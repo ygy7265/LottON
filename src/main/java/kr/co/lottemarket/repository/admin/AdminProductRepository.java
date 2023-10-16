@@ -16,4 +16,6 @@ public interface AdminProductRepository extends JpaRepository<ProductEntity, Int
 	
 	public Page<ProductEntity> findAll(Pageable pageable);
 	
+	
+	
 }

@@ -10,7 +10,6 @@ import lombok.Data;
 @Data
 public class Admin_ProductPageResponseDTO {
 
-	private String cate;
     private List<ProductDTO> dtoList;
     private int pg;
     private int size;
@@ -22,7 +21,6 @@ public class Admin_ProductPageResponseDTO {
     @Builder
     public Admin_ProductPageResponseDTO(Admin_ProductPageRequestDTO pageRequestDTO, List<ProductDTO> dtoList, int total) {
     	
-    	this.cate = pageRequestDTO.getCate();
         this.pg = pageRequestDTO.getPg();
         this.size =  pageRequestDTO.getSize();
         this.dtoList = dtoList;

@@ -20,8 +20,6 @@ public class Admin_ProductPageRequestDTO {
     @Builder.Default
     private int size = 10;
     
-    private String cate;
-
     public Pageable getPageable(String sort) {
 
         return PageRequest.of(this.pg - 1, this.size, Sort.by(sort).descending());
