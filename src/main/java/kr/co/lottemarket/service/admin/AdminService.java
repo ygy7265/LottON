@@ -158,12 +158,6 @@ public class AdminService {
         ArticleEntity articleEntity = articleEntityOptional.get();
         return articleEntity.toDTO();
     }
-
-	public void deleteProduct(int no) {
-		
-		repo.deleteByprodNo(no);
-		
-	}
     
     
     

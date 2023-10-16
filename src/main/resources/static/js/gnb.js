@@ -70,29 +70,11 @@ $(document).ready(function(){
 	    // 선택한 검색 카테고리 값을 가져옴
 	    var searchCategory = $('#searchCategory').val();
 	    	
-	});	
+	});
 	
-	$('.dtnProductDelete').click(function(event) {
-            event.preventDefault(); // 기본 링크 동작을 막습니다.
-
-            var $link = $(this); // 클릭한 링크를 선택합니다.
-            var productNo = $link.closest('tr').find('td:eq(2)').text(); // 상품 번호를 가져옵니다.
-            
-            if (confirm('상품을 삭제하시겠습니까?')) {
-                // 여기에서 AJAX DELETE 요청을 보내고 productNo를 전송합니다.
-                $.ajax({
-                    url: '/admin/layout/product/productDelete/' + productNo,
-                    type: 'DELETE',
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                        // 성공했을 때 수행할 작업을 여기에 추가하세요.
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        });
+	$(".dtnProductDelete").click(function (e) {
+		e.preventDefault();
+		$('.delete').submit();
+	})
     
 });

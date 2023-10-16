@@ -2,12 +2,9 @@ package kr.co.lottemarket.dto.product;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import kr.co.lottemarket.entity.*;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
-import kr.co.lottemarket.entity.product.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,9 +20,7 @@ public class ProductCartDTO {
 	
 	private int cartNo;
 	private String uid;
-	@OneToMany
-	@JoinColumn(name = "prodNo")
-	private ProductEntity prodNo;
+	private int prodNo;
 	private int count;
 	private int price;
 	private int discount;

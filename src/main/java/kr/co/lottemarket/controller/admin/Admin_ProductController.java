@@ -2,14 +2,10 @@ package kr.co.lottemarket.controller.admin;
 
 import java.io.IOException;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,14 +56,7 @@ public class Admin_ProductController {
 		
 		return "/admin/layout/product/register";
 	}
-
-	@DeleteMapping("/admin/layout/product/productDelete/{prodNo}")
-	public String deleteProduct(@PathVariable("prodNo") int no) {
-	    log.info("no :" + no);
-	    adminservice.deleteProduct(no);
-
-	    return "redirect:/admin/layout/product/productlist";
-	}
-
+	
+	
 	
 }
