@@ -3,14 +3,16 @@ package kr.co.lottemarket.entity.product;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
-import groovy.transform.Generated;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import lombok.AllArgsConstructor;
@@ -84,10 +86,6 @@ public class ProductEntity {
 				.hit(hit)
 				.score(score)
 				.review(review)
-				.thumb1(thumb1)
-				.thumb2(thumb2)
-				.thumb3(thumb3)
-				.detail(detail)
 				.status(status)
 				.receipt(receipt)
 				.bizType(bizType)
