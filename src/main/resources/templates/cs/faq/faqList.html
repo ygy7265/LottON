@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>케이마켓 고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../images/favicon.ico" />
-    <link rel="stylesheet" href="/css/Cs_style.css" />
+    <link rel="stylesheet" th:href="@{/css/Cs_style.css}" />
     <style>
       
       
@@ -44,16 +44,13 @@
               <a href="./member/login.html">로그인</a>
               <a href="#">회원가입</a>
               <a href="#">마이페이지</a>
-              <a href="#"
-                ><i class="fa fa-shopping-cart" aria-hidden="true"></i
-                >&nbsp;장바구니</a
-              >
+              <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
             </p>
           </div>
         </div>
         <div class="logo">
           <div>
-            <a href="../index.html"><img src="../../images/logo.png" alt="로고" />고객센터</a>
+            <a th:href="@{/cs/index}"><img th:src="@{/images/logo.png}" alt="로고" />고객센터</a>
           </div>
         </div>
       </header>
@@ -87,11 +84,11 @@
               <div>
                 <h3>가입</h3>
                 <ul>
-                  <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/qna/view}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/qna/view}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/qna/view}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/qna/view}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/qna/view}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
                   <li class="more"><a href="#">더보기</a></li>
                 </ul>
               </div>

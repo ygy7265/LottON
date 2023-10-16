@@ -29,17 +29,17 @@ public class ArticleDTO {
 	private LocalDateTime rdate;
 	
 	
-	public ArticleEntity toEntity(){
-        return ArticleEntity.builder()
-                .no(no)
-                .parent(parent)
-                .group(group)
-                .cate1(cate1)
-                .cate2(cate2)
-                .uid(uid)
-                .title(title)
-                .content(content)
-                .rdate(rdate)
-                .build();
-    }
+	 public ArticleEntity toEntity(){
+	        return ArticleEntity.builder()
+	                .no(no)
+	                .parent(parent)
+	                .group(group)
+	                .cate1(cate1)
+	                .cate2(cate2)
+	                .uid(uid)
+	                .title(title)
+	                .content(content)
+	                .rdate(rdate)
+	                .build();
+	    }
 }
