@@ -2,6 +2,7 @@ package kr.co.lottemarket.dto.product;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.ManyToMany;
 import kr.co.lottemarket.entity.*;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
 import lombok.AllArgsConstructor;
