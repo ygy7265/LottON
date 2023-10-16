@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="/admin/index.html">
+            <section id="admin-product-list" layout:fragment="content">
+                <nav>
+                    <h3>상품목록</h3>
+                    <p>
+                        HOME > 상품관리 > <strong>상품목록</strong>
+                    </p>
+                </nav>
+                <!-- 상품목록 컨텐츠 시작 -->                                
+                <section>
+                    <div>
+                        <select name="search">
+                            <option value="search1">상품명</option>
+                            <option value="search2">상품코드</option>
+                            <option value="search3">제조사</option>
+                            <option value="search4">판매자</option>                                    
+                        </select>
+                        <input type="text" name="search">
+                    </div>
+                    <table>
+                        <tr>
+                            <th><input type="checkbox" name="all"/></th>
+                            <th>이미지</th>
+                            <th>상품코드</th>
+                            <th>상품명</th>
+                            <th>판매가격</th>
+                            <th>할인율</th>
+                            <th>포인트</th>
+                            <th>재고</th>
+                            <th>판매자</th>
+                            <th>조회</th>
+                            <th>관리</th>
+                        </tr>
+
+                        <tr th:each="product : ${pageResponse.dtoList}">
+							<td style="text-align:center; width:5%"><input type="checkbox" name="chk"></td>
+	                        <td style="text-align:center; width:10%">[[${product.thumb1}]]</td>
+	                        <td style="text-align:center; width:10%">[[${product.prodNo}]]</td>
+	                        <td style="text-align:center; width:10%">[[${product.prodName}]]</td>
+	                        <td style="text-align:center; width:5%">[[${product.price}]]</td>
+	                        <td style="text-align:center; width:5%">[[${product.discount}]]</td>
+	                        <td style="text-align:center; width:5%">[[${product.point}]]</td>
+	                        <td style="text-align:center; width:5%">[[${product.stock}]]</td>
+	                        <td style="text-align:center; width:5%">[[${product.seller}]]</td>
+	                        <td style="text-align:center; width:5%">[[${product.hit}]]</td>
+	                        <td style="text-align:center; width:5%"><a href="">[삭제]</a></td>
+	                    </tr>
+                    </table>
+
+                    
+                    <input type="button" value="선택삭제" />                          
+
+
+                    <div class="paging">
+                        <li th:if="${pageResponse.prev}" class="num" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+			                <a th:href="@{/admin/layout/product/productlist(pg=${pageResponse.start - 1})}">이전</a>
+			            </li>
+			
+			            <li th:each="num: ${#numbers.sequence(pageResponse.start, pageResponse.end)}"
+			                class="num"
+			                aria-controls="dataTables-example"
+			                tabindex="0">
+			                <a th:href="@{/admin/layout/product/productlist(pg=${num})}">[[${num}]]</a>
+			            </li>
+			
+			            <li th:if="${pageResponse.next}" class="num" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
+			                <a th:href="@{/admin/layout/product/productlist(pg=${pageResponse.end + 1})}">다음</a>
+			            </li>
+                      </div>
+
+                </section>                
+</html>

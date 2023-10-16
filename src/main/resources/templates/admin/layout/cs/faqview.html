@@ -1,0 +1,37 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="/admin/index.html">
+ <section id="admin-cs-view" layout:fragment="content">
+	     <nav>
+	            <h3>자주묻는질문</h3>
+	            <p>
+	                HOME > 게시판관리 > <strong>자주묻는질문</strong>
+	            </p>
+	        </nav>
+	    <article>
+			<table class="cstable">
+				<tr class="cstable1">
+					<td>유형</td>
+					<td>[[${faqview.cate1}]]</td>
+				</tr>
+				<tr class="cstable2">
+					<td>제목</td>
+					<td>[[${faqview.title}]]</td>
+				</tr>
+				<tr class="cstable3">
+					<td>내용</td>
+					<td>[[${faqview.content}]]<br/><br/>
+					※ 피싱 관련 피해신고<br/><br/>
+					▶ 경찰청 사이버수사국 (국번없이)182 :
+					http://cyberbureau.police.go.kr<br/>
+					▶ KISA 인터넷침해대응센터 (국번없이)118 :
+					http://www.krcert.or.kr<br/>
+					감사합니다.<br/></td>
+				</tr>
+			</table>
+            <a href="" class="btnViewDelete">삭제</a>
+            <a href="" class="btnViewModify">질문수정</a>
+            <a href="" class="btnList">목록</a>
+		</article>
+	</section>
