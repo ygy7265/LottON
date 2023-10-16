@@ -1,9 +1,6 @@
 package kr.co.lottemarket.entity;
-
 import java.time.LocalDateTime;
-
 import org.hibernate.annotations.CreationTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -47,6 +44,8 @@ public class UserEntity {
 	private String managerHp;
 	private String fax;
 	private String regip;
+	
+	@CreationTimestamp
 	private LocalDateTime wdate;
 	@CreationTimestamp
 	private LocalDateTime rdate;

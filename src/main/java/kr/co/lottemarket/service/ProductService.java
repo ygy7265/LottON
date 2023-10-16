@@ -11,8 +11,14 @@ import org.springframework.stereotype.Service;
 
 import kr.co.lottemarket.dto.PageRequestDTO;
 import kr.co.lottemarket.dto.PageResponseDTO;
+import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
+import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
+import kr.co.lottemarket.entity.product.ProductCartEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
+import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
+import kr.co.lottemarket.repository.ProductCartRepository;
+import kr.co.lottemarket.repository.ProductOrderItemRepository;
 import kr.co.lottemarket.repository.ProductRepository;
 import lombok.extern.log4j.Log4j2;
 
@@ -22,6 +28,11 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository repo;
+	@Autowired
+	private ProductCartRepository cartrepo;
+	@Autowired
+	private ProductOrderItemRepository orderrepo;
+	
 	@Autowired
 	private ModelMapper modelmapper;
 	
@@ -89,5 +100,30 @@ public class ProductService {
 		log.info("selectprod = "+ proddto);
 		return proddto;
 	}
+	
+	public void insertDTO(ProductCartDTO dto) {
+		ProductCartEntity entity = modelmapper.map(dto, ProductCartEntity.class);
+		cartrepo.save(entity);
+	}
+	
+	public void insertDTOBuy(ProductOrderItemDTO dto) {
+		ProductOrderItemEntity entity = modelmapper.map(dto, ProductOrderItemEntity.class);
+		orderrepo.save(entity);
+		
+	}
+	
+	//ProductOrder
+	public List<ProductOrderItemDTO> selectOrderItems() {
+		List<ProductOrderItemEntity > entitys = orderrepo.findAll();
+		List<ProductOrderItemDTO> dto = entitys.stream().map(entity -> modelmapper.map(entity, ProductOrderItemDTO.class)).toList();	
+		return dto;
+	}
+	
+	public List<ProductCartDTO> selectCartItems(String uid) {
+		List<ProductCartEntity> entitys = cartrepo.findByUid(uid);
+		List<ProductCartDTO> dto = entitys.stream().map(entity -> modelmapper.map(entity, ProductCartDTO.class)).toList();	
+		return dto;
+	}
+	
 	
 }

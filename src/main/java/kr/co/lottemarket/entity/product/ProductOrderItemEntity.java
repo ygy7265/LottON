@@ -1,9 +1,11 @@
 package kr.co.lottemarket.entity.product;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ import lombok.Setter;
 public class ProductOrderItemEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ordNo;
 	private int prodNo;
 	private String uid;
