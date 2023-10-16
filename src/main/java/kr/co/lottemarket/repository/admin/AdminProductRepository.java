@@ -2,6 +2,7 @@ package kr.co.lottemarket.repository.admin;
 
 import org.springframework.stereotype.Repository;
 
+import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.entity.ArticleEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 
@@ -16,6 +17,6 @@ public interface AdminProductRepository extends JpaRepository<ProductEntity, Int
 	
 	public Page<ProductEntity> findAll(Pageable pageable);
 	
-	
+	public void deleteByprodNo(int prodNo);
 	
 }
