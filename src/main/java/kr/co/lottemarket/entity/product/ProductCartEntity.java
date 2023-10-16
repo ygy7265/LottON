@@ -9,9 +9,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.entity.UserEntity;
@@ -34,8 +32,7 @@ public class ProductCartEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartNo;
 	private String uid;
-	@ManyToOne
-	private ProductEntity prodNo;
+	private int prodNo;
 	private int count;
 	private int price;
 	private int discount;

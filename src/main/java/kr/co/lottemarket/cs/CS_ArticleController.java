@@ -35,6 +35,7 @@ public class CS_ArticleController {
 		}
 		
 		
+		log.info("pageResponseDTO no : " + pageResponseDTO.getNo());
 		log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
 		log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
         log.info("pageResponseDTO size : " + pageResponseDTO.getSize());
@@ -58,6 +59,7 @@ public class CS_ArticleController {
 		PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
 		
 		pageResponseDTO.getCate1();
+		
 		
 		model.addAttribute(pageResponseDTO);
 		

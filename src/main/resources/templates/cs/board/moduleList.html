@@ -28,22 +28,34 @@
         </header>
   
         <section id="cs">
-          <div class="notice">
+          <div th:class="${pageResponseDTO.group == 1} ? 'notice' : 'qna' ">
+		<!-- <div th:class="${pageResponseDTO.group == 1} ? 'notice' : (${pageResponseDTO.group == 2} ? 'faq' : 'qna')"> -->							  
             <nav>
               <div>
-                <p>홈<span>></span>공지사항</p>
+                <p>홈<span>></span>[[${pageResponseDTO.group == 1} ? '공지사항' : '문의하기']]</p>
               </div>
             </nav>
-            <section class="list">
+            <section th:class="${pageResponseDTO.no == 0} ? 'list' : 'view'">
               <aside>
-                <h2>공지사항</h2>
-                <ul>
+				  
+                <h2>[[${pageResponseDTO.group == 1} ? '공지사항' : '문의하기']]</h2>
+                <ul th:if="${pageResponseDTO.group == 1 || pageResponseDTO.group == 2}">
 					<li th:class="${pageResponseDTO.cate1 == 0} ? 'on' : ''"><a th:href="@{/cs/list(group=1,cate1=0)}">전체</a></li>
 					<li th:class="${pageResponseDTO.cate1 == 1} ? 'on' : ''"><a th:href="@{/cs/list(group=1,cate1=1)}">고객서비스</a></li>
 					<li th:class="${pageResponseDTO.cate1 == 2} ? 'on' : ''"><a th:href="@{/cs/list(group=1,cate1=2)}">안전거래</a></li>
 					<li th:class="${pageResponseDTO.cate1 == 3} ? 'on' : ''"><a th:href="@{/cs/list(group=1,cate1=3)}">위해상품</a></li>
 					<li th:class="${pageResponseDTO.cate1 == 4} ? 'on' : ''"><a th:href="@{/cs/list(group=1,cate1=4)}">이벤트당첨</a></li>
 				</ul>
+				
+				 <ul th:if="${pageResponseDTO.group == 3}">
+					 <li th:class="${pageResponseDTO.cate1 == 1} ? 'on' : ''"><a th:href="@{/cs/list(group=3,cate1=1)}">회원</a></li>
+					 <li th:class="${pageResponseDTO.cate1 == 2} ? 'on' : ''"><a th:href="@{/cs/list(group=3,cate1=2)}">쿠폰/이벤트</a></li>
+	                 <li th:class="${pageResponseDTO.cate1 == 3} ? 'on' : ''"><a th:href="@{/cs/list(group=3,cate1=3)}">주문/결제</a></li>
+	                 <li th:class="${pageResponseDTO.cate1 == 4} ? 'on' : ''"><a th:href="@{/cs/list(group=3,cate1=4)}">배송</a></li>
+	                 <li th:class="${pageResponseDTO.cate1 == 5} ? 'on' : ''"><a th:href="@{/cs/list(group=3,cate1=5)}">취소/반품/교환</a></li>
+	                 <li th:class="${pageResponseDTO.cate1 == 6} ? 'on' : ''"><a th:href="@{/cs/list(group=3,cate1=6)}">여행/숙박/항공</a></li>
+	                 <li th:class="${pageResponseDTO.cate1 == 7} ? 'on' : ''"><a th:href="@{/cs/list(group=3,cate1=7)}">안전거래</a></li>
+	            </ul>     
               </aside>
               
               <article layout:fragment="content"></article>

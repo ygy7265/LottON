@@ -49,13 +49,14 @@ layout:decorate="/admin/index.html">
 	                        <td style="text-align:center; width:5%">[[${product.stock}]]</td>
 	                        <td style="text-align:center; width:5%">[[${product.seller}]]</td>
 	                        <td style="text-align:center; width:5%">[[${product.hit}]]</td>
-	                        <td style="text-align:center; width:5%"><a href="#" class="dtnProductDelete">[삭제]</a>
-		                    </td>
+	                        <td style="text-align:center; width:5%"><a href="">[삭제]</a></td>
 	                    </tr>
                     </table>
 
-                    <input type="button" value="선택삭제" /> 
                     
+                    <input type="button" value="선택삭제" />                          
+
+
                     <div class="paging">
                         <span th:if="${pageResponse.prev}" class="num" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
 			                <a th:href="@{/admin/layout/product/productlist(pg=${pageResponse.start - 1})}">이전</a>

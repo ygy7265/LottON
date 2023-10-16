@@ -29,6 +29,8 @@ public class PageRequestDTO {
     @Builder.Default
     private int cate2 = 1;
     
+    private int no;
+    
 
                                       
     public Pageable getPageable(String sort){          
