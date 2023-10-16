@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>케이마켓 고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../images/favicon.ico" />
-    <link rel="stylesheet" href="/css/Cs_style.css" />    
+    <link rel="stylesheet" th:href="@{/css/Cs_style.css}" />    
   </head>
   <body>
     <div id="wrapper">
@@ -22,7 +22,7 @@
         </div>
         <div class="logo">
           <div>
-            <a href="../index.html"><img src="../../images/logo.png" alt="로고" />고객센터</a>
+            <a th:href="@{/cs/index}"><img th:src="@{/images/logo.png}" alt="로고" />고객센터</a>
           </div>
         </div>
       </header>
@@ -48,18 +48,31 @@
               </ul>
             </aside>
             <article>
-              <form action="#">
+                <form th:action="@{/cs/qna/write(group=3)}" method="post">
+			    <input type="text" name="group" th:value="${pageRequestDTO.group}">
+			    <input type="text" name="uid" th:value="seller1">
                 <table>
                   <tr>
                     <td>문의유형</td>
                     <td>
-                      <select name="type">
-                        <option value="0">선택</option>
-                        <option>가입</option>
-                        <option>탈퇴</option>
-                        <option>회원정보</option>
-                        <option>로그인</option>
-                      </select>
+                     <select name="cate1">
+                            <option>선택</option>
+                            <option th:value="1">회원</option>
+                            <option th:value="2">쿠폰/이벤트</option>
+                            <option th:value="3">주문/결제</option>
+                            <option th:value="4">배송</option>
+                            <option th:value="5">취소/반품/교환</option>
+                            <option th:value="6">여행/숙박/항공</option>
+                            <option th:value="7">안전거래</option>
+                        </select>
+                        
+                        <select name="cate2">
+                            <option>선택</option>
+                            <option th:value="1">가입</option>
+                            <option th:value="2">탈퇴</option>
+                            <option th:value="3">회원정보</option>
+                            <option th:value="4">로그인</option>
+                        </select>
                     </td>
                   </tr>
                   <tr>
@@ -76,7 +89,7 @@
                   </tr>
                 </table>
                 <div>
-                  <a href="./list.html" class="btnList">취소하기</a>
+                  <a th:href="@{/cs/qna}" class="btnList">취소하기</a>
                   <input type="submit" class="btnSubmit" value="등록하기"/>
                 </div>
               </form>

@@ -3,6 +3,7 @@ package kr.co.lottemarket.dto.product;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.lottemarket.entity.product.ProductEntity;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,10 @@ public class ProductDTO {
 	private int hit;
 	private int score;
 	private String review;
+	private MultipartFile fileThumb1;
+	private MultipartFile fileThumb2;
+	private MultipartFile fileThumb3;
+	private MultipartFile fileDetail;
 	private String thumb1;
 	private String thumb2;
 	private String thumb3;

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageResponseDTO;
+import kr.co.lottemarket.service.admin.AdminService;
 
 @Controller
 public class Admin_CsController {

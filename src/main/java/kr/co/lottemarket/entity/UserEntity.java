@@ -1,10 +1,6 @@
 package kr.co.lottemarket.entity;
-
-
 import java.time.LocalDateTime;
-
 import org.hibernate.annotations.CreationTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "lotte_member")
+@Table(name = "Lotte_member")
 public class UserEntity {
 	@Id
 	private String uid;
@@ -40,7 +36,9 @@ public class UserEntity {
 	private String addr1;
 	private String addr2;
 	private String company;
+	private String ceo;
 	private String bizRegNum;
+	private String comRegNum;
 	private String tel;
 	private String manager;
 	private String managerHp;
@@ -49,6 +47,7 @@ public class UserEntity {
 	
 	@CreationTimestamp
 	private LocalDateTime wdate;
+	@CreationTimestamp
 	private LocalDateTime rdate;
 	private String etc1;
 	private String etc2;
@@ -56,10 +55,12 @@ public class UserEntity {
 	private String etc4;
 	private String etc5;
 	
+	// DTO로 변환할 때 DTO의 모든 속성을 설정해준다(DTO에서 Entity로 변환할 때도 마찬가지)
 	public UserDTO toDTO() {
 		return UserDTO.builder()
 				.uid(uid)
-				.pass(pass)
+				.pass1(pass)
+				.pass2(pass)
 				.name(name)
 				.gender(gender)
 				.hp(hp)
@@ -71,10 +72,10 @@ public class UserEntity {
 				.addr1(addr1)
 				.addr2(addr2)
 				.company(company)
+				.ceo(ceo)
 				.bizRegNum(bizRegNum)
+				.bizRegNum(comRegNum)
 				.tel(tel)
-				.manager(manager)
-				.managerHp(managerHp)
 				.fax(fax)
 				.regip(regip)
 				.wdate(wdate)

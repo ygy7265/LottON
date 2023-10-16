@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>케이마켓 고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../images/favicon.ico" />
-    <link rel="stylesheet" href="/css/Cs_style.css" />
+    <link rel="stylesheet" th:href="@{/css/Cs_style.css}" />
   </head>
   <body>
     <div id="wrapper">
@@ -16,16 +16,13 @@
               <a href="./member/login.html">로그인</a>
               <a href="#">회원가입</a>
               <a href="#">마이페이지</a>
-              <a href="#"
-                ><i class="fa fa-shopping-cart" aria-hidden="true"></i
-                >&nbsp;장바구니</a
-              >
+              <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
             </p>
           </div>
         </div>
         <div class="logo">
           <div>
-            <a href="#"><img src="../../images/logo.png" alt="로고" />고객센터</a>
+            <a th:href="@{/cs/index}"><img th:src="@{/images/logo.png}" alt="로고" />고객센터</a>
           </div>
         </div>
       </header>
@@ -41,13 +38,13 @@
             <aside>
               <h2>문의하기</h2>
               <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
+                <li class="on"><a th:href="@{/cs/qna(group=3,cate1=1)}">회원</a></li>
+                <li><a th:href="@{/cs/qna(group=3,cate1=2)}">쿠폰/이벤트</a></li>
+                <li><a th:href="@{/cs/qna(group=3,cate1=3)}">주문/결제</a></li>
+                <li><a th:href="@{/cs/qna(group=3,cate1=4)}">배송</a></li>
+                <li><a th:href="@{/cs/qna(group=3,cate1=5)}">취소/반품/교환</a></li>
+                <li><a th:href="@{/cs/qna(group=3,cate1=6)}">여행/숙박/항공</a></li>
+                <li><a th:href="@{/cs/qna(group=3,cate1=7)}">안전거래</a></li>
               </ul>
             </aside>
             <article>
@@ -57,9 +54,10 @@
               </nav>
               <table>
                 <tr>
-                  <td><a th:href="@{/cs/qna/view}">[탈퇴] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
+                  <tr th:each="article:${articles}">
+						<td><a th:href="@{/cs/view(group=3,cate=${article.cate1},no=${article.no})}">[[${article.title}]]</a></td>
+                   		<td>[[${article.rdate}]]</td>
+                    </tr>
                 </tr>
               </table>
 
@@ -71,7 +69,7 @@
                 <a href="#" class="next">다음</a>
               </div>
 
-              <a href="./write.html" class="btnWrite">문의하기</a>
+              <a th:href="@{/cs/qna/write(group=3)}" class="btnWrite">문의하기</a>
 
             </article>
           </section>

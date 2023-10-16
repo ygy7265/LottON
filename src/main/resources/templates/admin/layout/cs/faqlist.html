@@ -43,32 +43,15 @@
                     <td><a th:href="@{/admin/layout/cs/faqview(no=${faqlist.no})}">[[${faqlist.title}]]</a></td>
                    	<td>[[${#temporals.format(faqlist.rdate, 'yy-MM-dd')}]]</td>
                     <td>
-						<a href="">[수정]</a>
-                        <a href="">[삭제]</a>
+						<a th:href="@{/admin/layout/cs/faqModify(no=${faqlist.no})}">[수정]</a>
+                        <a th:href="@{/admin/layout/cs/faqDelete(no=${faqlist.no})}">[삭제]</a>
                     </td>                   
                 </tr>
-                </c:forEach>
             </table>
             
             <input type="button" value="선택 삭제" class="csDelete"/>
-            <input type="button" value="공지 작성" class="csWrite"/>
-			
-			<div class="paging">
-		        <span th:if="${pageResponseDTO.prev}" class="prev" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
-		            <a th:href="@{/admin/layout/cs/faqlist(group=${pageResponseDTO.group},pg=${pageResponseDTO.start - 1})}">이전</a>
-		        </span>
-		
-		        <span th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}"
-		            class="num"
-		            aria-controls="dataTables-example"
-		            tabindex="0">
-		            <a th:href="@{/admin/layout/cs/faqlist(group=${pageResponseDTO.group},pg=${num})}" th:text="${num}"></a>
-		        </span>
-		
-		        <span th:if="${pageResponseDTO.next}" class="next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
-		            <a th:href="@{/admin/layout/cs/faqlist(group=${pageResponseDTO.group},pg=${pageResponseDTO.end + 1})}">다음</a>
-		        </span>
-            </div>
+            <input type="button" value="글 작성" class="csWrite"/>
+            		
         </section>
     </section>
 </html>
