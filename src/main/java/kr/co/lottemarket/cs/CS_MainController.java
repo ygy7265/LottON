@@ -1,4 +1,4 @@
-package kr.co.lottemarket.CS;
+package kr.co.lottemarket.cs;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
