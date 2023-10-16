@@ -20,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "lotte_member")
+@Table(name = "Lotte_member")
 public class UserEntity {
 	@Id
 	private String uid;

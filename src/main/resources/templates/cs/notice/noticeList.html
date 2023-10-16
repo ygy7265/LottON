@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케이마켓 고객센터</title>
-    <link rel="stylesheet" href="/css/Cs_style.css"/>
+    <link rel="stylesheet" th:href="@{/css/Cs_style.css}"/>
 </head>
 <body>
     <div id="container">
@@ -16,16 +16,13 @@
                 <a href="./member/login.html">로그인</a>
                 <a href="#">회원가입</a>
                 <a href="#">마이페이지</a>
-                <a href="#"
-                  ><i class="fa fa-shopping-cart" aria-hidden="true"></i
-                  >&nbsp;장바구니</a
-                >
+                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
               </p>
             </div>
           </div>
           <div class="logo">
             <div>
-              <a href="#"><img src="../../images/logo.png" alt="로고" />고객센터</a>
+              <a th:href="@{/cs/index}"><img src="../../images/logo.png" alt="로고" />고객센터</a>
             </div>
           </div>
         </header>
