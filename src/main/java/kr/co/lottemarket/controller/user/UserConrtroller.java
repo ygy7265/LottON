@@ -60,7 +60,7 @@ public class UserConrtroller {
 	
 	TermsDTO termsDTO = termsService.findById();	
 	model.addAttribute(termsDTO); //termsDTO 객체를 모델에 추가
-	model.addAttribute("type",type); // (type) 이거는 하면 안됨, 파라미터 수신한 걸 모델에 추가해줘야 view 페이지에서 사용가능
+	model.addAttribute("type",type); // (type) 이거는 사용불가, 파라미터 수신한 걸 모델에 추가해줘야 view 페이지에서 사용가능
 	//System.out.println("type"+type);
 	
 		return "/member/signup";
