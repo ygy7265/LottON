@@ -30,6 +30,8 @@ public class PageRequestDTO {
     
     private int no;
     
+    private int no;
+    
 
                                       
     public Pageable getPageable(String sort){          

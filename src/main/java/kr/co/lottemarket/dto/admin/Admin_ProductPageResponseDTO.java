@@ -14,13 +14,17 @@ public class Admin_ProductPageResponseDTO {
     private int pg;
     private int size;
     private int total;
-
+    private String search;
+    private String searchCate;
+    
     private int start, end;
     private boolean prev, next;
 
     @Builder
     public Admin_ProductPageResponseDTO(Admin_ProductPageRequestDTO pageRequestDTO, List<ProductDTO> dtoList, int total) {
     	
+    	this.search = pageRequestDTO.getSearch();
+        this.searchCate = pageRequestDTO.getSearchCate();
         this.pg = pageRequestDTO.getPg();
         this.size =  pageRequestDTO.getSize();
         this.dtoList = dtoList;

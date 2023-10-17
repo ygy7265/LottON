@@ -74,7 +74,7 @@ public class UserEntity {
 				.company(company)
 				.ceo(ceo)
 				.bizRegNum(bizRegNum)
-				.bizRegNum(comRegNum)
+				.comRegNum(comRegNum)
 				.tel(tel)
 				.fax(fax)
 				.regip(regip)

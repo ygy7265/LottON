@@ -12,14 +12,16 @@ layout:decorate="/admin/index.html">
                 <!-- 상품목록 컨텐츠 시작 -->                                
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">상품명</option>
-                            <option value="search2">상품코드</option>
-                            <option value="search3">제조사</option>
-                            <option value="search4">판매자</option>                                    
-                        </select>
-                        <input type="text" name="search">
-                        <input type="button" value="검색" class="btnSearch">
+						<form th:action="@{/admin/layout/product/productlist}" method="get">                      
+							<select name="searchCate" >
+	                            <option value="prodName">상품명</option>
+	                            <option value="prodNo">상품코드</option>
+	                            <option value="company">제조사</option>
+	                            <option value="seller">판매자</option>                                    
+	                        </select>
+	                        <input type="text" name="search">
+	                        <input type="submit" value="검색" class="btnSearch">
+                        </form>  
                     </div>
                     <table>
                         <tr>
@@ -49,13 +51,16 @@ layout:decorate="/admin/index.html">
 	                        <td style="text-align:center; width:5%">[[${product.stock}]]</td>
 	                        <td style="text-align:center; width:5%">[[${product.seller}]]</td>
 	                        <td style="text-align:center; width:5%">[[${product.hit}]]</td>
-	                        <td style="text-align:center; width:5%"><a href="#" class="dtnProductDelete">[삭제]</a>
-		                    </td>
+	                        <td style="text-align:center; width:5%">
+							    <a href="#" class="delete-product-link">[삭제]</a>
+							</td>
 	                    </tr>
                     </table>
 
-                    <input type="button" value="선택삭제" /> 
                     
+                    <input class="productDelete" type="button" value="선택삭제" />                          
+
+
                     <div class="paging">
                         <span th:if="${pageResponse.prev}" class="num" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
 			                <a th:href="@{/admin/layout/product/productlist(pg=${pageResponse.start - 1})}">이전</a>

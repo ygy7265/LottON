@@ -19,7 +19,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO { // DTO의 속성은 register.html에서 속성과 같은 이름(input태그)의 데이터로 설정됨
+public class UserDTO {
 	private String uid;
 	private String pass1;
 	private String pass2;
@@ -43,7 +43,7 @@ public class UserDTO { // DTO의 속성은 register.html에서 속성과 같은 
 	
 	private String regip;
 	private LocalDateTime wdate;
-	@CreationTimestamp // 이거 해줘야 DTO의 rdate값이 설정됨
+	@CreationTimestamp
 	private LocalDateTime rdate;
 	private String etc1;
 	private String etc2;
@@ -69,7 +69,7 @@ public class UserDTO { // DTO의 속성은 register.html에서 속성과 같은 
 				.company(company)
 				.ceo(ceo)
 				.bizRegNum(bizRegNum)
-				.bizRegNum(comRegNum)
+				.comRegNum(comRegNum)
 				.tel(tel)
 				.manager(name) // Entity는 manager, managerHp 속성이 있기 때문에 DTO의 name, hp로 설정해준다
 				.managerHp(hp)

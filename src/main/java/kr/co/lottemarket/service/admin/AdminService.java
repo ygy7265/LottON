@@ -131,6 +131,82 @@ public class AdminService {
 		return dto;
     }
 	
+	public Admin_ProductPageResponseDTO selectProdNameProucts(Admin_ProductPageRequestDTO pageRequestDTO, String prodName) {
+		
+		Pageable pageable = pageRequestDTO.getPageable("prodNo");
+		log.info("pageable...."+pageable);
+		log.info("pageRequestDTO...."+pageRequestDTO.toString());
+		Page<ProductEntity> eList = repo.findByProdNameLike("%" + prodName + "%", pageable);
+		log.info("eList...."+eList.toString());
+		List<ProductDTO> dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
+		
+		log.info("dtoPage...."+dtoPage.toString());
+		int total = (int) eList.getTotalElements();
+		
+		log.info("total...."+total);
+		Admin_ProductPageResponseDTO dto= Admin_ProductPageResponseDTO.builder().pageRequestDTO(pageRequestDTO).dtoList(dtoPage).total(total).build();
+		log.info("dto...."+dto);
+		return dto;
+		
+	}
+	
+		public Admin_ProductPageResponseDTO selectProdNoProucts(Admin_ProductPageRequestDTO pageRequestDTO, int prodNo) {
+		
+		Pageable pageable = pageRequestDTO.getPageable("prodNo");
+		log.info("pageable...."+pageable);
+		log.info("pageRequestDTO...."+pageRequestDTO.toString());
+		 Page<ProductEntity> eList = repo.findByProdNoLike('%'+prodNo+'%', pageable);
+		 log.info("prodNo" + prodNo);
+		log.info("eList...."+eList.toString());
+		List<ProductDTO> dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
+		
+		log.info("dtoPage...."+dtoPage.toString());
+		int total = (int) eList.getTotalElements();
+		
+		log.info("total...."+total);
+		Admin_ProductPageResponseDTO dto= Admin_ProductPageResponseDTO.builder().pageRequestDTO(pageRequestDTO).dtoList(dtoPage).total(total).build();
+		log.info("dto...."+dto);
+		return dto;
+		
+	}
+	
+	public Admin_ProductPageResponseDTO selectCompanyProucts(Admin_ProductPageRequestDTO pageRequestDTO, String company) {
+		
+		Pageable pageable = pageRequestDTO.getPageable("prodNo");
+		log.info("pageable...."+pageable);
+		log.info("pageRequestDTO...."+pageRequestDTO.toString());
+		Page<ProductEntity> eList = repo.findByCompanyLike("%"+company+"%", pageable);
+		log.info("eList...."+eList.toString());
+		List<ProductDTO> dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
+		
+		log.info("dtoPage...."+dtoPage.toString());
+		int total = (int) eList.getTotalElements();
+		
+		log.info("total...."+total);
+		Admin_ProductPageResponseDTO dto= Admin_ProductPageResponseDTO.builder().pageRequestDTO(pageRequestDTO).dtoList(dtoPage).total(total).build();
+		log.info("dto...."+dto);
+		return dto;
+		
+	}
+	public Admin_ProductPageResponseDTO selectSellerProucts(Admin_ProductPageRequestDTO pageRequestDTO, String seller) {
+		
+		Pageable pageable = pageRequestDTO.getPageable("prodNo");
+		log.info("pageable...."+pageable);
+		log.info("pageRequestDTO...."+pageRequestDTO.toString());
+		Page<ProductEntity> eList = repo.findBySellerLike("%"+seller+"%", pageable);
+		log.info("eList...."+eList.toString());
+		List<ProductDTO> dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
+		
+		log.info("dtoPage...."+dtoPage.toString());
+		int total = (int) eList.getTotalElements();
+		
+		log.info("total...."+total);
+		Admin_ProductPageResponseDTO dto= Admin_ProductPageResponseDTO.builder().pageRequestDTO(pageRequestDTO).dtoList(dtoPage).total(total).build();
+		log.info("dto...."+dto);
+		return dto;
+		
+	}
+	
 	public Admin_CsPageResponseDTO selectArticles(Admin_CsPageRequestDTO pageRequestDTO) {
 
         Pageable pageable = pageRequestDTO.getPageable("no");
@@ -158,13 +234,11 @@ public class AdminService {
         ArticleEntity articleEntity = articleEntityOptional.get();
         return articleEntity.toDTO();
     }
-
-	public void deleteProduct(int no) {
-		
-		repo.deleteByprodNo(no);
-		
-	}
     
-    
+    public void deleteProduct(int no) {
+    	
+    	repo.deleteByprodNo(no);
+    	
+    }
     
 }
