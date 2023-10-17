@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Lotte_member")
+@Table(name = "lotte_member")
 public class UserEntity {
 	@Id
 	private String uid;
@@ -74,7 +74,7 @@ public class UserEntity {
 				.company(company)
 				.ceo(ceo)
 				.bizRegNum(bizRegNum)
-				.bizRegNum(comRegNum)
+				.comRegNum(comRegNum)
 				.tel(tel)
 				.fax(fax)
 				.regip(regip)
