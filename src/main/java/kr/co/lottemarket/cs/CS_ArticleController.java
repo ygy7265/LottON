@@ -34,7 +34,6 @@ public class CS_ArticleController {
 			pageResponseDTO = articleSerivce.findByParentAndGroupAndCate1(pageRequestDTO);
 		}
 		
-		
 		log.info("pageResponseDTO no : " + pageResponseDTO.getNo());
 		log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
 		log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
@@ -47,7 +46,11 @@ public class CS_ArticleController {
 		
 		model.addAttribute(pageResponseDTO);
 		
-		return "/cs/board/list";
+		if(pageRequestDTO.getGroup() == 2 ) {
+			return "/cs/board/faqlist";
+		}else {
+			return "/cs/board/list";
+		}
 	}
 	
 	@GetMapping("/cs/view")
@@ -69,7 +72,11 @@ public class CS_ArticleController {
 		log.info("article content = " + article.getContent() );
 		log.info("article rdate = " + article.getRdate() );
 		
-		return "/cs/board/view";
+		if(pageRequestDTO.getGroup() == 2 ) {
+			return "/cs/board/faqView";
+		}else {
+			return "/cs/board/view";
+		}
 		
 	}
 	
