@@ -8,28 +8,31 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.option_return;
 import kr.co.lottemarket.dto.ArticleDTO;
-import kr.co.lottemarket.dto.PageResponseDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageResponseDTO;
 import kr.co.lottemarket.dto.admin.Admin_FileDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
+import kr.co.lottemarket.dto.product.ProductCate1DTO;
+import kr.co.lottemarket.dto.product.ProductCate2DTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.entity.ArticleEntity;
+import kr.co.lottemarket.entity.product.ProductCate1Entity;
+import kr.co.lottemarket.entity.product.ProductCate2Entity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.repository.admin.AdminProductRepository;
 import kr.co.lottemarket.repository.admin.Admin_FileRepository;
-import kr.co.lottemarket.repository.ProductRepository;
 import kr.co.lottemarket.repository.admin.AdminCsRepository;
+import kr.co.lottemarket.repository.admin.AdminProductCate1Repository;
+import kr.co.lottemarket.repository.admin.AdminProductCate2Repository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -44,6 +47,8 @@ public class AdminService {
 	private final ModelMapper modelmapper;
 	private final AdminCsRepository adminCsRepository;
 	private final Admin_FileRepository admin_FileRepository;
+	private final AdminProductCate1Repository adminProductCate1Repository;
+	private final AdminProductCate2Repository adminProductCate2Repository;
 	
 	@Value("${spring.servlet.multipart.location}")
     private String filePath;
@@ -155,7 +160,7 @@ public class AdminService {
 		Pageable pageable = pageRequestDTO.getPageable("prodNo");
 		log.info("pageable...."+pageable);
 		log.info("pageRequestDTO...."+pageRequestDTO.toString());
-		 Page<ProductEntity> eList = repo.findByProdNoLike('%'+prodNo+'%', pageable);
+		 Page<ProductEntity> eList = repo.findByProdNo(prodNo, pageable);
 		 log.info("prodNo" + prodNo);
 		log.info("eList...."+eList.toString());
 		List<ProductDTO> dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
@@ -238,6 +243,14 @@ public class AdminService {
     public void deleteProduct(int no) {
     	
     	repo.deleteByprodNo(no);
+    	
+    }
+    
+    public List<ProductCate1Entity> selectCate1() {
+    	
+    	List<ProductCate1Entity> cate1 = adminProductCate1Repository.findAll();	
+    	
+    	return cate1;
     	
     }
     

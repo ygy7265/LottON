@@ -14,38 +14,32 @@ layout:decorate="/admin/index.html">
                     <form action="/admin/layout/product/register" method="post" enctype="multipart/form-data">
 
                         <!-- 상품분류 -->
-                        <section>
-                            <h4>상품분류</h4>
-                            <p>
-                                기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.
-                            </p>
-                            <table>
-                                <tr>
-                                    <td>1차 분류</td>
-                                    <td>
-                                        <select name="category1">
-                                            <option value="cate0">1차 분류 선택</option>
-                                            <option value="cate1">패션·의류·뷰티</option>
-                                            <option value="cate2">가전·디지털</option>
-                                            <option value="cate3">식품·생필품</option>
-                                            <option value="cate4">홈·문구·취미</option>                                                
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2차 분류</td>
-                                    <td>
-                                        <select name="category2">
-                                            <option value="cate0">2차 분류 선택</option>
-                                            <option value="cate1">남성의류</option>
-                                            <option value="cate2">여성의류</option>
-                                            <option value="cate3">잡화</option>
-                                            <option value="cate44">뷰티</option>                                                
-                                        </select>
-                                    </td>
-                                </tr>
-                            </table>
-                        </section>
+						<section>
+						    <h4>상품분류</h4>
+						    <p>
+						        기본분류는 반드시 선택하셔야 합니다. 하나의 상품에 1개의 분류를 지정 합니다.
+						    </p>
+						    <table>
+						        <tr>
+						            <td>1차 분류</td>
+						            <td>
+						            <select name="category1" class="category1">
+									    <option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:text="${cate1.c1Name}"></option>
+									</select>
+									</td>
+						        </tr>
+						        <tr>
+						            <td>2차 분류</td>
+						            <td>
+						                <select name="category2">
+						                    <option value="cate0">2차 분류 선택</option>
+						                    <option th:each="cate2 : ${cate2List}" th:value="${cate2.cate2}" th:text="${cate2.c2Name}"></option>
+						                </select>
+						            </td>
+						        </tr>
+						    </table>
+						</section>
+
 
                         <!-- 기본정보 -->
                         <section>

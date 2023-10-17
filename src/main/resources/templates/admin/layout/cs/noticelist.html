@@ -32,7 +32,7 @@
 				<tr class="row" th:each="noticelist : ${pageResponseDTO.dtoList}">
                     <td><input type="checkbox" name="chk"></td>
                     <td>[[${noticelist.no}]]</td>
-                    <td>[[${noticelist.cate1}]]</td>
+                     <td>[[${noticelist.cate1}]]</td>
                     <td><a th:href="@{/admin/layout/cs/noticeview(no=${noticelist.no})}">[[${noticelist.title}]]</a></td>
                    	<td>[[${#temporals.format(noticelist.rdate, 'yy-MM-dd')}]]</td>
                     <td>
@@ -52,9 +52,7 @@
 		        </span>
 		
 		        <span th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}"
-		            class="num"
-		            aria-controls="dataTables-example"
-		            tabindex="0">
+		             class="${num == pageResponseDTO.pg} ? 'on' : 'num'">
 		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${num})}" th:text="${num}"></a>
 		        </span>
 		
