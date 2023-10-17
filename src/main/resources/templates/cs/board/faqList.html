@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+      layout:decorate="/cs/board/moduleList.html">
+
+ 
+             <article layout:fragment="content">        
+              <nav>
+                <h1>회원</h1>
+                <h2>가장 자주 묻는 질문입니다.</h2>
+              </nav>
+
+              <div>
+                <h3>가입</h3>
+                <ul>
+                  <li><a th:href="@{/cs/view(group=2,cate1=)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li class="more"><a href="#">더보기</a></li>
+                </ul>
+              </div>
+             
+
+            </article>
+        
+</html>

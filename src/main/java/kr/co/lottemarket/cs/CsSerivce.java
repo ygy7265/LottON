@@ -88,17 +88,16 @@ public class CsSerivce {
 	 
 	 
 	 
-	 public List<ArticleDTO> nfindByParentAndGroupCate1(ArticleDTO articleDTO) {
-		 
-		 List<ArticleDTO> articles = articleRepository
-				 						.findByParentAndGroupAndCate1OrderByNoDesc(0, articleDTO.getGroup(), articleDTO.getCate1())
-				 						.stream()
-				 						.map(entity -> modelMapper.map(entity, ArticleDTO.class))
-				 						.toList();
-		 
-		 return articles;
-	 }
-	    
+		/*
+		 * public List<ArticleDTO> nfindByParentAndGroupCate1(ArticleDTO articleDTO) {
+		 * 
+		 * List<ArticleDTO> articles = articleRepository
+		 * .findByParentAndGroupAndCate1OrderByNoDesc(0, articleDTO.getGroup(),
+		 * articleDTO.getCate1()) .stream() .map(entity -> modelMapper.map(entity,
+		 * ArticleDTO.class)) .toList();
+		 * 
+		 * return articles; }
+		 */
 	
 	
 	

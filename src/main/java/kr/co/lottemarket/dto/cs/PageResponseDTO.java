@@ -16,6 +16,7 @@ public class PageResponseDTO {
     private int group;
     private int cate1;
     private int cate2;
+    private int no;
     
     private int start, end;
     private boolean prev, next;
@@ -23,8 +24,10 @@ public class PageResponseDTO {
     @Builder
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<ArticleDTO> dtoList, int total){
 
+    	this.no = pageRequestDTO.getNo();
     	this.group = pageRequestDTO.getGroup();
         this.cate1 = pageRequestDTO.getCate1();
+        this.cate2 = pageRequestDTO.getCate2();
         this.pg = pageRequestDTO.getPg();
         this.size = pageRequestDTO.getSize();
         this.total = total;

@@ -34,8 +34,9 @@ public class CS_ArticleController {
 			pageResponseDTO = articleSerivce.findByParentAndGroupAndCate1(pageRequestDTO);
 		}
 		
-		
+		log.info("pageResponseDTO no : " + pageResponseDTO.getNo());
 		log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
+		log.info("pageResponseDTO cate2 : " + pageResponseDTO.getCate2());
 		log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
         log.info("pageResponseDTO size : " + pageResponseDTO.getSize());
         log.info("pageResponseDTO total : " + pageResponseDTO.getTotal());
@@ -43,10 +44,16 @@ public class CS_ArticleController {
         log.info("pageResponseDTO end : " + pageResponseDTO.getEnd());
         log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
         log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
+        log.info("pageResponseDTO group : " + pageResponseDTO.getGroup());
 		
-		model.addAttribute(pageResponseDTO);
+        
+		model.addAttribute("pageResponseDTO", pageResponseDTO);
 		
-		return "/cs/board/list";
+		if(pageRequestDTO.getGroup() == 2 ) {
+			return "/cs/board/faqlist";
+		}else {
+			return "/cs/board/list";
+		}
 	}
 	
 	@GetMapping("/cs/view")
@@ -59,15 +66,21 @@ public class CS_ArticleController {
 		
 		pageResponseDTO.getCate1();
 		
+		
 		model.addAttribute(pageResponseDTO);
 		
 		log.info("article no = " + article.getNo() );
 		log.info("article cate1 = " + article.getCate1() );
+		log.info("article cate2 = " + article.getCate2());
 		log.info("article title = " + article.getTitle() );
 		log.info("article content = " + article.getContent() );
 		log.info("article rdate = " + article.getRdate() );
 		
-		return "/cs/board/view";
+		if(pageRequestDTO.getGroup() == 2 ) {
+			return "/cs/board/faqView";
+		}else {
+			return "/cs/board/view";
+		}
 		
 	}
 	
@@ -84,21 +97,21 @@ public class CS_ArticleController {
 	}
 	
 	
-	@GetMapping("/cs/qna")
-	public String qanList(Model model, ArticleDTO articleDTO) {
-		
-		List<ArticleDTO> articles = articleSerivce.nfindByParentAndGroupCate1(articleDTO);
-		
-		model.addAttribute("articles",articles);
-		
-		return "/cs/qna/qnaList";
-	}
-	
-	@GetMapping("/cs/qna/view")
-	public String qanView() {
-		
-		return "/cs/qna/qnaView";
-	}
+	/*
+	 * @GetMapping("/cs/qna") public String qanList(Model model, ArticleDTO
+	 * articleDTO) {
+	 * 
+	 * List<ArticleDTO> articles =
+	 * articleSerivce.nfindByParentAndGroupCate1(articleDTO);
+	 * 
+	 * model.addAttribute("articles",articles);
+	 * 
+	 * return "/cs/qna/qnaList"; }
+	 * 
+	 * @GetMapping("/cs/qna/view") public String qanView() {
+	 * 
+	 * return "/cs/qna/qnaView"; }
+	 */
 	
 	
 	@GetMapping("/cs/qna/write")
@@ -115,7 +128,7 @@ public class CS_ArticleController {
 		
 		
 		
-		return "redirect:/cs/qna?group=" + dto.getGroup() + "&cate1=" + dto.getCate1();
+		return "redirect:/cs/list?group=" + dto.getGroup() + "&cate1=" + dto.getCate1();
 	}
 	
 	
