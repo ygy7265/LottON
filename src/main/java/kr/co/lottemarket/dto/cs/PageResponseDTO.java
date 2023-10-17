@@ -27,6 +27,7 @@ public class PageResponseDTO {
     	this.no = pageRequestDTO.getNo();
     	this.group = pageRequestDTO.getGroup();
         this.cate1 = pageRequestDTO.getCate1();
+        this.cate2 = pageRequestDTO.getCate2();
         this.pg = pageRequestDTO.getPg();
         this.size = pageRequestDTO.getSize();
         this.total = total;

@@ -26,8 +26,9 @@ public class PageRequestDTO {
     @Builder.Default
     private int cate1 = 0;
     
-    @Builder.Default
-    private int cate2 = 1;
+    private int cate2;
+    
+    private int no;
     
     private int no;
     

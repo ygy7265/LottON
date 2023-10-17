@@ -12,19 +12,26 @@
   
                 <table>
                     <tr th:each="article:${pageResponseDTO.dtoList}">
-						<td><a th:href="@{/cs/view(group=1,cate=${article.cate1},no=${article.no})}">[[${article.title}]]</a></td>
+						<td><a th:href="@{/cs/view(group=${article.group},cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}">[[${article.title}]]</a></td>
                    		<td>[[${article.rdate}]]</td>
                     </tr>
                 </table>
   
-                <div class="page">
-                  <a href="#" class="prev">이전</a>
-                  <a href="#" class="num on">1</a>
-                  <a href="#" class="num">2</a>
-                  <a href="#" class="num">3</a>
-                  <a href="#" class="next">다음</a>
-                </div>
-  
+                
+                 <div class="page">
+				    <a th:if="${pageResponseDTO.start > 10}" 
+				    th:href="@{/cs/list(group=${pageRequestDTO.group}, cate1=${pageRequestDTO.cate1}, pg=${pageResponseDTO.start - 1})}" class="prev">이전</a>
+				
+				    <th:block th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
+				        <a th:href="@{/cs/list(group=${pageRequestDTO.group}, cate1=${pageRequestDTO.cate1}, pg=${num})}" th:class="${num == pageRequestDTO.pg} ? 'on' : 'num'">[[${num}]]</a>
+				    </th:block>
+				
+				    <a th:if="${pageResponseDTO.start > 10}" 
+				    th:href="@{/cs/list(group=${pageRequestDTO.group}, cate1= ${pageRequestDTO.cate1}, pg=${pageResponseDTO.end + 1})}" class="next">다음</a>
+				</div>
+				
+				 <a th:if="${pageRequestDTO.group == 3}" th:href="@{/cs/qna/write(group=3)}" class="btnWrite">문의하기</a>
+				
               </article>
  
 

@@ -4,14 +4,15 @@
       layout:decorate="/cs/board/moduleList.html">
 		
              <article layout:fragment="content">
-
-                <nav>
-                <h2 class="title">[[${article.title}]]</h2>                
+			  <nav>
+                <h2 class="title">[가입] [[${article.title}]]</h2>                
                 <p>
-                  <span>chh***</span>
-                  <span>2022-11-21</span>
+                  <span>[[${article.uid}]]</span>
+                  <span>[[${article.rdate}]]</span>
                 </p>
-              </nav>
+              </nav>	 
+
+           
 
               <div class="content">
 				  
@@ -29,7 +30,7 @@
                   감사합니다.<br />
                 </p>
               </div>
-              <a th:href="@{/cs/list(group=1,cate=0)}" class="btnList">목록보기</a>
+              <a th:href="@{/cs/list(group=${article.group},cate1=0)}" class="btnList">목록보기</a>
             </article>
       
 </html>
