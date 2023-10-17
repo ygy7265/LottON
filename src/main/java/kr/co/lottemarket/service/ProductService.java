@@ -9,17 +9,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.PageRequestDTO;
 import kr.co.lottemarket.dto.PageResponseDTO;
 import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
+import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
 import kr.co.lottemarket.repository.ProductCartRepository;
 import kr.co.lottemarket.repository.ProductOrderItemRepository;
 import kr.co.lottemarket.repository.ProductRepository;
+import kr.co.lottemarket.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -32,6 +35,8 @@ public class ProductService {
 	private ProductCartRepository cartrepo;
 	@Autowired
 	private ProductOrderItemRepository orderrepo;
+	@Autowired 
+	private UserRepository userepo;
 	
 	@Autowired
 	private ModelMapper modelmapper;
@@ -67,7 +72,6 @@ public class ProductService {
 		return dlist;
 	}
 	public List<ProductDTO> selectsProductSold(){
-		modelmapper = new ModelMapper();
 		List<ProductEntity> elist = repo.findTop5ByOrderBySoldDesc();
 		log.info("selectsProductDiscount List..." + elist);
 		List<ProductDTO> dlist = elist.stream().map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
@@ -100,9 +104,13 @@ public class ProductService {
 		log.info("selectprod = "+ proddto);
 		return proddto;
 	}
-	
+	@Transactional
 	public void insertDTO(ProductCartDTO dto) {
+		log.info("dto.getuid" + dto.getUid().getUid());
+		UserEntity user = dto.getUid();
+		userepo.save(user);
 		ProductCartEntity entity = modelmapper.map(dto, ProductCartEntity.class);
+		entity.setUid(user);
 		cartrepo.save(entity);
 	}
 	
@@ -119,11 +127,21 @@ public class ProductService {
 		return dto;
 	}
 	
-	public List<ProductCartDTO> selectCartItems(String uid) {
-		List<ProductCartEntity> entitys = cartrepo.findByUid(uid);
-		List<ProductCartDTO> dto = entitys.stream().map(entity -> modelmapper.map(entity, ProductCartDTO.class)).toList();	
-		return dto;
+	public List<Object[]> selectCartItems(String uid) {
+		uid="seller1";
+		log.info("uid uid= "+uid.toString());
+		List<Object[]> entitys = cartrepo.findProductsBySeller(uid);
+		//List<ProductCartDTO> dto = entitys.stream().map(entity -> modelmapper.map(entity, ProductCartDTO.class)).toList();
+		
+		return entitys;
 	}
 	
+	public void deleteProductByCart(List<Integer> cartNo) {
+			log.info("cartNoDelete = " + cartNo);
+			for(int cartentity : cartNo) {			
+				cartrepo.deleteById(cartentity);
+			}
+			
+	}
 	
 }

@@ -9,7 +9,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.entity.UserEntity;
@@ -31,8 +33,13 @@ public class ProductCartEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartNo;
-	private String uid;
-	private int prodNo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uid")
+	private UserEntity uid;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prodNo")
+	private ProductEntity prodNo;
 	private int count;
 	private int price;
 	private int discount;
@@ -42,18 +49,4 @@ public class ProductCartEntity {
 	@CreationTimestamp
 	private LocalDateTime rDate;
 	
-	public ProductCartDTO toDTO() {
-		return ProductCartDTO.builder()
-				.cartNo(cartNo)
-				.uid(uid)
-				.prodNo(prodNo)
-				.count(count)
-				.price(price)
-				.discount(discount)
-				.point(point)
-				.delivery(delivery)
-				.total(total)
-				.rDate(rDate)
-				.build();
-	}
 }

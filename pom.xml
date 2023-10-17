@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>Lotte-Market</groupId>
 	<artifactId>Lotte-Market</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>Lotte-Market</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

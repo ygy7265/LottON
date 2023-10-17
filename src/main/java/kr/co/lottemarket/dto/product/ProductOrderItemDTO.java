@@ -1,5 +1,7 @@
 package kr.co.lottemarket.dto.product;
 
+import kr.co.lottemarket.entity.UserEntity;
+import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,8 +18,8 @@ public class ProductOrderItemDTO {
 
 	
 	private int ordNo;
-	private int prodNo;
-	private String uid;
+	private ProductEntity prodNo;
+	private UserEntity uid;
 	private int count;
 	private int price;
 	private int discount;

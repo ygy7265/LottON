@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.ManyToMany;
 import kr.co.lottemarket.entity.*;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
+import kr.co.lottemarket.entity.product.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,8 +20,8 @@ import lombok.Setter;
 public class ProductCartDTO {
 	
 	private int cartNo;
-	private String uid;
-	private int prodNo;
+	private UserEntity uid;
+	private ProductEntity prodNo;
 	private int count;
 	private int price;
 	private int discount;
@@ -28,20 +29,4 @@ public class ProductCartDTO {
 	private int delivery;
 	private int total;
 	private LocalDateTime rDate;
-	
-	public ProductCartEntity toEntity() {
-		return ProductCartEntity.builder()
-				.cartNo(cartNo)
-				.uid(uid)
-				.prodNo(prodNo)
-				.count(count)
-				.price(price)
-				.discount(discount)
-				.point(point)
-				.delivery(delivery)
-				.total(total)
-				.rDate(rDate)
-				.build();
-	}
-	
 }
