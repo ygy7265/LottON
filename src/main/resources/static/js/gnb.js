@@ -46,8 +46,8 @@ $(document).ready(function(){
         var confirmDelete = confirm("선택한 상품을 삭제하시겠습니까?");
         
 	    $.ajax({
-	        type: "GET",
-	        url: "${ctxPath}/admin/product/selcteDelete.do",
+	        type: "DElETE",
+	        url: "/admin/layout/product/productDelete",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr

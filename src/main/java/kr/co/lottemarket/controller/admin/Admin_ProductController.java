@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
@@ -56,7 +57,12 @@ public class Admin_ProductController {
 		
 		return "/admin/layout/product/register";
 	}
-	
-	
-	
+	@DeleteMapping("/admin/layout/product/productDelete/{prodNo}")
+	@Transactional
+	public String deleteProduct(@PathVariable("prodNo") int no) {
+	    log.info("no :" + no);
+	    adminservice.deleteProduct(no);
+
+	    return "redirect:/admin/layout/product/productlist";
+	}
 }
