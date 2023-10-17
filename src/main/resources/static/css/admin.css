@@ -277,6 +277,11 @@ select {
     font-size: 13px 
     
 }
+
+.btnSearch {
+	width: 50px;
+}
+
 .qnabtnViewDelete {
 	position: absolute;
 	bottom: 35px;

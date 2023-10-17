@@ -18,5 +18,12 @@ public interface AdminProductRepository extends JpaRepository<ProductEntity, Int
 	@Transactional
 	public void deleteByprodNo(int prodNo);
 
+	public Page<ProductEntity> findByProdNameLike(String ProdName,Pageable pageable);
+	
+	public Page<ProductEntity> findByProdNoLike(int ProdNo, Pageable pageable);
+	
+	public Page<ProductEntity> findByCompanyLike(String Company, Pageable pageable);
+	
+	public Page<ProductEntity> findBySellerLike(String Seller, Pageable pageable);
 	
 }
