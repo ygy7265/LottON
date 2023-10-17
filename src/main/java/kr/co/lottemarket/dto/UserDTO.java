@@ -69,7 +69,7 @@ public class UserDTO {
 				.company(company)
 				.ceo(ceo)
 				.bizRegNum(bizRegNum)
-				.bizRegNum(comRegNum)
+				.comRegNum(comRegNum)
 				.tel(tel)
 				.manager(name) // Entity는 manager, managerHp 속성이 있기 때문에 DTO의 name, hp로 설정해준다
 				.managerHp(hp)
