@@ -38,4 +38,5 @@ public class ProductCate2Entity {
 				.c2Name(c2Name)
 				.build();
 	}
+	
 }

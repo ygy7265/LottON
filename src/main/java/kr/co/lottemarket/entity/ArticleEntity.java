@@ -43,6 +43,9 @@ public class ArticleEntity {
 	private String title;
 	private String content;
 	
+	// 카테필드 추가
+	
+	
 	@CreationTimestamp
 	private LocalDateTime rdate;
 	
