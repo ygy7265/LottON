@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import groovy.util.logging.Log4j2;
+import kr.co.lottemarket.cs.mapper.ArticleMapper;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.cs.PageRequestDTO;
 import kr.co.lottemarket.dto.cs.PageResponseDTO;
@@ -23,7 +24,9 @@ public class CsSerivce {
 
 	private final ArticleRepository articleRepository;
 	private final ModelMapper modelMapper;
-
+	private final ArticleMapper mapper;
+	
+	
 	public PageResponseDTO findByParentAndGroupAndCate1(PageRequestDTO pageRequestDTO){
 		
 		Pageable pageable = pageRequestDTO.getPageable("no");
@@ -98,6 +101,12 @@ public class CsSerivce {
 		 * 
 		 * return articles; }
 		 */
+	 
+	 //faqList출력
+	 public List<ArticleDTO> selectArticles(int group,int cate1) {
+		 group = 3;
+		 return mapper.selectArticles(group,cate1);
+	 }
 	
 	
 	

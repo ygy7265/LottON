@@ -31,4 +31,16 @@ public class UserService {
 		
 		userRepository.save(entity); 
 	}
+	
+	public int countUid(String uid) {
+		return userRepository.countByUid(uid);
+	}
+	
+	public int countEmail(String email) {
+		return userRepository.countByEmail(email);
+	}
+	
+	public int countHp(String hp) {
+		return userRepository.countByHp(hp);
+	}
 }

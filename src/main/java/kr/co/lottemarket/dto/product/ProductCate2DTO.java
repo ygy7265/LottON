@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductCate2DTO {
-	private ProductCate1Entity cate1;
+	private int cate1;
 	private int cate2;
 	private String c2Name;
 	
@@ -26,3 +26,4 @@ public class ProductCate2DTO {
 				.build();
 	}
 }
+

@@ -20,39 +20,62 @@ public class CS_ArticleController {
 
 	@Autowired
 	private CsSerivce articleSerivce;
-	
-	
-	
+
+	@Autowired
+	private CsSerivce serivce;
+
 	@GetMapping("/cs/list")
-	public String noticeList(Model model, PageRequestDTO pageRequestDTO) {
+	public String noticeList(Model model, PageRequestDTO pageRequestDTO, int group, int cate1) {
+		 
 		
-		PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
+		log.info("groupserivce.selectArticles(group, cate1)= " + serivce.selectArticles(group,cate1));
+		serivce.selectArticles(group,cate1);
 		
-		if(pageResponseDTO.getCate1() == 0) {
-			pageResponseDTO = articleSerivce.findByParentAndGroup(pageRequestDTO);
-		}else {
-			pageResponseDTO = articleSerivce.findByParentAndGroupAndCate1(pageRequestDTO);
-		}
-		
-		log.info("pageResponseDTO no : " + pageResponseDTO.getNo());
-		log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
-		log.info("pageResponseDTO cate2 : " + pageResponseDTO.getCate2());
-		log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
-        log.info("pageResponseDTO size : " + pageResponseDTO.getSize());
-        log.info("pageResponseDTO total : " + pageResponseDTO.getTotal());
-        log.info("pageResponseDTO start : " + pageResponseDTO.getStart());
-        log.info("pageResponseDTO end : " + pageResponseDTO.getEnd());
-        log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
-        log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
-        log.info("pageResponseDTO group : " + pageResponseDTO.getGroup());
-		
-        
-		model.addAttribute("pageResponseDTO", pageResponseDTO);
-		
-		if(pageRequestDTO.getGroup() == 2 ) {
-			return "/cs/board/faqlist";
-		}else {
+		if(pageRequestDTO.getGroup() != 2 ) {
+			
+			PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
+			
+			if(pageResponseDTO.getCate1() == 0) {
+				pageResponseDTO = articleSerivce.findByParentAndGroup(pageRequestDTO);
+			}else {
+				pageResponseDTO = articleSerivce.findByParentAndGroupAndCate1(pageRequestDTO);
+			}
+			
+			log.info("pageResponseDTO no : " + pageResponseDTO.getNo());
+			log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
+			log.info("pageResponseDTO cate2 : " + pageResponseDTO.getCate2());
+			log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
+	        log.info("pageResponseDTO size : " + pageResponseDTO.getSize());
+	        log.info("pageResponseDTO total : " + pageResponseDTO.getTotal());
+	        log.info("pageResponseDTO start : " + pageResponseDTO.getStart());
+	        log.info("pageResponseDTO end : " + pageResponseDTO.getEnd());
+	        log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
+	        log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
+	        log.info("pageResponseDTO group : " + pageResponseDTO.getGroup());
+			
+	        
+			model.addAttribute("pageResponseDTO", pageResponseDTO);
+			
+			
 			return "/cs/board/list";
+			
+		}else {
+			
+			
+			
+			
+			  List<ArticleDTO> articles = serivce.selectArticles(group, cate1);
+			  
+			  log.info("articlesarticles = " + articles); 
+			  log.info("group = " + group );
+			  log.info("articles2 = " + articles);
+			  model.addAttribute("pageResponseDTO", articles.get(1));
+			  model.addAttribute("articles", articles);
+			 
+			
+			return "/cs/board/faqlist";
+		
+			
 		}
 	}
 	
@@ -76,13 +99,12 @@ public class CS_ArticleController {
 		log.info("article content = " + article.getContent() );
 		log.info("article rdate = " + article.getRdate() );
 		
-		if(pageRequestDTO.getGroup() == 2 ) {
-			return "/cs/board/faqView";
-		}else {
-			return "/cs/board/view";
-		}
+		return "/cs/board/view";
 		
 	}
+	
+	
+	
 	
 	@GetMapping("/cs/faq")
 	public String faqList() {
@@ -112,33 +134,19 @@ public class CS_ArticleController {
 	 * 
 	 * return "/cs/qna/qnaView"; }
 	 */
-	
-	
+
 	@GetMapping("/cs/qna/write")
 	public String qanWrite(@ModelAttribute PageRequestDTO pageRequestDTO) {
 
 		return "/cs/qna/qnaWrite";
 	}
-	
+
 	@PostMapping("/cs/qna/write")
 	public String qanWrite(HttpServletRequest request, ArticleDTO dto) {
-		dto.setUid("seller1");
-		log.info("dtodtodto" +  dto.getUid());
+		log.info("dtodtodto" + dto.getUid());
 		articleSerivce.insertArticle(dto);
-		
-		
-		
+
 		return "redirect:/cs/list?group=" + dto.getGroup() + "&cate1=" + dto.getCate1();
 	}
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
 }

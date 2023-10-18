@@ -66,6 +66,12 @@ public class UserConrtroller {
 		return "/member/signup";
 	}
 	
+	// 추가
+	@GetMapping("/member/findId")
+	public String findId() {
+		return "/member/findId";
+	}
+	
 	
 	
 }

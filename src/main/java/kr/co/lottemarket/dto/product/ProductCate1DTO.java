@@ -24,3 +24,4 @@ public class ProductCate1DTO {
 				.build();
 	}
 }
+
