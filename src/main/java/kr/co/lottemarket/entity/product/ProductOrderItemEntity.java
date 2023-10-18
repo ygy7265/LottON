@@ -1,5 +1,6 @@
 package kr.co.lottemarket.entity.product;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,11 +30,11 @@ public class ProductOrderItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ordNo;
-	@ManyToOne
-	@JoinColumn(name = "prodNo",referencedColumnName = "prodNo")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prodNo")
 	private ProductEntity prodNo;
-	@ManyToOne
-	@JoinColumn(name = "uid",referencedColumnName = "uid")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uid")
 	private UserEntity uid;
 	private int count;
 	private int price;

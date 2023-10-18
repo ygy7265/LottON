@@ -12,5 +12,9 @@ import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
 
 @Repository
 public interface ProductOrderItemRepository extends JpaRepository<ProductOrderItemEntity, String>{
-
+	@Query("SELECT pc, p.thumb1,p.prodNo, p.prodName, p.descript FROM ProductOrderItemEntity pc " +
+		       "JOIN pc.uid u " +
+		       "JOIN pc.prodNo p " +
+		       "WHERE u.uid = :uid ")
+		List<Object[]> findProductsByOrderItem(@Param("uid") String uid);
 }

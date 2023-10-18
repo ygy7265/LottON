@@ -12,12 +12,14 @@ import kr.co.lottemarket.entity.product.ProductCartEntity;
 
 @Repository
 public interface ProductCartRepository extends JpaRepository<ProductCartEntity, Integer>{
-	
-	@Query("SELECT pc, p.thumb1,p.prodNo, p.prodName, p.descript FROM ProductCartEntity pc " +
+	  
+	    @Query("SELECT pc, p.thumb1,p.prodNo, p.prodName, p.descript FROM ProductCartEntity pc " +
 		       "JOIN pc.uid u " +
 		       "JOIN pc.prodNo p " +
 		       "WHERE u.uid = :uid " +
 		       "ORDER BY pc.cartNo DESC")
 		List<Object[]> findProductsBySeller(@Param("uid") String uid);
+		
+		
 
 }

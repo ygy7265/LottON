@@ -7,5 +7,6 @@ import kr.co.lottemarket.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String>{
+	public UserEntity findByUid(String uid);
 
 }
