@@ -28,7 +28,9 @@
         </header>
   
         <section id="cs">
-		<div th:class="${pageResponseDTO.group == 1} ? 'notice' : (${pageResponseDTO.group == 2} ? 'faq' : 'qna')"> 							  
+	   <div th:class="${pageResponseDTO.group == 1} ? 'notice' : (${pageResponseDTO.group == 2} ? 'faq' : 'qna')">
+
+ 							  
             <nav>
               <div>
                 <p>홈<span>></span>[[${pageResponseDTO.group == 1} ? '공지사항' :  (${pageResponseDTO.group == 2} ? '자주묻는질문' : '문의하기')]]</p>
