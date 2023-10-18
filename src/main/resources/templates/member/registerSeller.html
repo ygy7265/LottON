@@ -8,11 +8,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" href="../css/style.css"/>
-    <link rel="stylesheet" href="./css/member.css"/>
+    <link rel="stylesheet" href="../member/css/member.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="../member/js/validation.js"></script> <!-- static에 있는 파일 경로 이렇게 설정해줘야함 -->
+    <script src="../member/js/checkUser.js"></script>
+    <script src="../member/js/zipcode.js"></script>
+    <script>
+	//auto hyphen
+	const hypenTel = (target) => {
+		target.value = target.value
+				.replace(/[^0-9]/g, '')
+				.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	}
+
+	</script>
 </head>
 <body>
     <div id="wrapper">
@@ -29,21 +41,26 @@
 							<caption>필수 정보입력</caption>
 							<tr>
 								<th><span class="essential">*</span>아이디</th>
-								<td><input type="text" name="uid" placeholder="아이디를 입력"
-									required /> <span class="msgSId">&nbsp;&nbsp;영문, 숫자로
-										4~12자까지 설정해 주세요.</span></td>
+								<td>
+									<input type="text" name="uid" placeholder="아이디를 입력" required /> 
+									<span class="msgSId">&nbsp;&nbsp;영문, 숫자로 4~12자까지 설정해 주세요.</span>
+									<span class="resultId"></span>
+								</td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>비밀번호</th>
-								<td><input type="password" name="pass1"
-									placeholder="비밀번호를 입력" required /> <span class="msgPass">&nbsp;&nbsp;영문,
-										숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span></td>
+								<td>
+									<input type="password" name="pass1" placeholder="비밀번호를 입력" required /> 
+									<span class="msgPass">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+								</td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>비밀번호확인</th>
-								<td><input type="password" name="pass2"
-									placeholder="비밀번호를 확인" required /> <span class="msgPass">&nbsp;&nbsp;비밀번호
-										재입력</span></td>
+								<td>
+									<input type="password" name="pass2" placeholder="비밀번호를 확인" required />
+									<span class="msgPass">&nbsp;&nbsp;비밀번호 재입력</span>
+									<span class="resultPass"></span>
+								</td>
 							</tr>
 						</table>
 					</section>
@@ -89,15 +106,16 @@
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>EMAIL</th>
-								<td><input type="email" name="email"
-									placeholder="이메일 입력" required /></td>
+								<td>
+									<input type="email" name="email" placeholder="이메일 입력" required />
+									<span id="resultEmail"></span>
+								</td>
 							</tr>
 							<tr class="addr">
 								<th>회사주소</th>
 								<td>
 									<div>
-										<input type="text" name="zip" id="zip"
-											placeholder="우편번호 입력 클릭" readonly />
+										<input type="text" name="zip" id="zip" placeholder="우편번호 입력 클릭" onclick="zipcode()" readonly />
 									</div>
 									<div>
 										<input type="text" name="addr1" id="addr1" size="50"
@@ -116,14 +134,18 @@
 							<caption>담당자 정보입력</caption>
 							<tr>
 								<th><span class="essential">*</span>이름</th>
-								<td><input type="text" name="name" placeholder="이름을 입력"
-									required /></td>
+								<td>
+									<input type="text" name="name" placeholder="이름을 입력" required />
+									<span class="resultName"></span>
+								</td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>휴대폰</th>
-								<td><input type="text" name="hp" maxlength="13"
-									placeholder="휴대폰번호 입력" required /> <span class="msgHp">&nbsp;&nbsp;-
-										포함 13자리를 입력하세요.</span></td>
+								<td>
+									<input type="text" name="hp" maxlength="13" placeholder="휴대폰번호 입력" required /> 
+									<span class="msgHp">&nbsp;&nbsp;- 포함 13자리를 입력하세요.</span>
+									<span id="resultHp"></span>
+								</td>
 							</tr>
 						</table>
 					</section>
