@@ -16,6 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface AdminProductCate1Repository extends JpaRepository<ProductCate1Entity, Integer>{
 	
-	public List<ProductCate1Entity> findAll();
+	public List<ProductCate1Entity> findByCate1(int cate1);
 	
 }

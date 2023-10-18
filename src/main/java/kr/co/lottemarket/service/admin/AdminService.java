@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.option_return;
+import kr.co.lottemarket.cs.mapper.Category2Mapper;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageResponseDTO;
@@ -36,6 +37,7 @@ import kr.co.lottemarket.repository.admin.AdminProductCate2Repository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+import org.apache.ibatis.session.SqlSession;
 import org.modelmapper.ModelMapper;
 
 @Log4j2
@@ -48,11 +50,15 @@ public class AdminService {
 	private final AdminCsRepository adminCsRepository;
 	private final Admin_FileRepository admin_FileRepository;
 	private final AdminProductCate1Repository adminProductCate1Repository;
-	private final AdminProductCate2Repository adminProductCate2Repository;
+	private final Category2Mapper category2Mapper;
 	
 	@Value("${spring.servlet.multipart.location}")
     private String filePath;
 	
+	
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+									/////////////////////////Product service part//////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void insertProduct(ProductDTO dto) {
 		
@@ -211,8 +217,37 @@ public class AdminService {
 		return dto;
 		
 	}
-	
-	public Admin_CsPageResponseDTO selectArticles(Admin_CsPageRequestDTO pageRequestDTO) {
+    
+    public void deleteProduct(int no) {
+    	
+    	repo.deleteByprodNo(no);
+    	
+    }
+    
+    public List<ProductCate1DTO> selectCate1() {
+        List<ProductCate1Entity> cate1 = adminProductCate1Repository.findAll();	
+
+        List<ProductCate1DTO> dtoList = cate1.stream()
+            .map(entity -> modelmapper.map(entity, ProductCate1DTO.class))
+            .collect(Collectors.toList());
+
+        return dtoList;
+    }
+    
+    
+
+    public List<ProductCate2DTO> selectCate2(int cate1) {
+    	
+    	List<ProductCate2DTO> cate2 = category2Mapper.selectProductCate2(cate1);
+    	
+        return cate2;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    									/////////////////////////CS service part//////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public Admin_CsPageResponseDTO selectArticles(Admin_CsPageRequestDTO pageRequestDTO) {
 
         Pageable pageable = pageRequestDTO.getPageable("no");
 
@@ -240,17 +275,17 @@ public class AdminService {
         return articleEntity.toDTO();
     }
     
-    public void deleteProduct(int no) {
+    public void insertArticle(ArticleDTO dto) {
     	
-    	repo.deleteByprodNo(no);
+    	ArticleEntity entity = dto.toEntity();
+    	
+    	ArticleEntity insert = adminCsRepository.save(entity); 
     	
     }
     
-    public List<ProductCate1Entity> selectCate1() {
+    public void deleteArticle(int no) {
     	
-    	List<ProductCate1Entity> cate1 = adminProductCate1Repository.findAll();	
-    	
-    	return cate1;
+    	adminCsRepository.deleteByNo(no);
     	
     }
     
