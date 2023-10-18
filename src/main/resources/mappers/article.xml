@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lottemarket.cs.mapper.ArticleMapper">
+
+<select id="selectArticles" resultType="kr.co.lottemarket.dto.ArticleDTO">
+    SELECT a.*, b.group_name, c.cate1_name, d.cate2_name
+    FROM lotte_board a
+    LEFT JOIN lotte_board_group b ON a.group = b.group
+    LEFT JOIN lotte_board_cate1 c ON a.group = c.group AND a.cate1 = c.cate1
+    LEFT JOIN lotte_board_cate2 d ON a.cate1 = d.cate1 AND a.cate2 = d.cate2
+    WHERE a.group = #{group} AND a.cate1 = #{cate1}
+    limit 0, 10;
+</select>
+ 
+
+</mapper>

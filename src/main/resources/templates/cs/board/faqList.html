@@ -13,12 +13,9 @@
               <div>
                 <h3>가입</h3>
                 <ul>
-                  <li><a th:href="@{/cs/view(group=2,cate1=)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
+                  <li th:each="article:${articles}">
+					  <a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>[[${article.content}]]?</a>
+				  </li>
                   <li class="more"><a href="#">더보기</a></li>
                 </ul>
               </div>
