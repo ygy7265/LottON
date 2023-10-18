@@ -1,301 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>product:Cart</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <link rel="stylesheet" href="../css/style.css" />
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+	layout:decorate="/side.html"
+	>
     
-    <script th:inline="javascript">
-		$(function(){
-			
-			let cartNo = null;
-		    let count = 0; // 상품 수 초기화
-		    let point = 0; // 포인트 초기화
-		    let total = 0; // total 변수를 초기화합니다.
-		    let delivery = 0; // 배송비 초기화
-		    let discountPrice = 0; // 전체비용 초기화
-			let orderdiscount = $('input.ordercount').val();
-		    var listValues = [];
-		    initialize();
-	    	
-	    	function initialize() {
-	        $('.ordernodiscount').text("0");
-	        $('.orderdiscount').text("0");
-	        $('.ordercount').text("0");
-	        $('.orderpoint').text("0");
-	        $('.orderdelivery').text("0");
-	        $('.ordertotal').text("0");
-	        $('.ordertotal2').val("0");
-	    	}
-	    	
-			 $('#all').click(function() {
-	        // 전체 선택 체크박스의 상태
-	        var isChecked = $(this).prop('checked');
-   			
-	  	 	 $('.Item').prop('checked', isChecked);
-	
-	   		
-	        // 개별 체크박스들의 상태를 전체 선택 체크박스와 동일하게 설정
-	  	   
-		        if($('.Item:checked').length === 0){
-		        	 initialize();
-		        }
-		        else{
-		        	calculateSelectedItems(); // 업데이트된 선택 항목 계산	
-		        }
-		        
-		       
-	 	   });
-	    
-	     
-		         $('.Item').click(function() {
-		        // 개별 체크박스들 중에서 하나라도 선택 해제된 것이 있는지 확인
-		        cartNo = $(this).val();
-		        console.log("cartNo = " + cartNo);
-		        if ($('.Item:checked').length < $('.Item').length) {
-		            // 하나라도 선택 해제된 경우, 전체 선택 체크박스도 선택 해제
-		            $('#all').prop('checked', false);
-		        } else {
-		            // 모두 선택된 경우, 전체 선택 체크박스도 선택
-		            $('#all').prop('checked', true);
-		        }
-		        
-		        if($('.Item:checked').length === 0){
-		        	 initialize();
-		        }
-		        else{
-		        	calculateSelectedItems(); // 업데이트된 선택 항목 계산	
-		        }
-	        
-	   		 });
-		
-			    //할인금액계산
-	    function calculateSelectedItems() {
-	        var selectedItems = $('.Item:checked'); // 선택된 체크박스 아이템들을 가져옵니다.
-	        count = selectedItems.length; // 선택된 상품 수 업데이트
-	        total = 0; // 총 상품금액 초기화
-	        var discount = 0; // 할인 총액 초기화
-	        var selectedCheckbox = $(this); // 선택된 체크박스
-	        var listCountValue = null;
-	      
-	        var listdeliveryValue = null;
-	        var listpriceValue = null;
-	        var listLastPriceValue = null;
-	        var listNoDiscountPriceValue = null;
-	        var listdiscountedPrice = null;
-	        var listpointValue = null;
-	        var listdiscountper = null;
-	        
-	        var listValues = [];
-	        selectedItems.each(function() {
-	            var row = $(this).closest('tr'); // 선택된 체크박스가 속한 행
-	            var listCount = parseFloat(row.find('.listcount').val());  // 선택된 체크박스의 .listcount 값
-	            var listpriceValue = parseFloat(row.find('.listprice').val());  // 선택된 체크박스의 .listprice 값
-	            var listdiscountValue = parseFloat(row.find('.listdiscount').val());  // 선택된 체크박스의 .listcount 값
-	            var listProdNo = parseFloat(row.find('.listprodNo').val());  // 선택된 체크박스의 .listprodNo 값
-	            var listUid = $('.listuid').val(); // 선택된 체크박스의 .listcount 값을 더합니다.
-	            var listdelivery = parseFloat(row.find('.listdelivery').val());  // 선택된 체크박스의 .listdelivery 값
-	            var listpName = parseFloat(row.find('.listpName').val());  // 선택된 체크박스의 .listpName 값
-	            var listtotal = parseFloat(row.find('.listtotal').val());  // 선택된 체크박스의 .listtotal 값
-	            var listpoint = parseFloat(row.find('.listpoint').val());  // 선택된 체크박스의 .listpoint 값
-	            var cartNo = $('.cartNo').val();
-	            var cartNo = $('.cartNo').val();
-	            
-	            console.log("listProdNo = " + listProdNo);
-	            console.log("listUid = " + listUid);
-	            console.log("listCount = " + listCount);
-	            console.log("listpriceValue = " + listpriceValue);
-	            console.log("listProdNo = " + listProdNo);
-	            console.log("listtotal = " + listtotal);
-	            console.log("listdelivery = " + listdelivery);
-	            console.log("listpoint = " + listpoint);
-	            console.log("cartNo = " + cartNo);
-	            
-	            
-	            listValues.push({
-	                listCount: listCount,
-	                listpriceValue: listpriceValue,
-	                listdiscountValue: listdiscountValue,
-	                listProdNo: listProdNo,
-	                listUid: listUid,
-	                listdelivery: listdelivery,
-	                listtotal: listtotal,
-	                listpoint: listpoint,
-	                cartNo: cartNo,
-	                orderdiscount:Math.round(orderdiscount)
-	               
-	            });
-	          
-	            
-	            $('.jsondata').val(JSON.stringify(listValues));
-	            console.log("$('.jsondata') = " + $('.jsondata').val());
-	            
-	           //데이터 값 저장
-	            listdeliveryValue += parseFloat(row.find('.listdelivery').val());  // 선택된 체크박스의 .listdelivery 값을 더합니다.
-	            listpointValue += parseFloat(row.find('.listpoint').val());  // 선택된 체크박스의 .listpoint 값을 더합니다.
-	        	listCountValue += parseFloat(row.find('.listcount').val());  // 선택된 체크박스의 .listcount 값을 더합니다.
-	        	listLastPriceValue = listCount * listpriceValue;
-	        	listNoDiscountPriceValue += listLastPriceValue;
-	        	
-	        	
-	        	
-	            // 할인 적용된 가격 계산
-	            var discountedPrice = listLastPriceValue - (listLastPriceValue * (listdiscountValue / 100));
-	            var discountper = (listLastPriceValue * (listdiscountValue / 100));
-	            //할인후 적용 금액
-	            listdiscountedPrice += discountedPrice;
-	            //할인금액
-	            listdiscountper += discountper;
-	            console.log('discountedPrice value: ' + Math.round(discountedPrice).toLocaleString());
-	            
-	            console.log('discountedPrice value: ' + Math.round(listdiscountedPrice).toLocaleString());
-	        });
-	     
-	        // 업데이트된 값들을 화면에 표시
-	        $('.ordernodiscount').text(listNoDiscountPriceValue.toLocaleString());
-	        
-	        $('.orderdiscount').text('- ' + Math.round(listdiscountper).toLocaleString());
-	        // 업데이트된 상품 수량을 화면에 표시
-	        $('.ordercount').text(listCountValue.toLocaleString());
-	        $('.orderpoint').text(listpointValue.toLocaleString());
-	        $('.orderdelivery').text(listdeliveryValue.toLocaleString());
-	        $('.ordertotal').text(Math.round(listdiscountedPrice).toLocaleString());
-	        $('.ordertotal2').val(Math.round(listdiscountedPrice).toLocaleString());
-	    }
-		
-		
-	 $('#deleteSelected').click(function() {
-  	 	 var selectedItems = $('.Item:checked'); // 선택된 체크박스 아이템들을 가져옵니다.
-  	 	 console.log("selectedItems"+selectedItems);
-         var cartNos = selectedItems.map(function() {
-            return $(this).val(); // 선택된 아이템의 data-cartno 속성 값을 가져옵니다.
-         }).get();
-  	  
-	  	  console.log("cartNos"+cartNos);
-	      $('.Item:checked').closest('tr').remove();
-	      
-		      	$.ajax({
-						url:'/product/cart/${cartNos}',
-						type:'delete',
-						traditional : true,
-						contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-						dataType:'json',
-						success:function(data){
-							console.log(data);
-							console.log(data.result);
-							if(data.result > 0){}
-								
-						}
-					
-				});
-    });
-			
-		});
-		
-		
-	</script>
-</head>
-<style>
+<head>
+	<script th:src="@{../js/cart.js}"></script>
 
-</style>
-<body>
-    <div id=" wrapper">
-        <header>
-            <div class="top">
-                <div>
-                    <a href="#">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#">
-                        <i class="fa fa-shopping-cart" aria-hidden="true">
-                            &nbsp;장바구니
-                        </i>
-                    </a>
-                </div>
-            </div>
-            <div class="logo">
-                <div>
-                    <a href="#"><img src="../images/header_logo.png" alt="로고"></a>
-                    <form action="#">
-                        <input type="text" name="keyword">
-                        <button>
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="menu">
-                <div>
-                    <ul>
-                        <li><a href="#">히트상품</a></li>
-                        <li><a href="#">추천상품</a></li>
-                        <li><a href="#">최신상품</a></li>
-                        <li><a href="#">인기상품</a></li>
-                        <li><a href="#">할인상품</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">쿠폰존</a></li>
-                        <li><a href="#">사용후기</a></li>
-                        <li><a href="#">개인결제</a></li>
-                        <li><a href="#">고객센터</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                   
-                </div>
-            </div>
-        </header>
-        <main id="product">
-            <aside>
-                <ul class="category">
-                    <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-                    <li>
-                        <a href="#"><i class="fas fa-tshirt" aria-hidden="true"></i>패션·의류·뷰티</a>
-                        <ol>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">잡화</a></li>
-                            <li><a href="#">뷰티</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-laptop" aria-hidden="true"></i>가전·디지털</a>
-                        <ol>
-                            <li><a href="#">노트북</a></li>
-                            <li><a href="#">가전</a></li>
-                            <li><a href="#">휴대폰</a></li>
-                            <li><a href="#">기타</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-utensils" aria-hidden="true"></i>식품·생필품</a>
-                        <ol>
-                            <li><a href="#">신선식품</a></li>
-                            <li><a href="#">가공식품</a></li>
-                            <li><a href="#">건강식품</a></li>
-                            <li><a href="#">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-home" aria-hidden="true"></i>홈·문구·취미</a>
-                        <ol>
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">침구·커튼</a></li>
-                            <li><a href="#">생활용품</a></li>
-                            <li><a href="#">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </aside>
+</head>
             <!-- 장바구니 페이지 시작 -->
-            <section class="cart">
+            <section class="cart" layout:fragment="content">
               
               <!-- 제목, 페이지 네비게이션 -->
               <nav>
@@ -305,7 +19,7 @@
                 </p>
               </nav>
                             
-              <form action="#">
+              <form th:action="@{/product/productOrder}" method="post" >
                 <!-- 장바구니 목록 -->
                 <table>
                   <thead>
@@ -322,7 +36,7 @@
                   </thead>
                   <tbody>
                     <tr class="empty">
-                      <td colspan="7">장바구니에 상품이 없습니다.</td>
+                     	<td th:if="${#lists.isEmpty(dtocart)}" colspan="7">장바구니에 상품이 없습니다.</td>
                     </tr>
                     <tr th:each="dto:${dto}">
                       <td><input type="checkbox" class="Item" th:value="${dto.cartNo}"></td>
@@ -339,19 +53,18 @@
                       <td>[[${#numbers.formatInteger(dto.price,0,'COMMA')}]]</td>
                       <td>[[${dto.discount}]]%</td>
                       <td>[[${dto.point}]]</td>
-                      <td>[[${dto.delivery}]]</td>
+                      <td>[[${#numbers.formatInteger(dto.delivery,0,'COMMA')}]]</td>
                       <td>[[${#numbers.formatInteger(dto.count * dto.price,0,'COMMA')}]]</td>
-                      <td><input type="hidden" class="listpoint" th:value="${dto.point}"/> </td>
-		              <td><input type="hidden" class="listcount" th:value="${dto.count}"/> </td>
-		              <td><input type="hidden" class="listprice" th:value="${dto.price}"/> </td>
-		              <td><input type="hidden" class="listdelivery" th:value="${dto.delivery}"/> </td>
-		              <td><input type="hidden" class="listtotal" th:value="${dto.count * dto.price  - ((dto.count * dto.price) * (dto.discount / 100))}"/> </td>
-		              <td><input type="hidden" class="listdiscount" th:value="${dto.discount}"/></td>
-		              <td><input type="hidden" class="listdiscript" th:value="${dto.prodNo.descript}"/></td>
-		              <td><input type="hidden" class="listpoint" th:value="${dto.point}"/></td>
-		              <td><input type="hidden" class="listprodNo" th:value="${dto.prodNo.prodNo}"/></td>
-		              <td><input type="hidden" class="listpName" th:value="${dto.prodNo.prodName}"/></td>
-		              <td><input type="hidden" class="listuid" value="seller1"/></td>
+                      <td><input type="hidden" class="point" th:value="${dto.point}"/> </td>
+		              <td><input type="hidden" class="count" th:value="${dto.count}"/> </td>
+		              <td><input type="hidden" class="price" th:value="${dto.price}"/> </td>
+		              <td><input type="hidden" class="delivery" th:value="${dto.delivery}"/> </td>
+		              <td><input type="hidden" class="discount" th:value="${dto.discount}"/></td>
+		              <td><input type="hidden" class="descript" th:value="${dto.prodNo.descript}"/></td>
+		              <td><input type="hidden" class="prodNo" th:value="${dto.prodNo.prodNo}"/></td>
+		              <td><input type="hidden" class="prodName" th:value="${dto.prodNo.prodName}"/></td>
+		              <td><input type="hidden" class="uid" value="seller1"/></td>
+		              <td><input type="hidden" class="total" th:value="${dto.price * dto.count}"/></td>
 		              <td><input type="hidden" class="cartNo" th:value="${dto.cartNo}"/></td>
                     </tr>
                    
@@ -389,49 +102,11 @@
 	              <td class="ordertotal">0</td>
 	            </tr>
                   </table>
-                   <input type="hidden" class="jsondata" name="jsonData"/>
+                   <input type="hidden" class="jsondata" name="productOrderItemEntity"/>
          		   <input type="hidden" class="orderdiscount" name="orderdiscount"/>
          		   <input type="hidden" class="ordertotal2"/>
                   <input type="submit" name="" value="주문하기">    
                 </div>
               </form>
             </section>
-            <!-- 장바구니 페이지 끝 -->
-        </main>
-        <footer>
-            <ul>
-                <li><a href="#">회사소개</a></li>
-                <li><a href="#">서비스이용약관</a></li>
-                <li><a href="#">개인정보처리방침</a></li>
-                <li><a href="#">전자금융거래약관</a></li>
-            </ul>
-            <div>
-                <p><img src="../images/footer_logo.png" alt="로고"></p>
-                <p>
-                    <strong>(주)KMARKET</strong>
-                    <br>
-                     부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)
-                    <br>
-                     대표이사 : 홍길동
-                    <br>
-                    사업자등록번호 : 220-81-83676 사업자정보확인
-                    <br>
-                    통신판매업신고 : 강남 10630호 Fax : 02-589-8842
-                </p>
-                <p>
-                    <strong>고객센터</strong>
-                    <br>
-                     Tel : 1234-5678 (평일 09:00~18:00)
-                    <br>
-                    스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)
-                    <br>
-                    경기도 부천시 원미구 부일로 223(상동) 투나빌딩 6층
-                    <br>
-                    Fax : 051-123-4567 | Mail : kmarket@kmarket.co.kr
-                </p>
-            </div>
-        </footer>
-        <button type="button" id="top">상단이동</button>
-    </div>
-</body>
 </html>

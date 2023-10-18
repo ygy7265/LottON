@@ -738,7 +738,7 @@
 }
 
 #product > .cart > form > table .empty {
-  display: none;
+  
 }
 #product > .cart > form > table .empty td {
   padding: 50px 0 !important;
@@ -863,7 +863,7 @@
 #product > .order > form > table tbody {}
 
 #product > .order > form > table .empty {
-  display: none;
+  
 }
 #product > .order > form > table .empty td {
   padding: 50px 0 !important;

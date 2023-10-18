@@ -1,4 +1,4 @@
-package kr.co.lottemarket.service;
+package kr.co.lottemarket.service.product;
 
 import java.util.List;
 import java.util.Optional;
@@ -131,8 +131,14 @@ public class ProductService {
 		uid="seller1";
 		log.info("uid uid= "+uid.toString());
 		List<Object[]> entitys = cartrepo.findProductsBySeller(uid);
-		//List<ProductCartDTO> dto = entitys.stream().map(entity -> modelmapper.map(entity, ProductCartDTO.class)).toList();
 		
+		return entitys;
+	}
+	
+	public List<Object[]> findProductsByOrderItem(String uid) {
+		uid="seller1";
+		List<Object[]> entitys = orderrepo.findProductsByOrderItem(uid);
+		log.info("uid entitys= "+entitys.toString());
 		return entitys;
 	}
 	

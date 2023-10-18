@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.co.lottemarket.dto.product.ProductDTO;
-import kr.co.lottemarket.service.ProductService;
+import kr.co.lottemarket.service.product.ProductService;
 import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Controller

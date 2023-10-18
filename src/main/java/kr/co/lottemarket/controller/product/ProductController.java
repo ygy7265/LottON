@@ -20,7 +20,7 @@ import kr.co.lottemarket.dto.product.ProductOrderDTO;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
 import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
-import kr.co.lottemarket.service.ProductService;
+import kr.co.lottemarket.service.product.ProductService;
 import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Controller
@@ -30,12 +30,9 @@ public class ProductController {
 	private ProductService service;
 	@Autowired
 	private ModelMapper modelmapper;
-	
-	
-	//Cart
 	@GetMapping("/product/productCart")
 	public String productCart(Model model, String uid) {
-	    uid = "seller1";
+	    uid = "sellr1";
 	    List<Object[]> dto = service.selectCartItems(uid);
 
 	    // DTO 리스트를 생성하고 엔티티를 DTO로 변환하여 추가
@@ -45,8 +42,8 @@ public class ProductController {
 	        ProductCartDTO prodDTO = modelmapper.map(entity, ProductCartDTO.class);
 	        prodDTOList.add(prodDTO);
 	    }
-	    log.info("prodprod"+prodDTOList.toString());
 	    model.addAttribute("dto", prodDTOList);
+	    model.addAttribute("dtocart", prodDTOList);
 
 	    return "/product/productCart";
 	}
@@ -61,22 +58,7 @@ public class ProductController {
 		service.insertDTO(dto);
 		return "redirect:/product/productCart";
 	}
-	@DeleteMapping
 	
-	
-	
-	
-	//Order
-	@GetMapping("/product/productOrder")
-	public String productOrder()	{
-		return "/product/productOrder";
-	}
-	@PostMapping("/product/productOrder")
-	public String productOrderPost(ProductOrderItemDTO dto)	{
-		dto.setTotal(dto.getCount() * dto.getPrice());
-		service.insertDTOBuy(dto);
-		return "redirect:/product/productOrder";
-	}
 	
 	@GetMapping("/product/productList")
 	public String productList(Model model,PageRequestDTO pageRequestDTO){

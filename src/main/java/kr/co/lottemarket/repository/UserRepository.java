@@ -7,6 +7,7 @@ import kr.co.lottemarket.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String>{
+	public UserEntity findByUid(String uid);
 
 	public int countByUid(String uid); // public 생략 가능??
 	public int countByEmail(String email);
