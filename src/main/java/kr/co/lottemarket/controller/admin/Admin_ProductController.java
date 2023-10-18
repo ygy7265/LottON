@@ -2,6 +2,7 @@ package kr.co.lottemarket.controller.admin;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.MergedAnnotations.Search;
@@ -12,13 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
+import kr.co.lottemarket.dto.product.ProductCate1DTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
-import kr.co.lottemarket.entity.product.ProductEntity;
+import kr.co.lottemarket.entity.product.ProductCate1Entity;
+import kr.co.lottemarket.entity.product.ProductCate2Entity;
 import kr.co.lottemarket.service.admin.AdminService;
 import lombok.extern.log4j.Log4j2;
 
@@ -68,11 +74,15 @@ public class Admin_ProductController {
 
 	
 	@GetMapping("/admin/layout/product/register")
-	public String register() {
+	public String register(Model model) {
 		
-		return "/admin/layout/product/register";
+	    List<ProductCate1DTO> cate1List = adminservice.selectCate1();
+	    model.addAttribute("cate1List", cate1List);
+	    
+	    return "/admin/layout/product/register";
 	}
-	
+
+
 	@PostMapping("/admin/layout/product/register")
 	public String register(ProductDTO dto) {
 		

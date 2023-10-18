@@ -20,7 +20,7 @@ public interface AdminProductRepository extends JpaRepository<ProductEntity, Int
 
 	public Page<ProductEntity> findByProdNameLike(String ProdName,Pageable pageable);
 	
-	public Page<ProductEntity> findByProdNoLike(int ProdNo, Pageable pageable);
+	public Page<ProductEntity> findByProdNo(int ProdNo, Pageable pageable);
 	
 	public Page<ProductEntity> findByCompanyLike(String Company, Pageable pageable);
 	

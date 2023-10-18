@@ -30,8 +30,8 @@ layout:decorate="/admin/index.html">
 					감사합니다.<br/></td>
 				</tr>
 			</table>
-            <a href="" class="btnViewDelete">삭제</a>
-            <a href="" class="btnViewModify">질문수정</a>
-            <a href="" class="btnList">목록</a>
+			<a th:href="@{/admin/layout/cs/noticelist(no=${noticeview.no}, pg=1, group=1)}" class="btnList">목록</a>
+			<a th:href="@{/admin/layout/cs/noticeModify(no=${noticeview.no}, group=1)}" class="btnViewModify">질문수정</a>
+            <a th:href="@{/admin/layout/cs/noticeDelete(no=${noticeview.no})}" class="btnViewDelete">삭제</a>    
 		</article>
 	</section>
