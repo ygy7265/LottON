@@ -643,7 +643,19 @@ button[type=submit] {
     margin-top: 10px;
 }
 
-#admin-cs-list > section > .csWrite {
+#admin-cs-list > section > .noticeWrite {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+}
+
+#admin-cs-list > section > .faqWrite {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+}
+
+#admin-cs-list > section > .qnaWrite {
     float: right;
     width: 100px;
     margin-top: 10px;

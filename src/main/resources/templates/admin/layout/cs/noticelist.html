@@ -36,15 +36,15 @@
                     <td><a th:href="@{/admin/layout/cs/noticeview(no=${noticelist.no})}">[[${noticelist.title}]]</a></td>
                    	<td>[[${#temporals.format(noticelist.rdate, 'yy-MM-dd')}]]</td>
                     <td>
-                        <a href="">[삭제]</a>
-                        <a href="">[수정]</a>
+						<a href="#" class="noticeModify">[수정]</a>
+                        <a href="#" class="noticeDelete">[삭제]</a>
                     </td>                   
                 </tr>
                 </c:forEach>
             </table>
             
             <input type="button" value="선택 삭제" class="csDelete"/>
-            <input type="button" value="공지 작성" class="csWrite"/>
+            <input type="button" value="공지 작성" class="noticeWrite"/>
 			
 			 <div class="paging">
 		        <span th:if="${pageResponseDTO.prev}" class="prev" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
@@ -52,7 +52,7 @@
 		        </span>
 		
 		        <span th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}"
-		             class="${num == pageResponseDTO.pg} ? 'on' : 'num'">
+		             class="num">
 		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${num})}" th:text="${num}"></a>
 		        </span>
 		

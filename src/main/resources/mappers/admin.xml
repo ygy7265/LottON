@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lottemarket.cs.mapper.Category2Mapper">
+	
+	<select id="selectProductCate2" resultType="kr.co.lottemarket.dto.product.ProductCate2DTO">
+       
+        SELECT *
+        FROM lotte_product_cate2
+        WHERE cate1 = #{cate1};
+        
+    </select>
+
+</mapper>

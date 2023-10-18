@@ -12,7 +12,6 @@ layout:decorate="/admin/index.html">
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
                     <form action="/admin/layout/product/register" method="post" enctype="multipart/form-data">
-
                         <!-- 상품분류 -->
 						<section>
 						    <h4>상품분류</h4>
@@ -23,15 +22,16 @@ layout:decorate="/admin/index.html">
 						        <tr>
 						            <td>1차 분류</td>
 						            <td>
-						            <select name="category1" class="category1">
-									    <option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:text="${cate1.c1Name}"></option>
+						            <select name="cate1" class="category1">
+										<option value="cate0">1차 분류 선택</option>
+									    <option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:selected="${cate1 eq selectedCate1}" th:text="${cate1.c1Name}"></option>
 									</select>
 									</td>
 						        </tr>
 						        <tr>
 						            <td>2차 분류</td>
 						            <td>
-						                <select name="category2">
+						                <select name="cate2" class="category2">
 						                    <option value="cate0">2차 분류 선택</option>
 						                    <option th:each="cate2 : ${cate2List}" th:value="${cate2.cate2}" th:text="${cate2.c2Name}"></option>
 						                </select>

@@ -8,15 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import kr.co.lottemarket.dto.product.ProductCate2DTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString(exclude = "cate1")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,18 +28,16 @@ public class ProductCate2Entity {
 	
 	@Id
 	private int cateNo;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cate1", unique = false)
-	private ProductCate1Entity cate1;
+	
+	private int cate1;
 	private int cate2;
 	private String c2Name;
 	
-	public ProductCate2Entity toEntity() {
-		return ProductCate2Entity.builder()
+	public ProductCate2DTO toDTO() {
+		return ProductCate2DTO.builder()
 				.cate1(cate1)
 				.cate2(cate2)
 				.c2Name(c2Name)
 				.build();
 	}
-	
 }

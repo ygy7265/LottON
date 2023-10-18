@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
+import kr.co.lottemarket.dto.product.ProductCate1DTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.entity.product.ProductCate1Entity;
 import kr.co.lottemarket.entity.product.ProductCate2Entity;
@@ -75,12 +76,12 @@ public class Admin_ProductController {
 	@GetMapping("/admin/layout/product/register")
 	public String register(Model model) {
 		
-	    List<ProductCate1Entity> cate1List = adminservice.selectCate1();
+	    List<ProductCate1DTO> cate1List = adminservice.selectCate1();
 	    model.addAttribute("cate1List", cate1List);
 	    
 	    return "/admin/layout/product/register";
-	    
 	}
+
 
 	@PostMapping("/admin/layout/product/register")
 	public String register(ProductDTO dto) {
