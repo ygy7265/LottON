@@ -1,6 +1,7 @@
 package kr.co.lottemarket.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import kr.co.lottemarket.entity.ArticleEntity;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,12 @@ public class ArticleDTO {
 	private String title;
 	private String content;
 	private LocalDateTime rdate;
+	
+	//추가필드
+	private String group_name;
+	private String cate1_name;
+	private String cate1_description;
+	private String cate2_name;
 	
 	
 	 public ArticleEntity toEntity(){

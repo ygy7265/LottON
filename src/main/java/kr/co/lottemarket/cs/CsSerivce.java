@@ -50,6 +50,26 @@ public class CsSerivce {
 	}
 	
 	
+	 
+	 // faqList출력
+	  public List<ArticleDTO> selectArticles(int group,int cate1) {
+		  return mapper.selectArticles(group, cate1);
+	 }
+	  
+	//faq카테고리 출력
+	  public List<ArticleDTO> selectCate1(int group){
+		  return mapper.selectCate1(group);
+	  }
+	
+	
+	
+	//메인페이지 글 출력
+	public List<ArticleDTO> selectIndex(int group){
+		return mapper.selectIndex(group);
+	}
+	
+	
+	
 	public PageResponseDTO findByParentAndGroup(PageRequestDTO pageRequestDTO){
 		
 		Pageable pageable = pageRequestDTO.getPageable("no");
@@ -101,12 +121,7 @@ public class CsSerivce {
 		 * 
 		 * return articles; }
 		 */
-	 
-	 //faqList출력
-	 public List<ArticleDTO> selectArticles(int group,int cate1) {
-		 group = 3;
-		 return mapper.selectArticles(group,cate1);
-	 }
+	
 	
 	
 	

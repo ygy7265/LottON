@@ -1,5 +1,7 @@
 package kr.co.lottemarket.cs;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import groovyjarjarantlr4.v4.parse.GrammarTreeVisitor.mode_return;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.cs.PageRequestDTO;
@@ -21,15 +24,9 @@ public class CS_ArticleController {
 	@Autowired
 	private CsSerivce articleSerivce;
 
-	@Autowired
-	private CsSerivce serivce;
 
 	@GetMapping("/cs/list")
 	public String noticeList(Model model, PageRequestDTO pageRequestDTO, int group, int cate1) {
-		 
-		
-		log.info("groupserivce.selectArticles(group, cate1)= " + serivce.selectArticles(group,cate1));
-		serivce.selectArticles(group,cate1);
 		
 		if(pageRequestDTO.getGroup() != 2 ) {
 			
@@ -55,26 +52,37 @@ public class CS_ArticleController {
 			
 	        
 			model.addAttribute("pageResponseDTO", pageResponseDTO);
+			  log.info("pageResponseDTO = " + pageResponseDTO );
 			
+			model.addAttribute("state", "list");
 			
 			return "/cs/board/list";
 			
 		}else {
-			
-			
-			
-			
-			  List<ArticleDTO> articles = serivce.selectArticles(group, cate1);
-			  
-			  log.info("articlesarticles = " + articles); 
-			  log.info("group = " + group );
-			  log.info("articles2 = " + articles);
-			  model.addAttribute("pageResponseDTO", articles.get(1));
-			  model.addAttribute("articles", articles);
+			 PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
+
 			 
-			
-			return "/cs/board/faqlist";
+			  List<ArticleDTO> lists = articleSerivce.selectCate1(cate1);
+			  model.addAttribute("lists", lists);
+			  List<ArticleDTO> articles = articleSerivce.selectArticles(group, cate1);
+			  log.info("articles = " + articles );
+			  log.info("pageRequestDTO cate1 = " + pageRequestDTO.getCate1() );
+			  log.info("pageRequestDTO group = " + pageRequestDTO.getGroup() );
+			  
+			  pageResponseDTO.setCate1(cate1);
+			  pageResponseDTO.setGroup(group);
+			 
+			  log.info("group = " + group );
+			  
+			  model.addAttribute("pageResponseDTO", pageResponseDTO);
+			  log.info("articles.get(0) = " + pageResponseDTO);
+			  log.info("articles = " + articles); 
+			  model.addAttribute("articles", articles);
 		
+			  
+			  model.addAttribute("state", "list");
+			
+			return "/cs/board/faqList";
 			
 		}
 	}
@@ -82,24 +90,30 @@ public class CS_ArticleController {
 	@GetMapping("/cs/view")
 	public String view(Model model, int no, PageRequestDTO pageRequestDTO) {
 		
-		ArticleDTO article = articleSerivce.findLotteON_boardByNo(no);
-		model.addAttribute("article", article);
+			log.info("no = " + no);
+			ArticleDTO article = articleSerivce.findLotteON_boardByNo(no);
+			model.addAttribute("article", article);
+			
+			PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
+			
+			pageResponseDTO.getCate1();
+			
+			model.addAttribute("state", "view");
+			model.addAttribute(pageResponseDTO);
+			
+			log.info("article no = " + article.getNo() );
+			log.info("article cate1 = " + article.getCate1() );
+			log.info("article cate2 = " + article.getCate2());
+			log.info("article title = " + article.getTitle() );
+			log.info("article content = " + article.getContent() );
+			log.info("article rdate = " + article.getRdate() );
+			if(pageRequestDTO.getGroup() == 2) {
+				return "/cs/board/faqView";
+			}else {
+				return "/cs/board/view";
+		}
 		
-		PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
 		
-		pageResponseDTO.getCate1();
-		
-		
-		model.addAttribute(pageResponseDTO);
-		
-		log.info("article no = " + article.getNo() );
-		log.info("article cate1 = " + article.getCate1() );
-		log.info("article cate2 = " + article.getCate2());
-		log.info("article title = " + article.getTitle() );
-		log.info("article content = " + article.getContent() );
-		log.info("article rdate = " + article.getRdate() );
-		
-		return "/cs/board/view";
 		
 	}
 	
@@ -136,9 +150,21 @@ public class CS_ArticleController {
 	 */
 
 	@GetMapping("/cs/qna/write")
-	public String qanWrite(@ModelAttribute PageRequestDTO pageRequestDTO) {
+	public String qanWrite(@ModelAttribute PageRequestDTO pageRequestDTO, Model model) {
 
-		return "/cs/qna/qnaWrite";
+		log.info("pageRequestDTO11111 = " + pageRequestDTO );
+		
+		PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
+		pageResponseDTO.setGroup(3);
+		pageResponseDTO.getCate1();
+		
+		model.addAttribute("pageResponseDTO", pageResponseDTO);
+		model.addAttribute("state", "write");
+		
+		log.info(pageResponseDTO.getCate1());
+		log.info("pageResponseDTO1111 = " + pageResponseDTO );
+		
+		return "/cs/board/qnaWrite";
 	}
 
 	@PostMapping("/cs/qna/write")
