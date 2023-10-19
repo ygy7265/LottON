@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+      layout:decorate="/cs/board/moduleList.html">
+      
+            <article layout:fragment="content">
+                <form th:action="@{/cs/qna/write(group=3)}" method="post">
+			    <input type="text" name="group" th:value="${pageRequestDTO.group}">
+			    <input type="text" name="uid" th:value="seller1">
+                <table>
+                  <tr>
+                    <td>문의유형</td>
+                    <td>
+                     <select name="cate1">
+                            <option>선택</option>
+                            <option th:value="1">회원</option>
+                            <option th:value="2">쿠폰/이벤트</option>
+                            <option th:value="3">주문/결제</option>
+                            <option th:value="4">배송</option>
+                            <option th:value="5">취소/반품/교환</option>
+                            <option th:value="6">여행/숙박/항공</option>
+                            <option th:value="7">안전거래</option>
+                        </select>
+                        
+                        <select name="cate2">
+                            <option>선택</option>
+                            <option th:value="1">가입</option>
+                            <option th:value="2">탈퇴</option>
+                            <option th:value="3">회원정보</option>
+                            <option th:value="4">로그인</option>
+                        </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>문의제목</td>                  
+                    <td>
+                      <input type="text" name="title" placeholder="제목을 입력하세요."/>
+                    </td>
+                  </tr>                
+                  <tr>
+                    <td>문의내용</td>                  
+                    <td>
+                      <textarea name="content" placeholder="내용을 입력하세요."></textarea>
+                    </td>
+                  </tr>
+                </table>
+                <div>
+                  <a th:href="@{/cs/list(group=3, cate1=${pageRequestDTO.cate1})}" class="btnList">취소하기</a>
+                  <input type="submit" class="btnSubmit" value="등록하기"/>
+                </div>
+              </form>
+            </article>
+</html>

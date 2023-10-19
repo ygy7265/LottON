@@ -10,16 +10,19 @@
                 <h2>가장 자주 묻는 질문입니다.</h2>
               </nav>
 
+			 <th:block th:each="list:${lists}">
               <div>
-                <h3>가입</h3>
+                 <h3 th:text="${list.cate2_name}"></h3>
                 <ul>
                   <li th:each="article:${articles}">
-					  <a th:href="@{/cs/view(group=2,cate1=1)}"><span>Q.</span>[[${article.content}]]?</a>
+					<th:block th:if="${list.cate2 == article.cate2}">
+					  <a th:href="@{/cs/view(group=2,cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}"><span>Q.</span>[[${article.title}]]?</a>
+				  	</th:block>
 				  </li>
                   <li class="more"><a href="#">더보기</a></li>
                 </ul>
               </div>
-             
+             </th:block>
 
             </article>
         
