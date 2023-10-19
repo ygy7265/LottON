@@ -35,7 +35,7 @@ public class SecurityConfiguration {
 		//토큰방식으로 로그인처리하기때문에 품방식 비활성
 		.formLogin(config -> config
                 .loginPage("/member/login")
-                .defaultSuccessUrl("/",true)
+                .defaultSuccessUrl("/",true) // GET 전송인가??
                 .failureUrl("/member/login?success=100")
                 .usernameParameter("uid")
                 .passwordParameter("pass")
