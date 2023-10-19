@@ -10,20 +10,17 @@ layout:decorate="/admin/index.html">
 	            </p>
 	        </nav>
 	    <article>
-            <form action="${ctxPath}/admin/notice/write.do" method="post">
-            <input type="hidden" name="type" value="write"/>
-			<input type="hidden" name="uid" value="${sessUser.uid}"/>
+            <form action="/admin/layout/cs/noticeWrite" method="post">
+			<input type="hidden" name="uid" value="admin"/>
                 <section>
                     <table>
                     	<tr>
 							<td>공지유형</td>
 							<td>
 								<!-- type1은 회원게시판에서 클릭했을 시 회원으로 설정되게끔. -->
-								<select name="cate1" id="cate1">
+								<select name="cate1" id="boardCate1">
 									<option value="0">1차 선택</option>
-									<c:forEach var="main_cate" items="${cate1List}">
-										<option value="${main_cate.cate1}" ${cate1 eq main_cate.cate1?'selected':''}>${main_cate.cate1_name}</option>
-									</c:forEach>
+										<option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:selected="${cate1 eq selectedCate1}" th:text="${cate1.cate1_name}"></option>
 								</select>
 							</td>
 						</tr>

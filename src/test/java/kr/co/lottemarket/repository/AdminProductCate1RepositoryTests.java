@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.co.lottemarket.cs.mapper.Category2Mapper;
+import kr.co.lottemarket.cs.mapper.CategoryMapper;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
 import kr.co.lottemarket.entity.product.ProductCate1Entity;
 import kr.co.lottemarket.entity.product.ProductCate2Entity;

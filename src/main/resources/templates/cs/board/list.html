@@ -30,7 +30,7 @@
 				    th:href="@{/cs/list(group=${pageRequestDTO.group}, cate1= ${pageRequestDTO.cate1}, pg=${pageResponseDTO.end + 1})}" class="next">다음</a>
 				</div>
 				
-				 <a th:if="${pageRequestDTO.group == 3}" th:href="@{/cs/qna/write(group=3)}" class="btnWrite">문의하기</a>
+				 <a th:if="${pageRequestDTO.group == 3}" th:href="@{/cs/qna/write(group=3,cate1=${pageRequestDTO.cate1})}" class="btnWrite">문의하기</a>
 				
               </article>
  

@@ -14,7 +14,7 @@ $(document).ready(function(){
 
         console.log(checkBoxArr);
 		
-        var confirmDelete = confirm("선택한 상품을 삭제하시겠습니까?");
+        var confirmDelete = confirm("선택한 글을 삭제하시겠습니까?");
         
 	    $.ajax({
 	        type: "DELETE",
@@ -105,6 +105,89 @@ $(document).ready(function(){
 	
 	$('.qnaWrite').click(function(){
 	   window.location.href = "/admin/layout/cs/qnaWrite"; 
+	});
+	
+	document.querySelector('#faqboardCate1').addEventListener('change', function() {
+		
+	    var selectedCate1 = this.value;
+	    var category2Select = document.querySelector('#faqboardCate2');
+	    var url = `/admin/layout/cs/faqcate2/${selectedCate1}`;
+	 
+		console.log("url : " + url);
+	
+	    var xhr = new XMLHttpRequest();
+	    console.log(xhr);
+	    xhr.open('GET', url, true);
+	
+	    xhr.onload = function() {
+	        if (xhr.status >= 200 && xhr.status < 300) {
+	            // 이전 옵션 제거
+	            while (category2Select.firstChild) {
+	                category2Select.removeChild(category2Select.firstChild);
+	            }
+	
+	            var data= JSON.parse(xhr.response);
+	            for (var i = 0; i < data.length; i++) {
+				  console.log(data); // Access each item in the array
+				}
+	            var defaultOption = document.createElement('option');
+	            defaultOption.value = 'cate0';
+	            defaultOption.text = '2차 분류 선택';
+	            category2Select.appendChild(defaultOption);
+	
+	            data.forEach(function(cate2) {
+	                var option = document.createElement('option');
+	                option.value = cate2.cate2;
+	                option.text = cate2.cate2_name;
+	                category2Select.appendChild(option);
+	            });
+	        } else {
+	            console.error('카테고리 2 데이터를 가져오는데 실패했습니다.');
+	        }
+	    };
+	
+	    xhr.send();
+	});
+
+	document.querySelector('#boardCate1').addEventListener('change', function() {
+	    var selectedCate1 = this.value;
+	    var category2Select = document.querySelector('#boardCate2');
+	    var url = `/admin/layout/cs/qnacate2/${selectedCate1}`;
+	 
+		console.log("url : " + url);
+	
+	    var xhr = new XMLHttpRequest();
+	    console.log(xhr);
+	    xhr.open('GET', url, true);
+	
+	    xhr.onload = function() {
+	        if (xhr.status >= 200 && xhr.status < 300) {
+	            // 이전 옵션 제거
+	            while (category2Select.firstChild) {
+	                category2Select.removeChild(category2Select.firstChild);
+	            }
+	
+	            var data= JSON.parse(xhr.response);
+	            for (var i = 0; i < data.length; i++) {
+				  console.log(data); // Access each item in the array
+				}
+	            var defaultOption = document.createElement('option');
+	            defaultOption.value = 'cate0';
+	            defaultOption.text = '2차 분류 선택';
+	            category2Select.appendChild(defaultOption);
+	
+	            data.forEach(function(cate2) {
+	                var option = document.createElement('option');
+	                option.value = cate2.cate2;
+	                option.text = cate2.cate2_name;
+	                category2Select.appendChild(option);
+	            });
+	        } else {
+	            console.error('카테고리 2 데이터를 가져오는데 실패했습니다.');
+	        }
+	    };
+	
+	    xhr.send();
 	});
 	
 });
