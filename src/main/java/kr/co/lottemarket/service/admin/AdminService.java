@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,16 +16,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.option_return;
-import kr.co.lottemarket.cs.mapper.Category2Mapper;
+import kr.co.lottemarket.cs.mapper.CategoryMapper;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_CsPageResponseDTO;
 import kr.co.lottemarket.dto.admin.Admin_FileDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
+import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
+import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.dto.product.ProductCate1DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
+import kr.co.lottemarket.entity.ArticleCate1Entity;
+import kr.co.lottemarket.entity.ArticleCate2Entity;
 import kr.co.lottemarket.entity.ArticleEntity;
 import kr.co.lottemarket.entity.product.ProductCate1Entity;
 import kr.co.lottemarket.entity.product.ProductCate2Entity;
@@ -50,7 +55,8 @@ public class AdminService {
 	private final AdminCsRepository adminCsRepository;
 	private final Admin_FileRepository admin_FileRepository;
 	private final AdminProductCate1Repository adminProductCate1Repository;
-	private final Category2Mapper category2Mapper;
+	private final AdminProductCate2Repository adminProductCate2Repository;
+	private final CategoryMapper category2Mapper;
 	
 	@Value("${spring.servlet.multipart.location}")
     private String filePath;
@@ -242,17 +248,62 @@ public class AdminService {
     	
         return cate2;
     }
+  
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     									/////////////////////////CS service part//////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    public List<ArticleCate1DTO> selectNoticeCate1() {
+
+        List<ArticleCate1DTO> dtoList = category2Mapper.selectArticleNoticeCate1(1);
+
+        return dtoList;
+        
+    }
+    
+    public List<ArticleCate1DTO> selectFaqCate1() {
+    	
+    	List<ArticleCate1DTO> dtoList = category2Mapper.selectArticleNoticeCate1(2);
+    	
+    	return dtoList;
+    	
+    }
+    
+    public List<ArticleCate1DTO> selectQnaCate1() {
+    	
+    	List<ArticleCate1DTO> dtoList = category2Mapper.selectArticleNoticeCate1(3);
+    	
+    	return dtoList;
+    	
+    }
+    
+    public List<ArticleCate2DTO> selectFaqCate2(int cate1) {
+    	
+    	List<ArticleCate2DTO> dtoList = category2Mapper.selectArticleFaqCate2(2, cate1);
+    	
+    	return dtoList;
+    	
+    }
+    
+    public List<ArticleCate2DTO> selectQnaCate2(int cate1) {
+    	
+    	List<ArticleCate2DTO> dtoList = category2Mapper.selectArticleQnaCate2(3, cate1);
+    	
+    	return dtoList;
+    	
+    }
+    
     public Admin_CsPageResponseDTO selectArticles(Admin_CsPageRequestDTO pageRequestDTO) {
 
         Pageable pageable = pageRequestDTO.getPageable("no");
-
+        
         Page<ArticleEntity> articleEntities = adminCsRepository.findByParentAndGroup(0, pageRequestDTO.getGroup(), pageable);
-
+       
+        ArticleCate1Entity cate1 = ArticleCate1Entity.builder().cate1(pageRequestDTO.getGroup()).build();
+        
+        ArticleCate2Entity cate2 = ArticleCate2Entity.builder().cate1(cate1).build();
+        
         Page<ArticleDTO> articles = articleEntities.map(ArticleEntity::toDTO);
 
         List<ArticleDTO> dtoList = articles.getContent()
@@ -286,6 +337,18 @@ public class AdminService {
     public void deleteArticle(int no) {
     	
     	adminCsRepository.deleteByNo(no);
+    	
+    }
+    
+    public void noticemodify(int no) {
+    	
+    	category2Mapper.noticemodify(no);
+    	
+    }
+    
+    public void faqmodify(int no) {
+    	
+    	category2Mapper.faqmodify(no);
     	
     }
     

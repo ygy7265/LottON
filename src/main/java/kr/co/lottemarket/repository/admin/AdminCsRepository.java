@@ -18,6 +18,8 @@ public interface AdminCsRepository extends JpaRepository<ArticleEntity, Integer>
 	
 	Optional<ArticleEntity> findById(int no);
     public Page<ArticleEntity> findByParentAndGroup(int parent, int group, Pageable pageable);
+    public Page<ArticleEntity> findByParentAndGroupAndCate1(int parent, int group, int cate1 ,Pageable pageable);
+    public Page<ArticleEntity> findByParentAndGroupAndCate1AndCate2(int parent, int group, int cate1 , int cate2 ,Pageable pageable);
     
     @Transactional
 	public void deleteByNo(int no);
