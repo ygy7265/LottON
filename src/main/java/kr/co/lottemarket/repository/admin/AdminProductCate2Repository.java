@@ -16,5 +16,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface AdminProductCate2Repository extends JpaRepository<ProductCate2Entity, Integer>{
-
+	
 }

@@ -2,14 +2,73 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.lottemarket.cs.mapper.Category2Mapper">
-	
-	<select id="selectProductCate2" resultType="kr.co.lottemarket.dto.product.ProductCate2DTO">
-       
-        SELECT *
-        FROM lotte_product_cate2
-        WHERE cate1 = #{cate1};
-        
-    </select>
+	<mapper namespace="kr.co.lottemarket.cs.mapper.CategoryMapper">
+		
+		<select id="selectProductCate2" resultType="kr.co.lottemarket.dto.product.ProductCate2DTO">
+	       
+	        SELECT *
+	        FROM lotte_product_cate2
+	        WHERE cate1 = #{cate1};
+	        
+	    </select>
+	    
+		<select id="selectArticleNoticeCate1" resultType="kr.co.lottemarket.dto.cs.ArticleCate1DTO">
+	       
+	        SELECT *
+			FROM lotte_board_cate1 AS a
+			JOIN  lotte_board_group AS b ON a.`group` = b.`group`
+			WHERE a.`group` = #{group};
+	        
+	    </select>
+	    
+		<select id="selectArticleFaqCate1" resultType="kr.co.lottemarket.dto.cs.ArticleCate1DTO">
+	       
+	        SELECT *
+			FROM lotte_board_cate1 AS a
+			JOIN  lotte_board_group AS b ON a.`group` = b.`group`
+			WHERE a.`group` = #{group};
+	        
+	    </select>
+	    
+		<select id="selectArticleQnaCate1" resultType="kr.co.lottemarket.dto.cs.ArticleCate1DTO">
+	       
+	        SELECT *
+			FROM lotte_board_cate1 AS a
+			JOIN  lotte_board_group AS b ON a.`group` = b.`group`
+			WHERE a.`group` = #{group};
+	        
+	    </select>
+	    
+		<select id="selectArticleFaqCate2" resultType="kr.co.lottemarket.dto.cs.ArticleCate2DTO">
+	       
+	        SELECT *
+			FROM lotte_board_cate1 AS a
+			JOIN lotte_board_group AS b ON a.`group` = b.`group`
+			JOIN lotte_board_cate2 AS c ON a.cate1 = c.cate1
+			WHERE a.`group` = #{group} AND c.cate1 = #{cate1};
+	        
+	    </select>
+	    
+		<select id="selectArticleQnaCate2" resultType="kr.co.lottemarket.dto.cs.ArticleCate2DTO">
+	       
+	        SELECT *
+			FROM lotte_board_cate1 AS a
+			JOIN lotte_board_group AS b ON a.`group` = b.`group`
+			JOIN lotte_board_cate2 AS c ON a.cate1 = c.cate1
+			WHERE a.`group` = #{group} AND c.cate1 = #{cate1};
+	        
+	    </select>
+	    
+	    <update id="noticemodify">
+	    	
+	    	UPDATE lotte_board SET cate1 = #{cate1}, title = #{title}, content = #{content} WHERE `no` = #{no};
+	    
+	    </update>
+	    
+	    <update id="faqmodify">
+	    	
+	    	UPDATE lotte_board SET cate1 = #{cate1}, cate2 = #{cate2}, title = #{title}, content = #{content} WHERE `no` = #{no};
+	    
+	    </update>
 
 </mapper>
