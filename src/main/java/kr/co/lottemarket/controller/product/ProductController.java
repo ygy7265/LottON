@@ -1,6 +1,9 @@
 package kr.co.lottemarket.controller.product;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -77,7 +80,22 @@ public class ProductController {
 		 ProductDTO proddto = service.selectProd(dto);
 		String name = proddto.getProdName();
 		
+		 // 현재 날짜/시간
+        Date rDate = new Date();
+
+        //2일 추가
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 2);
+        Date wDate = new Date(cal.getTimeInMillis());
+        // 포맷팅 정의
+        SimpleDateFormat formatter = new SimpleDateFormat("(E) MM/dd");
+
+        // 포맷팅 적용
+        String formatedNow = formatter.format(wDate);
+        model.addAttribute("formatedNow",formatedNow);
+        
 		model.addAttribute("dto",proddto);
+		
 		return "/product/productView";
 	}
 	

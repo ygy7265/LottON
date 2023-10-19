@@ -28,7 +28,7 @@ public class MyUserDetails implements UserDetails{/**
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getType()));
+		authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getType())); // authorities 리스트에 ROLE_1 혹은 ROLE_2 이런 식으로 추가됨
 		
 		return authorities;
 	}

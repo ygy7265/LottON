@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lottemarket.dto.TermsDTO;
 import kr.co.lottemarket.dto.UserDTO;
+import kr.co.lottemarket.security.MyUserDetails;
 import kr.co.lottemarket.service.TermsService;
 import kr.co.lottemarket.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class UserConrtroller {
 	
 	private final TermsService termsService;
 	private final UserService userService;
+	private MyUserDetails myUserDetails;
 	
 	
 	@GetMapping("/member/login")
@@ -40,6 +42,7 @@ public class UserConrtroller {
 	public String register(UserDTO dto, HttpServletRequest request) { // 가입하는 그 순간, 즉 GET이 아니라 POST에서 ip 설정해준다! / register.html에서 작성한 객체가 UserDTO로 들어오고 DTO의 regip 속성에 ip값을 설정해준다.
 		String ip = request.getRemoteAddr();
 		dto.setRegip(ip);
+		dto.setType(1);
 		userService.save(dto);
 		
 		return "redirect:/member/login";
@@ -48,6 +51,16 @@ public class UserConrtroller {
 	@GetMapping("/member/registerSeller")
 	public String registerSeller() {
 		return "/member/registerSeller";
+	}
+	
+	@PostMapping("/member/registerSeller")
+	public String registerSeller(UserDTO dto, HttpServletRequest request) {
+		String ip = request.getRemoteAddr();
+		dto.setRegip(ip);
+		dto.setType(2);
+		userService.save(dto);
+		
+		return "redirect:/member/login";
 	}
 	
 	@GetMapping("/member/join")
