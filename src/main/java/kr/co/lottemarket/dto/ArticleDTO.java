@@ -3,6 +3,8 @@ package kr.co.lottemarket.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
+import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.entity.ArticleCate1Entity;
 import kr.co.lottemarket.entity.ArticleCate2Entity;
 import kr.co.lottemarket.entity.ArticleEntity;
@@ -29,16 +31,12 @@ public class ArticleDTO {
 	private String uid;
 	private String title;
 	private String content;
+	private String notice_cate1_name;
+	private String f;
+	private String f2;
+	private String q;
+	private String q2;
 	private LocalDateTime rdate;
-
-	private ArticleCate1Entity cate1_name;
-	private ArticleCate2Entity cate2_name;
-
-	//추가필드
-	private String group_name;
-	private String cate1_name;
-	private String cate1_description;
-	private String cate2_name;
 
 	 public ArticleEntity toEntity(){
 	        return ArticleEntity.builder()
@@ -47,8 +45,6 @@ public class ArticleDTO {
 	                .group(group)
 	                .cate1(cate1)
 	                .cate2(cate2)
-	                .cate1_name(cate1_name)
-	                .cate2_name(cate2_name)
 	                .uid(uid)
 	                .title(title)
 	                .content(content)

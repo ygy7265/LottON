@@ -26,10 +26,7 @@ import lombok.ToString;
 public class ArticleCate2Entity {
 	
 	@Id
-	private int cate1_num;
-	@ManyToOne
-	@JoinColumn(name = "cate1")
-	private ArticleCate1Entity cate1;
+	private int cate1;
 	private int cate2;
 	private String cate2_name;
 	

@@ -294,37 +294,59 @@ public class AdminService {
     	
     }
     
-    public Admin_CsPageResponseDTO selectArticles(Admin_CsPageRequestDTO pageRequestDTO) {
-
-        Pageable pageable = pageRequestDTO.getPageable("no");
-        
-        Page<ArticleEntity> articleEntities = adminCsRepository.findByParentAndGroup(0, pageRequestDTO.getGroup(), pageable);
-       
-        ArticleCate1Entity cate1 = ArticleCate1Entity.builder().cate1(pageRequestDTO.getGroup()).build();
-        
-        ArticleCate2Entity cate2 = ArticleCate2Entity.builder().cate1(cate1).build();
-        
-        Page<ArticleDTO> articles = articleEntities.map(ArticleEntity::toDTO);
-
-        List<ArticleDTO> dtoList = articles.getContent()
-                                            .stream()
-                                            .map(entity -> modelmapper.map(entity, ArticleDTO.class))
-                                            .toList();
-
-        int totalElement = (int) articles.getTotalElements();
-
-        return Admin_CsPageResponseDTO.builder()
-                .pageRequestDTO(pageRequestDTO)
-                .dtoList(dtoList)
-                .total(totalElement)
-                .build();
+    public List<ArticleDTO> selectArticleNotices() {
+    	
+    	List<ArticleDTO> dtoList = category2Mapper.selectArticleNotices();
+    	
+    	return dtoList;
+    	
+    }
+    
+    public List<ArticleDTO> selectArticleFaqs() {
+    	
+    	List<ArticleDTO> dtoList = category2Mapper.selectArticleFaqs();
+    	
+    	return dtoList;
+    	
+    }
+    
+    public List<ArticleDTO> selectArticleQnas() {
+    	
+    	List<ArticleDTO> dtoList = category2Mapper.selectArticleQnas();
+    	
+    	return dtoList;
+    	
+    }
+    
+    public ArticleDTO selectArticleNotice(int no) {
+    	
+    	ArticleDTO dtoList = category2Mapper.selectArticleNotice(no);
+    	
+    	return dtoList;
+    	
+    }
+    
+    public ArticleDTO selectArticleFaq(int no) {
+    	
+    	ArticleDTO dtoList = category2Mapper.selectArticleFaq(no);
+    	
+    	return dtoList;
+    	
+    }
+    
+    public ArticleDTO selectArticleQna(int no) {
+    	
+    	ArticleDTO dtoList = category2Mapper.selectArticleQna(no);
+    	
+    	return dtoList;
+    	
     }
 
-    public ArticleDTO selectArticle(int no) {
+    /*public ArticleDTO selectArticle(int no) {
         Optional<ArticleEntity> articleEntityOptional = adminCsRepository.findById(no);
         ArticleEntity articleEntity = articleEntityOptional.get();
         return articleEntity.toDTO();
-    }
+    }*/
     
     public void insertArticle(ArticleDTO dto) {
     	
@@ -340,16 +362,18 @@ public class AdminService {
     	
     }
     
-    public void noticemodify(int no) {
+    public void noticemodify(ArticleDTO dto) {
     	
-    	category2Mapper.noticemodify(no);
+    	category2Mapper.noticemodify(dto);
     	
     }
     
-    public void faqmodify(int no) {
+    public void faqmodify(ArticleDTO dto) {
     	
-    	category2Mapper.faqmodify(no);
+    	category2Mapper.faqmodify(dto);
     	
     }
+
+
     
 }
