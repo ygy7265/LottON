@@ -36,9 +36,7 @@ public class ArticleDTO {
 
 	//추가필드
 	private String group_name;
-	private String cate1_name;
 	private String cate1_description;
-	private String cate2_name;
 
 	 public ArticleEntity toEntity(){
 	        return ArticleEntity.builder()
