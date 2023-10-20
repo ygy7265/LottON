@@ -55,7 +55,7 @@
 	            <a th:href="@{/member/join}">회원가입</a>
             </th:block>
             <th:block th:if="${uid ne null}">
-				<a href="#">로그아웃</a>
+				<a th:href="@{/member/logout}">로그아웃</a>
 			</th:block>
 			<th:block th:if="${type eq '2' || type eq '9'}">
 				<a href="#">관리페이지</a>

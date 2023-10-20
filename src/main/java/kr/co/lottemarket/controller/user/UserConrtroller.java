@@ -29,13 +29,20 @@ public class UserConrtroller {
 	
 	@GetMapping("/member/login")
 	public String login() {
-		return "/member/login";
+		return "/member/layout/login";
 	}
+	
+	@GetMapping("/member/logout")
+	public String logout() {
+		return "redirect:/member/login";
+	}
+	
+	
 	
 	@GetMapping("/member/register")
 	public String register() {
 		
-		return "/member/register";
+		return "/member/layout/register";
 	}
 	
 	@PostMapping("/member/register")
@@ -45,12 +52,12 @@ public class UserConrtroller {
 		dto.setType(1);
 		userService.save(dto);
 		
-		return "redirect:/member/login";
+		return "redirect:/member/login"; // redirect는 html을 보여주는 게 아니라 url mapping 으로 전송이다!
 	}
 	
 	@GetMapping("/member/registerSeller")
 	public String registerSeller() {
-		return "/member/registerSeller";
+		return "/member/layout/registerSeller";
 	}
 	
 	@PostMapping("/member/registerSeller")
@@ -65,7 +72,7 @@ public class UserConrtroller {
 	
 	@GetMapping("/member/join")
 	public String join() {
-		return "/member/join";
+		return "/member/layout/join";
 	}
 	
 	@GetMapping("/member/signup")
@@ -76,13 +83,13 @@ public class UserConrtroller {
 	model.addAttribute("type",type); // (type) 이거는 하면 안됨, 파라미터 수신한 걸 모델에 추가해줘야 view 페이지에서 사용가능
 	//System.out.println("type"+type);
 	
-		return "/member/signup";
+		return "/member/layout/signup";
 	}
 	
 	// 추가
 	@GetMapping("/member/findId")
 	public String findId() {
-		return "/member/findId";
+		return "/member/layout/findId";
 	}
 	
 	

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+      layout:decorate="/member/index.html">
+
+<div layout:fragment="content">
+    <main id="member">
+        <div class="signup">
+			<nav>
+				<h1>약관동의</h1>
+			</nav>
+			<!-- <form th:action="@{/member/${type eq 'normal' ? 'register' : 'registerSeller' }}" method="get"> 이 코드는 안됨!!! -->
+			<form th:action="@{/member/} + ${type eq 'normal' ? 'register' : 'registerSeller'}" method="get"> <!-- spring은 삼항연산자 쓸때 + 연산자 사용 -->
+				<section>
+					<h3><span class="essential">(필수)</span>케이마켓 이용약관</h3>
+					<!-- <textarea class="terms" readonly>[[${termsDTO.terms}]]</textarea> JSP에서는 이렇게, 만약 getTerms() 쓸거면 괄호까먹지말기 -->
+					<textarea class="terms" readonly th:text="${type eq 'normal' ? termsDTO.terms : termsDTO.tax}"></textarea> <!-- th:text 속성으로 -->
+					<label><input type="checkbox" name="agree1" />동의합니다.</label>
+
+					<h3><span class="essential">(필수)</span>전자금융거래 이용약관</h3>
+					<textarea class="financial" readonly>[[${termsDTO.finance}]]</textarea>
+					<label><input type="checkbox" name="agree2" />동의합니다.</label>
+
+					<h3><span class="essential">(필수)</span>개인정보 수집동의</h3>
+					<textarea class="privacy" readonly>[[${termsDTO.privacy}]]</textarea>
+					<label><input type="checkbox" name="agree3" />동의합니다.</label>
+				</section>
+				<!--<c:if test="${type eq 'normal'}"> JSP에서는 이렇게-->
+				<th:block th:if="${type eq 'normal'}">
+					<section>
+						<h3><span class="optional">(선택)</span>위치정보 이용약관</h3>
+						<textarea class="location" readonly>[[${termsDTO.location}]]</textarea>
+						<label><input type="checkbox" name="agree4" />동의합니다.</label>
+					</section>
+				</th:block>
+				
+				<!-- 전체동의 script, css 작업할 것 -->
+								
+				<div>
+					<input type="submit" class="agree" value="동의하기" />
+				</div>
+			</form> <!-- input 태그까지 포함해야지 -->
+        </div>
+    </main>        
+</div>    
+</html>
