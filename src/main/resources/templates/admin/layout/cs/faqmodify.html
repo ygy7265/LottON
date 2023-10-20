@@ -11,6 +11,7 @@ layout:decorate="/admin/index.html">
 	        </nav>
 	    <article>
             <form th:action="@{/admin/layout/cs/faqmodify}" method="post">
+				<input type="hidden" name="no" th:value="${faqmodify.no}" />
                 <section>
                     <table>
                     	<tr>

@@ -69,12 +69,15 @@ public class Admin_CsController {
 		
 	}
 	
+	@Transactional
 	@GetMapping("/admin/layout/cs/qnaview")
     public String qnaview(int no, Model model) {
+		
         ArticleDTO qnaview = adminService.selectArticleQna(no);
         model.addAttribute("qnaview", qnaview);
         return "/admin/layout/cs/qnaview";
-    }
+        
+    } 
 	
 	@GetMapping("/admin/layout/cs/noticeview")
     public String noticeview(int no, Model model) {
@@ -136,7 +139,7 @@ public class Admin_CsController {
 	
 	@GetMapping("/admin/layout/cs/qnaWrite")
 	public String qnaWrite(int no, Model model) {
-		
+
 		ArticleDTO qnaWrite = adminService.selectArticleQna(no);
 		model.addAttribute("qnaWrite", qnaWrite);
 		
@@ -166,7 +169,7 @@ public class Admin_CsController {
 	@PostMapping("/admin/layout/cs/qnaWrite")
 	public String qnaWriter(ArticleDTO dto) {
 		
-		adminService.insertArticle(dto);
+		adminService.Answer(dto);
 		
 		return "redirect:/admin/layout/cs/qnalist?group=3";
 	}
