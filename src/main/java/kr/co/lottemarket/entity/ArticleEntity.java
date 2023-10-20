@@ -46,8 +46,6 @@ public class ArticleEntity {
 	private String uid;
 	private String title;
 	private String content;
-	
-	
 	@CreationTimestamp
 	private LocalDateTime rdate;
 	

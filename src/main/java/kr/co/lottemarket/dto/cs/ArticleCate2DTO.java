@@ -17,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ArticleCate2DTO {
 
-	private ArticleCate1Entity cate1;
+	private int cate1;
 	private int cate2;
 	private String cate2_name;
 	

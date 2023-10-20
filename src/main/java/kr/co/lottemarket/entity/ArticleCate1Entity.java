@@ -39,9 +39,8 @@ import lombok.ToString;
 public class ArticleCate1Entity {
 
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "\"group\"")
-	private ArticleEntity group;
+	@Column(name = "\"group\"")
+	private int group;
 	private int cate1;
 	private String cate1_name;
 	private String cate1_discription;
