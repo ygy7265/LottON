@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import groovyjarjarantlr4.v4.parse.GrammarTreeVisitor.mode_return;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lottemarket.dto.ArticleDTO;
+import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.PageRequestDTO;
 import kr.co.lottemarket.dto.cs.PageResponseDTO;
 
@@ -161,8 +162,15 @@ public class CS_ArticleController {
 		model.addAttribute("pageResponseDTO", pageResponseDTO);
 		model.addAttribute("state", "write");
 		
-		log.info(pageResponseDTO.getCate1());
 		log.info("pageResponseDTO1111 = " + pageResponseDTO );
+		
+		List<ArticleDTO> cate1List = articleSerivce.selectAjaxCate1(pageRequestDTO.getGroup());
+		
+		log.info("pageResponseDTO.getCate1() = " + pageResponseDTO.getCate1());
+		log.info("pageResponseDTO.getGroup() = " + pageResponseDTO.getGroup());
+		log.info("cate1Listcate1List.... = " + cate1List.get(0));
+		
+		model.addAttribute("cate1List",cate1List);
 		
 		return "/cs/board/qnaWrite";
 	}

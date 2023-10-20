@@ -31,6 +31,22 @@
 	    ORDER BY a.no DESC
 	    limit 0, 3
 	</select>
+	
+	
+	 <select id="selectAjaxCate2" resultType="kr.co.lottemarket.dto.ArticleDTO">
+        SELECT *
+        FROM lotte_board_cate1 AS a
+        LEFT JOIN lotte_board_cate2 AS b
+        ON a.cate1 = b.cate1
+        WHERE a.group = #{group} and a.cate1 = #{cate1}
+    </select>
+    
+    
+     <select id="selectAjaxCate1" resultType="kr.co.lottemarket.dto.ArticleDTO">
+        SELECT *
+        FROM lotte_board_cate1
+        WHERE `group` = #{group}
+    </select>
 
  
 

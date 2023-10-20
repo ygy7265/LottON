@@ -47,13 +47,6 @@ public class ArticleEntity {
 	private String title;
 	private String content;
 	
-	// 카테필드 추가
-	@OneToOne
-	@JoinColumn(name = "cate1_name")
-	private ArticleCate1Entity cate1_name;
-	@OneToOne
-	@JoinColumn(name = "cate2_name")
-	private ArticleCate2Entity cate2_name;
 	
 	@CreationTimestamp
 	private LocalDateTime rdate;
@@ -67,8 +60,6 @@ public class ArticleEntity {
 	                .group(group)
 	                .cate1(cate1)
 	                .cate2(cate2)
-	                .cate1_name(cate1_name)
-	                .cate2_name(cate2_name)
 	                .uid(uid)
 	                .title(title)
 	                .content(content)
