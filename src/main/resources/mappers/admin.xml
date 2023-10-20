@@ -4,6 +4,135 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="kr.co.lottemarket.cs.mapper.CategoryMapper">
 		
+		<select id="selectArticleNotices" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT 
+			a.*,
+			b.`group_name`, 
+			c.`cate1_name` AS `notice_cate1_name`
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
+			WHERE parent=0 AND a.`group` =1
+	        
+	    </select>
+	    
+		<select id="selectArticleFaqs" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT 
+			a.*, 
+			b.`group_name`, 
+			c.`cate1_name` AS f, 
+			d.`cate2_name` AS f2 
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
+			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
+	        WHERE parent=0 AND a.`group`= 2
+	        
+	    </select>
+	    
+		<select id="selectArticleQnas" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+	        SELECT 
+			a.*, 
+			b.`group_name`, 
+			c.`cate1_name` AS `q`, 
+			d.`cate2_name` AS `q2`
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
+			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
+	        WHERE parent=0 AND a.`group`= 3
+	        
+	    </select>
+	    
+		<select id="selectArticleNotice" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT 
+			a.*,
+			b.`group_name`, 
+			c.`cate1_name` AS `notice_cate1_name`
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
+			WHERE parent=0 AND a.`group` =1 AND a.`no` = #{no}
+	        
+	    </select>
+	    
+		<select id="selectArticleFaq" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT 
+			a.*, 
+			b.`group_name`, 
+			c.`cate1_name` AS f, 
+			d.`cate2_name` AS f2 
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
+			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
+	        WHERE parent=0 AND a.`group`= 2 AND a.`no` = #{no}
+	        
+	    </select>
+	    
+		<select id="selectArticleQna" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+	        SELECT 
+			a.*, 
+			b.`group_name`, 
+			c.`cate1_name` AS `q`, 
+			d.`cate2_name` AS `q2`
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
+			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
+	        WHERE parent=0 AND a.`group`= 3 AND a.`no` = #{no}
+	        
+	    </select>
+	    
+		<select id="selectSearchArticleNotice" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT 
+			a.*,
+			b.`group_name`, 
+			c.`cate1_name` AS `notice_cate1_name`
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
+			WHERE parent=0 AND a.`group` =1 AND a.cate1 = #{cate1}
+	        
+	    </select>
+	    
+		<select id="selectSearchArticleFaq" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT 
+			a.*, 
+			b.`group_name`, 
+			c.`cate1_name` AS f, 
+			d.`cate2_name` AS f2 
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
+			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
+	        WHERE parent=0 AND a.`group`= 2 AND a.cate1 = #{cate1} AND a.cate2 = #{cate2}
+	        
+	    </select>
+	    
+		<select id="selectSearchArticleQna" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+	        SELECT 
+			a.*, 
+			b.`group_name`, 
+			c.`cate1_name` AS `q`, 
+			d.`cate2_name` AS `q2`
+			FROM `lotte_board` AS a 
+			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
+			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
+			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
+	        WHERE parent=0 AND a.`group`= 3 AND a.cate1 = #{cate1} AND a.cate2 = #{cate2}
+	        
+	    </select>
+	    
 		<select id="selectProductCate2" resultType="kr.co.lottemarket.dto.product.ProductCate2DTO">
 	       
 	        SELECT *
@@ -59,11 +188,19 @@
 	        
 	    </select>
 	    
-	    <update id="noticemodify">
+	    <insert id="AnswerQna">
 	    	
-	    	UPDATE lotte_board SET cate1 = #{cate1}, title = #{title}, content = #{content} WHERE `no` = #{no};
+	    	INSERT INTO  lotte_board (parent, uid, `group`, cate1, cate2, content, rdate)  
+	    	VALUES parent = #{no}, uid = #{uid}, `group` = #{group} , cate1 = #{cate1}, cate2 = #{cate2}, content = #{parent}, rdate= NOW(); 
+	    	
+	    </insert>
 	    
-	    </update>
+	    <update id="noticemodify">
+	    
+		    UPDATE lotte_board SET cate1 = #{cate1}, title = #{title}, content = #{content} WHERE `no` = #{no};
+		    
+		</update>
+
 	    
 	    <update id="faqmodify">
 	    	

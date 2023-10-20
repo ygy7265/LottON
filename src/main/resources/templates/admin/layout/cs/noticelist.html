@@ -27,10 +27,10 @@
                     <th>관리</th>
                 </tr>
 			
-				<tr class="row" th:each="noticelist : ${pageResponseDTO.dtoList}">
+				<tr class="row" th:each="noticelist : ${noticelist}">
                     <td style="text-align:center; width:10%"><input type="checkbox" name="chk"></td>
                     <td style="text-align:center; width:10%">[[${noticelist.no}]]</td>
-                     <td style="text-align:center; width:10%">[[${noticelist.cate1}]]</td>
+                     <td style="text-align:center; width:10%">[[${noticelist.notice_cate1_name}]]</td>
                     <td style="text-align:center; width:40%"><a th:href="@{/admin/layout/cs/noticeview(no=${noticelist.no})}">[[${noticelist.title}]]</a></td>
                    	<td style="text-align:center; width:10%">[[${#temporals.format(noticelist.rdate, 'yy-MM-dd')}]]</td>
                     <td style="text-align:center; width:20%">
@@ -45,19 +45,8 @@
             <input type="button" value="공지 작성" class="noticeWrite"/>
 			
 			 <div class="paging">
-		        <span th:if="${pageResponseDTO.prev}" class="prev" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
-		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${pageResponseDTO.start - 1})}">이전</a>
-		        </span>
-		
-		        <span th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}"
-		             class="num">
-		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${num})}" th:text="${num}"></a>
-		        </span>
-		
-		        <span th:if="${pageResponseDTO.next}" class="next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
-		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${pageResponseDTO.end + 1})}">다음</a>
-		        </span>
-			</div>
+				 
+			 </div>
 
 			
         </section>

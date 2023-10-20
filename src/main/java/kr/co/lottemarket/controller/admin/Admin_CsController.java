@@ -20,6 +20,7 @@ import kr.co.lottemarket.dto.admin.Admin_CsPageResponseDTO;
 import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
+import kr.co.lottemarket.entity.ArticleEntity;
 import kr.co.lottemarket.service.admin.AdminService;
 import lombok.extern.log4j.Log4j2;
 
@@ -31,54 +32,53 @@ public class Admin_CsController {
 	private AdminService adminService;
 	
 	@GetMapping("/admin/layout/cs/noticelist")
-	public String noticelist(Admin_CsPageRequestDTO pageRequestDTO, Model model) {
+	public String noticelist(Model model) {
 		
 		List<ArticleCate1DTO> cate1List = adminService.selectNoticeCate1();
-		
-		Admin_CsPageResponseDTO pageResponseDTO = adminService.selectArticles(pageRequestDTO);
-
         model.addAttribute("cate1List", cate1List);
-        model.addAttribute("pageResponseDTO", pageResponseDTO);
 		
+        List<ArticleDTO> noticelist = adminService.selectArticleNotices();
+        
+        model.addAttribute("noticelist", noticelist);
+        
 		return "/admin/layout/cs/noticelist";
 	}
-	
+
 	@GetMapping("/admin/layout/cs/qnalist")
-	public String qnalist(Admin_CsPageRequestDTO pageRequestDTO, Model model) {
+	public String qnalist(Model model) {
 		
 		List<ArticleCate1DTO> cate1List = adminService.selectQnaCate1();
-		
-		Admin_CsPageResponseDTO pageResponseDTO = adminService.selectArticles(pageRequestDTO);
-		
 		model.addAttribute("cate1List", cate1List);
-        model.addAttribute("pageResponseDTO", pageResponseDTO);
+		
+		List<ArticleDTO> qnalist = adminService.selectArticleQnas();
+        model.addAttribute("qnalist", qnalist);
 		
 		return "/admin/layout/cs/qnalist";
 	}
 	
 	@GetMapping("/admin/layout/cs/faqlist")
-	public String faqlist(Admin_CsPageRequestDTO pageRequestDTO, Model model) {
+	public String faqlist(Model model) {
 		
-		List<ArticleCate1DTO> cate1List = adminService.selectFaqCate1();
-		
-		Admin_CsPageResponseDTO pageResponseDTO = adminService.selectArticles(pageRequestDTO);
-		
+		List<ArticleCate1DTO> cate1List = adminService.selectFaqCate1();	
 		model.addAttribute("cate1List", cate1List);
-        model.addAttribute("pageResponseDTO", pageResponseDTO);
+        
+		List<ArticleDTO> faqlist  = adminService.selectArticleFaqs();
+        model.addAttribute("faqlist", faqlist);
 		
 		return "/admin/layout/cs/faqlist";
+		
 	}
 	
 	@GetMapping("/admin/layout/cs/qnaview")
     public String qnaview(int no, Model model) {
-        ArticleDTO qnaview = adminService.selectArticle(no);
+        ArticleDTO qnaview = adminService.selectArticleQna(no);
         model.addAttribute("qnaview", qnaview);
         return "/admin/layout/cs/qnaview";
     }
 	
 	@GetMapping("/admin/layout/cs/noticeview")
     public String noticeview(int no, Model model) {
-        ArticleDTO noticeview = adminService.selectArticle(no);
+        ArticleDTO noticeview = adminService.selectArticleNotice(no);
         model.addAttribute("noticeview", noticeview);
         return "/admin/layout/cs/noticeview";
     }
@@ -86,7 +86,7 @@ public class Admin_CsController {
 	@GetMapping("/admin/layout/cs/faqview")
     public String faqview(int no, Model model) {
 		
-        ArticleDTO faqview = adminService.selectArticle(no);
+        ArticleDTO faqview = adminService.selectArticleFaq(no);
         model.addAttribute("faqview", faqview);
         
         return "/admin/layout/cs/faqview";
@@ -99,7 +99,7 @@ public class Admin_CsController {
 		List<ArticleCate1DTO> cate1List = adminService.selectNoticeCate1();
 		model.addAttribute("cate1List", cate1List);
 		
-		ArticleDTO noticemodify = adminService.selectArticle(no);
+		ArticleDTO noticemodify = adminService.selectArticleNotice(no);
 		model.addAttribute("noticemodify", noticemodify);
 		
 		return "/admin/layout/cs/noticemodify";
@@ -108,40 +108,36 @@ public class Admin_CsController {
 	@GetMapping("/admin/layout/cs/faqmodify")
 	public String faqmodify(int no, Model model) {
 		
-		List<ArticleCate1DTO> cate1List = adminService.selectNoticeCate1();
+		List<ArticleCate1DTO> cate1List = adminService.selectFaqCate1();
 		model.addAttribute("cate1List", cate1List);
 		
-		ArticleDTO faqmodify = adminService.selectArticle(no);
+		ArticleDTO faqmodify = adminService.selectArticleFaq(no);
 		model.addAttribute("faqmodify", faqmodify);
 		
 		return "/admin/layout/cs/faqmodify";
 	}
 	
 	@PostMapping("/admin/layout/cs/noticemodify")
-	public String cSnoticemodify(@RequestParam("no") String no, Model model) {
+	public String cSnoticemodify(ArticleDTO dto, Model model) {
+
+		adminService.noticemodify(dto);
 		
-		int noticeNo = Integer.parseInt(no);
-		log.info("noticeNo : " +  no);
-		
-		
-		adminService.noticemodify(noticeNo);
-		
-		return "/admin/layout/cs/noticemodify";
+		return "redirect:/admin/layout/cs/noticelist";
 		
 	}
 	
 	@PostMapping("/admin/layout/cs/faqmodify")
-	public String cSfaqmodify(int no, Model model) {
+	public String cSfaqmodify(ArticleDTO dto, Model model) {
 		
-		adminService.faqmodify(no);
+		adminService.faqmodify(dto);
 		
-		return "/admin/layout/cs/faqmodify";
+		return "redirect:/admin/layout/cs/faqlist";
 	}
 	
 	@GetMapping("/admin/layout/cs/qnaWrite")
 	public String qnaWrite(int no, Model model) {
 		
-		ArticleDTO qnaWrite = adminService.selectArticle(no);
+		ArticleDTO qnaWrite = adminService.selectArticleQna(no);
 		model.addAttribute("qnaWrite", qnaWrite);
 		
 		return "/admin/layout/cs/qnaWrite";
@@ -172,7 +168,7 @@ public class Admin_CsController {
 		
 		adminService.insertArticle(dto);
 		
-		return "redirect:/admin/layout/cs/qnalist";
+		return "redirect:/admin/layout/cs/qnalist?group=3";
 	}
 	
 	@PostMapping("/admin/layout/cs/noticeWrite")
@@ -180,7 +176,7 @@ public class Admin_CsController {
 		
 		adminService.insertArticle(dto);
 		
-		return "redirect:/admin/layout/cs/noticelist";
+		return "redirect:/admin/layout/cs/noticelist?group=1";
 	}
 	
 	@PostMapping("/admin/layout/cs/faqWrite")
@@ -188,7 +184,7 @@ public class Admin_CsController {
 		
 		adminService.insertArticle(dto);
 		
-		return "redirect:/admin/layout/cs/faqlist";
+		return "redirect:/admin/layout/cs/faqlist?group=2";
 	}
 	
 	@DeleteMapping("/admin/layout/cs/noticeDelete/{no}")

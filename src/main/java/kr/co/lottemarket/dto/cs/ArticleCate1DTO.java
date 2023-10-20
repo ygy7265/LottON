@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ArticleCate1DTO {
 	
-	private ArticleEntity group;
+	private int group;
 	private int cate1;
 	private String cate1_name;
 	private String cate1_discription;

@@ -33,11 +33,11 @@
                     <th>관리</th>
                 </tr>
 			
-				<tr class="row" th:each="faqlist : ${pageResponseDTO.dtoList}">
-                    <td style="text-align:center; width:5%"><input type="checkbox" name="chk"></tdstyle="text-align:center; width:10%">
+				<tr class="row" th:each="faqlist : ${faqlist}">
+                    <td style="text-align:center; width:5%"><input type="checkbox" name="chk"></td>
                     <td style="text-align:center; width:5%">[[${faqlist.no}]]</td>
-                    <td style="text-align:center; width:10%">[[${faqlist.cate1}]]</td>
-                    <td style="text-align:center; width:10%">[[${faqlist.cate2}]]</td>
+                    <td style="text-align:center; width:10%">[[${faqlist.f}]]</td>
+                    <td style="text-align:center; width:10%">[[${faqlist.f2}]]</td>
                     <td style="text-align:center; width:40%"><a th:href="@{/admin/layout/cs/faqview(no=${faqlist.no})}">[[${faqlist.title}]]</a></td>
                    	<td style="text-align:center; width:10%">[[${#temporals.format(faqlist.rdate, 'yy-MM-dd')}]]</td>
                     <td style="text-align:center; width:20%">
