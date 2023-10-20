@@ -53,7 +53,7 @@ public class MainController {
 		List<ProductDTO> discount = prodService.selectsProductDiscount();
 		List<ProductDTO> best = prodService.selectsProductSold();
 		
-		log.info("hit hit..." + hit.toString());
+
 		model.addAttribute("hit",hit);
 		model.addAttribute("score",score);
 		model.addAttribute("newprod",newprod);

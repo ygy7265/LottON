@@ -92,6 +92,24 @@
 	            var listtotal = parseFloat(row.find('.total').val());  // 선택된 체크박스의 .listtotal 값
 	            var listpoint = parseFloat(row.find('.point').val());  // 선택된 체크박스의 .listpoint 값
 	            
+	            //데이터 값 저장
+	            listdeliveryValue += parseFloat(row.find('.delivery').val());  // 선택된 체크박스의 .listdelivery 값을 더합니다.
+	            listpointValue += parseFloat(row.find('.point').val());  // 선택된 체크박스의 .listpoint 값을 더합니다.
+	        	listCountValue += parseFloat(row.find('.count').val());  // 선택된 체크박스의 .listcount 값을 더합니다.
+	        	listLastPriceValue = listCount * listpriceValue;
+	        	listNoDiscountPriceValue += listLastPriceValue;
+	
+	            // 할인 적용된 가격 계산
+	            var discountedPrice = listLastPriceValue - (listLastPriceValue * (listdiscountValue / 100));
+	            var discountper = (listLastPriceValue * (listdiscountValue / 100));
+	            //할인후 적용 금액
+	            listdiscountedPrice += discountedPrice;
+	            //할인금액
+	            listdiscountper += discountper;
+	            console.log('discountedPrice value: ' + Math.round(discountedPrice).toLocaleString());
+	            
+	            console.log('discountedPrice value: ' + Math.round(listdiscountedPrice).toLocaleString());
+	            
 	            
 	            
 	            console.log("listProdNo = " + listProdNo);
@@ -110,7 +128,7 @@
 	                price: listpriceValue,
 	                discount: listdiscountValue,
 	                prodNo: listProdNo,
-	                uid: "sellr1",
+	                uid: "seller1",
 	                delivery: listdelivery,
 	                prodName: listprodName,
 	                total: listtotal,
@@ -122,25 +140,7 @@
 	            $('.jsondata').val(JSON.stringify(listValues));
 	            console.log("$('.jsondata') = " + $('.jsondata').val());
 	            
-	           //데이터 값 저장
-	            listdeliveryValue += parseFloat(row.find('.delivery').val());  // 선택된 체크박스의 .listdelivery 값을 더합니다.
-	            listpointValue += parseFloat(row.find('.point').val());  // 선택된 체크박스의 .listpoint 값을 더합니다.
-	        	listCountValue += parseFloat(row.find('.count').val());  // 선택된 체크박스의 .listcount 값을 더합니다.
-	        	listLastPriceValue = listCount * listpriceValue;
-	        	listNoDiscountPriceValue += listLastPriceValue;
-	        	
-	        	
-	        	
-	            // 할인 적용된 가격 계산
-	            var discountedPrice = listLastPriceValue - (listLastPriceValue * (listdiscountValue / 100));
-	            var discountper = (listLastPriceValue * (listdiscountValue / 100));
-	            //할인후 적용 금액
-	            listdiscountedPrice += discountedPrice;
-	            //할인금액
-	            listdiscountper += discountper;
-	            console.log('discountedPrice value: ' + Math.round(discountedPrice).toLocaleString());
-	            
-	            console.log('discountedPrice value: ' + Math.round(listdiscountedPrice).toLocaleString());
+	           
 	        });
 	     
 	        // 업데이트된 값들을 화면에 표시

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import kr.co.lottemarket.entity.UserEntity;
+import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +21,9 @@ import lombok.Setter;
 public class ProductOrderDTO {
 	
 	private int ordNo;
-	private String uid;
+	private int ordCompleteNo;	
+	private UserEntity user;
+	private ProductEntity product;
 	private int ordCount;
 	private int ordPrice;
 	private int ordDiscount;
@@ -38,8 +42,10 @@ public class ProductOrderDTO {
 	
 	public ProductOrderEntity toEntity() {
 		return ProductOrderEntity.builder()
+				.ordCompleteNo(ordCompleteNo)
 				.ordNo(ordNo)
-				.uid(uid)
+				.user(user)
+				.product(product)
 				.ordCount(ordCount)
 				.ordPrice(ordPrice)
 				.ordDiscount(ordDiscount)

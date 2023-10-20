@@ -5,81 +5,46 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.lottemarket.dto.PageRequestDTO;
 import kr.co.lottemarket.dto.PageResponseDTO;
-import kr.co.lottemarket.dto.product.ProductCartDTO;
+import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
+import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
-import kr.co.lottemarket.dto.product.ProductOrderDTO;
-import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
-import kr.co.lottemarket.entity.UserEntity;
-import kr.co.lottemarket.entity.product.ProductCartEntity;
+import kr.co.lottemarket.service.admin.AdminService;
 import kr.co.lottemarket.service.product.ProductService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 @Log4j2
+@RequiredArgsConstructor
+@RequestMapping("/product")
 @Controller
 public class ProductController {
 	
-	@Autowired
-	private ProductService service;
-	@Autowired
-	private ModelMapper modelmapper;
-	@GetMapping("/product/productCart")
-	public String productCart(Model model, String uid) {
-	    uid = "sellr1";
-	    List<Object[]> dto = service.selectCartItems(uid);
+	private final ProductService service;
+	private final AdminService adminservice;
 
-	    // DTO 리스트를 생성하고 엔티티를 DTO로 변환하여 추가
-	    List<ProductCartDTO> prodDTOList = new ArrayList<>();
-	    for (Object[] objArray : dto) {
-	        ProductCartEntity entity = (ProductCartEntity) objArray[0];
-	        ProductCartDTO prodDTO = modelmapper.map(entity, ProductCartDTO.class);
-	        prodDTOList.add(prodDTO);
-	    }
-	    model.addAttribute("dto", prodDTOList);
-	    model.addAttribute("dtocart", prodDTOList);
-
-	    return "/product/productCart";
-	}
-
-	@PostMapping("/product/productCart")
-	public String productCartPost(ProductCartDTO dto)	{
-		UserEntity user = new UserEntity();
-		user.setUid("seller1");
-		dto.setTotal(dto.getCount() * dto.getPrice());
-		dto.setUid(user);
-		log.info("dto ==" + dto);
-		service.insertDTO(dto);
-		return "redirect:/product/productCart";
-	}
-	
-	
-	@GetMapping("/product/productList")
+	@GetMapping("/productList")
 	public String productList(Model model,PageRequestDTO pageRequestDTO){
 		
 		PageResponseDTO list = service.productList(pageRequestDTO);
-		log.info("pageRequestDTO.... " + pageRequestDTO.toString());
-		log.info("list.... " + list.toString());
 		model.addAttribute("list",list);
 		
 		return "/product/productList";
 	}
 	
 	
-	@GetMapping("/product/productView")
+	@GetMapping("/productView")
 	public String productView(Model model,ProductDTO dto) {
-		 ProductDTO proddto = service.selectProd(dto);
-		String name = proddto.getProdName();
 		
+		ProductDTO proddto = service.selectProd(dto);
 		 // 현재 날짜/시간
         Date rDate = new Date();
 
@@ -93,10 +58,19 @@ public class ProductController {
         // 포맷팅 적용
         String formatedNow = formatter.format(wDate);
         model.addAttribute("formatedNow",formatedNow);
-        
-		model.addAttribute("dto",proddto);
+	    	model.addAttribute("dto",proddto);
 		
 		return "/product/productView";
+	}
+	
+	@GetMapping("/productSearch")
+	public String productSearch(Admin_ProductPageRequestDTO pageRequestDTO, Model model, String chk , String search) {
+		
+	    Admin_ProductPageResponseDTO pageResponseDTO = null;
+	    pageResponseDTO = service.selectProdNameProucts(pageRequestDTO,chk,search);
+	    model.addAttribute("pageResponse", pageResponseDTO);
+
+	    return "/product/productSearch";
 	}
 	
 	

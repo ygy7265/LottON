@@ -13,10 +13,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
 @Getter
 @Setter
 @Builder
+@Log4j2
 @ToString
 public class MyUserDetails implements UserDetails{/**
 	 * 
@@ -28,8 +30,10 @@ public class MyUserDetails implements UserDetails{/**
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getType()));
+		log.info("uid = "+user.getUid());
 		authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getType())); // authorities 리스트에 ROLE_1 혹은 ROLE_2 이런 식으로 추가됨
-		
+    
 		return authorities;
 	}
 
@@ -47,7 +51,7 @@ public class MyUserDetails implements UserDetails{/**
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
 		return true;
 	}
 

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
-	layout:decorate="/side.html"
-	>
+	  layout:decorate="/side.html">
     
 <head>
-	<script th:src="@{../js/cart.js}"></script>
+  <script src="../js/product/cart.js"></script>
 
 </head>
             <!-- 장바구니 페이지 시작 -->
@@ -42,10 +41,10 @@
                       <td><input type="checkbox" class="Item" th:value="${dto.cartNo}"></td>
                       <td>
                         <article>
-                          <a href="#"><img th:src="@{/images/product/}+${dto.prodNo.thumb1}" alt=""></a>
+                          <a href="#"><img th:src="@{/images/product/}+${dto.product.thumb1}" alt=""></a>
                           <div>
-                            <h2><a href="#">[[${dto.prodNo.prodName}]]</a></h2>
-                            <p>[[${dto.prodNo.descript}]]</p>
+                            <h2><a href="#">[[${dto.product.prodName}]]</a></h2>
+                            <p>[[${dto.product.descript}]]</p>
                           </div>
                         </article>
                       </td>
@@ -60,9 +59,9 @@
 		              <td><input type="hidden" class="price" th:value="${dto.price}"/> </td>
 		              <td><input type="hidden" class="delivery" th:value="${dto.delivery}"/> </td>
 		              <td><input type="hidden" class="discount" th:value="${dto.discount}"/></td>
-		              <td><input type="hidden" class="descript" th:value="${dto.prodNo.descript}"/></td>
-		              <td><input type="hidden" class="prodNo" th:value="${dto.prodNo.prodNo}"/></td>
-		              <td><input type="hidden" class="prodName" th:value="${dto.prodNo.prodName}"/></td>
+		              <td><input type="hidden" class="descript" th:value="${dto.product.descript}"/></td>
+		              <td><input type="hidden" class="prodNo" th:value="${dto.product.prodNo}"/></td>
+		              <td><input type="hidden" class="prodName" th:value="${dto.product.prodName}"/></td>
 		              <td><input type="hidden" class="uid" value="seller1"/></td>
 		              <td><input type="hidden" class="total" th:value="${dto.price * dto.count}"/></td>
 		              <td><input type="hidden" class="cartNo" th:value="${dto.cartNo}"/></td>

@@ -1,5 +1,6 @@
 package kr.co.lottemarket.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,17 +8,25 @@ import org.springframework.stereotype.Service;
 import kr.co.lottemarket.dto.UserDTO;
 import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 
-
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
-	@Autowired
-	private UserRepository userRepository;
 	
-	@Autowired
-	private PasswordEncoder encoder;
+	private final UserRepository userRepository;
 	
+	private ModelMapper modelmapper;
+	
+	private final PasswordEncoder encoder;
+	
+	public UserDTO findByUesr(String uid) {
+		UserEntity entity = userRepository.findByUid(uid);
+		UserDTO dto = modelmapper.map(entity, UserDTO.class);
+		return dto;
+
+	}
 	
 	public void save(UserDTO dto) {
 		

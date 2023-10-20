@@ -355,6 +355,9 @@
     border-bottom: 1px solid #2e8de5;
     cursor: pointer;
 }
+#buyform > div > table > tbody > tr:nth-child(5) > td.orduserdPoint{
+	text-align: right;
+}
 
 #product > .view > .info > .summary .option button > .txt {
     font-size: 16px;
@@ -1042,24 +1045,24 @@
   color: #888;
 }
 #product > .order > form > .discount {}
-#product > .order > form > .payment {}
-#product > .order > form > .payment > div {
+#product > .order > form > .ordPayment {}
+#product > .order > form > .ordPayment > div {
   margin-bottom: 10px;
 }
-#product > .order > form > .payment > div > span {
+#product > .order > form > .ordPayment > div > span {
   display: inline-block;
   color: #3a85c8;
   margin: 6px 0;
 }
-#product > .order > form > .payment > div > p {}
-#product > .order > form > .payment > div label {
+#product > .order > form > .ordPayment > div > p {}
+#product > .order > form > .ordPayment > div label {
   margin-right: 16px;
 }
-#product > .order > form > .payment > div input {
+#product > .order > form > .ordPayment > div input {
   vertical-align: bottom;
   margin-right: 4px;
 }
-#product > .order > form > .payment {}
+#product > .order > form > .ordPayment {}
 
 #product > .order > form > .alert {
   width: 560px;

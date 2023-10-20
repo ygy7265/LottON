@@ -7,9 +7,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.product.ProductPointDTO;
+import kr.co.lottemarket.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +30,9 @@ public class ProductPointEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pointNo;
-	private String uid;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uid")
+	private UserEntity user;
 	private int ordNo;
 	private int point;
 	private LocalDateTime pointDate;
@@ -36,7 +41,7 @@ public class ProductPointEntity {
 		
 		return ProductPointDTO.builder()
 				.pointNo(pointNo)
-				.uid(uid)
+				.user(user)
 				.ordNo(ordNo)
 				.point(point)
 				.pointDate(pointDate)

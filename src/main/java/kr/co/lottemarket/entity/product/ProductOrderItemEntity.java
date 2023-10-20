@@ -30,12 +30,12 @@ public class ProductOrderItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ordNo;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "prodNo")
-	private ProductEntity prodNo;
-	@ManyToOne(fetch = FetchType.LAZY)
+	private ProductEntity product;
+	@ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "uid")
-	private UserEntity uid;
+	private UserEntity user;
 	private int count;
 	private int price;
 	private int discount;
@@ -46,8 +46,8 @@ public class ProductOrderItemEntity {
 	public ProductOrderItemDTO toDTO() {
 		return ProductOrderItemDTO.builder()
 				.ordNo(ordNo)
-				.prodNo(prodNo)
-				.uid(uid)
+				.product(product)
+				.user(user)
 				.count(count)
 				.price(price)
 				.discount(discount)

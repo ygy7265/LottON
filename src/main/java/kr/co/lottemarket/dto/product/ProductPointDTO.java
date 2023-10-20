@@ -3,6 +3,7 @@ package kr.co.lottemarket.dto.product;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Id;
+import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductPointEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import lombok.Setter;
 public class ProductPointDTO {
 
 	private int pointNo;
-	private String uid;
+	private UserEntity user;
 	private int ordNo;
 	private int point;
 	private LocalDateTime pointDate;
@@ -27,7 +28,7 @@ public class ProductPointDTO {
 		
 		return ProductPointEntity.builder()
 				.pointNo(pointNo)
-				.uid(uid)
+				.user(user)
 				.ordNo(ordNo)
 				.point(point)
 				.pointDate(pointDate)

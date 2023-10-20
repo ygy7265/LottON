@@ -9,9 +9,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.product.ProductOrderDTO;
+import kr.co.lottemarket.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,8 +31,14 @@ import lombok.Setter;
 public class ProductOrderEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int ordCompleteNo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prodNo")
+	private ProductEntity product;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uid")
+	private UserEntity user;
 	private int ordNo;
-	private String uid;
 	private int ordCount;
 	private int ordPrice;
 	private int ordDiscount;
@@ -49,8 +58,10 @@ public class ProductOrderEntity {
 	
 	public ProductOrderDTO toDTO() {
 		return ProductOrderDTO.builder()
+				.ordCompleteNo(ordCompleteNo)
 				.ordNo(ordNo)
-				.uid(uid)
+				.user(user)
+				.product(product)
 				.ordCount(ordCount)
 				.ordPrice(ordPrice)
 				.ordDiscount(ordDiscount)

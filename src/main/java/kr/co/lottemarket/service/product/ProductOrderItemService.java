@@ -12,12 +12,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.product.ProductCartDTO;
+import kr.co.lottemarket.dto.product.ProductOrderDTO;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
 import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
+import kr.co.lottemarket.entity.product.ProductOrderEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
+import kr.co.lottemarket.repository.ProductOrderICompleteRepository;
 import kr.co.lottemarket.repository.ProductOrderItemRepository;
 import kr.co.lottemarket.repository.ProductRepository;
 import kr.co.lottemarket.repository.UserRepository;
@@ -32,29 +36,68 @@ public class ProductOrderItemService {
 	
 	private final ModelMapper modelmapper;
 	private final ProductOrderItemRepository repo;
+	private final ProductOrderICompleteRepository orderCompleterepo;
 	private final ProductRepository productrepo;
 	private final UserRepository userrepo;
 	
+	//상품주문하기완료
+	public void insertOrderComplete(List<ProductOrderItemDTO> dto,ProductOrderDTO order) {
+		ProductOrderEntity orderentity = modelmapper.map(order, ProductOrderEntity.class); 
+		for(ProductOrderItemDTO itemdto : dto) {
+			int total = itemdto.getPrice() * itemdto.getCount();
+			ProductEntity product = productrepo.findByProdNo(itemdto.getProduct().getProdNo());
+			UserEntity user = userrepo.findByUid(itemdto.getUser().getUid());
+			ProductOrderEntity entity = ProductOrderEntity.builder()
+					.ordCount(itemdto.getCount())
+					.ordPayment(orderentity.getOrdPayment())
+					.ordNo(dto.get(0).getOrdNo())					
+					.ordDelivery(itemdto.getDelivery())
+					.ordDiscount(itemdto.getDiscount())
+					.ordPrice(itemdto.getPrice())
+					.ordTotPrice((int)(total * (itemdto.getDiscount()/100.0)))
+					.ordsavePoint(itemdto.getPoint())
+					.ordusedPoint(orderentity.getOrdusedPoint())
+					.recipAddr1(orderentity.getRecipAddr1())
+					.recipAddr2(orderentity.getRecipAddr2())
+					.recipHp(orderentity.getRecipHp())
+					.recipName(orderentity.getRecipName())
+					.recipZip(orderentity.getRecipZip())
+					.product(product)
+					.user(user)
+					.build();
+			
+			orderCompleterepo.save(entity);
+		}
+		 
+	}
+	
+	//카트리스트 출력
 	public List<ProductOrderItemDTO> selectOrderItem(String uid){
-		uid = "sellr1";
+		uid = "seller1";
+		UserEntity user = UserEntity.builder().uid(uid).build();
+		
 		List<Object[]> dto= repo.findProductsByOrderItem(uid);
 		
 		List<ProductOrderItemDTO> itemdto = new ArrayList<>();
 		for(Object[] item: dto) {
 	        log.info("dto"+dto);
-	        log.info("item"+item);
 	        
-			 ProductOrderItemDTO entity = modelmapper.map(item[0], ProductOrderItemDTO.class);
+	        
+			ProductOrderItemDTO entity = modelmapper.map(item[0], ProductOrderItemDTO.class);
+			log.info("entity"+entity);
 			itemdto.add(entity);
 		}
 		return itemdto;
 	}
 	
-	public void insertOrder(String productOrderItemEntity) {
+	//카트 > 상품 주문하기 페이지
+	@Transactional
+	public void insertOrder(String productOrderItemEntity,String uid) {
 		JsonElement jsonElement = JsonParser.parseString(productOrderItemEntity);
-		
+		uid = "seller1";
 		JsonArray jsonarray = jsonElement.getAsJsonArray();
-		
+		UserEntity user = userrepo.findByUid(uid);
+		repo.deleteByUser(user);
 		for(JsonElement item : jsonarray) {
 			JsonObject itemObject = item.getAsJsonObject();
 			int listCount = itemObject.get("count").getAsInt();
@@ -68,7 +111,7 @@ public class ProductOrderItemService {
             int totalprice = listpriceValue * listCount;
             
             ProductEntity productdto = productrepo.findByProdNo(listProdNo);
-            UserEntity user = userrepo.findByUid(listUid);
+            user = userrepo.findByUid(listUid);
             ProductOrderItemDTO dto = ProductOrderItemDTO.builder()
             .count(listCount)
             .delivery(listdelivery)
@@ -76,12 +119,12 @@ public class ProductOrderItemService {
             .point(listpoint)
             .price(listpriceValue)
             .total(totalprice)
-            .prodNo(productdto)
+            .product(productdto)
             
-            .uid(user)
+            .user(user)
             .build();
             
-            
+           
             ProductOrderItemEntity entity = modelmapper.map(dto, ProductOrderItemEntity.class);
             repo.save(entity);
             log.info("listCount"+listCount);
@@ -96,6 +139,9 @@ public class ProductOrderItemService {
             log.info("end");
 		}
 	}
+	
+	
+	//
 	
 	
 }

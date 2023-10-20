@@ -20,8 +20,8 @@ import lombok.Setter;
 public class ProductCartDTO {
 	
 	private int cartNo;
-	private UserEntity uid;
-	private ProductEntity prodNo;
+	private UserEntity user;
+	private ProductEntity product;
 	private int count;
 	private int price;
 	private int discount;

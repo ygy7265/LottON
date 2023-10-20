@@ -35,11 +35,11 @@ public class ProductCartEntity {
 	private int cartNo;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "uid")
-	private UserEntity uid;
+	private UserEntity user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prodNo")
-	private ProductEntity prodNo;
+	private ProductEntity product;
 	private int count;
 	private int price;
 	private int discount;
