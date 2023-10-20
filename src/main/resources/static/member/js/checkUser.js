@@ -25,7 +25,7 @@ $(function(){
 		*/
 		
 		$.ajax({
-			url:'/LotteON/member/check/uid/'+uid, // 위에서 만든 uid를 이렇게 참조해서 파라미터로 보내는구나, /LotteON 안 붙이면 적용 안됨 
+			url:'/member/check/uid/'+uid, // 위에서 만든 uid를 이렇게 참조해서 파라미터로 보내는구나, /LotteON 안 붙이면 적용 안됨 
 			type:'GET',
 			// data: jsonData, // url에 파라미터 대신 jsonData의 key,value로 uid 설정해서 해당주소로 보내는 건가?? ㅇㅇ맞음 / 그걸 UserCheckController에서 파라미터로 수신하고??
 			dataType:'json',
@@ -93,7 +93,7 @@ $(function(){
 
 		// 데이터 전송
 		const xhr = new XMLHttpRequest();
-		xhr.open('GET', '/LotteON/member/check/email/'+email);
+		xhr.open('GET', '/member/check/email/'+email);
 		xhr.send();
 		
 		// 응답 결과 (JSON 데이터 수신)
@@ -132,7 +132,7 @@ $(function(){
 			return;
 		}
 		
-		const url = '/LotteON/member/check/hp/'+this.value; // this.value는 hp랑 같은 값이라 hp로 표현해도 되고 this.value로 표현해도 되고.
+		const url = '/member/check/hp/'+this.value; // this.value는 hp랑 같은 값이라 hp로 표현해도 되고 this.value로 표현해도 되고.
 		
 		fetch(url)
 			.then(response => response.json())

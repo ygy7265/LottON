@@ -108,7 +108,12 @@
                 </div>
                 <div class="dis_price">
                   <ins>[[${#numbers.formatInteger(hit.price - ((hit.price * hit.discount)/100),0,'COMMA')}]]</ins>
-                  <span class="free">[[${hit.delivery}]]</span>
+                  <th:block th:if="${hit.delivery eq 0}">
+	                  <span class="free">[[${hit.delivery}]]</span>
+	              </th:block>
+	              <th:block th:unless="${hit.delivery eq 0}">    
+	                  <span>배송비 [[${hit.delivery}]] 원</span>
+                  </th:block>
                 </div>
               </a>
             </article>
@@ -129,7 +134,12 @@
                 </div>
                 <div class="dis_price">
                   <ins>[[${#numbers.formatInteger((score.price - (score.price * score.discount)/100),0,'COMMA')}]]</ins>
-                  <span>[[${score.delivery}]]</span>
+                  <th:block th:if="${score.delivery eq 0}">
+	                  <span class="free">[[${score.delivery}]]</span>
+	              </th:block>
+	              <th:block th:unless="${score.delivery eq 0}">    
+	                  <span>배송비 [[${score.delivery}]] 원</span>
+                  </th:block>
                 </div>
               </a>
             </article>
@@ -151,7 +161,12 @@
                 </div>
                 <div class="dis_price">
                   <ins>[[${#numbers.formatInteger(newprod.price - (newprod.price * newprod.discount/100),0,'COMMA')}]]</ins>
-                  <span class="free">[[${newprod.delivery}]]</span>
+                  <th:block th:if="${newprod.delivery eq 0}">
+	                  <span class="free">[[${newprod.delivery}]]</span>
+	              </th:block>
+	              <th:block th:unless="${newprod.delivery eq 0}">    
+	                  <span>배송비 [[${newprod.delivery}]] 원</span>
+                  </th:block>
                 </div>
               </a>
             </article>
@@ -172,7 +187,12 @@
                 </div>
                 <div class="dis_price">
                  <ins>[[${#numbers.formatInteger(discount.price - (discount.price * discount.discount/100),0,'COMMA')}]]</ins>
-                  <span class="free">[[${discount.delivery}]]</span>
+                  <th:block th:if="${discount.delivery eq 0}">
+	                  <span class="free">[[${discount.delivery}]]</span>
+	              </th:block>
+	              <th:block th:unless="${discount.delivery eq 0}">    
+	                  <span>배송비 [[${discount.delivery}]] 원</span>
+                  </th:block>
                 </div>
               </a>
             </article>

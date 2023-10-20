@@ -12,8 +12,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.ArticleDTO;
+import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
+import kr.co.lottemarket.entity.product.ProductCate1Entity;
+import kr.co.lottemarket.entity.product.ProductCate2Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,10 +46,6 @@ public class ArticleEntity {
 	private String uid;
 	private String title;
 	private String content;
-	
-	// 카테필드 추가
-	
-	
 	@CreationTimestamp
 	private LocalDateTime rdate;
 	

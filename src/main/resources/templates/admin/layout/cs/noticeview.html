@@ -13,7 +13,7 @@ layout:decorate="/admin/index.html">
 			<table class="cstable">
 				<tr class="cstable1">
 					<td>유형</td>
-					<td>[[${noticeview.cate1}]]</td>
+					<td>[[${noticeview.notice_cate1_name}]]</td>
 				</tr>
 				<tr class="cstable2">
 					<td>제목</td>
@@ -31,7 +31,7 @@ layout:decorate="/admin/index.html">
 				</tr>
 			</table>
 			<a th:href="@{/admin/layout/cs/noticelist(no=${noticeview.no}, pg=1, group=1)}" class="btnList">목록</a>
-			<a th:href="@{/admin/layout/cs/noticeModify(no=${noticeview.no}, group=1)}" class="btnViewModify">질문수정</a>
+			<a th:href="@{/admin/layout/cs/noticemodify(no=${noticeview.no}, group=1)}" class="btnViewModify">질문수정</a>
             <a th:href="@{/admin/layout/cs/noticeDelete(no=${noticeview.no})}" class="btnViewDelete">삭제</a>    
 		</article>
 	</section>

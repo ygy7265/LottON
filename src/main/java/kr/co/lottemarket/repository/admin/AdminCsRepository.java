@@ -17,7 +17,6 @@ import java.util.List;
 public interface AdminCsRepository extends JpaRepository<ArticleEntity, Integer>{
 	
 	Optional<ArticleEntity> findById(int no);
-    public Page<ArticleEntity> findByParentAndGroup(int parent, int group, Pageable pageable);
     
     @Transactional
 	public void deleteByNo(int no);

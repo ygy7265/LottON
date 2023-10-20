@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케이마켓 고객센터</title>
     <link rel="stylesheet" th:href="@{/css/Cs_style.css}"/>
+    
 </head>
 <body>
     <div id="container">
@@ -22,21 +23,20 @@
           </div>
           <div class="logo">
             <div>
-              <a th:href="@{/cs/index}"><img th:src="@{/images/logo.png}" alt="로고" />고객센터</a>
+              <a th:href="@{/cs/index}"><img th:src="@{/images/header_logo.png}" alt="로고">고객센터</a>
+              
             </div>
           </div>
         </header>
   
         <section id="cs">
-	   <div th:class="${pageResponseDTO.group == 1} ? 'notice' : (${pageResponseDTO.group == 2} ? 'faq' : 'qna')">
-
- 							  
+	   	 <div th:class="${pageResponseDTO.group == 1} ? 'notice' : (${pageResponseDTO.group == 2} ? 'faq' : 'qna')">
             <nav>
               <div>
                 <p>홈<span>></span>[[${pageResponseDTO.group == 1} ? '공지사항' :  (${pageResponseDTO.group == 2} ? '자주묻는질문' : '문의하기')]]</p>
               </div>
             </nav>
-            <section th:class="${pageResponseDTO.no == 0} ? 'list' : 'view'">
+			<section th:class="${state == 'list'} ? 'list' : (${state == 'view'} ? 'view' : 'write')">
               <aside>
 				  
                 <h2>[[${pageResponseDTO.group == 1} ? '공지사항' :  (${pageResponseDTO.group == 2} ? '자주묻는질문' : '문의하기')]]</h2>
@@ -48,7 +48,8 @@
 					<li th:class="${pageResponseDTO.cate1 == 4} ? 'on' : ''"><a th:href="@{/cs/list(group=${pageResponseDTO.group}, cate1=4)}">이벤트당첨</a></li>
 				</ul>
 				
-				 <ul th:if="${pageResponseDTO.group == 2 ||pageResponseDTO.group == 3}">
+				
+				 <ul th:if="${pageResponseDTO.group == 2 || pageResponseDTO.group == 3}">
 					 <li th:class="${pageResponseDTO.cate1 == 1} ? 'on' : ''"><a th:href="@{/cs/list(group=${pageResponseDTO.group},cate1=1)}">회원</a></li>
 					 <li th:class="${pageResponseDTO.cate1 == 2} ? 'on' : ''"><a th:href="@{/cs/list(group=${pageResponseDTO.group},cate1=2)}">쿠폰/이벤트</a></li>
 	                 <li th:class="${pageResponseDTO.cate1 == 3} ? 'on' : ''"><a th:href="@{/cs/list(group=${pageResponseDTO.group},cate1=3)}">주문/결제</a></li>

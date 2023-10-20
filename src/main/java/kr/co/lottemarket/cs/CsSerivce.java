@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import groovy.util.logging.Log4j2;
 import kr.co.lottemarket.cs.mapper.ArticleMapper;
 import kr.co.lottemarket.dto.ArticleDTO;
+import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.PageRequestDTO;
 import kr.co.lottemarket.dto.cs.PageResponseDTO;
 import kr.co.lottemarket.entity.ArticleEntity;
@@ -47,6 +48,36 @@ public class CsSerivce {
                               .total(totalElement)
                               .build();
 		
+	}
+	
+	
+	 
+	 // faqList출력
+	  public List<ArticleDTO> selectArticles(int group,int cate1) {
+		  return mapper.selectArticles(group, cate1);
+	 }
+	  
+	//faq카테고리 출력
+	  public List<ArticleDTO> selectCate1(int group){
+		  return mapper.selectCate1(group);
+	  }
+	
+	
+	
+	//메인페이지 글 출력
+	public List<ArticleDTO> selectIndex(int group){
+		return mapper.selectIndex(group);
+	}
+	
+	//Ajax글 카테고리1
+	public List<ArticleDTO> selectAjaxCate1(int group){
+		return mapper.selectAjaxCate1(group);
+	}
+	
+	
+	//Ajax글 카테고리2
+	public List<ArticleDTO> selectAjaxCate2(int group, int cate1){
+		return mapper.selectAjaxCate2(group, cate1);
 	}
 	
 	
@@ -101,12 +132,7 @@ public class CsSerivce {
 		 * 
 		 * return articles; }
 		 */
-	 
-	 //faqList출력
-	 public List<ArticleDTO> selectArticles(int group,int cate1) {
-		 group = 3;
-		 return mapper.selectArticles(group,cate1);
-	 }
+	
 	
 	
 	

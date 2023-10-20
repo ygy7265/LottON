@@ -12,39 +12,37 @@
         <section>
             <div>
 				<!-- type1은 회원게시판에서 클릭했을 시 회원으로 설정되게끔. -->
-				<select name="boardCate2" id="boardCate2">
+				<select name="cate1" id="faqboardCate1">
 					<option value="0">1차 선택</option>
-					<c:forEach var="main_cate" items="${cate1List}">
-						<option value="${main_cate.cate1}" ${cate1 eq main_cate.cate1?'selected':''}>${main_cate.cate1_name}</option>
-					</c:forEach>
+						<option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:selected="${cate1 eq selectedCate1}" th:text="${cate1.cate1_name}"></option>
 				</select>
 				<!--  type2는 jsonData로 받아와서 동적처리. -->
-				<select name="boardCate3" id="boardCate3">
+				<select name="cate2" id="faqboardCate2">
 					<option value="0">2차 선택</option>
-					<c:forEach var="sub_cate" items="${cate2List}">
-						<option value="${sub_cate.cate2}">${sub_cate.cate2_name}</option>
-					</c:forEach>
+						<option th:each="cate2 : ${cate2List}" th:value="${cate2.cate2}" th:text="${cate2.cate2_name}"></option>
 				</select>
             </div>
             <table>
                 <tr>
                     <th><input type="checkbox" name="all"></th>
                     <th>번호</th>
-                    <th>유형</th>
+                    <th>1차 유형</th>
+                    <th>2차 유형</th>
                     <th>제목</th>
                     <th>날짜</th>
                     <th>관리</th>
                 </tr>
 			
-				<tr class="row" th:each="faqlist : ${pageResponseDTO.dtoList}">
-                    <td><input type="checkbox" name="chk"></td>
-                    <td>[[${faqlist.no}]]</td>
-                    <td>[[${faqlist.cate1}]]</td>
-                    <td><a th:href="@{/admin/layout/cs/faqview(no=${faqlist.no})}">[[${faqlist.title}]]</a></td>
-                   	<td>[[${#temporals.format(faqlist.rdate, 'yy-MM-dd')}]]</td>
-                    <td>
-						<a href="#" class="faqModify">[수정]</a>
-                        <a href="#" class="faqDelete">>[삭제]</a>
+				<tr class="row" th:each="faqlist : ${faqlist}">
+                    <td style="text-align:center; width:5%"><input type="checkbox" name="chk"></td>
+                    <td style="text-align:center; width:5%">[[${faqlist.no}]]</td>
+                    <td style="text-align:center; width:10%">[[${faqlist.f}]]</td>
+                    <td style="text-align:center; width:10%">[[${faqlist.f2}]]</td>
+                    <td style="text-align:center; width:40%"><a th:href="@{/admin/layout/cs/faqview(no=${faqlist.no})}">[[${faqlist.title}]]</a></td>
+                   	<td style="text-align:center; width:10%">[[${#temporals.format(faqlist.rdate, 'yy-MM-dd')}]]</td>
+                    <td style="text-align:center; width:20%">
+						<a th:href="@{/admin/layout/cs/faqmodify(no=${faqlist.no})}" class="faqModify">[수정]</a>
+                        <a href="#" class="faqDelete">[삭제]</a>
                     </td>                   
                 </tr>
             </table>

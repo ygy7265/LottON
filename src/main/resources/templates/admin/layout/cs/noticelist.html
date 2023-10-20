@@ -12,11 +12,9 @@
         <section>
             <div>
                 <!-- type1은 회원게시판에서 클릭했을 시 회원으로 설정되게끔. -->
-				<select name="boardCate2" id="boardCate2">
+				<select name="cate1" id="boardCate1">
 					<option value="0">1차 선택</option>
-					<c:forEach var="main_cate" items="${cate1List}">
-						<option value="${main_cate.cate1}" ${cate1 eq main_cate.cate1?'selected':''}>${main_cate.cate1_name}</option>
-					</c:forEach>
+						<option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:selected="${cate1 eq selectedCate1}" th:text="${cate1.cate1_name}"></option>
 				</select>
             </div>
             <table>
@@ -29,14 +27,14 @@
                     <th>관리</th>
                 </tr>
 			
-				<tr class="row" th:each="noticelist : ${pageResponseDTO.dtoList}">
-                    <td><input type="checkbox" name="chk"></td>
-                    <td>[[${noticelist.no}]]</td>
-                     <td>[[${noticelist.cate1}]]</td>
-                    <td><a th:href="@{/admin/layout/cs/noticeview(no=${noticelist.no})}">[[${noticelist.title}]]</a></td>
-                   	<td>[[${#temporals.format(noticelist.rdate, 'yy-MM-dd')}]]</td>
-                    <td>
-						<a href="#" class="noticeModify">[수정]</a>
+				<tr class="row" th:each="noticelist : ${noticelist}">
+                    <td style="text-align:center; width:10%"><input type="checkbox" name="chk"></td>
+                    <td style="text-align:center; width:10%">[[${noticelist.no}]]</td>
+                     <td style="text-align:center; width:10%">[[${noticelist.notice_cate1_name}]]</td>
+                    <td style="text-align:center; width:40%"><a th:href="@{/admin/layout/cs/noticeview(no=${noticelist.no})}">[[${noticelist.title}]]</a></td>
+                   	<td style="text-align:center; width:10%">[[${#temporals.format(noticelist.rdate, 'yy-MM-dd')}]]</td>
+                    <td style="text-align:center; width:20%">
+						<a th:href="@{/admin/layout/cs/noticemodify(no=${noticelist.no})}" class="noticeModify">[수정]</a>
                         <a href="#" class="noticeDelete">[삭제]</a>
                     </td>                   
                 </tr>
@@ -47,19 +45,8 @@
             <input type="button" value="공지 작성" class="noticeWrite"/>
 			
 			 <div class="paging">
-		        <span th:if="${pageResponseDTO.prev}" class="prev" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
-		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${pageResponseDTO.start - 1})}">이전</a>
-		        </span>
-		
-		        <span th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}"
-		             class="num">
-		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${num})}" th:text="${num}"></a>
-		        </span>
-		
-		        <span th:if="${pageResponseDTO.next}" class="next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
-		            <a th:href="@{/admin/layout/cs/noticelist(group=${pageResponseDTO.group},pg=${pageResponseDTO.end + 1})}">다음</a>
-		        </span>
-			</div>
+				 
+			 </div>
 
 			
         </section>

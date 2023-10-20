@@ -5,10 +5,20 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.lottemarket.dto.ArticleDTO;
+import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 
 @Mapper
 public interface ArticleMapper {
 	
 	public List<ArticleDTO> selectArticles(int group,int cate1);
+	
+	public List<ArticleDTO> selectCate1(int group);
+	
+	public List<ArticleDTO> selectIndex(int group);
+	
+	public List<ArticleDTO> selectAjaxCate2(int group, int cate1);
+
+	public List<ArticleDTO> selectAjaxCate1(int group);
+	
 	
 }

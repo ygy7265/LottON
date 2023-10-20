@@ -13,7 +13,7 @@ layout:decorate="/admin/index.html">
 			<table class="cstable">
 				<tr class="cstable1">
 					<td>유형</td>
-					<td>[[${qnaview.cate1}]]</td>
+					<td>[[${qnaview.q}]] - [[${qnaview.q2}]]</td>
 				</tr>
 				<tr class="cstable2">
 					<td>제목</td>
@@ -28,10 +28,13 @@ layout:decorate="/admin/index.html">
 					▶ KISA 인터넷침해대응센터 (국번없이)118 :
 					http://www.krcert.or.kr<br/>
 					감사합니다.<br/></td>
+				<tr class="cstable4">
+				<td>답변</td>
+                  <td class="qnaAnswer" name="content" rows="4" cols="50"></td>
 				</tr>
 			</table>
 			<a th:href="@{/admin/layout/cs/qnalist(no=${qnaview.no}, pg=1, group=3)}" class="btnList">목록</a>
-			<a th:href="@{/admin/layout/cs/qnaModify(no=${qnaview.no}, group=3)}" class="btnViewModify">질문수정</a>
+			<a th:href="@{/admin/layout/cs/qnaWrite(no=${qnaview.no})}" class="btnViewModify">답변작성</a>
             <a th:href="@{/admin/layout/cs/qnaDelete(no=${qnaview.no})}" class="btnViewDelete">삭제</a>  
 		</article>
 	</section>

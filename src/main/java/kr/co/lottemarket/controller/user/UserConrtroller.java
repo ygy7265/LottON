@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lottemarket.dto.TermsDTO;
 import kr.co.lottemarket.dto.UserDTO;
+import kr.co.lottemarket.security.MyUserDetails;
 import kr.co.lottemarket.service.TermsService;
 import kr.co.lottemarket.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,36 +24,55 @@ public class UserConrtroller {
 	
 	private final TermsService termsService;
 	private final UserService userService;
+	private MyUserDetails myUserDetails;
 	
 	
 	@GetMapping("/member/login")
 	public String login() {
-		return "/member/login";
+		return "/member/layout/login";
 	}
+	
+	@GetMapping("/member/logout")
+	public String logout() {
+		return "redirect:/member/login";
+	}
+	
+	
 	
 	@GetMapping("/member/register")
 	public String register() {
 		
-		return "/member/register";
+		return "/member/layout/register";
 	}
 	
 	@PostMapping("/member/register")
 	public String register(UserDTO dto, HttpServletRequest request) { // 가입하는 그 순간, 즉 GET이 아니라 POST에서 ip 설정해준다! / register.html에서 작성한 객체가 UserDTO로 들어오고 DTO의 regip 속성에 ip값을 설정해준다.
 		String ip = request.getRemoteAddr();
 		dto.setRegip(ip);
+		dto.setType(1);
+		userService.save(dto);
+		
+		return "redirect:/member/login"; // redirect는 html을 보여주는 게 아니라 url mapping 으로 전송이다!
+	}
+	
+	@GetMapping("/member/registerSeller")
+	public String registerSeller() {
+		return "/member/layout/registerSeller";
+	}
+	
+	@PostMapping("/member/registerSeller")
+	public String registerSeller(UserDTO dto, HttpServletRequest request) {
+		String ip = request.getRemoteAddr();
+		dto.setRegip(ip);
+		dto.setType(2);
 		userService.save(dto);
 		
 		return "redirect:/member/login";
 	}
 	
-	@GetMapping("/member/registerSeller")
-	public String registerSeller() {
-		return "/member/registerSeller";
-	}
-	
 	@GetMapping("/member/join")
 	public String join() {
-		return "/member/join";
+		return "/member/layout/join";
 	}
 	
 	@GetMapping("/member/signup")
@@ -63,13 +83,13 @@ public class UserConrtroller {
 	model.addAttribute("type",type); // (type) 이거는 하면 안됨, 파라미터 수신한 걸 모델에 추가해줘야 view 페이지에서 사용가능
 	//System.out.println("type"+type);
 	
-		return "/member/signup";
+		return "/member/layout/signup";
 	}
 	
 	// 추가
 	@GetMapping("/member/findId")
 	public String findId() {
-		return "/member/findId";
+		return "/member/layout/findId";
 	}
 	
 	

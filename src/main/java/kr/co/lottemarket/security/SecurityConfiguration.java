@@ -32,10 +32,10 @@ public class SecurityConfiguration {
 			.anyRequest().authenticated()
 		)
 
-		//토큰방식으로 로그인처리하기때문에 품방식 비활성
-		.formLogin(config -> config
-                .loginPage("/member/login")
-                .defaultSuccessUrl("/",true)
+		//토큰방식으로 로그인처리하기때문에 품방식 비활성 : login.html에서 post로 폼 전송을 할 필요없이 여기 formLogin 메서드 자체에서 로그인 처리함
+		.formLogin(config -> config 
+                .loginPage("/member/login") // 이 주소로 매핑된 메서드에서 formLogin 진행
+                .defaultSuccessUrl("/",true) // GET 전송인가?? ㅇㅇ
                 .failureUrl("/member/login?success=100")
                 .usernameParameter("uid")
                 .passwordParameter("pass")
@@ -44,13 +44,13 @@ public class SecurityConfiguration {
 		// 사이트 위변조 방지 해제
 		.csrf(CsrfConfigurer::disable)
         .logout(config -> config
-                        .logoutUrl("/member/logout")
+                        .logoutUrl("/member/logout") // GET 전송
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .logoutSuccessUrl("/member/login?success=200")
         )
 
-        .userDetailsService(service);// 사용자 인증처리 컴포넌트 등록
+        .userDetailsService(service); // 사용자 인증처리 컴포넌트 등록
 		return http.build();
 	}
 	

@@ -16,6 +16,7 @@
     <script src="../member/js/validation.js"></script> <!-- static에 있는 파일 경로 이렇게 설정해줘야함 -->
     <script src="../member/js/checkUser.js"></script>
     <script src="../member/js/zipcode.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 이거 깜빡했네 -->
     <script>
 	//auto hyphen
 	const hypenTel = (target) => {
@@ -35,7 +36,7 @@
 					<h1>판매자 회원가입</h1>
 				</nav>
                 
-				<form th:action="@{/member/register}" method="POST">
+				<form th:action="@{/member/registerSeller}" method="POST">
 					<section>
 						<table>
 							<caption>필수 정보입력</caption>
@@ -142,7 +143,7 @@
 							<tr>
 								<th><span class="essential">*</span>휴대폰</th>
 								<td>
-									<input type="text" name="hp" maxlength="13" placeholder="휴대폰번호 입력" required /> 
+									<input type="text" name="hp" oninput="hypenTel(this)" maxlength="13" minlength="13" placeholder="휴대폰번호 입력" required /> 
 									<span class="msgHp">&nbsp;&nbsp;- 포함 13자리를 입력하세요.</span>
 									<span id="resultHp"></span>
 								</td>

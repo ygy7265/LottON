@@ -13,7 +13,7 @@ layout:decorate="/admin/index.html">
 			<table class="cstable">
 				<tr class="cstable1">
 					<td>유형</td>
-					<td>[[${faqview.cate1}]]</td>
+					<td>[[${faqview.f}]] - [[${faqview.f2}]]</td>
 				</tr>
 				<tr class="cstable2">
 					<td>제목</td>
@@ -31,7 +31,7 @@ layout:decorate="/admin/index.html">
 				</tr>
 			</table>
 			<a th:href="@{/admin/layout/cs/faqlist(no=${faqview.no}, pg=1, group=2)}" class="btnList">목록</a>
-            <a th:href="@{/admin/layout/cs/faqModify(no=${faqview.no}, group=2)}" class="btnViewModify">질문수정</a>
+            <a th:href="@{/admin/layout/cs/faqmodify(no=${faqview.no}, group=2)}" class="btnViewModify">질문수정</a>
             <a th:href="@{/admin/layout/cs/faqDelete(no=${faqview.no})}" class="btnViewDelete">삭제</a>
 		</article>
 	</section>

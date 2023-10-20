@@ -1,0 +1,45 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="/admin/index.html">
+ <section id="admin-cs-view" layout:fragment="content">
+	     <nav>
+	            <h3>고객문의</h3>
+	            <p>
+	                HOME > 게시판관리 > <strong>고객문의</strong>
+	            </p>
+	        </nav>
+	    <article>
+            <form action="${ctxPath}/admin/qna/answer.do" method="post">
+            <input type="hidden" name="group" value="3">
+            <input type="hidden" name="no" value="">
+            <input type="hidden" name="uid" value="">
+            <input type="hidden" name="cate1" value="">
+            <input type="hidden" name="cate2" value="">
+            <input type="hidden" name="title" value="">
+			<table class="cstable">
+				<tr class="cstable1">
+					<td>유형</td>
+					<td>[[${qnaWrite.cate1}]]-[[${qnaWrite.cate2}]]</td>
+				</tr>
+				<tr class="cstable2">
+					<td>제목</td>
+					<td>[[${qnaWrite.title}]]</td>
+				</tr>
+				<tr class="cstable3">
+					<td>내용</td>
+					<td style="white-space: pre-wrap; height:200px; vertical-align: top;">[[${qnaWrite.content}]]</td>
+				</tr>
+				<tr class="cstable4">
+				<td>답변</td>
+                  <td>
+                      <textarea class="qnaAnswer" name="content" rows="4" cols="50"></textarea>
+                  </td>
+                </tr>
+                </table>
+                <input type="submit" value="답변 제출" class="inputSubmit">
+                <a href="" class="qnabtnViewDelete">삭제</a>
+           		<a href="" class="qnabtnList">목록</a>
+            </form>
+        </article>
+	</section>

@@ -24,7 +24,7 @@
             <div class="logo">
                 <div>
                     <a th:href="@{/cs/index}">
-                        <img src="../images/logo.png" alt="Kmarket">고객센터
+                       <img th:src="@{/images/header_logo.png}" alt="로고">고객센터
                     </a>
                 </div>		
             </div>
@@ -32,30 +32,14 @@
         <section id="cs">
             <div class="main">
                 <h1 class="title">
-                    <strong>케이마켓</strong>이 도와드릴게요!
+                    <strong>롯데ON</strong>이 도와드릴게요!
                 </h1>
                 <section class="notice">
                     <h1>공지사항<a th:href="@{/cs/list(group=1,cate1=0)}">전체보기</a></h1>
-                    <ul>
+                    <ul th:each="article:${noticeArticles}">  
                         <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
+                            <a th:href="@{/cs/view(group=2,cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" class="title">[안내] [[${article.title}]]</a>
+                            <span class="date">[[${article.rdate}]] </span>
                         </li>
                     </ul>
                 </section>
@@ -102,43 +86,18 @@
                 <section class="qna">
                     <h1>문의하기<a th:href="@{/cs/list(group=3,cate1=1)}">전체 보기</a></h1>
                     <ul>
-                        <li>
-                            <a href="#" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
+                        <li th:each="article:${qnaArticles}">
+                            <a th:href="@{/cs/view(group=3,cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" class="title">[회원] [[${article.title}]]</a>
                             <p>
-                                <span class="uid">chh**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
-                            <p>
-                                <span class="uid">chh**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
-                            <p>
-                                <span class="uid">chh**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
-                            <p>
-                                <span class="uid">chh**</span>
-                                <span class="date">22.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
-                            <p>
-                                <span class="uid">chh**</span>
-                                <span class="date">22.10.31</span>
+                             <span class="uid">
+					            <span th:text="${#strings.substring(article.uid, 0, 3)}"></span>
+            					<span th:text="'***'"></span>
+					        </span>
+					        <span class="date">[[${article.rdate}]]</span>
                             </p>
                         </li>
                     </ul>
-                    <a th:href="@{/cs/write}" class="ask">문의글 작성 ></a>
+                    <a th:href="@{/cs/qna/write(group=3)}" class="ask">문의글 작성 ></a>
                 </section>
                 <section class="tel">
                     <h1>1:1 상담이 필요하신가요? </h1>

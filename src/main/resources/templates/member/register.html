@@ -16,6 +16,7 @@
     <script src="../member/js/validation.js"></script> <!-- static에 있는 파일 경로 이렇게 설정해줘야함 -->
     <script src="../member/js/checkUser.js"></script>
     <script src="../member/js/zipcode.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 이거 깜빡했네 -->
     <script>
 	//auto hyphen
 	const hypenTel = (target) => {
@@ -90,7 +91,7 @@
 							<tr>
 								<th><span class="essential">*</span>휴대폰</th>
 								<td>
-									<input type="text" name="hp" maxlength="13" placeholder="휴대폰번호 입력" required /> 
+									<input type="text" name="hp" oninput="hypenTel(this)" maxlength="13" minlength="13" placeholder="휴대폰번호 입력" required /> <!-- oninput, minlength 추가 -->
 									<span class="msgHp"> - 포함 13자리를 입력하세요.</span>
 									<span id="resultHp"></span>
 								</td>
@@ -99,7 +100,7 @@
 								<th>주소</th>
 								<td>
 									<div>
-										<input type="text" name="zip" id="zip" placeholder="우편번호 입력 클릭" onclick="zipcode()" readonly /><!--zipcode 왜 적용 안되지?? -->
+										<input type="text" name="zip" id="zip" placeholder="우편번호 입력 클릭" onclick="zipcode()" readonly /> <!--zipcode 왜 적용 안되지?? -->
 									</div>
 									<div>
 										<input type="text" name="addr1" id="addr1" size="50"
