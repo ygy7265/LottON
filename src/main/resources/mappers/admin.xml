@@ -190,8 +190,8 @@
 	    
 	    <insert id="AnswerQna">
 	    	
-	    	INSERT INTO  lotte_board (parent, uid, `group`, cate1, cate2, content, rdate)  
-	    	VALUES parent = #{no}, uid = #{uid}, `group` = #{group} , cate1 = #{cate1}, cate2 = #{cate2}, content = #{parent}, rdate= NOW(); 
+	    	INSERT INTO  lotte_board (`group`, parent, uid, cate1, cate2, content, rdate)  
+	    	VALUES (#{group}, #{no}, #{uid}, #{cate1}, #{cate2}, #{content}, NOW()); 
 	    	
 	    </insert>
 	    

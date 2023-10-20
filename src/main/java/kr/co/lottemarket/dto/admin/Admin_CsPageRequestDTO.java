@@ -21,6 +21,8 @@ public class Admin_CsPageRequestDTO {
     private int size = 10;
     
     private int group;
+    private int cate1;
+    private int cate2;
 
     public Pageable getPageable(String sort) {
 
