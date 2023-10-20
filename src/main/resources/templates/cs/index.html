@@ -24,7 +24,7 @@
             <div class="logo">
                 <div>
                     <a th:href="@{/cs/index}">
-                        <img src="../images/logo.png" alt="Kmarket">고객센터
+                       <img th:src="@{/images/header_logo.png}" alt="로고">고객센터
                     </a>
                 </div>		
             </div>
@@ -32,7 +32,7 @@
         <section id="cs">
             <div class="main">
                 <h1 class="title">
-                    <strong>케이마켓</strong>이 도와드릴게요!
+                    <strong>롯데ON</strong>이 도와드릴게요!
                 </h1>
                 <section class="notice">
                     <h1>공지사항<a th:href="@{/cs/list(group=1,cate1=0)}">전체보기</a></h1>
@@ -89,8 +89,11 @@
                         <li th:each="article:${qnaArticles}">
                             <a th:href="@{/cs/view(group=3,cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" class="title">[회원] [[${article.title}]]</a>
                             <p>
-                                <span class="uid">chh**</span>
-                                <span class="date">22.10.31</span>
+                             <span class="uid">
+					            <span th:text="${#strings.substring(article.uid, 0, 3)}"></span>
+            					<span th:text="'***'"></span>
+					        </span>
+					        <span class="date">[[${article.rdate}]]</span>
                             </p>
                         </li>
                     </ul>

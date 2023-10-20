@@ -2,6 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
       layout:decorate="/cs/board/moduleList.html">
+
+<head>
+	
+	<script>
+	window.onload = function() {
+			
+			document.querySelector('#faqboardCate1').addEventListener('change', function() {
+			
+		    var selectedCate1 = this.value;
+		    var selectedGroup = 3;
+		    var category2Select = document.querySelector('#faqboardCate2');
+		    var url = `/cs/board/write/3/${selectedCate1}`;
+		 
+			console.log("url : " + url);
+		
+		    var xhr = new XMLHttpRequest();
+		    console.log(xhr);
+		    xhr.open('GET', url, true);
+		
+		    xhr.onload = function() {
+		        if (xhr.status >= 200 && xhr.status < 300) {
+		            // 이전 옵션 제거
+		            while (category2Select.firstChild) {
+		                category2Select.removeChild(category2Select.firstChild);
+		            }
+		
+		            var data= JSON.parse(xhr.response);
+		            for (var i = 0; i < data.length; i++) {
+					  console.log(data); // Access each item in the array
+					}
+		            var defaultOption = document.createElement('option');
+		            defaultOption.value = 'cate0';
+		            defaultOption.text = '2차 분류 선택';
+		            category2Select.appendChild(defaultOption);
+		
+		            data.forEach(function(cate2) {
+		                var option = document.createElement('option');
+		                option.value = cate2.cate2;
+		                option.text = cate2.cate2_name;
+		                category2Select.appendChild(option);
+		            });
+		        } else {
+		            console.error('카테고리 2 데이터를 가져오는데 실패했습니다.');
+		        }
+		    };
+		
+		    xhr.send();
+		});
+
+	}
+	</script>
+</head>
       
             <article layout:fragment="content">
                 <form th:action="@{/cs/qna/write(group=3)}" method="post">
@@ -11,24 +63,15 @@
                   <tr>
                     <td>문의유형</td>
                     <td>
-                     <select name="cate1">
-                            <option>선택</option>
-                            <option th:value="1">회원</option>
-                            <option th:value="2">쿠폰/이벤트</option>
-                            <option th:value="3">주문/결제</option>
-                            <option th:value="4">배송</option>
-                            <option th:value="5">취소/반품/교환</option>
-                            <option th:value="6">여행/숙박/항공</option>
-                            <option th:value="7">안전거래</option>
-                        </select>
+						<select name="cate1" id="faqboardCate1">
+							<option value="0">1차 선택</option>
+								<option th:each="cate1 : ${cate1List}" th:value="${cate1.cate1}" th:text="${cate1.cate1_name}"></option>
+						</select>
                         
-                        <select name="cate2">
-                            <option>선택</option>
-                            <option th:value="1">가입</option>
-                            <option th:value="2">탈퇴</option>
-                            <option th:value="3">회원정보</option>
-                            <option th:value="4">로그인</option>
-                        </select>
+						<select name="cate2" id="faqboardCate2">
+							<option value="0">2차 선택</option>
+								<option th:each="cate2 : ${cate2Lists}" th:value="${cate2.cate2}" th:text="${cate2.cate2_name}"></option>
+						</select>
                     </td>
                   </tr>
                   <tr>
