@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.PageRequestDTO;
 import kr.co.lottemarket.dto.PageResponseDTO;
+import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
+import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
 import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
@@ -23,23 +25,20 @@ import kr.co.lottemarket.repository.ProductCartRepository;
 import kr.co.lottemarket.repository.ProductOrderItemRepository;
 import kr.co.lottemarket.repository.ProductRepository;
 import kr.co.lottemarket.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
+@RequiredArgsConstructor
 @Service
 public class ProductService {
 
-	@Autowired
-	private ProductRepository repo;
-	@Autowired
-	private ProductCartRepository cartrepo;
-	@Autowired
-	private ProductOrderItemRepository orderrepo;
-	@Autowired 
-	private UserRepository userepo;
 	
-	@Autowired
-	private ModelMapper modelmapper;
+	private final ProductRepository repo;
+	private final ProductCartRepository cartrepo;
+	private final ProductOrderItemRepository orderrepo;
+	private final UserRepository userepo;
+	private final ModelMapper modelmapper;
 	
 	//ProductList
 	public List<ProductDTO> selectsProductHit(){
@@ -106,11 +105,11 @@ public class ProductService {
 	}
 	@Transactional
 	public void insertDTO(ProductCartDTO dto) {
-		log.info("dto.getuid" + dto.getUid().getUid());
-		UserEntity user = dto.getUid();
+		log.info("dto.getuid" + dto.getUser().getUid());
+		UserEntity user = dto.getUser();
 		userepo.save(user);
 		ProductCartEntity entity = modelmapper.map(dto, ProductCartEntity.class);
-		entity.setUid(user);
+		entity.setUser(user);
 		cartrepo.save(entity);
 	}
 	
@@ -148,6 +147,34 @@ public class ProductService {
 				cartrepo.deleteById(cartentity);
 			}
 			
+	}
+	
+	public Admin_ProductPageResponseDTO selectProdNameProucts(Admin_ProductPageRequestDTO pageRequestDTO,String chk, String search) {
+		
+		Pageable pageable = pageRequestDTO.getPageable("prodNo");
+		Admin_ProductPageResponseDTO pageResponseDTO = null;
+		Page<ProductEntity> eList = null;
+		 
+	    if (chk != null) {
+	        switch (chk) {
+	            case "descript":
+	            	eList = repo.findByDescriptLike("%" + search + "%", pageable);
+	                break;
+	            case "price":
+	            	eList = repo.findByPriceLike("%" + search + "%", pageable);
+	                break;
+	        }
+	    }else if(search != null || chk == "prodName") {
+	    	eList = repo.findByProdNameLike("%" + search + "%", pageable);
+	    }else {
+	    	 eList = repo.findAll(pageable);
+	    }
+		
+		List<ProductDTO> dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
+		int total = (int) eList.getTotalElements();
+		Admin_ProductPageResponseDTO dto= Admin_ProductPageResponseDTO.builder().pageRequestDTO(pageRequestDTO).dtoList(dtoPage).total(total).build();
+		return dto;
+		
 	}
 	
 }

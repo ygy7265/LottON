@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org/"
+	  layout:decorate="/side.html">
+    
+        
+        <!-- 상품검색 화면 시작 -->
+        <section class="search" layout:fragment="content">
+
+          <!-- 제목, 페이지 네비게이션 -->
+          <nav>
+            <h1>상품 검색 결과</h1>
+            <p>
+              HOME > <span>상품검색</span> > <strong>검색키워드</strong>
+            </p>
+          </nav>
+
+          <!-- 검색결과 그룹박스 -->
+          <div class="group">
+            <h3><strong>셔츠</strong>검색결과 <em>(총&nbsp;:&nbsp;<span>20</span>&nbsp;건)</em></h3>
+            <form th:action="@{/product/productSearch}">
+              <input type="text" name="search"/>
+              <input type="submit" value="검색"/>
+              <span>
+                  <label><input type="checkbox" name="chk" value="prodName">상품명</label>
+                  <label><input type="checkbox" name="chk" value="descript">상품설명</label>
+                  <label><input type="checkbox" name="chk" value="price">상품가격</label>
+                  <input type="text" name="min"/>원&nbsp;~&nbsp;<input type="text" name="max"/>원
+              </span>
+            </form>
+            <p class="info">
+              상세검색을 선택하지 않거나, 상품가격을 입력하지 않으면 현재 결과내에서 검색합니다.<br>
+              검색어는 최대 10글자까지, 여러개의 검색어를 공백으로 구분하여 입력 할수 있습니다.
+            </p>
+          </div>
+
+          <!-- 정렬 메뉴 -->
+          <ul class="sort">
+              <li><a href="#">판매많은순</a></li>
+              <li><a href="#">낮은가격순</a></li>
+              <li><a href="#">높은가격순</a></li>
+              <li><a href="#">평점높은순</a></li>
+              <li><a href="#">후기많은순</a></li>
+              <li><a href="#">최근등록순</a></li>
+          </ul>
+
+          <!-- 검색목록 -->
+          <table border="0">                  
+            <tr th:each="dto:${pageResponse.dtoList}">
+              <td><a href="#" class="thumb"><img th:src="@{../images/product/}+${dto.thumb1}" alt="상품이미지"/></a></td>
+              <td>
+                <h3 class="name">[[${dto.prodName}]]</h3>
+                <a href="#" class="desc">[[${dto.descript}]]</a>
+              </td>
+              <td>
+                <ul>
+                  <li><ins class="dis-price">[[${dto.price}]]</ins></li>
+                  <li>
+                    <del class="org-price">[[${dto.price}]]</del>
+                    <span class="discount">[[${dto.discount}]]%</span>
+                  </li>
+                  <li><span class="free-delivery">무료배송</span></li>
+                </ul>
+              </td>
+              <td>
+                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
+                <h5 class="badge power great">판매자등급</h5>
+                <h6 class="rating star3">상품평</h6>
+              </td>
+            </tr>
+          </table>
+
+          <div class="paging">
+                        <span th:if="${pageResponse.prev}" class="num" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+			                <a th:href="@{/product/productSearch(pg=${pageResponse.start - 1})}">이전</a>
+			            </span>
+			
+			            <span th:each="num: ${#numbers.sequence(pageResponse.start, pageResponse.end)}"
+			                class="num"
+			                aria-controls="dataTables-example"
+			                tabindex="0">
+			                <a th:href="@{/product/productSearch(pg=${num})}">[[${num}]]</a>
+			            </span>
+			
+			            <span th:if="${pageResponse.next}" class="num" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
+			                <a th:href="@{/product/productSearch(pg=${pageResponse.end + 1})}">다음</a>
+			            </span>
+                      </div>
+          
+        </section>
+        <!-- 상품검색 화면 끝 -->
+
+</html>

@@ -18,8 +18,8 @@ public class ProductOrderItemDTO {
 
 	
 	private int ordNo;
-	private ProductEntity prodNo;
-	private UserEntity uid;
+	private ProductEntity product;
+	private UserEntity user;
 	private int count;
 	private int price;
 	private int discount;
@@ -30,8 +30,8 @@ public class ProductOrderItemDTO {
 	public ProductOrderItemEntity toEntity() {
 		return ProductOrderItemEntity.builder()
 				.ordNo(ordNo)
-				.prodNo(prodNo)
-				.uid(uid)
+				.product(product)
+				.user(user)
 				.count(count)
 				.price(price)
 				.discount(discount)

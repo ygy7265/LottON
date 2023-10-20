@@ -1,79 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 	  layout:decorate="/side.html">
 	<head>
-		
- <script th:inline="javascript">
-    $(function(){
-	let num = parseInt($("input[name='count']").val());
-	let price1 = "[[${dto.price - ((dto.price * dto.discount)/100)}]]";
-	
-	let totalprice = 0;
-	$('.increase').click(function(){
-		num = num+1;
-		$("input[name='count']").val(num);
-		updatePrice();
-		console.log("num"+num);
-	});
-	
-	$('.decrease').click(function(){
-		if(num > 1){
-			num = num-1;
-			$("input[name='count']").val(num);
-			updatePrice();
-				
-		}
-		console.log("num3"+num);
-		console.log("price1"+price1);
-	
-	});
-	
-	$('.cart').click(function(e){
-		e.preventDefault();
-		
-		
-	    var result = confirm("장바구니에 담으시겠습니까?");
-			if (result === true) {
-			    // 확인 버튼이 클릭된 경우
-				 $('.buy').submit();
-			} else {
-			    // 취소 버튼이 클릭된 경우
-			}	
-		  
-	})
-	$('.order').click(function(e){
-		e.preventDefault();
-		
-		var userSession = sessionStorage.getItem("memberdto");
-	    var result = confirm("구매하시겠습니까?");
-			if (result === true) {
-				var input = $("<input>")
-			    .attr("type", "hidden")
-			    .attr("name", "buytype")
-			    .val("buytype");
-				$('.order').append(input);
-
-			    // 확인 버튼이 클릭된 경우
-				 $('.buy').attr('action', 'productOrder');
-				 $('.buy').submit();
-			} else {
-			    // 취소 버튼이 클릭된 경우
-			}	
-		  
-	})
-	
-	function updatePrice(){
-		totalprice =  price1 * num;
-		$('.totalPrice').text(totalprice.toLocaleString());
-		$('.tot').val(totalprice);
-		console.log("totprice"+totalprice);
-	}
-	
-	
-});
-
-</script>
+	<script src="../js/product/viewCount.js"></script>
 
 	</head>
 
@@ -110,6 +41,7 @@
                             </div>
                             <div class="dis_price">
                                 <ins>[[${#numbers.formatInteger(dto.price - ((dto.price * dto.discount)/100),0,'COMMA')}]]</ins>
+                                <input type="hidden" class="productdisprice" th:value="${dto.price - ((dto.price * dto.discount)/100)}">
                             </div>
                         </nav>
                         <nav>
@@ -147,9 +79,10 @@
                         <input type="hidden" name="discount" th:value="${dto.discount}"/>
                         <input type="hidden" name="point" th:value="${dto.point}"/>
                         <input type="hidden" name="price" th:value="${dto.price}"/>
-                        <input type="hidden" name="prodNo" th:value="${dto.prodNo}"/>
+                        <input type="hidden" name="product" th:value="${dto.prodNo}"/>
+                        <input type="hidden" name="user" value="seller1"/>
                         <input type="hidden" name="tot" th:value="${dto.price}"/>
-                        <input type="hidden" name="uid" value="seller1"/>
+                      
                         </form>
                     </div>
                 </article>

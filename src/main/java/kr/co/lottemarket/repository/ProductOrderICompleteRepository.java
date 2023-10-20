@@ -10,18 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
+import kr.co.lottemarket.entity.product.ProductOrderEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
 
 @Repository
-public interface ProductOrderItemRepository extends JpaRepository<ProductOrderItemEntity, String>{
+public interface ProductOrderICompleteRepository extends JpaRepository<ProductOrderEntity, String>{
 	
-	public void deleteByUser(UserEntity user);
-	@Query("SELECT pc, p.thumb1,p.prodNo, p.prodName, p.descript FROM ProductOrderItemEntity pc " +
-		       "JOIN pc.user u " +
-		       "JOIN pc.product p " +
-		       "WHERE u.uid = :uid ")
-	List<Object[]> findProductsByOrderItem(@Param("uid") String uid);
-		
 		
 			
 }
