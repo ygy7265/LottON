@@ -3,7 +3,7 @@ package kr.co.lottemarket.repository.admin;
 import org.springframework.stereotype.Repository;
 import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.product.ProductDTO;
-import kr.co.lottemarket.entity.ArticleEntity;
+import kr.co.lottemarket.entity.article.ArticleEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

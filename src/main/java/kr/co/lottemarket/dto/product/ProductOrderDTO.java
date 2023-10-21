@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

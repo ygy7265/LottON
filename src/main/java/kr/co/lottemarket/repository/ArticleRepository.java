@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import kr.co.lottemarket.entity.ArticleEntity;
+import kr.co.lottemarket.entity.article.ArticleEntity;
 
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer>{
 	//전체 게시글 출력

@@ -1,4 +1,4 @@
-package kr.co.lottemarket.dto;
+package kr.co.lottemarket.dto.product;
 
 
 
@@ -33,6 +33,7 @@ public class PageRequestDTO {
 	@Builder.Default
 	private int cate2 = 11;
 	
+	private int type = 0;
 	public Pageable getPageable(String sort) {
 		
 		

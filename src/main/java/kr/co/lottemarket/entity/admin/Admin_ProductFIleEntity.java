@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.admin.Admin_FileDTO;
-import kr.co.lottemarket.entity.ArticleEntity;
+import kr.co.lottemarket.entity.article.ArticleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

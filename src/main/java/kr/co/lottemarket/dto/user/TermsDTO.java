@@ -1,6 +1,6 @@
-package kr.co.lottemarket.dto;
+package kr.co.lottemarket.dto.user;
 
-import kr.co.lottemarket.entity.TermsEntity;
+import kr.co.lottemarket.entity.user.TermsEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

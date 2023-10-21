@@ -14,7 +14,7 @@ import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.PageRequestDTO;
 import kr.co.lottemarket.dto.cs.PageResponseDTO;
-import kr.co.lottemarket.entity.ArticleEntity;
+import kr.co.lottemarket.entity.article.ArticleEntity;
 import kr.co.lottemarket.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 

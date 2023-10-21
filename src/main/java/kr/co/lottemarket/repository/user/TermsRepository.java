@@ -1,9 +1,9 @@
-package kr.co.lottemarket.repository;
+package kr.co.lottemarket.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import kr.co.lottemarket.entity.TermsEntity;
+import kr.co.lottemarket.entity.user.TermsEntity;
 
 
 @Repository

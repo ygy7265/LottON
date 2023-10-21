@@ -43,7 +43,7 @@
 	            </article>
 	            </td>
 	            <td>[[${#numbers.formatInteger(dto.price,0,'COMMA')}]]원</td>
-	            <td>[[${#numbers.formatInteger(dto.price * (dto.discount/100.0),0,'COMMA')}]]원</td>
+	            <td>[[${#numbers.formatInteger((dto.price * (dto.discount/100.0)),0,'COMMA')}]]원</td>
 	            <td>[[${dto.count}]]</td>
 	            <td>[[${#numbers.formatInteger(dto.total - (dto.total * (dto.discount/100.0)),0,'COMMA')}]]원</td>
 	        </tr>
@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                           <td>총 할인금액</td>
-                          <td><span>-[[${#numbers.formatInteger(map['discountprice'],0,'COMMA')}]]</span>원</td>
+                          <td><span>-[[${#numbers.formatInteger(map['discountprice'] + itemdto.ordusedPoint,0,'COMMA')}]]</span>원</td>
                         </tr>
                         <tr>
                           <td>배송비</td>

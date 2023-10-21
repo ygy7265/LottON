@@ -1,8 +1,7 @@
-package kr.co.lottemarket.dto;
+package kr.co.lottemarket.dto.product;
 
 import java.util.List;
 
-import kr.co.lottemarket.dto.product.ProductDTO;
 import lombok.Builder;
 import lombok.Data;
 
@@ -27,7 +26,7 @@ public class PageResponseDTO {
 		this.dtoList = dtoList;
 		this.cate1 = pageRequestDTO.getCate1();
 		this.cate2 = pageRequestDTO.getCate2();
-		this.end = (int) (Math.ceil(this.pg / 10.0) * 10);
+		this.end = (int) (Math.ceil(this.pg / 10.0)) * 10;
 		this.start = this.end - 9;
 		int last = (int) (Math.ceil(total / (double) size));
 		

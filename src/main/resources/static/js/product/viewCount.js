@@ -48,7 +48,7 @@
 				$('.order').append(input);
 
 			    // 확인 버튼이 클릭된 경우
-				 $('.buy').attr('action', 'productOrder');
+				 $('.buy').attr('action', 'productOrderBuy');
 				 $('.buy').submit();
 			} else {
 			    // 취소 버튼이 클릭된 경우

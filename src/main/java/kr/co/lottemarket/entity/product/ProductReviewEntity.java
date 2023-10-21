@@ -4,16 +4,13 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import groovy.transform.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,25 +24,22 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "lotte_product_cart")
-public class ProductCartEntity {
+@Table(name = "lotte_product_review")
+public class ProductReviewEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cartNo;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Id @Generated
+	private int revNo;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prodNo")
+	private ProductEntity product;
+	private String conent;
+	
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "uid")
 	private UserEntity user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "prodNo")
-	private ProductEntity product;
-	private int count;
-	private int price;
-	private int discount;
-	private int point;
-	private int delivery;
-	private int total;
+	private String regip;
 	@CreationTimestamp
 	private LocalDateTime rDate;
 	

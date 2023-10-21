@@ -1,14 +1,15 @@
-package kr.co.lottemarket.repository;
+package kr.co.lottemarket.repository.product;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 
 @Repository
 public interface ProductCartRepository extends JpaRepository<ProductCartEntity, Integer>{
@@ -20,6 +21,11 @@ public interface ProductCartRepository extends JpaRepository<ProductCartEntity, 
 		       "ORDER BY pc.cartNo DESC")
 		List<Object[]> findProductsBySeller(@Param("uid") String uid);
 		
+		ProductCartEntity findCartNoByProduct_ProdNo(int prodNo);
+		
+		@Modifying
+		@Query("UPDATE ProductCartEntity pc SET pc.count = pc.count + :count WHERE pc.cartNo = :cartNo")
+		int modifyCount(int cartNo,int count);
 		
 
 }

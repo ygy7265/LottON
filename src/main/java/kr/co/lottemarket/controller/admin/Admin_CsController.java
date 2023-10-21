@@ -20,7 +20,7 @@ import kr.co.lottemarket.dto.admin.Admin_CsPageResponseDTO;
 import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
-import kr.co.lottemarket.entity.ArticleEntity;
+import kr.co.lottemarket.entity.article.ArticleEntity;
 import kr.co.lottemarket.service.admin.AdminService;
 import lombok.extern.log4j.Log4j2;
 

@@ -1,11 +1,8 @@
 package kr.co.lottemarket.dto.product;
 
 import java.time.LocalDateTime;
-
-import jakarta.persistence.ManyToMany;
-import kr.co.lottemarket.entity.*;
-import kr.co.lottemarket.entity.product.ProductCartEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

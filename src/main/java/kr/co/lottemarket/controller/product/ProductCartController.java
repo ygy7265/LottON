@@ -49,7 +49,6 @@ public class ProductCartController {
 	@PostMapping("/productCart")
 	public String productCartPost(ProductCartDTO dto)	{
 		
-		dto.setTotal(dto.getCount() * dto.getPrice());
 		service.insertDTO(dto);
 		
 		return "redirect:/product/productCart";

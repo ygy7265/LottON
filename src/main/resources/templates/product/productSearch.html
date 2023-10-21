@@ -2,7 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
 	  layout:decorate="/side.html">
-    
+<head>
+	
+	<script>
+		$(function(){
+			$('input[name=search]').change(function(){
+					$('input[name=chk]:eq(0)').prop("checked", true);
+			})	
+			$('input[name=min]').change(function(){
+					$('input[name=chk]:eq(2)').prop("checked", true);
+			})
+			$('input[name=max]').change(function(){
+					$('input[name=chk]:eq(2)').prop("checked", true);
+			})
+			
+		})
+		
+	</script>
+</head>
         
         <!-- 상품검색 화면 시작 -->
         <section class="search" layout:fragment="content">
@@ -17,7 +34,7 @@
 
           <!-- 검색결과 그룹박스 -->
           <div class="group">
-            <h3><strong>셔츠</strong>검색결과 <em>(총&nbsp;:&nbsp;<span>20</span>&nbsp;건)</em></h3>
+            <h3><strong>[[${pageResponse.search}]]</strong>검색결과 <em>(총&nbsp;:&nbsp;<span>[[${pageResponse.total}]]</span>&nbsp;건)</em></h3>
             <form th:action="@{/product/productSearch}">
               <input type="text" name="search"/>
               <input type="submit" value="검색"/>
@@ -25,7 +42,7 @@
                   <label><input type="checkbox" name="chk" value="prodName">상품명</label>
                   <label><input type="checkbox" name="chk" value="descript">상품설명</label>
                   <label><input type="checkbox" name="chk" value="price">상품가격</label>
-                  <input type="text" name="min"/>원&nbsp;~&nbsp;<input type="text" name="max"/>원
+                  <input type="number" name="min" pattern="[0-9]*"/>원&nbsp;~&nbsp;<input type="number" name="max" pattern="[0-9]*"/>원
               </span>
             </form>
             <p class="info">
@@ -47,10 +64,10 @@
           <!-- 검색목록 -->
           <table border="0">                  
             <tr th:each="dto:${pageResponse.dtoList}">
-              <td><a href="#" class="thumb"><img th:src="@{../images/product/}+${dto.thumb1}" alt="상품이미지"/></a></td>
+              <td><a th:href="@{/product/productView(prodNo=${dto.prodNo})}" class="thumb"><img th:src="@{../images/product/}+${dto.thumb1}" alt="상품이미지"/></a></td>
               <td>
                 <h3 class="name">[[${dto.prodName}]]</h3>
-                <a href="#" class="desc">[[${dto.descript}]]</a>
+                <a th:href="@{/product/productView(prodNo=${dto.prodNo})}" class="desc">[[${dto.descript}]]</a>
               </td>
               <td>
                 <ul>

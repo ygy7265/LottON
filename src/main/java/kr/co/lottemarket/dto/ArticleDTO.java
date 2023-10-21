@@ -3,11 +3,9 @@ package kr.co.lottemarket.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
-import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
-import kr.co.lottemarket.entity.ArticleCate1Entity;
-import kr.co.lottemarket.entity.ArticleCate2Entity;
-import kr.co.lottemarket.entity.ArticleEntity;
+import kr.co.lottemarket.entity.article.ArticleCate1Entity;
+import kr.co.lottemarket.entity.article.ArticleCate2Entity;
+import kr.co.lottemarket.entity.article.ArticleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

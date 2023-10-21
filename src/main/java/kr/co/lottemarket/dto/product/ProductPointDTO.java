@@ -3,8 +3,8 @@ package kr.co.lottemarket.dto.product;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Id;
-import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductPointEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

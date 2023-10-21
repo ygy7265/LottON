@@ -1,13 +1,13 @@
-package kr.co.lottemarket.service;
+package kr.co.lottemarket.service.user;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import kr.co.lottemarket.dto.UserDTO;
-import kr.co.lottemarket.entity.UserEntity;
-import kr.co.lottemarket.repository.UserRepository;
+import kr.co.lottemarket.dto.user.UserDTO;
+import kr.co.lottemarket.entity.user.UserEntity;
+import kr.co.lottemarket.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

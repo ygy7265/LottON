@@ -3,7 +3,7 @@
       xmlns:layout="http://www.thymeleaf.org/"
 	  layout:decorate="/side.html">
 <head>
-<script th:src="@{../js/product/order}"></script>
+<script src="../js/product/order.js"></script>
 </head>
             <section layout:fragment="content" class="order">
               <!-- 제목, 페이지 네비게이션 -->
@@ -133,6 +133,7 @@
                     <label>
                         <input type="text"name="point" value="0"/>점
                         <input type="button" id="pointbtn" value="적용"/>
+                        
                     </label>
                     <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
                   </div>
@@ -167,6 +168,7 @@
                     </div>
                 </article>
                 <input type="hidden" name="user" value="seller1"/>
+                <input type="hidden" class="userpoint" th:value="${user.point}"/>
 				 <input type="hidden" class="totalprice" name="totalprice" th:value="${map['totalprice']}">
                 <!-- 경고 -->
                 <article class="alert">

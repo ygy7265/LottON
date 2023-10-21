@@ -1,4 +1,4 @@
-package kr.co.lottemarket.service;
+package kr.co.lottemarket.service.user;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.Entity;
-import kr.co.lottemarket.dto.TermsDTO;
-import kr.co.lottemarket.repository.TermsRepository;
+import kr.co.lottemarket.dto.user.TermsDTO;
+import kr.co.lottemarket.repository.user.TermsRepository;
 
 @Service
 public class TermsService {

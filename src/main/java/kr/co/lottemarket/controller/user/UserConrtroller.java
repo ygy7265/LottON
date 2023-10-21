@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import kr.co.lottemarket.dto.TermsDTO;
-import kr.co.lottemarket.dto.UserDTO;
+import kr.co.lottemarket.dto.user.TermsDTO;
+import kr.co.lottemarket.dto.user.UserDTO;
 import kr.co.lottemarket.security.MyUserDetails;
-import kr.co.lottemarket.service.TermsService;
-import kr.co.lottemarket.service.UserService;
+import kr.co.lottemarket.service.user.TermsService;
+import kr.co.lottemarket.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
