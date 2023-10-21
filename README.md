@@ -22,3 +22,19 @@
 0.0.5-SNAPSHOT
 
 - product 상품상세 기능구현 2차 완료 (장바구니 등록)
+
+0.0.6-SNAPSHOT
+
+- product 상품상세 기능구현 3차 완료 (상품구매하기 등록)
+
+0.0.7-SNAPSHOT
+
+- product 상품목록 기능구현 3차 완료 (정렬)
+
+0.0.8-SNAPSHOT
+
+- product 상품상세 기능구현 4차 완료 (상품완료)
+
+0.0.9-SNAPSHOT
+
+- product 검색기능구현 1차 완료 (검색)
