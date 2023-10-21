@@ -51,10 +51,10 @@
           <article class="best">
             <h1><i class="fas fa-crown"></i>베스트상품</h1>
             <ol>
-              <li th:each="best:${best}">
-                <a href="#">
+              <li th:each="best, index:${best}">
+                <a th:href="@{/product/productView(prodNo  = ${best.prodNo})}">
                   <div class="thumb">
-                    <i>1</i>
+                    <i>[[${index.index+1}]]</i>
                   <img th:src="@{'./images/product/' + ${best.thumb1}}" alt="item1" />
                   </div>
                   <h2>[[${best.prodName}]]</h2>

@@ -79,17 +79,17 @@
         <div class="menu">
           <div>
             <ul>
-              <li><a href="#">히트상품</a></li>
-              <li><a href="#">추천상품</a></li>
-              <li><a href="#">최신상품</a></li>
-              <li><a href="#">인기상품</a></li>
-              <li><a href="#">할인상품</a></li>
+              <li><a th:href="@{/product/productList(type=1)}">히트상품</a></li>
+              <li><a th:href="@{/product/productList(type=2)}">추천상품</a></li>
+              <li><a th:href="@{/product/productList(type=3)}">최신상품</a></li>
+              <li><a th:href="@{/product/productList(type=4)}">인기상품</a></li>
+              <li><a th:href="@{/product/productList(type=5)}">할인상품</a></li>
             </ul>
             <ul>
-              <li><a href="#">공지사항</a></li>
-              <li><a href="#">자주묻는질문</a></li>
-              <li><a href="#">문의하기</a></li>
-              <li><a href="#">고객센터</a></li>
+              <li><a th:href="@{/cs/list?group=1&cate1=0}">공지사항</a></li>
+              <li><a th:href="@{/cs/list?group=2&cate1=1}">자주묻는질문</a></li>
+              <li><a th:href="@{/cs/list?group=3&cate1=1}">문의하기</a></li>
+              <li><a th:href="@{/cs}">고객센터</a></li>
             </ul>
           </div>
         </div>
@@ -118,7 +118,7 @@
             <strong>고객센터</strong><br>
             Tel : 1899-7000(유료) (평일 09:00~18:00)<br>
             Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br>
-            App Version:LotteON-0.0.8-SNAPSHOH
+            App Version:LotteON-0.0.9-SNAPSHOH
           </p>
         </div>
       </footer>

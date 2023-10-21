@@ -1,4 +1,4 @@
-package kr.co.lottemarket.dto;
+package kr.co.lottemarket.dto.user;
 
 import java.time.LocalDateTime;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.persistence.Column;
-import kr.co.lottemarket.entity.UserEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

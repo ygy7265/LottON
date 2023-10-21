@@ -1,7 +1,7 @@
 package kr.co.lottemarket.dto.cs;
 
-import kr.co.lottemarket.entity.ArticleCate1Entity;
-import kr.co.lottemarket.entity.ArticleCate2Entity;
+import kr.co.lottemarket.entity.article.ArticleCate1Entity;
+import kr.co.lottemarket.entity.article.ArticleCate2Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

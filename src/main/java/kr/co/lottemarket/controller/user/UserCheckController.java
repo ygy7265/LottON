@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.co.lottemarket.service.UserService;
+import kr.co.lottemarket.service.user.UserService;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2  

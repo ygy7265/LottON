@@ -3,8 +3,8 @@ $(function(){
 	$('#pointbtn').click(function(e){
 		e.preventDefault();		
 		var totalprice = parseFloat($('.ordertotal').text().replace(/,/g, ''));
-		var nowpoint = "[[${user.point}]]";
-		var total = "[[${map['totalprice']}]]";
+		var nowpoint = $('.userpoint').val();
+		var total = $('.totalprice').val();
 		console.log("nowpoint" + nowpoint);
 		console.log("total" + total);
 		const point = $('input[name=point]').val();
@@ -13,10 +13,18 @@ $(function(){
 			alert("전체 금액 이상 할인할수없습니다. 다시 확인 해주십시요.");
 			return;
 		}
+		else if(pspoint > nowpoint){
+			alert("포인트가 부족합니다. 다시 확인 부탁드립니다.");
+			return;
+		}
+		if(pspoint < 5000 && pspoint > 0){
+			alert("5000점 이상부터 사용할수있습니다.");
+			return;
+		}
 		else{
-			$('.nowpoint').text(nowpoint - pspoint);
+			$('.nowpoint').text((nowpoint - pspoint).toLocaleString());
 			$('.ordertotal').text((total - pspoint).toLocaleString());
-			$('.totalprice').val(total - pspoint);
+			total.val(total - pspoint);
 			if(pspoint != 0){
 				$('.orduserdPoint').text(" - "+pspoint);	
 				$('input[name=ordusedPoint]').val(pspoint);

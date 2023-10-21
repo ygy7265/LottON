@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
-import kr.co.lottemarket.entity.UserEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

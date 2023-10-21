@@ -16,15 +16,15 @@ import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.dto.product.ProductOrderDTO;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
-import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
-import kr.co.lottemarket.repository.ProductOrderICompleteRepository;
-import kr.co.lottemarket.repository.ProductOrderItemRepository;
-import kr.co.lottemarket.repository.ProductRepository;
-import kr.co.lottemarket.repository.UserRepository;
+import kr.co.lottemarket.entity.user.UserEntity;
+import kr.co.lottemarket.repository.product.ProductOrderICompleteRepository;
+import kr.co.lottemarket.repository.product.ProductOrderItemRepository;
+import kr.co.lottemarket.repository.product.ProductRepository;
+import kr.co.lottemarket.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -41,12 +41,15 @@ public class ProductOrderItemService {
 	private final UserRepository userrepo;
 	
 	//상품주문하기완료
+	@Transactional
 	public void insertOrderComplete(List<ProductOrderItemDTO> dto,ProductOrderDTO order) {
-		ProductOrderEntity orderentity = modelmapper.map(order, ProductOrderEntity.class); 
+		ProductOrderEntity orderentity = modelmapper.map(order, ProductOrderEntity.class);
+		UserEntity user = userrepo.findByUid(order.getUser().getUid());
+		int point = 0;
 		for(ProductOrderItemDTO itemdto : dto) {
 			int total = itemdto.getPrice() * itemdto.getCount();
 			ProductEntity product = productrepo.findByProdNo(itemdto.getProduct().getProdNo());
-			UserEntity user = userrepo.findByUid(itemdto.getUser().getUid());
+			
 			ProductOrderEntity entity = ProductOrderEntity.builder()
 					.ordCount(itemdto.getCount())
 					.ordPayment(orderentity.getOrdPayment())
@@ -65,9 +68,21 @@ public class ProductOrderItemService {
 					.product(product)
 					.user(user)
 					.build();
-			
+			point += itemdto.getPoint();
 			orderCompleterepo.save(entity);
 		}
+		if(point > order.getOrdusedPoint()) {
+			point  = point - order.getOrdusedPoint();
+			userrepo.modifyPointAdd(order.getUser().getUid(), point);
+			log.info("point" + point);
+		}
+		else {
+			point = order.getOrdusedPoint() - point;
+			userrepo.modifyPoint(order.getUser().getUid(),point);
+			log.info("point2" + point);
+			log.info("order.getUser().getUid()" + order.getUser().getUid());
+		}
+		
 		 
 	}
 	
@@ -80,11 +95,8 @@ public class ProductOrderItemService {
 		
 		List<ProductOrderItemDTO> itemdto = new ArrayList<>();
 		for(Object[] item: dto) {
-	        log.info("dto"+dto);
-	        
-	        
 			ProductOrderItemDTO entity = modelmapper.map(item[0], ProductOrderItemDTO.class);
-			log.info("entity"+entity);
+
 			itemdto.add(entity);
 		}
 		return itemdto;
@@ -107,7 +119,6 @@ public class ProductOrderItemService {
             int listdiscountValue = itemObject.get("discount").getAsInt();
             int listpoint = itemObject.get("point").getAsInt();
             String listUid = itemObject.get("uid").getAsString();
-            String listprodName = itemObject.get("prodName").getAsString();
             int totalprice = listpriceValue * listCount;
             
             ProductEntity productdto = productrepo.findByProdNo(listProdNo);
@@ -127,21 +138,17 @@ public class ProductOrderItemService {
            
             ProductOrderItemEntity entity = modelmapper.map(dto, ProductOrderItemEntity.class);
             repo.save(entity);
-            log.info("listCount"+listCount);
-            log.info("listProdNo"+listProdNo);
-            log.info("listpriceValue"+listpriceValue);
-            log.info("listdelivery"+listdelivery);
-            log.info("listdiscountValue"+listdiscountValue);
-            log.info("listpoint"+listpoint);
-            log.info("listUid"+listUid);
-            log.info("listUid"+listUid);
-            log.info("listprodName"+listprodName);
-            log.info("end");
+
 		}
 	}
-	
-	
-	//
-	
-	
+	@Transactional
+	public void saveOrderItem(ProductOrderItemDTO dto) {
+		UserEntity user = userrepo.findByUid(dto.getUser().getUid());
+		log.info("test = " + user.getUid());
+		repo.deleteByUser(user);
+		ProductOrderItemEntity entity = modelmapper.map(dto, ProductOrderItemEntity.class);
+		repo.save(entity);
+		
+	}
+
 }

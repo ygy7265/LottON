@@ -1,8 +1,8 @@
 package kr.co.lottemarket.dto.product;
 
-import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

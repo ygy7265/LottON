@@ -34,11 +34,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.dto.product.ProductOrderDTO;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
-import kr.co.lottemarket.entity.UserEntity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
-import kr.co.lottemarket.service.UserService;
+import kr.co.lottemarket.entity.user.UserEntity;
 import kr.co.lottemarket.service.product.ProductOrderItemService;
+import kr.co.lottemarket.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -102,6 +102,13 @@ public class ProductOrderController {
 		
 		itemService.insertOrder(productOrderItemEntity,uid);
 		
+		return "redirect:/product/productOrder";
+	}
+	@PostMapping("/productOrderBuy")
+	public String productBuy(ProductOrderItemDTO dto) {
+		
+		log.info("Test"+dto.toString());
+		itemService.saveOrderItem(dto);
 		return "redirect:/product/productOrder";
 	}
 	

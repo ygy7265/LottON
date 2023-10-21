@@ -1,4 +1,4 @@
-package kr.co.lottemarket.entity;
+package kr.co.lottemarket.entity.article;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

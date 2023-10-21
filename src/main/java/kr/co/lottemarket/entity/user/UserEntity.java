@@ -1,11 +1,11 @@
-package kr.co.lottemarket.entity;
+package kr.co.lottemarket.entity.user;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import kr.co.lottemarket.dto.UserDTO;
+import kr.co.lottemarket.dto.user.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

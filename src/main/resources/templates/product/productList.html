@@ -6,17 +6,17 @@
 	<!-- 제목, 페이지 네비게이션 -->
 		<nav>
 		    <h1>상품목록</h1>
-		    <p>HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong></p>
+		    <p>HOME > <span th:text="${list.cate1}"></span> > <strong th:text="${list.cate2}"></strong></p>
 		  </nav>
 		
 		  <!-- 정렬 메뉴 -->
 		  <ul class="sort">
-		      <li><a href="#" class="on">판매많은순</a></li>
-		      <li><a href="#">낮은가격순</a></li>
-		      <li><a href="#">높은가격순</a></li>
-		      <li><a href="#">평점높은순</a></li>
-		      <li><a href="#">후기많은순</a></li>
-		      <li><a href="#">최근등록순</a></li>
+		      <li><a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},type=6)}" th:class="${type == 6 ? 'on' : ''}">판매많은순</a></li>
+		      <li><a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},type=7)}" th:class="${type == 7 ? 'on' : ''}">낮은가격순</a></li>
+		      <li><a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},type=8)}" th:class="${type == 8 ? 'on' : ''}">높은가격순</a></li>
+		      <li><a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},type=9)}" th:class="${type == 9 ? 'on' : ''}">평점높은순</a></li>
+		      <li><a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},type=10)}"th:class="${type == 10 ? 'on' : ''}">후기많은순</a></li>
+		      <li><a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},type=11)}"th:class="${type == 11 ? 'on' : ''}">최근등록순</a></li>
 		  </ul>
 		
 		  <!-- 상품목록 -->              
@@ -49,15 +49,15 @@
 		  <!-- 상품목록 페이지번호 -->
 		  <div class="paging">
 		    <span th:if="${list.prev}"class="prev">
-		      <a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},pg=${list.start - 1})}"><&nbsp;이전</a>
+		      <a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},pg=${list.start - 1},type=${type})}"><&nbsp;이전</a>
 		    </span>
 		    <span class="num">
 		       <th:block th:each="num: ${#numbers.sequence(list.start,list.end)}" >
-		            <a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},pg=${num})}" class="on">[[${num}]]</a>
+		            <a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},pg=${num},type=${type})}" th:class="${num == list.pg} ? 'on':''">[[${num}]]</a>
 		        </th:block>
 		    </span>
 		    <span th:if="${list.next}"class="next">
-		      <a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},pg=${list.end + 1})}">다음&nbsp;></a>
+		      <a th:href="@{/product/productList(cate1=${list.cate1},cate2=${list.cate2},pg=${list.end + 1},type=${type})}">다음&nbsp;></a>
 		    </span>
 		  </div>
 	</section>

@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import kr.co.lottemarket.entity.UserEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
