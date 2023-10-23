@@ -2,6 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="/admin/index.html" >
+      <head>
+      <script>
+		  $(document).ready(function(){
+		  		document.querySelector('#faqboardCate2').addEventListener('change', function () {
+				    var selectedCate1 = document.querySelector('#faqboardCate1').value;
+				    var selectedCate2 = this.value;
+				    window.location.href = `/admin/layout/cs/faqlist?cate1=${selectedCate1}&cate2=${selectedCate2}`;
+					 
+				});
+		  });
+	  </script>
+	  </head>
        <section id="admin-cs-list" layout:fragment="content">
         <nav>
             <h3>자주묻는 질문</h3>
@@ -49,7 +61,7 @@
             
             <input type="button" value="선택 삭제" class="csDelete"/>
             <input type="button" value="글 작성" class="faqWrite"/>
-            		
+            
         </section>
     </section>
 </html>
