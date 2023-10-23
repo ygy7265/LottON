@@ -60,7 +60,7 @@
 			<th:block th:if="${type eq '2' || type eq '9'}">
 				<a href="#">관리페이지</a>
 			</th:block>
-            <a href="#">마이페이지</a>
+            <a th:href="@{/my/}">마이페이지</a>
             <a th:href="@{product/productCart}"
               ><i class="fa fa-shopping-cart" aria-hidden="true"></i
               >&nbsp;장바구니</a
