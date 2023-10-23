@@ -33,7 +33,7 @@ public class Admin_CsController {
 			
 			int cate1value = Integer.parseInt(cate1);
 			
-			List<ArticleCate1DTO> cate1List = adminService.selectQnaCate1();	
+			List<ArticleCate1DTO> cate1List = adminService.selectNoticeCate1();	
 			model.addAttribute("cate1List", cate1List);
 	        
 			List<ArticleDTO> noticelist = adminService.selectSearchArticleNotices(cate1value);
