@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,12 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import groovyjarjarantlr4.v4.parse.ANTLRParser.option_return;
 import kr.co.lottemarket.cs.mapper.CategoryMapper;
 import kr.co.lottemarket.dto.ArticleDTO;
-import kr.co.lottemarket.dto.admin.Admin_CsPageRequestDTO;
-import kr.co.lottemarket.dto.admin.Admin_CsPageResponseDTO;
 import kr.co.lottemarket.dto.admin.Admin_FileDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
@@ -28,21 +22,15 @@ import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.dto.product.ProductCate1DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
-import kr.co.lottemarket.entity.article.ArticleCate1Entity;
-import kr.co.lottemarket.entity.article.ArticleCate2Entity;
 import kr.co.lottemarket.entity.article.ArticleEntity;
 import kr.co.lottemarket.entity.product.ProductCate1Entity;
-import kr.co.lottemarket.entity.product.ProductCate2Entity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.repository.admin.AdminProductRepository;
 import kr.co.lottemarket.repository.admin.Admin_FileRepository;
 import kr.co.lottemarket.repository.admin.AdminCsRepository;
 import kr.co.lottemarket.repository.admin.AdminProductCate1Repository;
-import kr.co.lottemarket.repository.admin.AdminProductCate2Repository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-
-import org.apache.ibatis.session.SqlSession;
 import org.modelmapper.ModelMapper;
 
 @Log4j2
@@ -55,7 +43,6 @@ public class AdminService {
 	private final AdminCsRepository adminCsRepository;
 	private final Admin_FileRepository admin_FileRepository;
 	private final AdminProductCate1Repository adminProductCate1Repository;
-	private final AdminProductCate2Repository adminProductCate2Repository;
 	private final CategoryMapper category2Mapper;
 	
 	@Value("${spring.servlet.multipart.location}")
@@ -287,6 +274,31 @@ public class AdminService {
     	
     }
     
+    public List<ArticleDTO> selectSearchArticleNotices(int cate1) {
+    	
+    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleNotice(cate1);
+    	
+    	return dtoList;
+    	
+    }
+    
+    public List<ArticleDTO> selectSearchArticleFaqs(int cate1, int cate2) {
+    	
+    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleFaq(cate1,cate2);
+    	
+    	return dtoList;
+    	
+    }
+    
+    public List<ArticleDTO> selectSearchArticleQnas(int cate1, int cate2) {
+    	
+    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleQna(cate1,cate2);
+    	
+    	return dtoList;
+    	
+    }
+
+    
     public ArticleDTO selectArticleNotice(int no) {
     	
     	ArticleDTO dtoList = category2Mapper.selectArticleNotice(no);
@@ -315,7 +327,7 @@ public class AdminService {
     	
     	ArticleEntity entity = dto.toEntity();
     	
-    	ArticleEntity insert = adminCsRepository.save(entity); 
+    	adminCsRepository.save(entity); 
     	
     }
     
@@ -340,7 +352,7 @@ public class AdminService {
     public void Answer(ArticleDTO dto) {
     	
     	category2Mapper.AnswerQna(dto);
-    	
+    
     }
 
     

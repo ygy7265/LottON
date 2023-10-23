@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.lottemarket.dto.ArticleDTO;
+import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.dto.product.ProductCate1DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
@@ -56,6 +58,7 @@ public class Admin_ProductRestController {
     	return cate2List;
     	
     }
+    
 }
 
 
