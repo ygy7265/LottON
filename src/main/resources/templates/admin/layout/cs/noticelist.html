@@ -2,6 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="/admin/index.html">
+      <head>
+      <script>
+		  $(document).ready(function(){
+		  	document.querySelector('#boardCate1').addEventListener('change', function () {
+			    var selectedCate1 = document.querySelector('#boardCate1').value;
+			    window.location.href = `/admin/layout/cs/noticelist?cate1=${selectedCate1}`;
+				 
+			});
+		  });
+	  </script>
+      </head>
  	<section id="admin-cs-list" layout:fragment="content">
         <nav>
             <h3>공지사항</h3>
@@ -44,11 +55,18 @@
             <input type="button" value="선택 삭제" class="csDelete"/>
             <input type="button" value="공지 작성" class="noticeWrite"/>
 			
-			 <div class="paging">
-				 
-			 </div>
+			<div class="paging">
+		        <span th:if="${pageStartNum > 1}">
+		            <a th:href="@{/admin/layout/cs/noticelist(pg=${pageStartNum - 1})}" class="prev">이전</a>
+		        </span>
+		        <span th:each="page : ${#numbers.sequence(1, totalPages)}" th:class="num">
+		            <a th:href="@{/admin/layout/cs/noticelist(pg=${page})}" th:text="${page}"></a>
+		        </span>
+		        <span th:if="${pageEndNum < totalPages}">
+		            <a th:href="@{/admin/layout/cs/noticelist(pg=${pageEndNum + 1})}">다음</a>
+		        </span>
+			</div>
 
-			
         </section>
         
     </section>

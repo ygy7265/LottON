@@ -26,9 +26,9 @@ public interface CategoryMapper {
 	public ArticleDTO selectArticleNotice(int no);
 	public ArticleDTO selectArticleFaq(int no);
 	public ArticleDTO selectArticleQna(int no);
-	public ArticleDTO selectSearchArticleNotice(int cate1);
-	public ArticleDTO selectSearchArticleFaq(int cate1, int cate2);
-	public ArticleDTO selectSearchArticleQna(int cate1, int cate2);
+	public List<ArticleDTO> selectSearchArticleNotice(int cate1);
+	public List<ArticleDTO> selectSearchArticleFaq(int cate1, int cate2);
+	public List<ArticleDTO> selectSearchArticleQna(int cate1, int cate2);
 	public void AnswerQna(ArticleDTO dto);
 	
 }
