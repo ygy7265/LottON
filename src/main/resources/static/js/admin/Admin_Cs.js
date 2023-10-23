@@ -32,6 +32,19 @@ $(document).ready(function(){
 	    });
 	});
 	
+	$("#tabs").tabs();
+
+            // 팝업 닫기
+            $('.btnClose').click(function(){                
+                $(this).closest('.popup').removeClass('on');                
+            });
+
+            // 배너등록 팝업 띄우기
+            $('.btnRegister').click(function(e){
+                e.preventDefault();
+                $('#bannerRegister').addClass('on');
+            });
+            
 	 $('.noticeDelete').click(function (e) {
 	    e.preventDefault();
 	    var $link = $(this);
