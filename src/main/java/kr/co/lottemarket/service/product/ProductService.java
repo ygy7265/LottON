@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import kr.co.lottemarket.config.Cond;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
 import kr.co.lottemarket.dto.product.PageRequestDTO;

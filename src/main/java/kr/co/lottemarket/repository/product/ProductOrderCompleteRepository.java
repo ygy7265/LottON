@@ -14,8 +14,15 @@ import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
 
 @Repository
-public interface ProductOrderICompleteRepository extends JpaRepository<ProductOrderEntity, String>{
+public interface ProductOrderCompleteRepository extends JpaRepository<ProductOrderEntity, String>{
 	
-		
+	
+	public List<ProductOrderEntity> findByUser(UserEntity user);
+	
+	@Query("SELECT pc, p.thumb1,p.prodNo, p.prodName, p.descript FROM ProductOrderEntity pc " +
+		       "JOIN pc.user u " +
+		       "JOIN pc.product p " +
+		       "WHERE u.uid = :uid ")
+	List<Object[]> findProductsByUser(@Param("uid") String uid);
 			
 }

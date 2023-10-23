@@ -9,10 +9,12 @@ import kr.co.lottemarket.entity.product.ProductOrderEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @Getter
 @Setter
 @Builder
@@ -62,4 +64,5 @@ public class ProductOrderDTO {
 				.ordDate(ordDate)
 				.build();
 	}
+
 }

@@ -21,7 +21,7 @@ import kr.co.lottemarket.entity.product.ProductEntity;
 import kr.co.lottemarket.entity.product.ProductOrderEntity;
 import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
-import kr.co.lottemarket.repository.product.ProductOrderICompleteRepository;
+import kr.co.lottemarket.repository.product.ProductOrderCompleteRepository;
 import kr.co.lottemarket.repository.product.ProductOrderItemRepository;
 import kr.co.lottemarket.repository.product.ProductRepository;
 import kr.co.lottemarket.repository.user.UserRepository;
@@ -36,7 +36,7 @@ public class ProductOrderItemService {
 	
 	private final ModelMapper modelmapper;
 	private final ProductOrderItemRepository repo;
-	private final ProductOrderICompleteRepository orderCompleterepo;
+	private final ProductOrderCompleteRepository orderCompleterepo;
 	private final ProductRepository productrepo;
 	private final UserRepository userrepo;
 	

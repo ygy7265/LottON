@@ -23,4 +23,6 @@ public interface UserRepository extends JpaRepository<UserEntity, String>{
 	@Modifying
 	@Query("UPDATE UserEntity u SET u.point = u.point + :point WHERE u.uid = :uid")
 	int modifyPointAdd(String uid,int point);
+	
+	
 }
