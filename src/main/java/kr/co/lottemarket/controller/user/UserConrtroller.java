@@ -17,7 +17,9 @@ import kr.co.lottemarket.service.user.TermsService;
 import kr.co.lottemarket.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RequiredArgsConstructor
 @Controller
 public class UserConrtroller {
@@ -86,12 +88,44 @@ public class UserConrtroller {
 		return "/member/layout/signup";
 	}
 	
-	// 추가
+	// 아이디 찾기
 	@GetMapping("/member/findId")
 	public String findId() {
 		return "/member/layout/findId";
 	}
 	
+	@GetMapping("/member/findIdResult") 
+	public String findIdResult(Model model, @RequestParam String name, @RequestParam String email) {
+		
+		UserDTO userDTO = userService.findByNameAndEmail(name, email);
+		model.addAttribute(userDTO); // 근데 여기 컨트롤러에서 추가했던 모델 속성들이 전부 프론트에서 출력할 수 있는건가?? ㄴㄴ : 모델속성은 GET메서드안에서 지정하고 해당 페이지에서 참조 가능 / 예를들면 userDTO 나 termsDTO나
+		log.info("userDTO : " + userDTO);
+		
+		return "/member/layout/findIdResult";
+	}
 	
+	// 비밀번호 찾기
+	@GetMapping("/member/findPass")
+	public String findPass() {
+		return "/member/layout/findPass";
+	}
+	
+	@GetMapping("/member/findPassChange")
+	public String findPassChange(Model model, @RequestParam String uid, @RequestParam String email) {
+		
+		UserDTO userDTO = userService.findByUidAndEmail(uid, email);
+		model.addAttribute(userDTO);
+		return "/member/layout/findPassChange";
+	}
+	
+	/*@PostMapping("/member/findPassChange")
+	public String findPassChange(UserDTO dto) {
+		
+		
+		
+		userService.updatePass(dto);
+		
+	}
+	*/
 	
 }

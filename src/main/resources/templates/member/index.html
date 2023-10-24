@@ -19,7 +19,46 @@
     <script src="../member/js/zipcode.js"></script>
     <script src="../member/js/agreeCheck.js"></script>
     <script src="../member/js/hpHypen.js"></script>
+    <script src="../member/js/authEmail.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 이거 깜빡했네 -->
+    
+    <script>
+		// 아이디, 비밀번호 찾기에서 다음 버튼 누룰 때
+		$(function(){ // onload 빠트리지말기!
+			
+			$('.btnNext').click(function(e){
+				
+				e.preventDefault; // 우선 a태그 기능을 막아야지!
+				
+				//alert('click!');
+				
+				if(isEmailOk){ // 이메일 인증이 되면 isEmailOk = true
+					
+					$('#formFindId').submit();
+					$('#formFindPass').submit();
+				
+				}else{
+					alert('이메일 인증을 수행하십시오');
+				}
+			});	
+		});
+		
+		// 비밀번호 변경
+		window.onload = function(){
+			const btnPassChange = document.getElementById('btnPassChange');
+			const formFindPassChange = document.getElementById('formFindPassChange');
+			
+			btnPassChange.onclick = function(e){
+				e.preventDefault();
+				
+				if(isPassOk){
+					formFindPassChange.submit();
+				}else{
+					alert('변경 비밀번호가 유효하지 않거나 일치하지 않습니다.');
+				}
+			}
+		}
+	</script>
 </head>
 <body>
     <div id="wrapper">
