@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.lottemarket.dto.ArticleDTO;
-import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 
 @Mapper
 public interface ArticleMapper {
@@ -27,6 +26,9 @@ public interface ArticleMapper {
 	
 	//faq nav
 	public ArticleDTO selectNav(int group, int cate1);
+	
+	//MyPage Article
+	public List<ArticleDTO> selectMyQna(Object uid);
 	
 	
 }

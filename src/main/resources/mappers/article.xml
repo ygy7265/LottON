@@ -68,6 +68,18 @@
         FROM `lotte_board_cate1`
         WHERE `group` = #{group} AND `cate1` = #{cate1}
     </select>
+    
+    
+    <select id="selectMyQna" resultType="kr.co.lottemarket.dto.ArticleDTO">
+		  SELECT a.*, b.group_name, c.cate1_name, d.cate2_name
+		  FROM `lotte_board` a
+		  LEFT JOIN `lotte_board_group` b ON a.group = b.group
+		  LEFT JOIN `lotte_board_cate1` c ON a.group = c.group AND a.cate1 = c.cate1
+		  LEFT JOIN `lotte_board_cate2` d ON a.cate1 = d.cate1 AND a.cate2 = d.cate2
+		  WHERE a.`group` = 3 AND a.parent=0 AND `uid` = #{uid}
+		  ORDER BY a.no DESC
+		  LIMIT 0, 10
+    </select>
 	
 
  
