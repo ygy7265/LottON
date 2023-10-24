@@ -63,7 +63,6 @@ public class CsSerivce {
 	  }
 	
 	
-	
 	//메인페이지 글 출력
 	public List<ArticleDTO> selectIndex(int group){
 		return mapper.selectIndex(group);
@@ -80,7 +79,12 @@ public class CsSerivce {
 		return mapper.selectAjaxCate2(group, cate1);
 	}
 	
+	//qna 답변 출력
+	public ArticleDTO selectComment(int parent){
+		return mapper.selectComment(parent);
+	}
 	
+	//글보기인데 안씀 마이바티스로 수정
 	public PageResponseDTO findByParentAndGroup(PageRequestDTO pageRequestDTO){
 		
 		Pageable pageable = pageRequestDTO.getPageable("no");
@@ -103,14 +107,9 @@ public class CsSerivce {
 		
 	}
 	
-	public ArticleDTO findLotteON_boardByNo(int no) {
-		
-		Optional<ArticleEntity> result = articleRepository.findLotteON_boardByNo(no);
-		
-		ArticleDTO dtoArticle = result.get().toDTO();
-					 						
-		return dtoArticle;
-		
+	//글보기
+	public ArticleDTO selectArticle(int no) {
+		return mapper.selectArticle(no);
 	}
 	
 	//글 등록
@@ -133,6 +132,10 @@ public class CsSerivce {
 		 * return articles; }
 		 */
 	
+	//faq nav
+	public ArticleDTO selectNav(int group, int cate1) {
+		return mapper.selectNav(group ,cate1);
+	}
 	
 	
 	

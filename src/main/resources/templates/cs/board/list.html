@@ -3,17 +3,44 @@
       xmlns:layout="http://www.thymeleaf.org/"
       layout:decorate="/cs/board/moduleList.html">
 
+<head>
+	<script>
+			document.addEventListener("DOMContentLoaded", function() {
+		    // "status" 클래스를 가진 모든 셀을 찾아서 처리
+		    var statusCells = document.querySelectorAll('.status');
+		
+		    statusCells.forEach(function(cell) {
+		        // 현재 셀의 텍스트 가져오기
+		        var text = cell.textContent;
+		
+		        // 텍스트에 따라 스타일 변경
+		        if (text === '검토중') {
+		            cell.style.color = "black";
+		        } else if (text === '답변완료') {
+		            cell.style.color = "blue";
+		        }
+		    });
+		});
+		
+	</script>
+</head>
+
    
               <article layout:fragment="content">
                 <nav>
-                  <h1>전체</h1>
-                  <h2>공지사항 전체 내용입니다.</h2>
+                  <h1 th:text="${nav.cate1_name}"></h1>
+                  <h2 th:text="${nav.cate1_discription}"></h2>
                 </nav>
   
                 <table>
                     <tr th:each="article:${pageResponseDTO.dtoList}">
-						<td><a th:href="@{/cs/view(group=${article.group},cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}">[[${article.title}]]</a></td>
-                   		<td>[[${article.rdate}]]</td>
+						<td><a th:href="@{/cs/view(group=${article.group},cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}">
+							[[${article.title}]]</a>
+						</td>
+                   		<th:block th:if="${article.group == 3}">
+		                	<td class="status" th:text="${article.comment == 0 ? '답변중' : '답변완료'}"></td>           
+						</th:block>	
+                   		<td th:text="${#temporals.format(article.rdate, 'yyyy-MM-dd')}"></td>
                     </tr>
                 </table>
   
