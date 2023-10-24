@@ -20,5 +20,13 @@ public interface ArticleMapper {
 
 	public List<ArticleDTO> selectAjaxCate1(int group);
 	
+	public ArticleDTO selectComment(int parent);
+	
+	//글 보기
+	public ArticleDTO selectArticle(int no);
+	
+	//faq nav
+	public ArticleDTO selectNav(int group, int cate1);
+	
 	
 }

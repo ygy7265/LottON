@@ -13,7 +13,7 @@
 		    var selectedCate1 = this.value;
 		    var selectedGroup = 3;
 		    var category2Select = document.querySelector('#faqboardCate2');
-		    var url = `/cs/board/write/3/${selectedCate1}`;
+		    var url = `/LotteON/cs/board/write/3/${selectedCate1}`;
 		 
 			console.log("url : " + url);
 		
@@ -57,7 +57,6 @@
       
             <article layout:fragment="content">
                 <form th:action="@{/cs/qna/write(group=3)}" method="post">
-			    <input type="text" name="group" th:value="${pageRequestDTO.group}">
 			    <input type="text" name="uid" th:value="seller1">
                 <table>
                   <tr>
