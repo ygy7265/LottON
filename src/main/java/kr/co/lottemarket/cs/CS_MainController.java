@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import kr.co.lottemarket.config.RootConfig;
 import kr.co.lottemarket.dto.ArticleDTO;
 import lombok.extern.log4j.Log4j2;
 
@@ -20,6 +21,8 @@ public class CS_MainController {
 
 	@Autowired
 	private CsSerivce articleSerivce;
+	private RootConfig rootConfig;
+	
 	
 	@GetMapping(value = { "/cs", "/cs/index"})
 	public String index(Model model) {
@@ -27,9 +30,6 @@ public class CS_MainController {
 		List<ArticleDTO> noticeArticles = articleSerivce.selectIndex(1);
 		List<ArticleDTO> qnaArticles = articleSerivce.selectIndex(3);
 		
-		model.addAttribute("noticeArticles", noticeArticles);
-		model.addAttribute("qnaArticles", qnaArticles);
-
 		
 		// 현재 사용자의 정보 가져오기 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -55,6 +55,13 @@ public class CS_MainController {
 		// 사용자 정보
 		model.addAttribute("uid",uid);
 		model.addAttribute("type",type);
+				
+		
+	    //Object user = rootConfig.Usersession();
+	    
+		model.addAttribute("noticeArticles", noticeArticles);
+		model.addAttribute("qnaArticles", qnaArticles);
+
 		
 		
 		return "/cs/index";

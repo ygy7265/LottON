@@ -57,7 +57,7 @@
       
             <article layout:fragment="content">
                 <form th:action="@{/cs/qna/write(group=3)}" method="post">
-			    <input type="text" name="uid" th:value="seller1">
+			    <input type="text" name="uid" th:value="${#authentication.principal.user.uid}">
                 <table>
                   <tr>
                     <td>문의유형</td>
