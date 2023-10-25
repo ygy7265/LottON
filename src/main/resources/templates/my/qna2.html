@@ -26,22 +26,21 @@
                         <th>작성일</th>
                         <th>상태</th>
                     </tr>
-                    <tr th:each="article:${qnaList}">
-                        <td class="no">[[${article.no}]]</td>
-                        <td class="channel">[[${article.cate1}]]</td>
-                        <td class="type">[[${article.cate2}]]</td>                                
-                        <td class="tit"><a href="#">[[${article.title}]]</a></td>
-                        <td class="date">[[${article.rdate}]]</td>
-                        <td class="status" th:if="${article.comment == 1}">
-							<span class="answered">
-								답변완료
-							</span>
-						</td>
-						<td class="status" th:if="${article.comment == 0}">
-							<span class="notAnswerYet">
-								검토중
-							</span>
-						</td>
+                    <tr>
+                        <td class="no">5</td>
+                        <td class="channel">고객센터</td>
+                        <td class="type">주문/결제</td>                                
+                        <td class="tit"><a href="#">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a></td>
+                        <td class="date">2024-12-12</td>
+                        <td class="status"><span class="notAnswerYet">검토중</span></td>
+                    </tr>                            
+                    <tr>
+                        <td class="no">4</td>
+                        <td class="channel">고객센터</td>
+                        <td class="type">주문/결제</td>                                
+                        <td class="tit"><a href="#">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a></td>
+                        <td class="date">2024-12-12</td>
+                        <td class="status"><span class="answered">답변완료</span></td>
                     </tr>
                     <tr class="answerRow">
                         <td colspan="6">

@@ -27,7 +27,7 @@
 	    LEFT JOIN lotte_board_group b ON a.group = b.group
 	    LEFT JOIN lotte_board_cate1 c ON a.group = c.group AND a.cate1 = c.cate1
 	    LEFT JOIN lotte_board_cate2 d ON a.cate1 = d.cate1 AND a.cate2 = d.cate2
-	    WHERE a.group = #{group}
+	    WHERE a.group = #{group} AND a.parent = 0
 	    ORDER BY a.no DESC
 	    limit 0, 3
 	</select>
@@ -47,6 +47,40 @@
         FROM lotte_board_cate1
         WHERE `group` = #{group}
     </select>
+
+	 <select id="selectComment" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	     SELECT *
+		 FROM lotte_board
+		 WHERE parent = #{parent}
+   </select>
+   
+   
+   <select id="selectArticle" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	  SELECT a.*, b.cate1_name, c.cate2_name
+	  FROM lotte_board AS a
+	  LEFT JOIN lotte_board_cate1 AS b ON a.group = b.group AND a.cate1 = b.cate1
+	  LEFT JOIN lotte_board_cate2 AS c ON a.cate1 = c.cate1 AND a.cate2 = c.cate2
+	  WHERE a.`no` = #{no}
+	</select>
+	
+	<select id="selectNav" resultType="kr.co.lottemarket.dto.ArticleDTO">
+        SELECT *
+        FROM `lotte_board_cate1`
+        WHERE `group` = #{group} AND `cate1` = #{cate1}
+    </select>
+    
+    
+    <select id="selectMyQna" resultType="kr.co.lottemarket.dto.ArticleDTO">
+		  SELECT a.*, b.group_name, c.cate1_name, d.cate2_name
+		  FROM `lotte_board` a
+		  LEFT JOIN `lotte_board_group` b ON a.group = b.group
+		  LEFT JOIN `lotte_board_cate1` c ON a.group = c.group AND a.cate1 = c.cate1
+		  LEFT JOIN `lotte_board_cate2` d ON a.cate1 = d.cate1 AND a.cate2 = d.cate2
+		  WHERE a.`group` = 3 AND a.parent=0 AND `uid` = #{uid}
+		  ORDER BY a.no DESC
+		  LIMIT 0, 10
+    </select>
+	
 
  
 
