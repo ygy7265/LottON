@@ -28,7 +28,8 @@ public interface ArticleMapper {
 	public ArticleDTO selectNav(int group, int cate1);
 	
 	//MyPage Article
-	public List<ArticleDTO> selectMyQna(Object uid);
+	public List<ArticleDTO> selectMyQna(String uid, int start);
 	
+	public int selectMyCountTotal(String uid);
 	
 }
