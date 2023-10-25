@@ -33,7 +33,7 @@
                     <tr th:each="dto:${dto}">
                       <td>
                         <article>
-                          <a href="#"><img th:src="@{/images/product/}+${dto.product.thumb1}" alt=""></a>
+                          <a href="#"><img th:src="@{/thumb1/}+${dto.product.thumb1}" alt=""></a>
                           <div>
                             <h2><a href="#">[[${dto.product.prodName}]]</a></h2>
                             <p>[[${dto.product.descript}]]</p>
@@ -131,7 +131,7 @@
                   <div>
                     <p>현재 포인트 : <span class="nowpoint">[[${#numbers.formatInteger(user.point,0,'COMMA')}]]</span>점</p>
                     <label>
-                        <input type="text"name="point" value="0"/>점
+                        <input type="number" class="point2" name="point" value="0"/>점
                         <input type="button" id="pointbtn" value="적용"/>
                         
                     </label>

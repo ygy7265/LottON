@@ -74,13 +74,10 @@ public class ProductOrderItemService {
 		if(point > order.getOrdusedPoint()) {
 			point  = point - order.getOrdusedPoint();
 			userrepo.modifyPointAdd(order.getUser().getUid(), point);
-			log.info("point" + point);
 		}
 		else {
 			point = order.getOrdusedPoint() - point;
 			userrepo.modifyPoint(order.getUser().getUid(),point);
-			log.info("point2" + point);
-			log.info("order.getUser().getUid()" + order.getUser().getUid());
 		}
 		
 		 
@@ -95,7 +92,7 @@ public class ProductOrderItemService {
 		
 		List<ProductOrderItemDTO> itemdto = new ArrayList<>();
 		for(Object[] item: dto) {
-			ProductOrderItemDTO entity = modelmapper.map(item[0], ProductOrderItemDTO.class);
+			ProductOrderItemDTO entity = modelmapper.map(item, ProductOrderItemDTO.class);
 
 			itemdto.add(entity);
 		}

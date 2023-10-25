@@ -21,7 +21,7 @@
                 <!-- 상품 전체 정보 내용 -->                
                 <article class="info">
                     <div class="image">
-                        <img th:src="@{'../images/product/'+${dto.thumb3}}" alt="상품이미지"/>
+                        <img th:src="@{'/thumb1/'+${dto.thumb3}}" alt="상품이미지"/>
                     </div>
                     <div class="summary">
 						
@@ -93,7 +93,7 @@
                         <h1>상품정보</h1>
                     </nav>
                     <!-- 상품상세페이지 이미지 -->
-                    <img th:src="@{'../images/product/'+${dto.detail}}" alt="상세페이지1">
+                    <img th:src="@{'/thumb1/'+${dto.detail}}" alt="상세페이지1">
                    
                 </article>
 

@@ -35,7 +35,7 @@
 	        <tr th:each="dto:${dtoList}">
 	            <td>
 	            <article>
-	                <img th:src="@{/images/product/}+${dto.product.thumb1}" alt="">
+	                <img th:src="@{/thumb1/}+${dto.product.thumb1}" alt="">
 	                <div>
 	                <h2><a href="#">[[${dto.product.prodName}]]</a></h2>
 	                <p>[[${dto.product.descript}]]</p>

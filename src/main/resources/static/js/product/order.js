@@ -7,8 +7,11 @@ $(function(){
 		var total = $('.totalprice').val();
 		console.log("nowpoint" + nowpoint);
 		console.log("total" + total);
-		const point = $('input[name=point]').val();
+		var point = $('.point2').val();
+		console.log("point" + point);
 		var pspoint = parseFloat(point);
+		console.log("pspoint" + pspoint);
+		console.log("total" + pspoint);
 		if(pspoint > totalprice){
 			alert("전체 금액 이상 할인할수없습니다. 다시 확인 해주십시요.");
 			return;
@@ -24,7 +27,7 @@ $(function(){
 		else{
 			$('.nowpoint').text((nowpoint - pspoint).toLocaleString());
 			$('.ordertotal').text((total - pspoint).toLocaleString());
-			total.val(total - pspoint);
+	
 			if(pspoint != 0){
 				$('.orduserdPoint').text(" - "+pspoint);	
 				$('input[name=ordusedPoint]').val(pspoint);

@@ -69,7 +69,11 @@ public class ProductController {
 
 	    pageResponseDTO = service.searchProucts(pageRequestDTO,chk,search,max,min);
 	    model.addAttribute("pageResponse", pageResponseDTO);
-
+	    model.addAttribute("search", search);
+	    model.addAttribute("chk", chk);
+	    model.addAttribute("max", max);
+	    model.addAttribute("min", min);
+	    
 	    return "/product/productSearch";
 	}
 	

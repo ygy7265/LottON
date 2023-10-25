@@ -47,48 +47,31 @@
                         <th>비고</th>
                         <th>유효기간</th>
                     </tr>
-                    <tr>
-                        <td class="date">2022-12-13</td>
+                    <tr th:each="list:${dto.dtoList}">
+                        <td class="date">[[${list.pointDate}]]</td>
                         <td class="type">적립</td>
-                        <td class="ordNo">2022121001</td>                                
-                        <td class="point">340</td>
-                        <td class="desc">상품 구매확정</td>
+                        <td class="ordNo">[[${list.order.ordNo}]]</td>                                
+                        <td class="point">[[${list.point}]]</td>
+                        <td class="desc">[[${list.type}]]</td>
                         <td class="expire">2024-12-12</td>
                     </tr>
-                    <tr>
-                        <td class="date">2022-12-13</td>
-                        <td class="type">적립</td>
-                        <td class="ordNo">2022121001</td>
-                        <td class="point">100</td>
-                        <td class="desc">상품 리뷰 작성 추가 포인트</td>
-                        <td class="expire">2024-12-12</td>
-                    </tr>
-                    <tr>
-                        <td class="date">2022-12-13</td>
-                        <td class="type">적립</td>
-                        <td class="ordNo">2022121001</td>
-                        <td class="point">340</td>
-                        <td class="desc">상품 구매확정</td>
-                        <td class="expire">2024-12-12</td>
-                    </tr>
-                    <tr>
-                        <td class="date">2022-12-13</td>
-                        <td class="type">적립</td>
-                        <td class="ordNo">2022121001</td>
-                        <td class="point">340</td>
-                        <td class="desc">상품 구매확정</td>
-                        <td class="expire">2024-12-12</td>
-                    </tr>
+                   
                     
                 </table>
 
                 <p class="page">
-                    <a href="#" class="prev">이전</a>
-                    <a href="#" class="num on">1</a>
-                    <a href="#" class="num">2</a>
-                    <a href="#" class="num">3</a>
-                    <a href="#" class="next">다음</a>
-                </p>
+			    <th:block th:if="${dto.prev}"class="prev">
+			      <a th:href="@{/my/order(pg=${dto.start - 1})}"><&nbsp;이전</a>
+			    </th:block>
+			   
+			       <th:block th:each="num: ${#numbers.sequence(dto.start,dto.end)}" >
+			            <a th:href="@{/my/order(pg=${num})}" th:class="${num == dto.pg} ? 'on':''">[[${num}]]</a>
+			        </th:block>
+			 
+			    <th:block th:if="${dto.next}"class="next">
+			      <a th:href="@{/my/order(pg=${dto.end + 1)}">다음&nbsp;></a>
+			    </th:block>
+		  </p>
 
             </article>                  
         </section>

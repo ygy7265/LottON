@@ -22,7 +22,7 @@
 		  <!-- 상품목록 -->              
 		  <table border="0">                  
 		    <tr th:each="list:${list.dtoList}">
-		      <td><a th:href="@{/product/productView(prodNo=${list.prodNo})}" class="thumb"><img th:src="@{'../images/product/' + ${list.thumb1}}" alt="상품이미지"/></a></td>
+		      <td><a th:href="@{/product/productView(prodNo=${list.prodNo})}" class="thumb"><img th:src="@{'/thumb1/' + ${list.thumb1}}" alt="상품이미지"/></a></td>
 		      <td>
 		        <h3 class="name">[[${list.prodName}]]</h3>
 		        <a href="#" class="desc">[[${list.descript}]]</a>

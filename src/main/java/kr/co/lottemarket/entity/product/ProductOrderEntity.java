@@ -53,6 +53,7 @@ public class ProductOrderEntity {
 	private String recipAddr2;
 	private int ordPayment;
 	private int ordComplete;
+	private int rvComplete;
 	@CreationTimestamp
 	private LocalDateTime ordDate;
 	
@@ -75,6 +76,7 @@ public class ProductOrderEntity {
 				.recipAddr2(recipAddr2)
 				.ordPayment(ordPayment)
 				.ordComplete(ordComplete)
+				.rvComplete(rvComplete)
 				.ordDate(ordDate)
 				.build();
 	}

@@ -151,9 +151,6 @@ public class ProductService {
 		dto.setTotal(dto.getCount() * dto.getPrice());
 		ProductCartEntity result = cartrepo.findCartNoByProduct_ProdNo(dto.getProduct().getProdNo());
 		userepo.save(user);
-		log.info("Test = "+ dto.getCartNo());
-		log.info("result = "+ result);
-		log.info("Test1 = "+ dto.getCount());
 		ProductCartEntity entity = modelmapper.map(dto, ProductCartEntity.class);
 		entity.setUser(user);
 		if(result != null) {
@@ -199,6 +196,7 @@ public class ProductService {
 			
 	}
 	
+	@SuppressWarnings("unused")
 	public Admin_ProductPageResponseDTO searchProucts(Admin_ProductPageRequestDTO pageRequestDTO,String chk, String search,String max,String min){
 		
 		Pageable pageable = pageRequestDTO.getPageable("prodNo");
@@ -208,6 +206,13 @@ public class ProductService {
 		final String descript = "descript";
 		final String price = "price";
 		
+		
+		String[] searchs = search.split(" ");
+		
+		
+		if(searchs != null) {
+			searchs = search.split(" ");
+		}
 		if(min != null) {
 			if(min.isEmpty()) {
 				min = "0";
@@ -217,50 +222,53 @@ public class ProductService {
 			}
 		}
 		
-		
 	    if (chk != null) {
 	    	String[] type = chk.split(",");
 	    	if(type.length >= 2) {
 	    		if(chk.contains(prodName) && chk.contains(descript) && chk.contains(price)) {
-	        		
+	        		log.info("1");
 	        		eList = repo.findByPriceAndProdNameAndDescriptContaining(min,max,search, pageable);
 	        		
 	    		}else if(chk.contains(prodName) && chk.contains(price)) {
-
+	    			log.info("2");
 	    			eList = repo.findByPriceAndProdNameContaining(min,max,search, pageable);
 	    			
 	    		}else if(chk.contains(descript) && chk.contains(price)) {
-	    			
+	    			log.info("3");
 	    			eList = repo.findByPriceAndDescriptContaining(min,max,search, pageable);
 	    			
 	    		}else {
-	    			
+	    			log.info("4");
 	    			eList = repo.findByProdNameAndDescriptContaining(search, pageable);
 	    		}
         	
         	}else {
-        		if(chk.equals(prodName)) {
-        			
+        		if(chk.equals(prodName) && searchs.length < 2) {
+        			log.info("5");
        	    	 	eList = repo.findByProdNameLike("%" + search + "%", pageable);
        	    	 	
-        		}else if(chk.equals(price)){
-        			
+        		}else if(chk.equals(price) && searchs.length < 2){
+        			log.info("6");
         			eList = repo.findByPriceContaining(min, max, pageable);
         			
-        		}else {
+        		}else if(chk.equals(descript) && searchs.length < 2){
+        			log.info("7");
         			eList = repo.findByDescriptLike("%" + search + "%", pageable);
         		}
         		
         		
        	    }
+	    	if(eList != null) {
+	    		dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
+				total = (int) eList.getTotalElements();
+	    	}
 	    	
-	    	dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
-			total = (int) eList.getTotalElements();
 			
-	    }else if(search != null) {
-    		String[] searchs = search.split(" ");
+	    }
+	    else if(search != null) {
+    		
     		if(search.length() >= 2) {
-    			
+    			log.info("8");
     			for(String item :searchs) {
     				entityList.add(repo.findByProdNameLike("%" + item + "%", pageable));
     			}
@@ -268,19 +276,38 @@ public class ProductService {
         		dtoPage = dtopages.stream().flatMap(List::stream).collect(Collectors.toList());
         		total = dtopages.stream().mapToInt(List::size).sum();
     		}else {
+    			log.info("9");
     			eList = repo.findByProdNameLike("%" + search + "%", pageable);
     			dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
     			total = (int) eList.getTotalElements();
     		}
     		
 	    }else {
+	    	log.info("10");
 	    	eList = repo.findAll(pageable);
 	    	dtoPage = eList.map(entity -> modelmapper.map(entity, ProductDTO.class)).toList();
 			total = (int) eList.getTotalElements();
 	    }
-	    
-	    
+	    if(searchs.length >= 2) {
+	    	for(String item :searchs) {
+	    		log.info("item" + item);
+				entityList.add(repo.findByProdNameLike("%" + item + "%", pageable));
+			}
+	    	log.info("11");
+			List<List<ProductDTO>> dtopages = entityList.stream().map(page -> page.stream().map(entity -> modelmapper.map(entity, ProductDTO.class)).collect(Collectors.toList())).collect(Collectors.toList());
+    		dtoPage = dtopages.stream().flatMap(List::stream).collect(Collectors.toList());
+    		total = dtopages.stream().mapToInt(List::size).sum();
+	    }
 		
+	    
+	    int a = pageRequestDTO.getPg();
+	    log.info("a =" + a);
+	    for(ProductDTO search2 :dtoPage) {
+	    	log.info("dtoPage =" + search2.getProdName());
+	    	log.info("total" + total);
+	    }
+	    
+	    
 		Admin_ProductPageResponseDTO dto= Admin_ProductPageResponseDTO.builder().pageRequestDTO(pageRequestDTO).dtoList(dtoPage).total(total).build();
 		return dto;
 		

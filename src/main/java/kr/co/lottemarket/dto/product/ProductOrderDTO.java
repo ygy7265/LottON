@@ -40,6 +40,7 @@ public class ProductOrderDTO {
 	private String recipAddr2;
 	private int ordPayment;
 	private int ordComplete;
+	private int rvComplete;
 	private LocalDateTime ordDate;
 	
 	public ProductOrderEntity toEntity() {
@@ -61,6 +62,7 @@ public class ProductOrderDTO {
 				.recipAddr2(recipAddr2)
 				.ordPayment(ordPayment)
 				.ordComplete(ordComplete)
+				.rvComplete(rvComplete)
 				.ordDate(ordDate)
 				.build();
 	}

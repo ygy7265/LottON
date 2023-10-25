@@ -55,7 +55,8 @@
                 <a th:href="@{/product/productView(prodNo  = ${best.prodNo})}">
                   <div class="thumb">
                     <i>[[${index.index+1}]]</i>
-                  <img th:src="@{'./images/product/' + ${best.thumb1}}" alt="item1" />
+                  <img th:src="@{'/thumb1/'+${best.thumb1}}" alt="item1" />
+
                   </div>
                   <h2>[[${best.prodName}]]</h2>
                   <div class="org_price">
@@ -98,7 +99,7 @@
             <article th:each="hit:${hit}">
               <a th:href="@{/product/productView(prodNo  = ${hit.prodNo})}">
                 <div class="thumb">
-                  <img th:src="@{'./images/product/' + ${hit.thumb1}}" alt="t1" />
+                  <img th:src="@{'/thumb1/' + ${hit.thumb1}}" alt="t1" />
                 </div>
                 <h2>[[${hit.prodName}]]</h2>
                 <p>[[${hit.descript}]]</p>
@@ -124,7 +125,7 @@
             <article th:each="score:${score}">
               <a th:href="@{/product/productView(prodNo  = ${score.prodNo})}">
                 <div class="thumb">
-                  <img  th:src="@{'./images/product/' + ${score.thumb1}}" alt="t1" />
+                  <img th:src="@{'/thumb1/' + ${score.thumb1}}" alt="t1" />
                 </div>
                 <h2>[[${score.prodName}]]</h2>
                 <p>[[${score.descript}]]</p>
@@ -151,7 +152,7 @@
             <article th:each="newprod:${newprod}">
               <a th:href="@{/product/productView(prodNo  = ${newprod.prodNo})}">
                 <div class="thumb">
-                  <img  th:src="@{'./images/product/' + ${newprod.thumb1}}" alt="t1" />
+                  <img th:src="@{'/thumb1/' + ${newprod.thumb1}}" alt="t1" />
                 </div>
                 <h2>[[${newprod.prodName}]]</h2>
                 <p>[[${newprod.descript}]]</p>
@@ -178,7 +179,7 @@
             <article th:each="discount:${discount}">
               <a th:href="@{/product/productView(prodNo  = ${discount.prodNo})}">
                 <div class="thumb">
-                  <img  th:src="@{'./images/product/' + ${discount.thumb1}}"alt="t1" />
+                  <img  th:src="@{'/thumb1/' + ${discount.thumb1}}"alt="t1" />
                 </div>
                 <p>[[${discount.descript}]]</p>
                 <div class="org_price">
