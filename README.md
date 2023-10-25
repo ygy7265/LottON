@@ -38,3 +38,7 @@
 0.0.9-SNAPSHOT
 
 - product 검색기능구현 1차 완료 (검색)
+- 
+0.0.10-SNAPSHOT
+
+- product 마이페이지 기능구현 1차 완료 (조회)
