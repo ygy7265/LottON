@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
       layout:decorate="/member/index.html">
@@ -6,7 +7,7 @@
 <div layout:fragment="content">
         <main id="user">
 		    <section class="find findId">
-		        <form id="formFindId" action="${ctxPath}/member/findIdResult.do" method="POST">
+		        <form id="formFindId" th:action="@{/member/findIdResult}" method="GET"> <!-- 왜 POST 전송이지?? ㅇㅇ GET으로 해야함, 왜냐면 GET으로 페이지 띄우면서 model 속성 참조해야하므로!-->
 		        	<input type="hidden" name="type" value="FIND_ID"/>
 		            <table border="0">
 		                <caption>아이디 찾기</caption>
@@ -37,7 +38,7 @@
 		        </p>
 		
 		        <div>
-		            <a href="${ctxPath}/member/login.do" class="btn btnCancel">취소</a>
+		            <a th:href="@{/member/login}" class="btn btnCancel">취소</a>
 		            <a href="#" class="btn btnNext">다음</a> <!-- script 작성으로 a태그를 통해 form 전송한다 -->
 		        </div>
 		    </section>
