@@ -48,12 +48,12 @@
                         <th>유효기간</th>
                     </tr>
                     <tr th:each="list:${dto.dtoList}">
-                        <td class="date">[[${list.pointDate}]]</td>
+                        <td class="date">[[${#temporals.format(list.pointDate, 'yyyy-MM-dd')}]]</td>
                         <td class="type">적립</td>
                         <td class="ordNo">[[${list.order.ordNo}]]</td>                                
-                        <td class="point">[[${list.point}]]</td>
+                        <td class="point">[[${list.point}]] </td>
                         <td class="desc">[[${list.type}]]</td>
-                        <td class="expire">2024-12-12</td>
+                        <td class="expire" th:text="${#temporals.format(list.pointDate.plusYears(1), 'yyyy-MM-dd')}"></td>
                     </tr>
                    
                     

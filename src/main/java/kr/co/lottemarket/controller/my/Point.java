@@ -23,6 +23,7 @@ public class Point {
 		
 		PointPageResponseDTO dto = pointService.findPoint(pageRequestDTO);
 		model.addAttribute("dto",dto);
+		
 		return "/my/point";
 	}
 }

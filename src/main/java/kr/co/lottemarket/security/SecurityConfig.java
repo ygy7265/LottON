@@ -16,11 +16,6 @@ public class SecurityConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/thumb1/**")
 				.addResourceLocations(resourceLoader.getResource("file:thumb1/"));
 	}
-  	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/thumbs/**")
-						.addResourceLocations(resourceLoader.getResource("file:thumbs/"));
-	}
-	
 }
 
 

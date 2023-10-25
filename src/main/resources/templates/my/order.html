@@ -45,7 +45,7 @@
 	                <th>확인/신청</th>
 	            </tr>
 	            <tr th:each="list:${dtoList.dtoList}">
-	                <td class="date">[[${list.ordDate}]]</td>
+	                <td class="date">[[${#temporals.format(list.ordDate, 'yyyy-MM-dd')}]]</td>
 	                <td>
 	                    <a href="#" class="thumb"><img th:src="@{'/thumb1/'}+${list.product.thumb1}" alt=""></a>
 	                    <ul>

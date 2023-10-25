@@ -26,8 +26,8 @@ import kr.co.lottemarket.dto.user.UserDTO;
 import kr.co.lottemarket.entity.product.ProductReviewEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
 import kr.co.lottemarket.service.mypage.MyPageQnaService;
-import kr.co.lottemarket.service.mypage.myPageOrderService;
-import kr.co.lottemarket.service.mypage.myPageReviewService;
+import kr.co.lottemarket.service.mypage.MyPageOrderService;
+import kr.co.lottemarket.service.mypage.MyPageReviewService;
 import lombok.RequiredArgsConstructor;
 import kr.co.lottemarket.service.user.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -37,19 +37,13 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 @Controller
 public class MyPageController {
-	private final myPageOrderService service;
-	private final myPageReviewService reviewService;
-
-	@Autowired
-	private RootConfig user;
-	@Autowired
-	private myPageOrderService service;
-	@Autowired
-	private MyPageQnaService articleSerivce;
-	@Autowired
-	private RootConfig rootConfig;
-	@Autowired
-	private UserService userService;
+	
+	private final MyPageReviewService reviewService;
+	private final RootConfig user;
+	private final MyPageOrderService service;
+	private final MyPageQnaService articleSerivce;
+	private final RootConfig rootConfig;
+	private final UserService userService;
 	
 	@GetMapping("/")
 	public String index(Model model) {
@@ -76,7 +70,7 @@ public class MyPageController {
 	public String info(Model model) {
 		
 		Object obj = rootConfig.Usersession();
-		String uid = null;
+		String uid = "seller1";
 		
 		// Object 형변환 가능 여부 확인
 		if(obj instanceof String) {
@@ -89,10 +83,6 @@ public class MyPageController {
 		UserDTO userDTO = userService.findByUid(uid);
 		model.addAttribute(userDTO);
 		return "/my/info";
-	}
-	@GetMapping("/point")
-	public String point() {
-		return "/my/point";
 	}
 	@GetMapping("/qna")
 	public String qna(Model model, @RequestParam(defaultValue = "1")  int pg) {
