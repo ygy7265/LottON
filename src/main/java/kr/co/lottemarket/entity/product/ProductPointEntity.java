@@ -2,6 +2,8 @@ package kr.co.lottemarket.entity.product;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -33,8 +35,12 @@ public class ProductPointEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "uid")
 	private UserEntity user;
-	private int ordNo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ordNo")
+	private ProductOrderEntity order;
 	private int point;
+	private String type;
+	@CreationTimestamp
 	private LocalDateTime pointDate;
 	
 	public ProductPointDTO toDTO() {
@@ -42,7 +48,8 @@ public class ProductPointEntity {
 		return ProductPointDTO.builder()
 				.pointNo(pointNo)
 				.user(user)
-				.ordNo(ordNo)
+				.order(order)
+				.type(type)
 				.point(point)
 				.pointDate(pointDate)
 				.build();

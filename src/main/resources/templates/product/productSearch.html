@@ -64,7 +64,7 @@
           <!-- 검색목록 -->
           <table border="0">                  
             <tr th:each="dto:${pageResponse.dtoList}">
-              <td><a th:href="@{/product/productView(prodNo=${dto.prodNo})}" class="thumb"><img th:src="@{../images/product/}+${dto.thumb1}" alt="상품이미지"/></a></td>
+              <td><a th:href="@{/product/productView(prodNo=${dto.prodNo})}" class="thumb"><img th:src="@{/thumb1/}+${dto.thumb1}" alt="상품이미지"/></a></td>
               <td>
                 <h3 class="name">[[${dto.prodName}]]</h3>
                 <a th:href="@{/product/productView(prodNo=${dto.prodNo})}" class="desc">[[${dto.descript}]]</a>
@@ -96,7 +96,7 @@
 			                class="num"
 			                aria-controls="dataTables-example"
 			                tabindex="0">
-			                <a th:href="@{/product/productSearch(pg=${num})}">[[${num}]]</a>
+			                <a th:href="@{/product/productSearch(search=${search},chk=${chk},pg=${num},min=${min},max=${max})}">[[${num}]]</a>
 			            </span>
 			
 			            <span th:if="${pageResponse.next}" class="num" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">

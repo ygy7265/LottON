@@ -1,28 +1,21 @@
 package kr.co.lottemarket.repository.product;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import kr.co.lottemarket.entity.product.ProductCartEntity;
 import kr.co.lottemarket.entity.product.ProductOrderEntity;
-import kr.co.lottemarket.entity.product.ProductOrderItemEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
 
 @Repository
-public interface ProductOrderCompleteRepository extends JpaRepository<ProductOrderEntity, String>{
+public interface ProductOrderCompleteRepository extends JpaRepository<ProductOrderEntity, Integer>{
 	
 	
-	public List<ProductOrderEntity> findByUser(UserEntity user);
+	public Page<ProductOrderEntity> findByUserOrderByOrdDateDesc(UserEntity user,Pageable pageable);
+	public List<ProductOrderEntity> findTop5ByUserOrderByOrdDateDesc(UserEntity user);
+	public ProductOrderEntity findByOrdCompleteNo(int ordNo);
 	
-	@Query("SELECT pc, p.thumb1,p.prodNo, p.prodName, p.descript FROM ProductOrderEntity pc " +
-		       "JOIN pc.user u " +
-		       "JOIN pc.product p " +
-		       "WHERE u.uid = :uid ")
-	List<Object[]> findProductsByUser(@Param("uid") String uid);
 			
 }

@@ -69,12 +69,4 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
 		return config.getAuthenticationManager();
 	}
-	
-
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/product/**")
-				.addResourceLocations(resourceLoader.getResource("file:product/"));
-	}
-	
 }

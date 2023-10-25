@@ -447,11 +447,25 @@ footer p > strong {
     background-repeat: no-repeat;
     background-position: 36px 0px;    
 }
+#my > .review > section > article > table .rating {
+    display: block;
+    width: 84px;
+    height: 20px;
+    font-size: 0px;
+    background-image: url('../../images/my_rating_star.png');
+    background-repeat: no-repeat;
+    background-position: 36px 0px;    
+}
 #my > .home > section > article > table .rating.star1 {background-position: 0 -40px;}
 #my > .home > section > article > table .rating.star2 {background-position: 0 -80px;}
 #my > .home > section > article > table .rating.star3 {background-position: 0 -120px;}
 #my > .home > section > article > table .rating.star4 {background-position: 0 -160px;}
 #my > .home > section > article > table .rating.star5 {background-position: 0 -200px;}
+#my > .review > section > article > table .rating.star1 {background-position: 0 -40px;}
+#my > .review > section > article > table .rating.star2 {background-position: 0 -80px;}
+#my > .review > section > article > table .rating.star3 {background-position: 0 -120px;}
+#my > .review > section > article > table .rating.star4 {background-position: 0 -160px;}
+#my > .review > section > article > table .rating.star5 {background-position: 0 -200px;}
 
 #my > .home > section > article > table .notAnswerYet {color: #999;}
 #my > .home > section > article > table .answered {color: #01a900;}
@@ -1044,7 +1058,7 @@ footer p > strong {
     width: 84px;
     height: 20px;
     font-size: 0px;
-    background-image: url('../images/my_rating_star.png');
+    background-image: url('../../images/my_rating_star.png');
     background-repeat: no-repeat;
     background-position: 36px 0px;    
 }
@@ -1272,7 +1286,14 @@ footer p > strong {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
-
+#my > div > section > article.latest > table > tbody > tr > td.info > a > img{
+	width: 150px;
+	height: 150px;
+}
+#my > div > section > article > table > tbody > tr > td > a > img{
+	width: 150px;
+	height: 150px;
+}
 .popup.on {display: block;}
 
 .popup > div {
