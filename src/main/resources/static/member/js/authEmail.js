@@ -6,7 +6,7 @@ $(function(){
 	
 	let preventDoubleClick = false;
 	
-	$('#btnEmailCode').click(function(){
+	$('#btnEmailCode').click(function(){ // 인증번호 받기 버튼
 		
 		const type  = $('input[name=type]').val(); // findId.jsp의 input이 name="type" value="FIND_ID"
 		const uid   = $('input[name=uid]').val();
@@ -78,7 +78,7 @@ $(function(){
 		}, 1000);
 	});
 	
-	$('#btnEmailAuth').click(function(){
+	$('#btnEmailAuth').click(function(){ // 인증번호 확인 버튼
 		const code = $('input[name=auth]').val(); // 인증번호입력창에 내가 입력한 인증번호
 		/*const jsonData = {
 			"code": code

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,7 +35,7 @@ public class UserConrtroller {
 		return "/member/layout/login";
 	}
 	
-	@GetMapping("/member/logout")
+	@GetMapping("/member/logout") // SecurityConfiguration에서 url주소 여기로 GET 전송함
 	public String logout() {
 		return "redirect:/member/login";
 	}
@@ -54,7 +55,7 @@ public class UserConrtroller {
 		dto.setType(1);
 		userService.save(dto);
 		
-		return "redirect:/member/login"; // redirect는 html을 보여주는 게 아니라 url mapping 으로 전송이다!
+		return "redirect:/member/login?success=101"; // redirect는 html을 보여주는 게 아니라 url mapping 으로 전송이다! / 회원가입 : success=101
 	}
 	
 	@GetMapping("/member/registerSeller")
@@ -69,7 +70,7 @@ public class UserConrtroller {
 		dto.setType(2);
 		userService.save(dto);
 		
-		return "redirect:/member/login";
+		return "redirect:/member/login?success=101";
 	}
 	
 	@GetMapping("/member/join")
@@ -118,14 +119,20 @@ public class UserConrtroller {
 		return "/member/layout/findPassChange";
 	}
 	
-	/*@PostMapping("/member/findPassChange")
-	public String findPassChange(UserDTO dto) {
+	
+	// 비밀번호 변경
+	@PostMapping("/member/findPassChange")
+	public String findPassChange(@RequestParam String uid, @RequestParam String pass1) { // @GetMapping에서 설정된 모델 객체를 이렇게 받을 수 있나?? ㄴㄴ 안됨 / @ModelAttribute는 도대체 언제 쓰는겨
 		
+		UserDTO dto = userService.findByUid(uid);
 		
+		dto.setPass1(pass1);
 		
-		userService.updatePass(dto);
+		userService.save(dto);
+		
+		return "redirect:/member/login?success=102"; // 비밀번호변경 : success=102
 		
 	}
-	*/
+	
 	
 }

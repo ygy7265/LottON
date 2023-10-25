@@ -9,24 +9,24 @@
 <div layout:fragment="content">
 	<main id="user">
 	    <section class="find findPassChange">
-	        <form id="formFindPassChange" th:action="${/member/findPassChange}" method="post">
-	        	<input type="hidden" name="uid" value="${sessionScope.uid}"> <!-- FindPassController에서 session 만든 걸 여기서 이용하네 -->
+	        <form id="formFindPassChange" th:action="@{/member/findPassChange}" method="POST">
+	        	<input type="hidden" name="uid" th:value="${userDTO.uid}"> <!-- 이 uid값으로 entity객체 찾고 거기에 pass값만 SET해서 Save 하자! / th:value잖아!!! / name="uid", name="pass1", name="pass2" 값들이 UserDTO 객체의 속성 이름에 일치하여 값이 정해지고, UserController에 findPassChange 메서드 매개변수로서 UserDTO로 들어간다-->
 	            <table border="0">
 	                <caption>비밀번호 변경</caption>                        
 	                <tr>
 	                    <td>아이디</td>
-	                    <td>${uid}</td>
+	                    <td>[[${userDTO.uid}]]</td>
 	                </tr>
 	                <tr>
 	                    <td>새 비밀번호</td>
 	                    <td>
-	                        <input type="password" name="km_pass1" placeholder="새 비밀번호 입력"/> <!-- validation.js에서 pass1, pass2가 아니라 km_pass1, km_pass2로 찾는다. -->
+	                        <input type="password" name="pass1" placeholder="새 비밀번호 입력"/> <!-- validation.js에서 pass1, pass2 찾음-->
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>새 비밀번호 확인</td>
 	                    <td>
-	                        <input type="password" name="km_pass2" placeholder="새 비밀번호 입력 확인"/>
+	                        <input type="password" name="pass2" placeholder="새 비밀번호 입력 확인"/>
 	                        <span class="resultPass"></span> <!-- validation.js에서 resultPass에 글자 표시하는 거 놓치면 안되지! -->
 	                    </td>
 	                </tr>
@@ -39,8 +39,8 @@
 	        </p>
 	
 	        <div>
-	            <a href="${ctxPath}/member/login.do" class="btn btnCancel">취소</a>
-	            <a href="#" id="btnPassChange" class="btn btnNext">비밀번호 변경</a>
+	            <a th:href="@{/member/login}" class="btn btnCancel">취소</a>
+	            <a href="#" id="btnPassChange" class="btn btnㄹNext">비밀번호 변경</a>
 	        </div>
 	    </section>
 	</main>

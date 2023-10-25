@@ -21,6 +21,7 @@ import kr.co.lottemarket.dto.user.UserDTO;
 import kr.co.lottemarket.entity.user.UserEntity;
 import kr.co.lottemarket.service.mypage.MyPageQnaService;
 import kr.co.lottemarket.service.mypage.myPageOrderService;
+import kr.co.lottemarket.service.user.UserService;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -36,6 +37,8 @@ public class MyPageController {
 	private MyPageQnaService articleSerivce;
 	@Autowired
 	private RootConfig rootConfig;
+	@Autowired
+	private UserService userService;
 	
 	
 	@GetMapping("/")
@@ -56,10 +59,26 @@ public class MyPageController {
 		log.info("list"+ list.get(0));
 		return "/my/order";
 	}
+	
 	@GetMapping("/info")
-	public String info() {
+	public String info(Model model) {
+		
+		Object obj = rootConfig.Usersession();
+		String uid = null;
+		
+		// Object 형변환 가능 여부 확인
+		if(obj instanceof String) {
+			uid = (String) obj;
+			//log.info("/my/info uid : " + uid);
+		}else {
+			//log.info("error 1...");
+		}
+		
+		UserDTO userDTO = userService.findByUid(uid);
+		model.addAttribute(userDTO);
 		return "/my/info";
 	}
+	
 	@GetMapping("/point")
 	public String point() {
 		return "/my/point";
