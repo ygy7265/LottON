@@ -26,7 +26,7 @@
                             <th>확인/신청</th>
                         </tr>
                         <tr th:each="dto:${dto}">
-                            <td class="date">[[${dto.ordDate}]]</td>
+                            <td class="date">[[${#temporals.format(dto.ordDate, 'yyyy-MM-dd')}]]</td>
                             <td class="info">
                                 <a th:href="@{/product/productView(prodNo=${dto.product.prodNo})}" class="thumb"><img th:src="@{'/thumb1/'}+${dto.product.thumb1}" alt=""></a>
                                 <ul>

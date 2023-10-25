@@ -32,7 +32,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequiredArgsConstructor
 @Service
-public class myPageOrderService {
+public class MyPageOrderService {
 	
 	
 	private final ProductOrderCompleteRepository comRepo;

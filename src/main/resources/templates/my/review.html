@@ -30,22 +30,22 @@
                         <td class="prodName"><a th:href="@{/product/productView(prodNo=${list.product.prodNo})}">[[${list.product.prodName}]]</a></td>
                         <td class="content">[[${list.content}]]</td>                                
                         <td class="score"><span th:class="@{rating star}+${list.score}"></span></td>
-                        <td class="date">[[${list.rDate}]]</td>
+                        <td class="date">[[${#temporals.format(list.rDate, 'yyyy-MM-dd')}]]</td>
                     </tr>
                   
                 </table>
 
             <p class="page">
 			    <th:block th:if="${list.prev}"class="prev">
-			      <a th:href="@{/my/order(pg=${list.start - 1})}"><&nbsp;이전</a>
+			      <a th:href="@{/my/review(pg=${list.start - 1})}"><&nbsp;이전</a>
 			    </th:block>
 			   
 			       <th:block th:each="num: ${#numbers.sequence(list.start,list.end)}" >
-			            <a th:href="@{/my/order(pg=${num})}" th:class="${num == list.pg} ? 'on':''">[[${num}]]</a>
+			            <a th:href="@{/my/review(pg=${num})}" th:class="${num == list.pg} ? 'on':''">[[${num}]]</a>
 			        </th:block>
 			 
 			    <th:block th:if="${list.next}"class="next">
-			      <a th:href="@{/my/order(pg=${dtoList.end + 1)}">다음&nbsp;></a>
+			      <a th:href="@{/my/review(pg=${dtoList.end + 1)}">다음&nbsp;></a>
 			    </th:block>
 		  </p>
             </article>

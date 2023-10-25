@@ -1,5 +1,7 @@
 package kr.co.lottemarket.config;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -38,5 +40,21 @@ public class RootConfig {
 		
 		return uid;
 
+	}
+	
+	public String DateTime(String date) {
+		
+
+	        // 문자열을 LocalDateTime으로 파싱
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+
+	        // 년, 월, 일 추출
+	        int year = dateTime.getYear();
+	        int month = dateTime.getMonthValue();
+	        int day = dateTime.getDayOfMonth();
+	        String sDate = year +" - " + month + " - " + day;
+	        return sDate;
+		
 	}
 }

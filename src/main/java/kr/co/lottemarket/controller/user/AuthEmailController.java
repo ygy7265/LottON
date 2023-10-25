@@ -21,7 +21,7 @@ public class AuthEmailController {
 
 	@Autowired
 	private UserService userService;
-	
+	/*
 	@GetMapping("/member/authEmail")
     public Map<String, Integer> authEmail(@RequestParam Map<String, Object> params) { 
 
@@ -80,7 +80,7 @@ public class AuthEmailController {
 
         return returnMap;
     }
-	
+	*/
 	
 	@PostMapping("/member/authEmail/{code}")
 	public int authEmail(@PathVariable("code") String code) {
