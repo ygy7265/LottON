@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lottemarket.config.RootConfig;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.product.ProductOrderDTO;
@@ -83,13 +85,73 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/qna")
-	public String qna(Model model, String uid) {
+	public String qna(Model model, @RequestParam(defaultValue = "1")  int pg) {
 		
-		Object user = rootConfig.Usersession();
+		String user = (String)rootConfig.Usersession();
 		
-		List<ArticleDTO> qnaList = articleSerivce.selectMyQna("seller1");
+		//게시글 출력
+	
 		
-		log.info("qnaList = " + qnaList);
+		//페이지 관련 변수
+		int start=0;
+		int currentPage =1;
+		int total=0;
+		int lastPageNum=0;
+		int pageGroupCurrent=1;
+		int pageGroupStart=1;
+		int pageGroupEnd=0;
+		int pageStartNum=0;
+		
+		
+		// 현재페이지계산
+		currentPage = pg;
+		
+		// 전체 상품 갯수
+		total = articleSerivce.selectMyCountTotal(user);
+		
+		log.info("total = " + total);
+		
+		//LIMIT 시작값계산
+		start =(currentPage -1)*10;
+
+		if(total%10 == 0){
+			lastPageNum =(total/10);
+		}else{
+			lastPageNum =(total/10)+1;
+		}
+		
+		//페이지 그룹계산
+		// 페이지 그룹 계산 (5개 단위로 나누기)
+		pageGroupCurrent = (int) Math.ceil(currentPage / 5.0); // 현재 페이지 그룹 계산
+		pageGroupStart = (pageGroupCurrent - 1) * 5 + 1; // 페이지 그룹의 시작 페이지 계산
+		pageGroupEnd = Math.min(pageGroupCurrent * 5, lastPageNum); // 페이지 그룹의 끝 페이지 계산
+		
+		if(pageGroupEnd > lastPageNum){
+			pageGroupEnd=lastPageNum;
+		}
+		
+		//페이지 시작번호 계산
+		pageStartNum = total-start;
+		
+		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user,start);
+		model.addAttribute("start", start);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("total", total);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("pageGroupCurrent", pageGroupCurrent);
+		model.addAttribute("pageGroupStart", pageGroupStart);
+		model.addAttribute("pageGroupEnd", pageGroupEnd);
+		model.addAttribute("pageStartNum", pageStartNum);
+		
+		
+		log.info("start = "+ start);
+		log.info("currentPage = " + currentPage);
+		log.info("total = " +  total);
+		log.info("lastPageNum = " + lastPageNum);
+		log.info("pageGroupStart = " + pageGroupStart);
+		log.info("pageGroupEnd = " + pageGroupEnd);
+		log.info("pageStartNum = " + pageStartNum);
+		
 		
 		model.addAttribute("qnaList",qnaList);
 		
