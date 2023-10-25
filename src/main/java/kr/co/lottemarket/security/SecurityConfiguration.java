@@ -3,6 +3,7 @@ package kr.co.lottemarket.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,11 +11,14 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfiguration implements WebMvcConfigurer {
 	
+	@Autowired
+	private ResourceLoader resourceLoader;
 	
 	@Autowired
 	private SecurityUserService service;
@@ -26,6 +30,7 @@ public class SecurityConfiguration {
 			authorizeHttpRequests -> 
 			authorizeHttpRequests
 			.requestMatchers("/**").permitAll()
+			.requestMatchers("/product/**", "/js/**", "/images/**", "/css/**").permitAll()
 		//	.requestMatchers("/admin/**").hasAuthority("ADMIN")
 		//	.requestMatchers("/manager/**").hasAnyAuthority("ADMIN", "MANAGER")
             
@@ -64,5 +69,4 @@ public class SecurityConfiguration {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
 		return config.getAuthenticationManager();
 	}
-
 }

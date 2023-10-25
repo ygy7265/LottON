@@ -20,7 +20,7 @@
                 <table border="0">
                     <tr>
                         <td>사용자 ID</td>
-                        <td>chh****</td>
+                        <td id="userId">[[${userDTO.uid}]]</td>
                     </tr>
                     <tr>
                         <td>비밀번호</td>
@@ -30,17 +30,17 @@
                     </tr>
                     <tr>
                         <td>이름</td>
-                        <td>김*학</td>
+                        <td id="userName">[[${userDTO.name}]]</td>
                     </tr>
                     <tr>
                         <td>생년월일</td>
-                        <td>1983년 05월 03일</td>
+                        <td id="userBirth">[[${userDTO.birth}]]</td>
                     </tr>
                     <tr>
                         <td>E-mail</td>
                         <td>
-                            <input type="text" name="email1" value="chakh101">@
-                            <input type="text" name="email2" value="naver.com">
+                            <input type="text" id="userEmail1" name="email1" th:value="${userDTO.email}" readonly/>@ <!-- th:value 주의!!! -->
+                            <input type="text" id="userEmail2" name="email2" readonly/>
                             <select>
                                 <option>직접입력</option>
                                 <option>naver.com</option>
@@ -56,9 +56,9 @@
                         <td>휴대폰</td>
                         <td>
                             <p class="hp">
-                                <input type="text" name="hp1" value="010"/>-
-                                <input type="text" name="hp2" value="1234"/>-
-                                <input type="text" name="hp3" value="1001"/>
+                                <input type="text" id="userHp1" name="hp1" th:value="${userDTO.hp}" readonly/>-
+                                <input type="text" id="userHp2" name="hp2" readonly/>-
+                                <input type="text" id="userHp3" name="hp3" readonly/>
                                 <button id="btnChangeHp">수정하기</button>
                             </p>
                         </td>
@@ -66,11 +66,11 @@
                     <tr>
                         <td>주소</td>
                         <td>
-                            <input type="text" name="zip"/>
-                            <button id="btnFindZip">주소검색</button>
+                            <input type="text" name="zip" th:value="${userDTO.zip}" readonly/>
+                            <button id="btnFindZip" onclick="zipcode()">주소검색</button>
                             <p class="address">
-                                <input type="text" name="addr1"/>
-                                <input type="text" name="addr2"/>
+                                <input type="text" name="addr1" th:value="${userDTO.addr1}" readonly/>
+                                <input type="text" name="addr2" th:value="${userDTO.addr2}"/>
                             </p>
                         </td>
                     </tr>

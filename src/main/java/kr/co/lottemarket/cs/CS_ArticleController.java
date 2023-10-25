@@ -39,6 +39,7 @@ public class CS_ArticleController {
 				pageResponseDTO = articleSerivce.findByParentAndGroupAndCate1(pageRequestDTO);
 			}
 			
+			
 			log.info("pageResponseDTO no : " + pageResponseDTO.getNo());
 			log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
 			log.info("pageResponseDTO cate2 : " + pageResponseDTO.getCate2());
@@ -50,12 +51,19 @@ public class CS_ArticleController {
 	        log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
 	        log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
 	        log.info("pageResponseDTO group : " + pageResponseDTO.getGroup());
-			
+	        log.info("pageResponseDTO.getDtoList()...." + pageResponseDTO.getDtoList());
 	        
 			model.addAttribute("pageResponseDTO", pageResponseDTO);
 			  log.info("pageResponseDTO = " + pageResponseDTO );
 			
 			model.addAttribute("state", "list");
+			
+			 //nav
+			 ArticleDTO nav = articleSerivce.selectNav(group, cate1);
+			 
+			 log.info(nav);
+			 
+			 model.addAttribute("nav", nav);
 			
 			return "/cs/board/list";
 			
@@ -73,16 +81,22 @@ public class CS_ArticleController {
 			  pageResponseDTO.setCate1(cate1);
 			  pageResponseDTO.setGroup(group);
 			 
-			  log.info("group = " + group );
+			  for(ArticleDTO article : articles) {
+				  for(ArticleDTO list : lists) {
+					  log.info("articles = " + article.getCate2());
+					  log.info("lists = " + list.getCate2());  
+				  }
+				  
+			  }
+			
 			  
 			  model.addAttribute("pageResponseDTO", pageResponseDTO);
-			  log.info("articles.get(0) = " + pageResponseDTO);
-			  log.info("articles = " + articles); 
 			  model.addAttribute("articles", articles);
-		
-			  
 			  model.addAttribute("state", "list");
-			
+			  //nav
+			  ArticleDTO nav = articleSerivce.selectNav(group, cate1);
+			  model.addAttribute("nav", nav);
+			 
 			return "/cs/board/faqList";
 			
 		}
@@ -92,7 +106,7 @@ public class CS_ArticleController {
 	public String view(Model model, int no, PageRequestDTO pageRequestDTO) {
 		
 			log.info("no = " + no);
-			ArticleDTO article = articleSerivce.findLotteON_boardByNo(no);
+			ArticleDTO article = articleSerivce.selectArticle(no);
 			model.addAttribute("article", article);
 			
 			PageResponseDTO pageResponseDTO = new PageResponseDTO(pageRequestDTO, null, 0); // 초기화
@@ -108,11 +122,34 @@ public class CS_ArticleController {
 			log.info("article title = " + article.getTitle() );
 			log.info("article content = " + article.getContent() );
 			log.info("article rdate = " + article.getRdate() );
+			log.info("article comment = " + article.getComment());
+			log.info("article cate2_name = " + article.getCate2_name());
+			
+
+			log.info(pageRequestDTO.getNo());
+			//답글 출력
+
+			//초기값
+			ArticleDTO comment = null;
+			
+			if (article.getComment() == 1) {
+				comment = articleSerivce.selectComment(pageRequestDTO.getNo());
+			} else {
+				comment = new ArticleDTO();
+			}
+
+			log.info("pageRequestDTO.getParent() = " + pageRequestDTO.getParent());
+			log.info("pageRequestDTO.getNo() = " + pageRequestDTO.getNo());
+			log.info("comment = " + comment);
+			
+			model.addAttribute("comment", comment);
+			
+			
 			if(pageRequestDTO.getGroup() == 2) {
 				return "/cs/board/faqView";
 			}else {
 				return "/cs/board/view";
-		}
+			}
 		
 		
 		

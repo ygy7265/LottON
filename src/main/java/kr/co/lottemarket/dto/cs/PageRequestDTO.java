@@ -29,6 +29,9 @@ public class PageRequestDTO {
     private int cate2;
     
     private int no;
+    
+    private int parent;
+    
     public Pageable getPageable(String sort){          
         return PageRequest.of(this.pg - 1, this.size, Sort.by(sort).descending());
     }

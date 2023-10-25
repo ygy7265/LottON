@@ -1,7 +1,5 @@
 package kr.co.lottemarket.dto.product;
-
 import java.time.LocalDateTime;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 import groovy.transform.Generated;
@@ -23,4 +21,5 @@ public class ProductReviewDTO {
 	private int score;
 	private String regip;
 	private LocalDateTime rDate;
+  
 }

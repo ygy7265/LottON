@@ -24,6 +24,7 @@ public class UserEntity {
 	private String uid;
 	private String pass;
 	private String name;
+	private int birth;
 	private int gender;
 	@Column(name = "hp", unique = true)
 	private String hp;
@@ -62,6 +63,7 @@ public class UserEntity {
 				.pass1(pass)
 				.pass2(pass)
 				.name(name)
+				.birth(birth)
 				.gender(gender)
 				.hp(hp)
 				.email(email)

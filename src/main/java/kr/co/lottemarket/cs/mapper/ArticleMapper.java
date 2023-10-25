@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.co.lottemarket.dto.ArticleDTO;
-import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 
 @Mapper
 public interface ArticleMapper {
@@ -20,5 +19,17 @@ public interface ArticleMapper {
 
 	public List<ArticleDTO> selectAjaxCate1(int group);
 	
+	public ArticleDTO selectComment(int parent);
+	
+	//글 보기
+	public ArticleDTO selectArticle(int no);
+	
+	//faq nav
+	public ArticleDTO selectNav(int group, int cate1);
+	
+	//MyPage Article
+	public List<ArticleDTO> selectMyQna(String uid, int start);
+	
+	public int selectMyCountTotal(String uid);
 	
 }

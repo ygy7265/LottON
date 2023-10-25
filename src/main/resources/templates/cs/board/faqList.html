@@ -3,23 +3,62 @@
       xmlns:layout="http://www.thymeleaf.org/"
       layout:decorate="/cs/board/moduleList.html">
 
- 
+
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+     $(document).ready(function () {
+            $(".detail").click(function (e) {
+                e.preventDefault();
+                var cate2 = this.classList[1];
+                console.log("cate2 = " + cate2);
+
+                // jQuery를 사용하여 해당 클래스에 속하는 모든 숨겨진 요소를 표시합니다.
+                $("." + cate2).show();
+
+                // "더보기" 버튼을 숨깁니다.
+                $(this).hide();
+
+                // "간단히보기" 버튼을 보여줍니다.
+                $(".simple." + cate2).show();
+            });
+
+            $(".simple").click(function (e) {
+                e.preventDefault();
+                var cate2 = this.classList[1];
+
+                // 해당 클래스에 속하는 모든 요소를 숨김 처리합니다.
+                $("." + cate2 + "list").children().slice(3).hide();
+
+                // "간단히보기" 버튼을 숨깁니다.
+                $(this).hide();
+
+                // "더보기" 버튼을 보여줍니다.
+                $(".detail." + cate2).show();
+            });
+        });
+</script>
+</head>
+
+
              <article layout:fragment="content">        
               <nav>
-                <h1>회원</h1>
-                <h2>가장 자주 묻는 질문입니다.</h2>
+                <h1 th:text="${nav.cate1_name}"></h1>
+                <h2 th:text="${nav.cate1_discription}"></h2>
               </nav>
 
 			 <th:block th:each="list:${lists}">
               <div>
                  <h3 th:text="${list.cate2_name}"></h3>
-                <ul>
-                  <li th:each="article:${articles}">
-					<th:block th:if="${list.cate2 == article.cate2}">
+                <ul th:class="${list.cate2}+list">
+                  <li th:each="article:${articles}" th:if="${list.cate2 == article.cate2}" th:class="${list.cate2}">
 					  <a th:href="@{/cs/view(group=2,cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}"><span>Q.</span>[[${article.title}]]?</a>
-				  	</th:block>
 				  </li>
-                  <li class="more"><a href="#">더보기</a></li>
+				  
+                  <li class="more">
+                     <a th:class="detail + ' ' + ${list.cate2}" href="#">더보기</a>
+                     <a th:class="simple + ' ' + ${list.cate2}" style="display: none" href="#">간단히보기</a>
+                  </li>
                 </ul>
               </div>
              </th:block>
