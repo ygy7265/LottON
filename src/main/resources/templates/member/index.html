@@ -16,10 +16,10 @@
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="../member/js/validation.js"></script> <!-- static에 있는 파일 경로 이렇게 설정해줘야함 -->
     <script src="../member/js/checkUser.js"></script>
-    <script src="../member/js/zipcode.js"></script>
     <script src="../member/js/agreeCheck.js"></script>
     <script src="../member/js/hpHypen.js"></script>
     <script src="../member/js/authEmail.js"></script>
+    <script src="../member/js/zipcode.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 이거 깜빡했네 -->
     
     <script>
@@ -67,8 +67,7 @@
                 <div>
                     <a th:href="@{/member/login}">로그인</a>
                     <a th:href="@{/member/join}">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    <a th:href="@{/product/productCart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
                 </div>
             </div>
             <div class="logo">

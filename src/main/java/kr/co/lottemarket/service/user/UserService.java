@@ -41,6 +41,11 @@ public class UserService {
 
 	}
 	
+	public UserDTO findByUid(String uid) {
+		UserEntity entity = userRepository.findByUid(uid);
+		return entity.toDTO();
+	}
+	
 	public void save(UserDTO dto) { // Service에서는 Entity가 아닌 DTO가 매개변수로!!
 		
 		// 비밀번호 암호화
@@ -127,14 +132,17 @@ public class UserService {
 	
 	// 비밀번호 찾기
 	public UserDTO findByUidAndEmail(String uid, String email) {
-		UserEntity entity = userRepository.findByUidAndEmail(uid, email); // 왜 get() 안되지??
-		return entity.toDTO();
+		UserEntity entity = userRepository.findByUidAndEmail(uid, email); // 왜 get() 안되지?? 
+		return entity.toDTO(); // return값이 DTO로 나오도록 하는 건 Controller에서 service로 메서드 호출할 때 DTO로 나오기 위함!
 	}
 	
 	// 비밀번호 변경
 	public void updatePass(UserDTO dto) {
 		
-		UserEntity entity = dto.toEntity();
+		// 비밀번호 암호화
+		dto.setPass1(encoder.encode(dto.getPass1()));
+		
+		UserEntity entity = dto.toEntity(); //findPassChange에서 name=pass1에 입력한 값이 위에서 암호화되고 entity의 pass값으로 설정한다
 		
 		userRepository.save(entity);
 	}

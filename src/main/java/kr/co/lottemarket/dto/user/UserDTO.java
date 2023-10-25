@@ -24,6 +24,7 @@ public class UserDTO {
 	private String pass1;
 	private String pass2;
 	private String name;
+	private int birth;
 	private int gender;
 	private String hp;
 	private String email;
@@ -57,6 +58,7 @@ public class UserDTO {
 				.uid(uid)
 				.pass(pass1)
 				.name(name)
+				.birth(birth)
 				.gender(gender)
 				.hp(hp)
 				.email(email)
