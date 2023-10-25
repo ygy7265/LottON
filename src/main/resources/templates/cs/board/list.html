@@ -37,6 +37,11 @@
 						<td><a th:href="@{/cs/view(group=${article.group},cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}">
 							[[${article.title}]]</a>
 						</td>
+						<th:block th:if="${article.group == 3}">
+						<td>
+							[[${#strings.substring(article.uid, 0, 3) + '***'}]]
+						</td>
+						</th:block>	
                    		<th:block th:if="${article.group == 3}">
 		                	<td class="status" th:text="${article.comment == 0 ? '답변중' : '답변완료'}"></td>           
 						</th:block>	

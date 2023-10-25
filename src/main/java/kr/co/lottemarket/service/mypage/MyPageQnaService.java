@@ -17,8 +17,18 @@ public class MyPageQnaService {
 	
 	private final ArticleMapper mapper;
 	
-	public List<ArticleDTO> selectMyQna(Object user){
-		return mapper.selectMyQna(user);
+	public List<ArticleDTO> selectMyQna(String user,int start){
+		return mapper.selectMyQna(user,start);
+	}
+	
+	
+	public ArticleDTO selectComment(int parent) {
+		return mapper.selectComment(parent);
+	}
+	
+	
+	public int selectMyCountTotal(String user) {
+		return mapper.selectMyCountTotal(user);
 	}
 	
 	

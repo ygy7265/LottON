@@ -56,7 +56,7 @@
    
    
    <select id="selectArticle" resultType="kr.co.lottemarket.dto.ArticleDTO">
-	  SELECT a.*, b.cate1_name, c.cate2_name
+	  SELECT a.*, b.cate1_name as cate1_name, c.cate2_name as cate2_name
 	  FROM lotte_board AS a
 	  LEFT JOIN lotte_board_cate1 AS b ON a.group = b.group AND a.cate1 = b.cate1
 	  LEFT JOIN lotte_board_cate2 AS c ON a.cate1 = c.cate1 AND a.cate2 = c.cate2
@@ -78,8 +78,18 @@
 		  LEFT JOIN `lotte_board_cate2` d ON a.cate1 = d.cate1 AND a.cate2 = d.cate2
 		  WHERE a.`group` = 3 AND a.parent=0 AND `uid` = #{uid}
 		  ORDER BY a.no DESC
-		  LIMIT 0, 10
+		  LIMIT #{start}, 10
     </select>
+    
+    
+     <select id="selectMyCountTotal" resultType="int">
+		    SELECT COUNT(*) FROM lotte_board
+		    WHERE uid = #{uid}
+    </select>
+    
+    
+    
+    
 	
 
  

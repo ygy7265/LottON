@@ -5,7 +5,7 @@
 
 <head>
 	
-	<script>
+		<script>
 	window.onload = function() {
 			
 			document.querySelector('#faqboardCate1').addEventListener('change', function() {
@@ -25,6 +25,7 @@
 		        if (xhr.status >= 200 && xhr.status < 300) {
 		            // 이전 옵션 제거
 		            while (category2Select.firstChild) {
+						console.log("category2Select.firstChild = " + category2Select.firstChild)
 		                category2Select.removeChild(category2Select.firstChild);
 		            }
 		
@@ -50,14 +51,64 @@
 		
 		    xhr.send();
 		});
-
+		
+		var form = document.querySelector('form');
+	    form.addEventListener('submit', function(e) {
+	        // 선택한 cate와 type 값을 가져옵니다.
+	        var selectedCate1 = document.querySelector('select[name="cate1"]').value;
+	        var selectedCate2 = document.querySelector('select[name="cate2"]').value;
+	
+	        // cate1 또는 cate2가 ''인 경우 처리합니다.
+	        if (selectedCate1 === '0' || selectedCate2 === '0') {
+	            e.preventDefault(); // 양식 제출을 방지합니다.
+	
+	            // cate와 type에 따라 알람 메시지를 생성합니다.
+	            var alertMessage = '';
+	            if (selectedCate1 === '0') {
+	                alertMessage += '1차 분류를 선택하세요. ';
+	            }
+	            if (selectedCate2 === '0') {
+	                alertMessage += '2차 분류를 선택하세요.';
+	            }
+	
+	            alert(alertMessage); // 경고 메시지를 표시합니다.
+	        }
+	    });
 	}
 	</script>
+	
+	<script>
+	$(document).ready(function() {
+	    $('form').submit(function(e) {
+	        // 선택한 cate와 type 값을 가져옵니다.
+	        var selectedCate1 = $('select[name="cate1"]').val();
+	        var selectedCate2 = $('select[name="cate2"]').val();
+	
+	
+	        // cate 또는 type이 ''인 경우 처리합니다.
+	        if (selectedCate1 === '0' || selectedCate2 === '') {
+	            e.preventDefault(); // 양식 제출을 방지합니다.
+	
+	            // cate와 type에 따라 알람 메시지를 생성합니다.
+	            var alertMessage = '';
+	            if (selectedCate1 === '0') {
+	                alertMessage += '1차 분류를 선택하세요.';
+	            }
+	            if (selectedCate2 === '') {
+	                alertMessage += '2차 분류을 선택하세요.';
+	            }
+	
+	            alert(alertMessage); // 경고 메시지를 표시합니다.
+	        }
+	    });
+	});
+
+</script>	
 </head>
       
             <article layout:fragment="content">
                 <form th:action="@{/cs/qna/write(group=3)}" method="post">
-			    <input type="text" name="uid" th:value="${#authentication.principal.user.uid}">
+			    <input type="hidden" name="uid" th:value="${#authentication.principal.user.uid}">
                 <table>
                   <tr>
                     <td>문의유형</td>

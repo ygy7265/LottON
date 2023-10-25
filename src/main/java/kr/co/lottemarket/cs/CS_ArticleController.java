@@ -123,7 +123,7 @@ public class CS_ArticleController {
 			log.info("article content = " + article.getContent() );
 			log.info("article rdate = " + article.getRdate() );
 			log.info("article comment = " + article.getComment());
-			log.info("article cate2_Name = " + article.getCate2_name());
+			log.info("article cate2_name = " + article.getCate2_name());
 			
 
 			log.info(pageRequestDTO.getNo());
