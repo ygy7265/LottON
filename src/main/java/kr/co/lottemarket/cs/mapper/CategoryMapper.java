@@ -32,4 +32,6 @@ public interface CategoryMapper {
 	public List<ArticleDTO> selectSearchArticleQna(int cate1, int cate2);
 	public void AnswerQna(ArticleDTO dto);
 	public List<TermsDTO> selectPolicy();
+	public int selectCountNotices();
+	public int selectCountQnas();
 }

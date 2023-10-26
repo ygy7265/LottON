@@ -355,6 +355,18 @@ public class AdminService {
     	category2Mapper.AnswerQna(dto);
     
     }
+    
+    public int selectCountNotices() {
+    	
+    	return category2Mapper.selectCountNotices();
+		
+    	
+    }
+    public int selectCountQnas() {
+    	
+    	return category2Mapper.selectCountQnas();
+    	
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								/////////////////////////policy service part//////////////////////
