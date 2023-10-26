@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/">
-  <head>
-    <meta charset="UTF-8" />
-    <title>롯데마켓::대한민국 1등 온라인 쇼핑몰</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./imges/favicon.ico" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구매회원 약관</title>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"/>
-    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../../css/policy/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <script src="./js/javascript.js"></script> 
-
-    <style>
-     
-
-    </style>
-    <script>
-      $(function(){
-        $('#bannerTop .btnClose').click(function(){
-          $(this).closest('#bannerTop').removeClass('on');
-        });
-      });
-
-    </script>
-  </head>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>    
+</head>
   <body>
     <div id="bannerTop" class="on" style="background: #e4dfdf;">
       <article>
-        <a href="#"><img src="./images/topBanner1.png"/></a>
+        <a href="#"><img src="../images/topBanner1.png"/></a>
         <button class="btnClose">close</button>
       </article>
     </div>
@@ -68,7 +56,7 @@
         </div>
         <div class="logo">
           <div>
-            <a th:href="@{/}"><img src="./images/header_logo.png" alt="로고" /></a>
+            <a th:href="@{/}"><img src="../images/header_logo.png" alt="로고" /></a>
             <form th:action="@{/product/productSearch}">
               <input type="text" name="search" />
               <button><i class="fa fa-search"></i></button>
@@ -93,10 +81,55 @@
           </div>
         </div>
       </header>
-      
-      
-      <main layout:fragment="content"></main>
-      <footer>
+<body>
+        <main id="termsPolicy">
+            <aside>
+                <ul class="category">
+                    <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
+                    <li>
+                        <a th:href="@{/product/productList(cate1=11,cate2=11)}"><i class="fas fa-tshirt" aria-hidden="true"></i>패션·의류·뷰티</a>
+                        <ol>
+                            <li><a th:href="@{/product/productList(cate1=11,cate2=11)}">남성의류</a></li>
+                            <li><a th:href="@{/product/productList(cate1=11,cate2=10)}">여성의류</a></li>
+                            <li><a th:href="@{/product/productList(cate1=11,cate2=14)}">잡화</a></li>
+                            <li><a th:href="@{/product/productList(cate1=11,cate2=16)}">뷰티</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a th:href="@{/product/productList(cate1=15,cate2=10)}"><i class="fas fa-laptop" aria-hidden="true"></i>가전·디지털</a>
+                        <ol>
+                            <li><a th:href="@{/product/productList(cate1=15,cate2=10)}">노트북</a></li>
+                            <li><a th:href="@{/product/productList(cate1=15,cate2=21)}">가전</a></li>
+                            <li><a th:href="@{/product/productList(cate1=15,cate2=13)}">휴대폰</a></li>
+                            <li><a th:href="@{/product/productList(cate1=15,cate2=12)}">기타</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a th:href="@{/product/productList(cate1=13,cate2=11)}"><i class="fas fa-utensils" aria-hidden="true"></i>식품·생필품</a>
+                        <ol>
+                            <li><a th:href="@{/product/productList(cate1=13,cate2=10)}">신선식품</a></li>
+                            <li><a th:href="@{/product/productList(cate1=13,cate2=11)}">가공식품</a></li>
+                            <li><a th:href="@{/product/productList(cate1=13,cate2=12)}">건강식품</a></li>
+                            <li><a th:href="@{/product/productList(cate1=13,cate2=14)}">생필품</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a th:href="@{/product/productList(cate1=14,cate2=11)}"><i class="fas fa-home" aria-hidden="true"></i>홈·문구·취미</a>
+                        <ol>
+                            <li><a th:href="@{/product/productList(cate1=14,cate2=10)}">가구/DIY</a></li>
+                            <li><a th:href="@{/product/productList(cate1=14,cate2=11)}">침구·커튼</a></li>
+                            <li><a th:href="@{/product/productList(cate1=14,cate2=13)}">생활용품</a></li>
+                            <li><a th:href="@{/product/productList(cate1=14,cate2=15)}">사무용품</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </aside>
+            
+            <section layout:fragment="content"></section>
+
+        </main>
+
+<footer>
         <ul>
           <li><a href="#">회사소개</a></li>
           <li><a th:href="@{/policy/buyer}">서비스이용약관</a></li>
@@ -121,7 +154,7 @@
           </p>
         </div>
       </footer>
-      <button type="button" id="top">상단이동</button>
     </div>
   </body>
+</body>
 </html>
