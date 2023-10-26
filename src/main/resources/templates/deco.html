@@ -58,7 +58,7 @@
 				<a th:href="@{/my/}">마이페이지</a> <!-- 마이페이지는 로그인했을때만 나오게 -->
 			</th:block>
 			<th:block th:if="${type eq '2' || type eq '9'}">
-				<a href="#">관리페이지</a>
+				<a th:href="@{/admin/layout/index/layoutindex}">관리자페이지</a>
 			</th:block>
             <a th:href="@{product/productCart}"
               ><i class="fa fa-shopping-cart" aria-hidden="true"></i
