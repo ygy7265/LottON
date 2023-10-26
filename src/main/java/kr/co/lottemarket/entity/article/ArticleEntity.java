@@ -48,7 +48,7 @@ public class ArticleEntity {
 	private String content;
 	@CreationTimestamp
 	private LocalDateTime rdate;
-	private int Answer;
+	private int comment;
 	
 	
 	
@@ -63,7 +63,6 @@ public class ArticleEntity {
 	                .title(title)
 	                .content(content)
 	                .rdate(rdate)
-	                .Answer(Answer)
 	                .build();
 	    }
 

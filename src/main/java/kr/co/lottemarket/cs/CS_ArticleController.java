@@ -88,8 +88,6 @@ public class CS_ArticleController {
 				  }
 				  
 			  }
-			
-			  
 			  model.addAttribute("pageResponseDTO", pageResponseDTO);
 			  model.addAttribute("articles", articles);
 			  model.addAttribute("state", "list");
@@ -130,19 +128,19 @@ public class CS_ArticleController {
 			//답글 출력
 
 			//초기값
-			ArticleDTO comment = null;
+			ArticleDTO answer = null;
 			
 			if (article.getComment() == 1) {
-				comment = articleSerivce.selectComment(pageRequestDTO.getNo());
+				answer = articleSerivce.selectAnswer(pageRequestDTO.getNo());
 			} else {
-				comment = new ArticleDTO();
+				answer = new ArticleDTO();
 			}
 
 			log.info("pageRequestDTO.getParent() = " + pageRequestDTO.getParent());
 			log.info("pageRequestDTO.getNo() = " + pageRequestDTO.getNo());
-			log.info("comment = " + comment);
+			log.info("answer = " + answer);
 			
-			model.addAttribute("comment", comment);
+			model.addAttribute("answer", answer);
 			
 			
 			if(pageRequestDTO.getGroup() == 2) {

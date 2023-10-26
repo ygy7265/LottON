@@ -313,7 +313,7 @@ public class Admin_CsController {
 	@PostMapping("/admin/layout/cs/qnaWrite")
 	public String qnaWriter(ArticleDTO dto) {
 		
-		dto.setAnswer(dto.getAnswer() +1);
+		dto.setComment(dto.getComment() +1);
 		
 		adminService.Answer(dto);
 		

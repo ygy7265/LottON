@@ -80,8 +80,8 @@ public class CsSerivce {
 	}
 	
 	//qna 답변 출력
-	public ArticleDTO selectComment(int parent){
-		return mapper.selectComment(parent);
+	public ArticleDTO selectAnswer(int parent){
+		return mapper.selectAnswer(parent);
 	}
 	
 	//글보기인데 안씀 마이바티스로 수정

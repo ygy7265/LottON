@@ -35,7 +35,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "lotte_board")
+@Table(name = "lotte_board_cate1")
 public class ArticleCate1Entity {
 
 	@Id
