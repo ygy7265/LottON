@@ -17,6 +17,8 @@ public class TermsDTO {
 	private String privacy;
 	private String location;
 	private String finance;
+	private String buyer;
+	private String seller;
 	private String tax;
 	
 	public TermsEntity toEntity() {

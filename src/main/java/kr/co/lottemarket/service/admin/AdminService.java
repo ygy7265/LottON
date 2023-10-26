@@ -22,6 +22,7 @@ import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.dto.product.ProductCate1DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
+import kr.co.lottemarket.dto.user.TermsDTO;
 import kr.co.lottemarket.entity.article.ArticleEntity;
 import kr.co.lottemarket.entity.product.ProductCate1Entity;
 import kr.co.lottemarket.entity.product.ProductEntity;
@@ -355,5 +356,18 @@ public class AdminService {
     
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+								/////////////////////////policy service part//////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public List<TermsDTO> selectPolicy() {
+    	
+    	List<TermsDTO> dtoList = category2Mapper.selectPolicy();
+    	
+    	return dtoList;
+    	
+    }
+    
+    
     
 }
