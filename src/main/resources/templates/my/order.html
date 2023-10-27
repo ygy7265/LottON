@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<th:block th:insert="/my/_header.html"/>
+
 <div class="ordered">
 				<ul>
                     <span class="menu_else"></span>
@@ -20,21 +21,21 @@
 	        <div class="byDate">
 	            <span class="tit">기간별조회</span>                            
 	            <ul class="date_3ea">
-	                <li><a href="#"><em>1</em>주일</a></li>
-	                <li><a href="#"><em>15</em>일</a></li>
-	                <li><a href="#" class="on"><em>1</em>개월</a></li>
+	                <li><a href="#" class="date"><em>1</em>주일</a></li>
+	                <li><a href="#" class="date"><em>15</em>일</a></li>
+	                <li><a href="#" class="date"><em>1</em>개월</a></li>
 	            </ul>
 	            <ul class="date_5ea">
-	                <li><a href="#"><em>11</em>월</a></li>
-	                <li><a href="#"><em>10</em>월</a></li>
-	                <li><a href="#"><em>9</em>월</a></li>
-	                <li><a href="#"><em>8</em>월</a></li>
-	                <li><a href="#"><em>7</em>월</a></li>
+	                <li><a href="#" class="date" ><em>11</em>월</a></li>
+	                <li><a href="#" class="date"><em>10</em>월</a></li>
+	                <li><a href="#" class="date"><em>9</em>월</a></li>
+	                <li><a href="#" class="date"><em>8</em>월</a></li>
+	                <li><a href="#" class="date"><em>7</em>월</a></li>
 	            </ul>
 	            <p>
 	                <input type="date" name="begin"><span>~</span><input type="date" name="end">
 	            </p>
-	            <button class="btnConfirm">조회하기</button>
+	            <button class="btnConfirm btnDateConfirm">조회하기</button>
 	        </div>
 	
 	        <table border="0">
@@ -55,8 +56,8 @@
 	                        <li class="prodPrice">[[${#numbers.formatInteger(list.product.price,0,"COMMA")}]]</li>
 	                    </ul>
 	                </td>
-	                <td class="status" th:if="${list.ordComplete} == 1")>배송완료</td>
-	                <td class="status" th:if="${list.ordComplete} == 0")>배송중</td>
+	                <td class="status" style="color: blue;" th:if="${list.ordComplete} == 1")>배송완료</td>
+	                <td class="status"  style="color: red;" th:if="${list.ordComplete} == 0")>배송중</td>
 	                <td class="confirm">
 						<input type="hidden" name="ordCompleteNo" th:value="${list.ordCompleteNo}">
 						<input type="hidden" name="ordProdName" th:value="${list.product.prodName}">

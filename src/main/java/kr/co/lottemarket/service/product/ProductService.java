@@ -183,10 +183,14 @@ public class ProductService {
 		return entitys;
 	}
 	
-	public List<Object[]> findProductsByOrderItem(String uid) {
+	public List<ProductOrderItemDTO> findProductsByOrderItem(String uid) {
+		
 		uid="seller1";
-		List<Object[]> entitys = orderrepo.findProductsByOrderItem(uid);
-		return entitys;
+		UserEntity entity = new UserEntity();
+		entity.setUid(uid);
+		List<ProductOrderItemEntity> entitys = orderrepo.findByUser(entity);
+		List<ProductOrderItemDTO> dto = entitys.stream().map(e-> modelmapper.map(e, ProductOrderItemDTO.class)).toList();
+		return dto;
 	}
 	
 	public void deleteProductByCart(List<Integer> cartNo) {

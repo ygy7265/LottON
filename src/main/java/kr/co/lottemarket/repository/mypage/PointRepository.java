@@ -14,4 +14,5 @@ import kr.co.lottemarket.entity.user.UserEntity;
 public interface PointRepository extends JpaRepository<ProductPointEntity, String>{
 	
 	public Page<ProductPointEntity> findByUser(UserEntity user,Pageable page);
+	public List<ProductPointEntity> findTop5ByUserOrderByPointDateDesc(UserEntity user);
 }

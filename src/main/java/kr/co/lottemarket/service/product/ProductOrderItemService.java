@@ -88,15 +88,10 @@ public class ProductOrderItemService {
 		uid = "seller1";
 		UserEntity user = UserEntity.builder().uid(uid).build();
 		
-		List<Object[]> dto= repo.findProductsByOrderItem(uid);
+		List<ProductOrderItemEntity> entity= repo.findByUser(user);
 		
-		List<ProductOrderItemDTO> itemdto = new ArrayList<>();
-		for(Object[] item: dto) {
-			ProductOrderItemDTO entity = modelmapper.map(item, ProductOrderItemDTO.class);
-
-			itemdto.add(entity);
-		}
-		return itemdto;
+		List<ProductOrderItemDTO> dto = entity.stream().map(e -> modelmapper.map(e, ProductOrderItemDTO.class)).toList();
+		return dto;
 	}
 	
 	//카트 > 상품 주문하기 페이지

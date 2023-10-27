@@ -30,7 +30,7 @@
                         <td class="prodName"><a th:href="@{/product/productView(prodNo=${list.product.prodNo})}">[[${list.product.prodName}]]</a></td>
                         <td class="content">[[${list.content}]]</td>                                
                         <td class="score"><span th:class="@{rating star}+${list.score}"></span></td>
-                        <td class="date">[[${#temporals.format(list.rDate, 'yyyy-MM-dd')}]]</td>
+                        <td class="date">[[${#temporals.format(list.regDate, 'yyyy-MM-dd')}]]</td>
                     </tr>
                   
                 </table>
