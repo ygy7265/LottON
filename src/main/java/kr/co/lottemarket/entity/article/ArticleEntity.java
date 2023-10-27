@@ -49,7 +49,7 @@ public class ArticleEntity {
 	@CreationTimestamp
 	private LocalDateTime rdate;
 	private int comment;
-	
+  
 	 public ArticleDTO toDTO(){
 	        return ArticleDTO.builder()
 	                .no(no)

@@ -19,6 +19,7 @@ import kr.co.lottemarket.dto.product.OrderPageResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.product.ProductOrderDTO;
+import kr.co.lottemarket.dto.product.ProductPointDTO;
 import kr.co.lottemarket.dto.product.ProductReviewDTO;
 import kr.co.lottemarket.dto.product.ReviewPageRequestDTO;
 import kr.co.lottemarket.dto.product.ReviewPageResponseDTO;
@@ -27,6 +28,8 @@ import kr.co.lottemarket.entity.product.ProductReviewEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
 import kr.co.lottemarket.service.mypage.MyPageQnaService;
 import kr.co.lottemarket.service.mypage.MyPageOrderService;
+import kr.co.lottemarket.service.mypage.MyPageOrderService.dataDTO;
+import kr.co.lottemarket.service.mypage.MyPagePointService;
 import kr.co.lottemarket.service.mypage.MyPageReviewService;
 import lombok.RequiredArgsConstructor;
 import kr.co.lottemarket.service.user.UserService;
@@ -39,11 +42,14 @@ import lombok.extern.log4j.Log4j2;
 public class MyPageController {
 	
 	private final MyPageReviewService reviewService;
+	private final MyPagePointService pointService;
 	private final RootConfig user;
 	private final MyPageOrderService service;
 	private final MyPageQnaService articleSerivce;
 	private final RootConfig rootConfig;
 	private final UserService userService;
+	
+	int total=0;
 	
 	@GetMapping("/")
 	public String index(Model model) {
@@ -51,24 +57,60 @@ public class MyPageController {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUid("seller1");
 		List<ProductOrderDTO> dto = service.lastOrder(userDTO);
+		List<ProductReviewDTO> dtoReview = reviewService.reviewFindTop5();
+		List<ProductPointDTO> dtoPoint = pointService.pointFindTop5();
+		
+		dataDTO datadto = service.countProduct();
+		model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("count",datadto.getCount());
 		model.addAttribute("dto",dto);
+		model.addAttribute("dtoReview",dtoReview);
+		model.addAttribute("dtoPoint",dtoPoint);
+		String user = (String)rootConfig.Usersession();
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
+		
+		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user, 0, 3);
+		model.addAttribute("qnaList",qnaList);
 		return "/my/home";
 	}
 	@GetMapping("/coupon")
-	public String coupon() {
+	public String coupon(Model model) {
+
+		dataDTO datadto = service.countProduct();
+		model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("count",datadto.getCount());
+		String user = (String)rootConfig.Usersession();
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
+    
 		return "/my/coupon";
 	}
 	@GetMapping("/order")
-	public String order(Model model,OrderPageRequestDTO pageRequestDTO) {
-		OrderPageResponseDTO dto =service.OrderList(pageRequestDTO);
-		model.addAttribute("dtoList",dto);
+	public String order(Model model,OrderPageRequestDTO pageRequestDTO,HttpServletRequest request) {
+    
+		dataDTO datadto = service.countProduct();
+		String begin = request.getParameter("begin");
+		String end = request.getParameter("end");
+		OrderPageResponseDTO dto = null;
+	
+		dto =service.OrderList(pageRequestDTO, begin, end);
+		
+		String user = (String)rootConfig.Usersession();
+		total = articleSerivce.selectMyCountTotal(user);
+    
+    model.addAttribute("dtoList",dto);
+    model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("count",datadto.getCount());
+		model.addAttribute("total", total);
 		
 		return "/my/order";
 	}
 	
 	@GetMapping("/info")
-	public String info(Model model) {
-		
+	public String info(Model model,HttpServletRequest request) {
+		dataDTO datadto = service.countProduct();
+
 		Object obj = rootConfig.Usersession();
 		String uid = "seller1";
 		
@@ -81,12 +123,22 @@ public class MyPageController {
 		}
 		
 		UserDTO userDTO = userService.findByUid(uid);
-		model.addAttribute(userDTO);
+
+		String user = (String)rootConfig.Usersession();
+		total = articleSerivce.selectMyCountTotal(user);
+    
+    model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("count",datadto.getCount());
+    model.addAttribute(userDTO);
+		model.addAttribute("total", total);
+		
 		return "/my/info";
 	}
 	@GetMapping("/qna")
-	public String qna(Model model, @RequestParam(defaultValue = "1")  int pg) {
-		
+	public String qna(Model model, @RequestParam(defaultValue = "1")  int pg,HttpServletRequest request) {
+		dataDTO datadto = service.countProduct();
+		model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("count",datadto.getCount());
 		String user = (String)rootConfig.Usersession();
 		
 		//게시글 출력
@@ -95,7 +147,6 @@ public class MyPageController {
 		//페이지 관련 변수
 		int start=0;
 		int currentPage =1;
-		int total=0;
 		int lastPageNum=0;
 		int pageGroupCurrent=1;
 		int pageGroupStart=1;
@@ -133,7 +184,9 @@ public class MyPageController {
 		//페이지 시작번호 계산
 		pageStartNum = total-start;
 		
-		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user,start);
+		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user,start, 10);
+		
+		model.addAttribute("qnaList",qnaList);
 		model.addAttribute("start", start);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("total", total);
@@ -151,30 +204,47 @@ public class MyPageController {
 		log.info("pageGroupStart = " + pageGroupStart);
 		log.info("pageGroupEnd = " + pageGroupEnd);
 		log.info("pageStartNum = " + pageStartNum);
+		log.info("qnaList = " + qnaList);
 		
-		
-		model.addAttribute("qnaList",qnaList);
+	
 		
 		return "/my/qna";
 	}
+	
 	
 	
 	@GetMapping("/review")
 	public String reviewGet(Model model,ReviewPageRequestDTO dto) {
 		ReviewPageResponseDTO list = reviewService.reviewFind(dto);
 		
+
+		dataDTO datadto = service.countProduct();
+		String user = (String)rootConfig.Usersession();
+		total = articleSerivce.selectMyCountTotal(user);
+    
+		model.addAttribute("total", total);
 		model.addAttribute("list",list);
-		
+		model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("count",datadto.getCount());
 		return "/my/review";
-		
 	}
-	
+
 	@PostMapping("/review")
-	public String review(ProductReviewDTO dto,@Param("ordCompleteNo") int ordCompleteNo,HttpServletRequest request) {
-	
+	public String review(ProductReviewDTO dto,@Param("ordCompleteNo") int ordCompleteNo,Model model,HttpServletRequest request) {
+		dataDTO datadto = service.countProduct();
+
 		dto.setRegip(request.getRemoteAddr());
 		reviewService.reviewSave(dto,ordCompleteNo);
+		
+		String user = (String)rootConfig.Usersession();
+		total = articleSerivce.selectMyCountTotal(user);
+    
+    model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("count",datadto.getCount());
+		model.addAttribute("total", total);
+		
 		return "redirect:/my/";
 	}
+	
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import kr.co.lottemarket.config.RootConfig;
+import kr.co.lottemarket.cs.mapper.ArticleMapper;
 import kr.co.lottemarket.dto.product.ProductReviewDTO;
 import kr.co.lottemarket.dto.product.ReviewPageRequestDTO;
 import kr.co.lottemarket.dto.product.ReviewPageResponseDTO;
@@ -36,6 +37,7 @@ public class MyPageReviewService {
 	private final ProductOrderCompleteRepository orderRepo;
 	private final PointRepository pointRepo;
 	private final ModelMapper modelmapper;
+	private final ArticleMapper articleMapper;
 	
 	
 	public UserEntity entity() {
@@ -78,4 +80,11 @@ public class MyPageReviewService {
 		 
 		 return list;
 	}
+	
+	
+	public int selectMyCountTotal(String user) {
+		return articleMapper.selectMyCountTotal(user);
+	}
+	
+	
 }

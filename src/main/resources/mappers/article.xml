@@ -48,7 +48,7 @@
         WHERE `group` = #{group}
     </select>
 
-	 <select id="selectComment" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	 <select id="selectAnswer" resultType="kr.co.lottemarket.dto.ArticleDTO">
 	     SELECT *
 		 FROM lotte_board
 		 WHERE parent = #{parent}
@@ -78,7 +78,7 @@
 		  LEFT JOIN `lotte_board_cate2` d ON a.cate1 = d.cate1 AND a.cate2 = d.cate2
 		  WHERE a.`group` = 3 AND a.parent=0 AND `uid` = #{uid}
 		  ORDER BY a.no DESC
-		  LIMIT #{start}, 10
+		  LIMIT #{start}, #{end}
     </select>
     
     

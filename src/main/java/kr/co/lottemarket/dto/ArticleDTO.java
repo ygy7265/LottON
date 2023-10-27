@@ -38,7 +38,6 @@ public class ArticleDTO {
 	private String cate1_name;
 	private String cate2_name;
 	private String cate1_discription;
-	private int comment;
 	
 	 public ArticleEntity toEntity(){
 	        return ArticleEntity.builder()
@@ -52,6 +51,7 @@ public class ArticleDTO {
 	                .content(content)
 	                .rdate(rdate)
 	                .comment(comment)
+	                .content(content)
 	                .build();
 	    }
 }

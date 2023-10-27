@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../company/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    <script src="../js/company//header.js"></script>
+    <script src="../js/company/header.js"></script>
     <script>
         $(function() {        
             
@@ -62,7 +62,7 @@
     <div class="swiper">
         <header>
             <div>
-                <a href="./index.html"><img src="./img/header_logo.png" width="200" alt="로고"></a>
+                <a th:href="@{/}"><img th:src="@{/thumb1/img/header_logo.png}" width="200" alt="로고"></a>
                 <ul>
                     <li><a th:href="@{/company/}">회사소개</a></li>
                     <li><a th:href="@{/company/notice}">전자공시</a></li>
@@ -76,7 +76,7 @@
         <div class="swiper-wrapper">
           <!-- Slides -->
           <div class="swiper-slide slide1">
-            <img class="mainImg" src="./img/indexLogo.png" alt="로고">
+            <img class="mainImg" style="width: 100%; height: 750px;" th:src="@{/thumb1/img/indexLogo.png}" alt="로고">
             <div class="scroll-icon">
                 <span></span>
                 <span></span>

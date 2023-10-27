@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import kr.co.lottemarket.cs.mapper.ArticleMapper;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
 import kr.co.lottemarket.dto.product.OrderPageRequestDTO;
@@ -34,7 +35,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class MyPageOrderService {
 	
-	
+	private final ArticleMapper articleMapper;
 	private final ProductOrderCompleteRepository comRepo;
 	private final PointRepository pointRepo;
 	private final ModelMapper modelMapper;
@@ -78,6 +79,10 @@ public class MyPageOrderService {
 		int result = save.getOrdComplete();
 		log.info("result" + result);
 		return result;
+	}
+	
+	public int selectMyCountTotal(String user) {
+		return articleMapper.selectMyCountTotal(user);
 	}
 	
 
