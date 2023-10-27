@@ -46,21 +46,25 @@
                                 기본정보는 반드시 입력해야 합니다.
                             </p>
                             <table>
-                                <tr>
-                                    <td>1조</td>
-                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1"></textarea></td>
+                                <tr th:each="termslist : ${termslist}">
+                                    <td>구매회원 이용약관</td>
+                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1">[[${termslist.buyer}]]</textarea></td>
                                 </tr>
-                                <tr>
-                                    <td>2조</td>
-                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1"></textarea></td>
+                                <tr th:each="termslist : ${termslist}">
+                                    <td>전자금융거래 이용약관</td>
+                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1">[[${termslist.finance}]]</textarea></td>
                                 </tr>
-                                <tr>
-                                    <td>3조</td>
-                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1"></textarea></td>
+                                <tr th:each="termslist : ${termslist}">
+                                    <td>위치정보 이용약관</td>
+                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1">[[${termslist.location}]]</textarea></td>
                                 </tr>
-                                <tr>
-                                    <td>4조</td>
-                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1"></textarea></td>
+                                <tr th:each="termslist : ${termslist}">
+                                    <td>개인정보처리방침</td>
+                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1">[[${termslist.privacy}]]</textarea></td>
+                                </tr>
+                                <tr th:each="termslist : ${termslist}">
+                                    <td>판매회원 이용약관</td>
+                                    <td><textarea style="resize: none; width: 800px; height: 100px;" name="art1">[[${termslist.seller}]]</textarea></td>
                                 </tr>
                             </table>                                
                         </section>                                                

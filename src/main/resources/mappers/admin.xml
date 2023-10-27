@@ -20,7 +20,7 @@
 			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
 			WHERE parent=0 AND a.`group` =1
-			LIMIT 10 OFFSET #{pageStartNum};
+			LIMIT #{pageStartNum}, 10;
 	        
 	    </select>
 	    
@@ -64,7 +64,7 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 3
-	        LIMIT 10 OFFSET #{pageStartNum};
+	        LIMIT  #{pageStartNum}, 10;
 
 	        
 	    </select>
@@ -134,7 +134,7 @@
 			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
 			WHERE parent=0 AND a.`group` =1 AND a.cate1 = #{cate1}
-			LIMIT 10 OFFSET #{pageStartNum};
+			LIMIT  #{pageStartNum}, 10;
 	        
 	    </select>
 	    
@@ -166,7 +166,7 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 3 AND a.cate1 = #{cate1} AND a.cate2 = #{cate2}
-	        LIMIT 10 OFFSET #{pageStartNum};
+	        LIMIT #{pageStartNum}, 10;
 	        
 	    </select>
 	    
@@ -225,12 +225,30 @@
 	        
 	    </select>
 	    
+		<select id="selectUser" resultType="kr.co.lottemarket.dto.user.UserDTO">
+	       
+	        SELECT * FROM lotte_member; 
+	        
+	    </select>
+	    
+	    <select id="selectCountUser" resultType="int">
+	       
+			SELECT COUNT(*) FROM `lotte_member`;
+	        
+	    </select>
+	    
 	    <insert id="AnswerQna">
 	    	
 	    	INSERT INTO  lotte_board (`group`, parent, uid, cate1, cate2, content, rdate)  
 	    	VALUES (#{group}, #{no}, #{uid}, #{cate1}, #{cate2}, #{content}, NOW()); 
 	    	
 	    </insert>
+	    
+	    <update id="commentPlus">
+	    
+	    	UPDATE lotte_board SET comment = 1 WHERE `no` = #{no};
+	    
+	    </update>
 	    
 	    <update id="noticemodify">
 	    
