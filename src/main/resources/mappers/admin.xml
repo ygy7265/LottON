@@ -20,13 +20,19 @@
 			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
 			WHERE parent=0 AND a.`group` =1
-			LIMIT 10 OFFSET 0;
+			LIMIT 10 OFFSET #{pageStartNum};
 	        
 	    </select>
 	    
-		<select id="selectCountNotices" resultType="kr.co.lottemarket.dto.ArticleDTO">
+		<select id="selectCountNotices" resultType="int">
 	       
-			SELECT COUNT(*) FROM `lotte_board` WHERE parent = 0 AND `group` = 3;
+			SELECT COUNT(*) FROM `lotte_board` WHERE parent = 0 AND `group` = 1;
+	        
+	    </select>
+	    
+		<select id="selectCountNoticesByCate1" resultType="int">
+	       
+			SELECT COUNT(*) FROM `lotte_board` WHERE parent = 0 AND `group` = 1 AND cate1= #{cate1};
 	        
 	    </select>
 	    
@@ -58,13 +64,20 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 3
-	        LIMIT 10 OFFSET 0;
+	        LIMIT 10 OFFSET #{pageStartNum};
+
 	        
 	    </select>
 	    
-	   	<select id="selectCountQnas" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	   	<select id="selectCountQnas" resultType="int">
 	       
 			SELECT COUNT(*) FROM `lotte_board` WHERE parent = 0 AND `group` = 3;
+	        
+	    </select>
+	    
+	   	<select id="selectCountQnasByCate1ANDCate2" resultType="int">
+	       
+			SELECT COUNT(*) FROM `lotte_board` WHERE parent = 0 AND `group` = 3 AND cate1= #{cate1} AND cate2 = #{cate2};
 	        
 	    </select>
 	    
@@ -121,6 +134,7 @@
 			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
 			WHERE parent=0 AND a.`group` =1 AND a.cate1 = #{cate1}
+			LIMIT 10 OFFSET #{pageStartNum};
 	        
 	    </select>
 	    
@@ -136,6 +150,7 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 2 AND a.cate1 = #{cate1} AND a.cate2 = #{cate2}
+	        LIMIT 10 OFFSET 0;
 	        
 	    </select>
 	    
@@ -151,6 +166,7 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 3 AND a.cate1 = #{cate1} AND a.cate2 = #{cate2}
+	        LIMIT 10 OFFSET #{pageStartNum};
 	        
 	    </select>
 	    

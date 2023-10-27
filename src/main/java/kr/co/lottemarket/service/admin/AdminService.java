@@ -251,9 +251,9 @@ public class AdminService {
     	
     }
     
-    public List<ArticleDTO> selectArticleNotices() {
+    public List<ArticleDTO> selectArticleNotices(int pg, int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectArticleNotices();
+    	List<ArticleDTO> dtoList = category2Mapper.selectArticleNotices(pg, pageStartNum);
     	
     	return dtoList;
     	
@@ -267,17 +267,17 @@ public class AdminService {
     	
     }
     
-    public List<ArticleDTO> selectArticleQnas() {
+    public List<ArticleDTO> selectArticleQnas(int pg, int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectArticleQnas();
+    	List<ArticleDTO> dtoList = category2Mapper.selectArticleQnas(pg, pageStartNum);
     	
     	return dtoList;
     	
     }
     
-    public List<ArticleDTO> selectSearchArticleNotices(int cate1) {
+    public List<ArticleDTO> selectSearchArticleNotices(int cate1, int pg, int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleNotice(cate1);
+    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleNotice(cate1, pg, pageStartNum);
     	
     	return dtoList;
     	
@@ -291,9 +291,9 @@ public class AdminService {
     	
     }
     
-    public List<ArticleDTO> selectSearchArticleQnas(int cate1, int cate2) {
+    public List<ArticleDTO> selectSearchArticleQnas(int cate1, int cate2, int pg, int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleQna(cate1,cate2);
+    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleQna(cate1,cate2, pg, pageStartNum);
     	
     	return dtoList;
     	
@@ -358,13 +358,36 @@ public class AdminService {
     
     public int selectCountNotices() {
     	
-    	return category2Mapper.selectCountNotices();
+    	int page = category2Mapper.selectCountNotices();
+    	
+    	return page;
 		
     	
     }
+    
+    public int selectCountNoticesByCate1(int cate1) {
+    	
+    	int catePage = category2Mapper.selectCountNoticesByCate1(cate1);
+    	
+    	return catePage;
+    	
+    	
+    }
+    
+    
     public int selectCountQnas() {
     	
-    	return category2Mapper.selectCountQnas();
+    	int page = category2Mapper.selectCountQnas();
+    	
+    	return page;
+    	
+    }
+    
+    public int selectCountQnasByCate1ANDCate2(int cate1, int cate2) {
+    	
+    	int catePage = category2Mapper.selectCountQnasByCate1ANDCate2(cate1, cate2);
+    	
+    	return catePage;
     	
     }
 

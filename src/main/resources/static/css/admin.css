@@ -638,7 +638,6 @@ button[type=submit] {
 #admin-cs-list > section > table img.thumb {width: 60px;}
 
 #admin-cs-list > section > .csDelete {
-    float: left;
     width: 100px;
     margin-top: 10px;
 }

@@ -51,7 +51,7 @@ public class ArticleDTO {
 	                .title(title)
 	                .content(content)
 	                .rdate(rdate)
-	                .content(content)
+	                .comment(comment)
 	                .build();
 	    }
 }

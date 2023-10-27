@@ -48,6 +48,7 @@ public class ArticleEntity {
 	private String content;
 	@CreationTimestamp
 	private LocalDateTime rdate;
+	private int comment;
 	
 	 public ArticleDTO toDTO(){
 	        return ArticleDTO.builder()
@@ -61,6 +62,7 @@ public class ArticleEntity {
 	                .content(content)
 	                .rdate(rdate)
 	                .content(content)
+	                .comment(comment)
 	                .build();
 	    }
 
