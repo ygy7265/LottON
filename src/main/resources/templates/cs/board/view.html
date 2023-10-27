@@ -9,7 +9,7 @@
                 	<h2 class="title">[[${article.title}]]</h2>                
 				</th:block>	  
 				<th:block th:if="${article.group == 3}">
-                	<h2 class="title">[[${article.cate2_name}]] [[${article.title}]]</h2>                
+                	<h2 class="title">[ [[${article.cate2_name}]] ] [[${article.title}]]</h2>                
 				</th:block>	
                 <p>
                   <span>[[${article.uid}]]</span>
@@ -23,7 +23,7 @@
 				  
 				 [[${article.content}]]<br><br>  
 				 [[${article.no}]]<br><br>
-				 [[${comment.parent}]]<br><br>
+				 [[${answer.parent}]]<br><br>
 				  
                 <p>
                   개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
@@ -39,17 +39,17 @@
               </div>
            
            <th:block th:if="${article.group == 3}">
-              <th:block th:if="${comment != null && article.no == comment.parent}">
+              <th:block th:if="${answer != null && article.no == answer.parent}">
 			    <div class="qna_answer">
-			        <nav>☛ [답변] <span th:text="${comment.title}"></span></nav>
+			        <nav>☛ [답변] <span th:text="${answer.title}"></span></nav>
 			        <div>
 			            <p>
-			                <span th:text="${comment.content}"></span>
+			                <span th:text="${answer.content}"></span>
 			            </p>
 			        </div>
 			    </div>
 			</th:block>
-			<th:block th:if="${comment == null || article.no != comment.parent}">
+			<th:block th:if="${answer == null || article.no != answer.parent}">
 			    <div class="qna_answer">
 			        <p>
 			            답변이 없습니다. 잠시만 기다려주세요.

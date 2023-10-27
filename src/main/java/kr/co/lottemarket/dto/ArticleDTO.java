@@ -35,10 +35,10 @@ public class ArticleDTO {
 	private String q;
 	private String q2;
 	private LocalDateTime rdate;
+	private int comment;
 	private String cate1_name;
 	private String cate2_name;
 	private String cate1_discription;
-	private int comment;
 	
 	 public ArticleEntity toEntity(){
 	        return ArticleEntity.builder()

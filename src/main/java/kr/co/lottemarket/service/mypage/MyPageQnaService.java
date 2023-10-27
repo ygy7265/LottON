@@ -17,13 +17,13 @@ public class MyPageQnaService {
 	
 	private final ArticleMapper mapper;
 	
-	public List<ArticleDTO> selectMyQna(String user,int start){
-		return mapper.selectMyQna(user,start);
+	public List<ArticleDTO> selectMyQna(String user,int start , int end){
+		return mapper.selectMyQna(user,start, end);
 	}
 	
 	
 	public ArticleDTO selectComment(int parent) {
-		return mapper.selectComment(parent);
+		return mapper.selectAnswer(parent);
 	}
 	
 	

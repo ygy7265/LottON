@@ -45,6 +45,8 @@ public class MyPageController {
 	private final RootConfig rootConfig;
 	private final UserService userService;
 	
+	int total=0;
+	
 	@GetMapping("/")
 	public String index(Model model) {
 		
@@ -52,16 +54,35 @@ public class MyPageController {
 		userDTO.setUid("seller1");
 		List<ProductOrderDTO> dto = service.lastOrder(userDTO);
 		model.addAttribute("dto",dto);
+		
+		String user = (String)rootConfig.Usersession();
+		// 전체 상품 갯수
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
+		
+		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user, 0, 3);
+		model.addAttribute("qnaList",qnaList);
+		
 		return "/my/home";
 	}
 	@GetMapping("/coupon")
-	public String coupon() {
+	public String coupon(Model model) {
+		
+		String user = (String)rootConfig.Usersession();
+		// 전체 상품 갯수
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
 		return "/my/coupon";
 	}
 	@GetMapping("/order")
 	public String order(Model model,OrderPageRequestDTO pageRequestDTO) {
 		OrderPageResponseDTO dto =service.OrderList(pageRequestDTO);
 		model.addAttribute("dtoList",dto);
+		
+		String user = (String)rootConfig.Usersession();
+		// 전체 상품 갯수
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
 		
 		return "/my/order";
 	}
@@ -82,6 +103,12 @@ public class MyPageController {
 		
 		UserDTO userDTO = userService.findByUid(uid);
 		model.addAttribute(userDTO);
+		
+		String user = (String)rootConfig.Usersession();
+		// 전체 상품 갯수
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
+		
 		return "/my/info";
 	}
 	@GetMapping("/qna")
@@ -95,7 +122,6 @@ public class MyPageController {
 		//페이지 관련 변수
 		int start=0;
 		int currentPage =1;
-		int total=0;
 		int lastPageNum=0;
 		int pageGroupCurrent=1;
 		int pageGroupStart=1;
@@ -133,7 +159,9 @@ public class MyPageController {
 		//페이지 시작번호 계산
 		pageStartNum = total-start;
 		
-		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user,start);
+		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user,start, 10);
+		
+		model.addAttribute("qnaList",qnaList);
 		model.addAttribute("start", start);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("total", total);
@@ -151,9 +179,9 @@ public class MyPageController {
 		log.info("pageGroupStart = " + pageGroupStart);
 		log.info("pageGroupEnd = " + pageGroupEnd);
 		log.info("pageStartNum = " + pageStartNum);
+		log.info("qnaList = " + qnaList);
 		
-		
-		model.addAttribute("qnaList",qnaList);
+	
 		
 		return "/my/qna";
 	}
@@ -164,16 +192,25 @@ public class MyPageController {
 		ReviewPageResponseDTO list = reviewService.reviewFind(dto);
 		
 		model.addAttribute("list",list);
-		
+		String user = (String)rootConfig.Usersession();
+		// 전체 상품 갯수
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
 		return "/my/review";
 		
 	}
 	
 	@PostMapping("/review")
-	public String review(ProductReviewDTO dto,@Param("ordCompleteNo") int ordCompleteNo,HttpServletRequest request) {
+	public String review(ProductReviewDTO dto,@Param("ordCompleteNo") int ordCompleteNo,HttpServletRequest request, Model model) {
 	
 		dto.setRegip(request.getRemoteAddr());
 		reviewService.reviewSave(dto,ordCompleteNo);
+		
+		String user = (String)rootConfig.Usersession();
+		// 전체 상품 갯수
+		total = articleSerivce.selectMyCountTotal(user);
+		model.addAttribute("total", total);
+		
 		return "redirect:/my/";
 	}
 

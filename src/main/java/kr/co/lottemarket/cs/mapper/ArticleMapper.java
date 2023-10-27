@@ -19,7 +19,7 @@ public interface ArticleMapper {
 
 	public List<ArticleDTO> selectAjaxCate1(int group);
 	
-	public ArticleDTO selectComment(int parent);
+	public ArticleDTO selectAnswer(int parent);
 	
 	//글 보기
 	public ArticleDTO selectArticle(int no);
@@ -28,7 +28,7 @@ public interface ArticleMapper {
 	public ArticleDTO selectNav(int group, int cate1);
 	
 	//MyPage Article
-	public List<ArticleDTO> selectMyQna(String uid, int start);
+	public List<ArticleDTO> selectMyQna(String uid, int start , int end);
 	
 	public int selectMyCountTotal(String uid);
 	

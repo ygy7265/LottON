@@ -34,7 +34,7 @@ public class MyPageRestController {
 	@GetMapping("/qna/{no}")
 	public ArticleDTO selectAjaxCate2(@PathVariable int no){
 		
-		ArticleDTO answer = articleService.selectComment(no);
+		ArticleDTO answer = articleService.selectAnswer(no);
 
 		log.info("answer = " + answer);
 		
