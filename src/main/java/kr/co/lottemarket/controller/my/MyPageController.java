@@ -214,5 +214,4 @@ public class MyPageController {
 		return "redirect:/my/";
 	}
 
-
 }

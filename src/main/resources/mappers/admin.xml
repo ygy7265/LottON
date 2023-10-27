@@ -4,6 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="kr.co.lottemarket.cs.mapper.CategoryMapper">
 		
+		<select id="selectPolicy" resultType="kr.co.lottemarket.dto.user.TermsDTO">
+	       
+			SELECT * FROM lotte_terms
+	        
+	    </select>
+	    
 		<select id="selectArticleNotices" resultType="kr.co.lottemarket.dto.ArticleDTO">
 	       
 			SELECT 
@@ -15,6 +21,12 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
 			WHERE parent=0 AND a.`group` =1
 			LIMIT 10 OFFSET 0;
+	        
+	    </select>
+	    
+		<select id="selectCountNotices" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT COUNT(*) FROM `lotte_board` WHERE parent = 0 AND `group` = 3;
 	        
 	    </select>
 	    
@@ -47,6 +59,12 @@
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 3
 	        LIMIT 10 OFFSET 0;
+	        
+	    </select>
+	    
+	   	<select id="selectCountQnas" resultType="kr.co.lottemarket.dto.ArticleDTO">
+	       
+			SELECT COUNT(*) FROM `lotte_board` WHERE parent = 0 AND `group` = 3;
 	        
 	    </select>
 	    

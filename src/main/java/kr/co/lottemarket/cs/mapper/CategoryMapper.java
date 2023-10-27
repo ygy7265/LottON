@@ -8,6 +8,7 @@ import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.ArticleCate2DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
+import kr.co.lottemarket.dto.user.TermsDTO;
 
 @Mapper
 public interface CategoryMapper {
@@ -30,5 +31,7 @@ public interface CategoryMapper {
 	public List<ArticleDTO> selectSearchArticleFaq(int cate1, int cate2);
 	public List<ArticleDTO> selectSearchArticleQna(int cate1, int cate2);
 	public void AnswerQna(ArticleDTO dto);
-	
+	public List<TermsDTO> selectPolicy();
+	public int selectCountNotices();
+	public int selectCountQnas();
 }
