@@ -35,8 +35,6 @@ public class ArticleDTO {
 	private String q;
 	private String q2;
 	private LocalDateTime rdate;
-	private int Answer;
-	
 	private String cate1_name;
 	private String cate2_name;
 	private String cate1_discription;
@@ -53,7 +51,7 @@ public class ArticleDTO {
 	                .title(title)
 	                .content(content)
 	                .rdate(rdate)
-	                .Answer(Answer)
+	                .comment(comment)
 	                .build();
 	    }
 }
