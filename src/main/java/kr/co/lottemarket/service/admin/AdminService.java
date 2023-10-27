@@ -23,6 +23,7 @@ import kr.co.lottemarket.dto.product.ProductCate1DTO;
 import kr.co.lottemarket.dto.product.ProductCate2DTO;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.dto.user.TermsDTO;
+import kr.co.lottemarket.dto.user.UserDTO;
 import kr.co.lottemarket.entity.article.ArticleEntity;
 import kr.co.lottemarket.entity.product.ProductCate1Entity;
 import kr.co.lottemarket.entity.product.ProductEntity;
@@ -251,9 +252,9 @@ public class AdminService {
     	
     }
     
-    public List<ArticleDTO> selectArticleNotices(int pg, int pageStartNum) {
+    public List<ArticleDTO> selectArticleNotices(int pg, int pageSize,int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectArticleNotices(pg, pageStartNum);
+    	List<ArticleDTO> dtoList = category2Mapper.selectArticleNotices(pg, pageSize, pageStartNum);
     	
     	return dtoList;
     	
@@ -267,17 +268,17 @@ public class AdminService {
     	
     }
     
-    public List<ArticleDTO> selectArticleQnas(int pg, int pageStartNum) {
+    public List<ArticleDTO> selectArticleQnas(int pg, int pageSize, int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectArticleQnas(pg, pageStartNum);
+    	List<ArticleDTO> dtoList = category2Mapper.selectArticleQnas(pg, pageStartNum, pageSize);
     	
     	return dtoList;
     	
     }
     
-    public List<ArticleDTO> selectSearchArticleNotices(int cate1, int pg, int pageStartNum) {
+    public List<ArticleDTO> selectSearchArticleNotices(int cate1, int pg, int pageSize, int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleNotice(cate1, pg, pageStartNum);
+    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleNotice(cate1, pg, pageStartNum, pageSize);
     	
     	return dtoList;
     	
@@ -291,9 +292,9 @@ public class AdminService {
     	
     }
     
-    public List<ArticleDTO> selectSearchArticleQnas(int cate1, int cate2, int pg, int pageStartNum) {
+    public List<ArticleDTO> selectSearchArticleQnas(int cate1, int cate2, int pg, int pageSize, int pageStartNum) {
     	
-    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleQna(cate1,cate2, pg, pageStartNum);
+    	List<ArticleDTO> dtoList = category2Mapper.selectSearchArticleQna(cate1,cate2, pg, pageStartNum, pageSize);
     	
     	return dtoList;
     	
@@ -353,8 +354,14 @@ public class AdminService {
     public void Answer(ArticleDTO dto) {
     	
     	category2Mapper.AnswerQna(dto);
-    
+    	
     }
+    public void commentPlus(int no) {
+    	
+    	category2Mapper.commentPlus(no);
+    	
+    }
+
     
     public int selectCountNotices() {
     	
@@ -403,6 +410,23 @@ public class AdminService {
     	
     }
     
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    							/////////////////////////Admin User service part//////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    public List<UserDTO> selectUser() {
+    	
+    	List<UserDTO> dtoList = category2Mapper.selectUser();
+    	
+    	return dtoList;
+    	
+    }
+    
+    public int selectCountUser() {
+    	
+    	int User = category2Mapper.selectCountUser();
+    	
+    	return User;
+    }
     
 }
