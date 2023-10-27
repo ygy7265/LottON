@@ -34,7 +34,7 @@
                 <td style="text-align:center; width:10%" th:text="${userlist.hp}"></td>
                 <td style="text-align:center; width:10%" th:text="${userlist.email}"></td>
                 <td style="text-align:center; width:20%" th:text="${userlist.addr1}"></td>
-                <td style="text-align:center; width:10%" th:if="${userlist.type == 0}">일반회원</td>
+                <td style="text-align:center; width:10%" th:if="${userlist.type == 1}">일반회원</td>
                 <td style="text-align:center; width:10%" th:if="${userlist.type == 2}">판매자회원</td>
                 <td style="text-align:center; width:10%" th:text="${#temporals.format(userlist.rdate, 'yy-MM-dd')}"></td>
                 <td style="text-align:center; width:10%">
