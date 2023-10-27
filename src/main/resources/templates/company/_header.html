@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LotteON Inc. 상상하는 모든것</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../company/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/company/header.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <header style="background: transparent">
+            <div>
+                <a th:href="@{/}" style="color: rgb(255, 255, 255);"><img th:src="@{/thumb1/img/header_logo.png}" width="180" alt="로고"></a>
+                <ul>
+            		<li><a th:href="@{/company/}" style="color: rgb(255, 255, 255);">회사소개</a></li>
+                    <li><a th:href="@{/company/notice}" style="color: rgb(255, 255, 255);">전자공시</a></li>
+                    <li><a th:href="@{/company/promote}" style="color: rgb(255, 255, 255);">홍보채널</a></li>
+                    <li><a th:href="@{/company/manage}" style="color: rgb(255, 255, 255);">투명경영</a></li>
+                </ul>
+            </div>
+        </header>
+</html>        

@@ -106,7 +106,7 @@ public class Admin_CsController {
 	        // 페이지당 항목 수
 		    int itemsPerPage = pageSize;
 
-		    // 총 항목 수 (공지사항 목록의 크기)
+		    // 총 항목 수
 		    int totalItems = qnalist.size();
 
 		    // totalPages 계산
@@ -313,7 +313,7 @@ public class Admin_CsController {
 	@PostMapping("/admin/layout/cs/qnaWrite")
 	public String qnaWriter(ArticleDTO dto) {
 		
-		dto.setAnswer(dto.getAnswer() +1);
+		dto.setComment(dto.getComment() +1);
 		
 		adminService.Answer(dto);
 		
