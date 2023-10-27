@@ -20,6 +20,6 @@ public class ProductReviewDTO {
 	private UserEntity user;
 	private int score;
 	private String regip;
-	private LocalDateTime rDate;
+	private LocalDateTime regDate;
   
 }

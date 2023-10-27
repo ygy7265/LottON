@@ -3,6 +3,8 @@ package kr.co.lottemarket.entity.product;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -41,7 +43,7 @@ public class ProductReviewEntity {
 	private UserEntity user;
 	private int score;
 	private String regip;
+	@Column(name = "rDate")
 	@CreationTimestamp
-	private LocalDateTime rDate;
-	
+	private LocalDateTime regDate;
 }

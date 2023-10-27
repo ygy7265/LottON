@@ -99,8 +99,8 @@ public class MyPageController {
 		String user = (String)rootConfig.Usersession();
 		total = articleSerivce.selectMyCountTotal(user);
     
-    model.addAttribute("dtoList",dto);
-    model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("dtoList",dto);
+		model.addAttribute("point",datadto.getPoint());
 		model.addAttribute("count",datadto.getCount());
 		model.addAttribute("total", total);
 		
@@ -127,9 +127,9 @@ public class MyPageController {
 		String user = (String)rootConfig.Usersession();
 		total = articleSerivce.selectMyCountTotal(user);
     
-    model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("point",datadto.getPoint());
 		model.addAttribute("count",datadto.getCount());
-    model.addAttribute(userDTO);
+		model.addAttribute(userDTO);
 		model.addAttribute("total", total);
 		
 		return "/my/info";
@@ -186,6 +186,9 @@ public class MyPageController {
 		
 		List<ArticleDTO> qnaList = articleSerivce.selectMyQna(user,start, 10);
 		
+		if(pageGroupEnd < 1) {
+			pageGroupEnd = 1;
+		}
 		model.addAttribute("qnaList",qnaList);
 		model.addAttribute("start", start);
 		model.addAttribute("currentPage", currentPage);
@@ -239,7 +242,7 @@ public class MyPageController {
 		String user = (String)rootConfig.Usersession();
 		total = articleSerivce.selectMyCountTotal(user);
     
-    model.addAttribute("point",datadto.getPoint());
+		model.addAttribute("point",datadto.getPoint());
 		model.addAttribute("count",datadto.getCount());
 		model.addAttribute("total", total);
 		

@@ -16,12 +16,7 @@ import kr.co.lottemarket.entity.user.UserEntity;
 public interface ProductOrderItemRepository extends JpaRepository<ProductOrderItemEntity, String>{
 	
 	public void deleteByUser(UserEntity user);
-	@Query("SELECT pc, p.thumb1,p.prodNo, p.prodName, p.descript FROM ProductOrderItemEntity pc " +
-		       "JOIN pc.user u " +
-		       "JOIN pc.product p " +
-		       "WHERE u.uid = :uid ")
-	List<Object[]> findProductsByOrderItem(@Param("uid") String uid);
-		
+	public List<ProductOrderItemEntity> findByUser(UserEntity uid);
 		
 			
 }

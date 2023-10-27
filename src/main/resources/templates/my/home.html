@@ -37,10 +37,10 @@
                                 </ul>
                             </td>
                             
-                          	<td class="status" th:if="${dto.ordComplete} == 1")>배송완료</td>
-	                		<td class="status" th:if="${dto.ordComplete} == 0")>배송중</td>
+                          	<td class="status" style="color: blue;" th:if="${dto.ordComplete} == 1")>배송완료</td>
+	                		<td class="status" style="color: red;" th:if="${dto.ordComplete} == 0")>배송중</td>
                             <td class="confirm">
-								<input type="hidden" name="ordCompleteNo" th:value="${dto.ordCompleteNo}">
+								<input type="hidden" name="ordComNo" th:value="${dto.ordCompleteNo}" data-status="${dto.ordComplete}">
 								<input type="hidden" name="ordProdName" th:value="${dto.product.prodName}">
 								<input type="hidden" name="ordProdNo" th:value="${dto.product.prodNo}">
                                 <a href="#" class="receive" th:if="${dto.ordComplete} == 0">수취확인</a>
@@ -64,13 +64,13 @@
                             <th>비고</th>
                             <th>유효기간</th>
                         </tr>
-                        <tr>
-                            <td>2022-12-10</td>
+                        <tr th:each="list : ${dtoPoint}">
+                            <td>[[${#temporals.format(list.pointDate, 'yyyy-MM-dd')}]]</td>
                             <td>적립</td>
-                            <td>2022121001</td>
-                            <td>340</td>
-                            <td>상품 구매확정</td>
-                            <td>2024-12-10</td>
+                            <td>[[${list.pointNo}]]</td>
+                            <td>[[${list.point}]]</td>
+                            <td>[[${list.type}]]</td>
+                            <td th:text="${#temporals.format(list.pointDate.plusYears(1), 'yyyy-MM-dd')}"></td>
                         </tr>
                     </table>
                 </article>
@@ -85,41 +85,14 @@
                             <th>평점</th>
                             <th>작성일</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>상품명</td>
-                            <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                            <td><span class="rating star1">상품평</span></td>
-                            <td>2022-12-10</td>
+                        <tr th:each="list:${dtoReview}">
+                            <td>[[${list.revNo}]]</td>
+                            <td>[[${list.product.prodName}]]</td>
+                            <td>[[${list.content}]]</td>
+                            <td><span th:class="@{rating star}+${list.score}">상품평</span></td>
+                            <td>[[${#temporals.format(list.regDate, 'yyyy-MM-dd')}]]</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>상품명</td>
-                            <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                            <td><span class="rating star2">상품평</span></td>
-                            <td>2022-12-10</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>상품명</td>
-                            <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                            <td><span class="rating star3">상품평</span></td>
-                            <td>2022-12-10</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>상품명</td>
-                            <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                            <td><span class="rating star4">상품평</span></td>
-                            <td>2022-12-10</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>상품명</td>
-                            <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                            <td><span class="rating star5">상품평</span></td>
-                            <td>2022-12-10</td>
-                        </tr>
+                       
                     </table>
                 </article>
 
@@ -130,16 +103,15 @@
                         <tr>
                             <th>번호</th>
                             <th>문의채널</th>
-                            <th>문의유형</th>                                
+                            <th>문의유형</th>
                             <th>제목</th>
                             <th>작성일</th>
                             <th>상태</th>
                         </tr>
-                        
                         <tr th:each="article:${qnaList}">
                             <td>[[${article.no}]]</td>
                             <td>[[${article.cate1_name}]]</td>
-                            <td>[[${article.cate2_name}]]</td>                                
+                            <td>[[${article.cate2_name}]]</td>
                             <td>[[${article.title}]]</td>
                             <td>[[${article.rdate}]]</td>
                             <td>
