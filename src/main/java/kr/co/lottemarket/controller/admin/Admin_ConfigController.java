@@ -29,4 +29,10 @@ public class Admin_ConfigController {
 		return "/admin/layout/config/info";
 	}
 	
+	@GetMapping("/admin/layout/config/banner")
+	public String banner() {
+		
+		return "/admin/layout/config/banner";
+	}
+	
 }

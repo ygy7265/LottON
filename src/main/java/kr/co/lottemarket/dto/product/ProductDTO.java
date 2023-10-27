@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.lottemarket.entity.product.ProductCate1Entity;
+import kr.co.lottemarket.entity.product.ProductCate2Entity;
 import kr.co.lottemarket.entity.product.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
