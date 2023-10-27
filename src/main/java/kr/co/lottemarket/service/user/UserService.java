@@ -4,8 +4,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import kr.co.lottemarket.dto.user.EmailMessageDTO;
 import kr.co.lottemarket.dto.user.UserDTO;
 import kr.co.lottemarket.entity.user.UserEntity;
@@ -25,7 +30,7 @@ public class UserService {
 	
 	private final PasswordEncoder encoder;
 	
-	//private final JavaMailSender javaMailSender; // 이메일 인증
+	private final JavaMailSender javaMailSender; // 이메일 인증
 	
 	private static String generatedCode; // 인증코드 생성 시 사용할 변수
 	
@@ -38,6 +43,12 @@ public class UserService {
 	
 	public UserDTO findByUid(String uid) {
 		UserEntity entity = userRepository.findByUid(uid);
+		return entity.toDTO();
+	}
+	
+	public UserDTO findByUidAndPass(String uid, String pass) {
+		pass = encoder.encode(pass);
+		UserEntity entity = userRepository.findByUidAndPass(uid, pass);
 		return entity.toDTO();
 	}
 	
@@ -77,7 +88,7 @@ public class UserService {
 		return userRepository.countByUidAndEmail(uid, email);
 	}
 	
-	/*
+	
 	public int sendCodeByEmail(EmailMessageDTO emailMessage) {
 
         // 인증코드 생성
@@ -106,7 +117,7 @@ public class UserService {
         }
 
         return status;
-    }*/
+    }
 	
 	public int confirmCodeByEmail(String code) {
 		

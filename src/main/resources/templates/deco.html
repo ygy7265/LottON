@@ -39,7 +39,6 @@
       <header>
         <div class="top">
           <div>
-				 
 			<th:block th:if="${type eq '1'}"> <!-- 문자열 비교라 1이 아니라 '1' -->
 				<a href="#">회원 [[${uid}]] 님</a> <!-- th:href="#" 하면 오류 뜸 -->
 			</th:block>
@@ -60,10 +59,7 @@
 			<th:block th:if="${type eq '2' || type eq '9'}">
 				<a th:href="@{/admin/layout/index/layoutindex}">관리자페이지</a>
 			</th:block>
-            <a th:href="@{product/productCart}"
-              ><i class="fa fa-shopping-cart" aria-hidden="true"></i
-              >&nbsp;장바구니</a
-            >
+            <a th:href="@{product/productCart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
           </div>
         </div>
         <div class="logo">
