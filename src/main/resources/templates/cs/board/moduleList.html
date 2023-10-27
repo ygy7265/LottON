@@ -14,10 +14,25 @@
           <div class="top">
             <div>
               <p>
-                <a href="./member/login.html">로그인</a>
-                <a href="#">회원가입</a>
-                <a href="#">마이페이지</a>
-                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                 <th:block sec:authorize="isAnonymous()">
+	              <a th:href="@{/}">메인</a>
+	              <a th:href="@{/member/login}">로그인</a>
+	              <a th:href="@{/member/join}">회원가입</a>
+	            </th:block>
+	            <th:block sec:authorize="isAuthenticated()">
+	              <a href="#" >[[${#authentication.principal.user.uid}]]님 반갑습니다.</a>
+	              <th:block sec:authorize="hasRole('1')">
+	                <a href="#">마이페이지</a>
+	              </th:block>
+	              <th:block sec:authorize="hasAnyRole('2','3')" >
+	                <a th:href="@{/admin/layout/index/layoutindex}">관리자</a>
+	              </th:block>
+	              <a th:href="@{/member/logout}">로그아웃</a>
+	              <a href="#">
+	                <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
+	                장바구니
+	              </a>
+	            </th:block>
               </p>
             </div>
           </div>

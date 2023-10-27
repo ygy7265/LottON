@@ -32,4 +32,13 @@ public interface ArticleMapper {
 	
 	public int selectMyCountTotal(String uid);
 	
+	
+	public List<ArticleDTO> selectNoticeArticles();
+
+	//notice에 맞는 cate출력하기
+	public List<ArticleDTO> selectNoticeCate();
+	
+	
+	public void deleteArticle(int no);
+
 }

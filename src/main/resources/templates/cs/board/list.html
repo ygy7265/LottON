@@ -33,7 +33,15 @@
                 </nav>
   
                 <table>
+				
                     <tr th:each="article:${pageResponseDTO.dtoList}">
+					    <th:block th:if="${article.group == 3}">
+					        <th:block th:each="articleCate:${articleCates}">
+					            <th:block th:if="${article.no == articleCate.no}">
+					                <td style="font-size: 16px;">[ [[${articleCate.cate2_name}]] ]</td>
+					            </th:block>
+					        </th:block>
+					    </th:block>
 						<td><a th:href="@{/cs/view(group=${article.group},cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}">
 							[[${article.title}]]</a>
 						</td>
