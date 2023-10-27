@@ -63,23 +63,75 @@ document.addEventListener('DOMContentLoaded', function(){
 	hpInput2.value = hpParts[1];
 	hpInput3.value = hpParts[2];
 	
-	// 이메일 수정버튼
-	const btnEmail = document.getElementById('btnChangeEmail');
 	
-	btnEmail.addEventListener('click', function(){
+	
+	// 이메일 수정
+	const btnEmail = document.getElementById('btnChangeEmail');
+	const emailDomainSelect = document.getElementById('emailDomain');
+	
+	btnEmail.addEventListener('click', function(e){
 			
-	emailInput1.readOnly = false;	
-	emailInput2.readOnly = false;
+			
+			// button이라 폼 전송 되므로 기본기능 막아주기
+			e.preventDefault();
+			
+			//alert('here1');
+			emailInput1.readOnly = false;		
+			
+			emailDomainSelect.addEventListener('change', function(){
+			//alert('here2');	
+			// 선택된 옵션값 가져오기 / emailDomainSelect의 option이 바뀔 때 그에 따라  선택된 옵션값을 가져와야지!
+			const selectedOption = emailDomainSelect.options[emailDomainSelect.selectedIndex].value; // emailDomainSelect의 선택된 option의 value값
+			console.log('selectedOption : ' + selectedOption);
+			
+			if(selectedOption === 'direct'){ // selectedOption 문자열이므로 direct 문자열로 비교해야함!!! 그냥 direct로 비교 XXX
+				emailInput2.readOnly = false;	
+				emailInput2.value = '';	
+			}else{
+				emailInput2.value = selectedOption;	
+			}
+		});	
+		
 	});
 	
-	// 휴대폰 수정버튼
+	// 휴대폰 수정
 	const btnHp = document.getElementById('btnChangeHp');	
 	
-	btnHp.addEventListener('click', function(){
-	
-	hpInput1.readOnly = false;
-	hpInput2.readOnly = false;
-	hpInput3.readOnly = false;
+	btnHp.addEventListener('click', function(e){
+		
+		e.preventDefault();
+		
+		hpInput1.readOnly = false;
+		hpInput2.readOnly = false;
+		hpInput3.readOnly = false;
 		
 	});	
+	
+	// 수정하기 버튼 누를때 
+	const btnInfoChange = document.getElementById('btnInfoChange');
+	const formInfo = document.getElementById('formInfo');
+	
+	btnInfoChange.addEventListener('click', function(){
+		
+		// 이메일 수정
+		const emailInput = document.getElementById('userEmail');
+		emailInput.value = emailInput1.value + '@' + emailInput2.value;
+		console.log('email : ' + emailInput.value);
+		
+		// 휴대폰 수정
+		const hpInput = document.getElementById('userHp');
+		hpInput.value = hpInput1.value + '-' + hpInput2.value + '-' + hpInput3.value;
+		console.log('hp : ' + hpInput.value);
+		
+		// 자바스크립트로 formInfo.submit(); 전송할 필요없다, button  기본 기능이 폼전송이므로 
+	});
 });
+
+
+
+
+
+
+
+
+

@@ -22,18 +22,30 @@
     <div id=" wrapper">
         <header>
             <div class="top">
-                <div>
-                    <a th:href="@{/member/login}">로그인</a>
-                    <a th:href="@{/member/join}">회원가입</a>
-                    <a th:href="@{/my/}">마이페이지</a>
-                    <a th:href="@{/admin/layout/index/layoutindex}">관리자</a>
-                    <a th:href="@{/product/productCart}">
-                        <i class="fa fa-shopping-cart" aria-hidden="true">
-                            &nbsp;장바구니
-                        </i>
-                    </a>
-                </div>
-            </div>
+	          <div>
+				<th:block th:if="${type eq '1'}"> <!-- 문자열 비교라 1이 아니라 '1' -->
+					<a href="#">회원 [[${uid}]] 님</a> <!-- th:href="#" 하면 오류 뜸 -->
+				</th:block>
+				<th:block th:if="${type eq '2'}">
+					<a href="#">판매자 [[${uid}]] 님</a>
+				</th:block>
+				<th:block th:if="${type eq '9'}">
+					<a href="#">관리자 [[${uid}]] 님</a>
+				</th:block>
+				<th:block th:if="${uid eq null}">  
+		            <a th:href="@{/member/login}">로그인</a>
+		            <a th:href="@{/member/join}">회원가입</a>
+	            </th:block>
+	            <th:block th:if="${uid ne null}">
+					<a th:href="@{/member/logout}">로그아웃</a>
+					<a th:href="@{/my/}">마이페이지</a> <!-- 마이페이지는 로그인했을때만 나오게 -->
+				</th:block>
+				<th:block th:if="${type eq '2' || type eq '9'}">
+					<a href="#">관리페이지</a>
+				</th:block>
+	            <a th:href="@{product/productCart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+	          </div>
+        	</div>
             <div class="logo">
                 <div>
                     <a th:href="@{/}"><img src="../images/header_logo.png" alt="로고"></a>

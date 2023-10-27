@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nimbusds.oauth2.sdk.http.HTTPRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -66,6 +69,7 @@ public class MyPageController {
 		return "/my/order";
 	}
 	
+	// info
 	@GetMapping("/info")
 	public String info(Model model) {
 		
@@ -84,6 +88,89 @@ public class MyPageController {
 		model.addAttribute(userDTO);
 		return "/my/info";
 	}
+	
+	@GetMapping("/infoPassCheck")
+	public String infoPassCheck(
+		Model model, 
+		@RequestParam String email,  // 나의설정에서 수정된데이터 수신하기
+		@RequestParam String hp, 
+		@RequestParam String zip, 
+		@RequestParam String addr1, 
+		@RequestParam String addr2)	{
+		
+		Object obj = rootConfig.Usersession();
+		String uid = "null";
+		
+		// Object 형변환 가능 여부 확인
+		if(obj instanceof String) {
+			uid = (String) obj;
+			//log.info("/my/info uid : " + uid);
+		}else {
+			//log.info("error 1...");
+		}
+		
+		log.info("uid : " + uid);
+		log.info("email : " + email);
+		log.info("hp : " + hp);
+		log.info("zip : " + zip);
+		log.info("addr1 : " + addr1);
+		log.info("addr2 : " + addr2);
+		
+		// 나의설정에서 수정된데이터 DTO객체 속성에 저장하기
+		UserDTO userDTO = userService.findByUid(uid);
+		userDTO.setEmail(email);
+		userDTO.setHp(hp);
+		userDTO.setZip(zip);
+		userDTO.setAddr1(addr1);
+		userDTO.setAddr2(addr2);
+		
+		model.addAttribute(userDTO);
+		
+		return "/my/infoPassCheck";
+	}
+	
+	@ResponseBody
+	@PostMapping("/infoPassCheck") // 비밀번호 일치하는지 안하는지 여기로 AJAX POST 전송해서 확인후 일치하면(성공값) 그때 다시 폼을 통해 여기로 POST 전송 해서 save한다!
+	public UserDTO infoPassCheck(String uid, String pass) { // 매개변수 DTO로도 받을 수 있다! 근데 AJAX로 쏠때랑 폼전송할 때랑 한번에 받을 수 있는 매개변수는 DTO겠네??
+		
+		log.info("uid : " + uid);
+		log.info("pass : " + pass);
+
+		UserDTO userDTO = userService.findByUidAndPass(uid, pass);
+		
+		return userDTO;
+		
+		
+		/*
+		
+		
+		// 비밀번호확인 페이지로부터 수정데이터 수신해서 DTO 객체의 속성에 저장
+		userDTO.setEmail(email);
+		userDTO.setHp(hp);
+		userDTO.setZip(zip);
+		userDTO.setAddr1(addr1);
+		userDTO.setAddr2(addr2);
+		
+		if(pass.equals(userDTO.getPass1())) {
+			
+			log.info("here...1");
+			
+			userService.save(userDTO);
+			
+			return "redirect:/my/";
+		}else {
+			
+			log.info("here...2");
+			
+			// 비밀번호가 일치하지 않을 때 알림을 추가
+			redirectAttributes.addFlashAttribute("error", "비밀번호가 일치하지 않습니다.");
+			
+			return "redirect:/my/infoPassCheck";
+		}
+		*/
+		
+	}
+	
 	@GetMapping("/qna")
 	public String qna(Model model, @RequestParam(defaultValue = "1")  int pg) {
 		

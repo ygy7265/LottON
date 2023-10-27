@@ -16,72 +16,77 @@
             <a href="#"><img src="../images/my_banner1.jpg" alt="패션, 타운 하나로 끝" class="banner"></a>
             <article>
                 <h3>회원정보 설정</h3>
-
-                <table border="0">
-                    <tr>
-                        <td>사용자 ID</td>
-                        <td id="userId">[[${userDTO.uid}]]</td>
-                    </tr>
-                    <tr>
-                        <td>비밀번호</td>
-                        <td>
-                            <button id="btnChangePass">비밀번호 수정</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>이름</td>
-                        <td id="userName">[[${userDTO.name}]]</td>
-                    </tr>
-                    <tr>
-                        <td>생년월일</td>
-                        <td id="userBirth">[[${userDTO.birth}]]</td>
-                    </tr>
-                    <tr>
-                        <td>E-mail</td>
-                        <td>
-                            <input type="text" id="userEmail1" name="email1" th:value="${userDTO.email}" readonly/>@ <!-- th:value 주의!!! -->
-                            <input type="text" id="userEmail2" name="email2" readonly/>
-                            <select>
-                                <option>직접입력</option>
-                                <option>naver.com</option>
-                                <option>daum.net</option>
-                                <option>gmail.com</option>
-                                <option>nate.com</option>
-                                <option>outlook.com</option>
-                            </select>
-                            <button id="btnChangeEmail">수정하기</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>휴대폰</td>
-                        <td>
-                            <p class="hp">
-                                <input type="text" id="userHp1" name="hp1" th:value="${userDTO.hp}" readonly/>-
-                                <input type="text" id="userHp2" name="hp2" readonly/>-
-                                <input type="text" id="userHp3" name="hp3" readonly/>
-                                <button id="btnChangeHp">수정하기</button>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>주소</td>
-                        <td>
-                            <input type="text" name="zip" th:value="${userDTO.zip}" readonly/>
-                            <button id="btnFindZip" onclick="zipcode()">주소검색</button>
-                            <p class="address">
-                                <input type="text" name="addr1" th:value="${userDTO.addr1}" readonly/>
-                                <input type="text" name="addr2" th:value="${userDTO.addr2}"/>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>회원탈퇴</td>
-                        <td>
-                            <button id="btnWithdraw">탈퇴하기</button>
-                        </td>
-                    </tr>
-                </table>
-                <button id="btnInfoChange">수정하기</button>
+				<form id="formInfo" th:action="@{/my/infoPassCheck}" method="GET"> <!-- form을 이용해야 input name으로 파라미터 보낼 수 있지! -->
+					<input type="hidden" id="userEmail" name="email" />
+					<input type="hidden" id="userHp" name="hp" />
+	                <table border="0">
+	                    <tr>
+	                        <td>사용자 ID</td>
+	                        <td id="userId">[[${userDTO.uid}]]</td>
+	                    </tr>
+	                    <tr>
+	                        <td>비밀번호</td>
+	                        <td>
+	                            <button id="btnChangePass">비밀번호 수정</button>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>이름</td>
+	                        <td id="userName">[[${userDTO.name}]]</td>
+	                    </tr>
+	                    <tr>
+	                        <td>생년월일</td>
+	                        <td id="userBirth">[[${userDTO.birth}]]</td>
+	                    </tr>
+	                    <tr>
+	                        <td>E-mail</td>
+	                        <td>
+	                            <input type="text" id="userEmail1" name="email1" th:value="${userDTO.email}" readonly/>@ <!-- th:value 주의!!! -->
+	                            <input type="text" id="userEmail2" name="email2" readonly/>
+	                            
+	                            <select id="emailDomain">
+	                                <option value="direct">직접입력</option>
+	                                <option value="naver.com">naver.com</option>
+	                                <option value="daum.net">daum.net</option>
+	                                <option value="gmail.com">gmail.com</option>
+	                                <option value="nate.com">nate.com</option>
+	                                <option value="outlook.com">outlook.com</option>
+	                            </select>
+	                            <button id="btnChangeEmail">수정하기</button>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>휴대폰</td>
+	                        <td>
+	                            <p class="hp">
+	                                <input type="text" id="userHp1" th:value="${userDTO.hp}" readonly/>-
+	                                <input type="text" id="userHp2" readonly/>-
+	                                <input type="text" id="userHp3" readonly/>
+	                                
+	                                <button id="btnChangeHp">수정하기</button>
+	                            </p>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>주소</td>
+	                        <td>
+	                            <input type="text" name="zip" th:value="${userDTO.zip}" readonly/>
+	                            <button id="btnFindZip" onclick="zipcode(event)">주소검색</button> <!-- event객체 추가하기 -->
+	                            <p class="address">
+	                                <input type="text" name="addr1" th:value="${userDTO.addr1}" readonly/>
+	                                <input type="text" name="addr2" th:value="${userDTO.addr2}"/>
+	                            </p>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>회원탈퇴</td>
+	                        <td>
+	                            <button id="btnWithdraw">탈퇴하기</button>
+	                        </td>
+	                    </tr>
+	                </table>
+	                <button id="btnInfoChange">수정하기</button> <!-- button 기본기능이 폼전송 -->
+                </form>
             </article>
         </section>
 

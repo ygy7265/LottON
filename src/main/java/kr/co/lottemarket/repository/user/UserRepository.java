@@ -11,6 +11,7 @@ import kr.co.lottemarket.entity.user.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, String>{
 	// SecurityUserService 
 	public UserEntity findByUid(String uid);
+	public UserEntity findByUidAndPass(String uid, String pass);
 
 	// 중복체크
 	public int countByUid(String uid); // public 생략 가능?? ㅇㅇ

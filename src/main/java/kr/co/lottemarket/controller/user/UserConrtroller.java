@@ -35,7 +35,7 @@ public class UserConrtroller {
 		return "/member/layout/login";
 	}
 	
-	@GetMapping("/member/logout") // SecurityConfiguration에서 url주소 여기로 GET 전송함
+	@GetMapping("/member/logout") // SecurityConfiguration에서 url주소 여기로 GET 전송함, 로그아웃 처리는 SecurityConfiguration 통해서 처리
 	public String logout() {
 		return "redirect:/member/login";
 	}
