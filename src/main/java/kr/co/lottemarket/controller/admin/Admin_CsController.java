@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.transaction.Transactional;
+import kr.co.lottemarket.cs.mapper.CategoryMapper;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.service.admin.AdminService;
@@ -33,17 +34,11 @@ public class Admin_CsController {
 			
 			int cate1value = Integer.parseInt(cate1);
 			
-			List<ArticleCate1DTO> cate1List = adminService.selectNoticeCate1();	
-			model.addAttribute("cate1List", cate1List);
-	        
-			List<ArticleDTO> noticelist = adminService.selectSearchArticleNotices(cate1value);
-	        model.addAttribute("noticelist", noticelist);
-			
-	        // 페이지당 항목 수
+			// 페이지당 항목 수
 		    int itemsPerPage = pageSize;
 
 		    // 총 항목 수 (공지사항 목록의 크기)
-		    int totalItems = noticelist.size();
+		    int totalItems = adminService.selectCountNoticesByCate1(cate1value);
 
 		    // totalPages 계산
 		    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
@@ -56,19 +51,29 @@ public class Admin_CsController {
 		    model.addAttribute("pageStartNum", pageStartNum);
 		    model.addAttribute("pageEndNum", pageEndNum);
 			
-		} else {
+			List<ArticleCate1DTO> cate1List = adminService.selectNoticeCate1();	
+			model.addAttribute("cate1List", cate1List);
+	        
+			List<ArticleDTO> noticelist = adminService.selectSearchArticleNotices(cate1value, pageStartNum, pg);
+	        model.addAttribute("noticelist", noticelist);
+			
+	        
+		    
+		    return "/admin/layout/cs/noticelist";
+		    
+		}
 		
 		    List<ArticleCate1DTO> cate1List = adminService.selectNoticeCate1();
 		    model.addAttribute("cate1List", cate1List);
 	
-		    List<ArticleDTO> noticelist = adminService.selectArticleNotices();
+		    List<ArticleDTO> noticelist = adminService.selectArticleNotices(pageSize, pg);
 		    model.addAttribute("noticelist", noticelist);
 	
 		    // 페이지당 항목 수
 		    int itemsPerPage = pageSize;
 	
 		    // 총 항목 수 (공지사항 목록의 크기)
-		    int totalItems = noticelist.size();
+		    int totalItems = adminService.selectCountNotices();
 	
 		    // totalPages 계산
 		    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
@@ -81,9 +86,8 @@ public class Admin_CsController {
 		    model.addAttribute("pageStartNum", pageStartNum);
 		    model.addAttribute("pageEndNum", pageEndNum);
 		    
-		}
-	    
-	    return "/admin/layout/cs/noticelist";
+		    return "/admin/layout/cs/noticelist";
+		        
 	}
 
 
@@ -97,17 +101,11 @@ public class Admin_CsController {
 			int cate1value = Integer.parseInt(cate1);
 			int cate2value = Integer.parseInt(cate2);
 			
-			List<ArticleCate1DTO> cate1List = adminService.selectQnaCate1();	
-			model.addAttribute("cate1List", cate1List);
-	        
-			List<ArticleDTO> qnalist = adminService.selectSearchArticleQnas(cate1value, cate2value);
-	        model.addAttribute("qnalist", qnalist);
-			
-	        // 페이지당 항목 수
+			// 페이지당 항목 수
 		    int itemsPerPage = pageSize;
 
 		    // 총 항목 수
-		    int totalItems = qnalist.size();
+		    int totalItems = adminService.selectCountQnasByCate1ANDCate2(cate1value, cate2value);
 
 		    // totalPages 계산
 		    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
@@ -117,36 +115,47 @@ public class Admin_CsController {
 		    int pageStartNum = (pg - 1) * itemsPerPage + 1;
 		    int pageEndNum = Math.min(pg * itemsPerPage, totalItems);
 		    
-		    model.addAttribute("pageStartNum", pageStartNum);
-		    model.addAttribute("pageEndNum", pageEndNum);
+		   
 			
-		} else {
-		
+			List<ArticleCate1DTO> cate1List = adminService.selectQnaCate1();	
+			
+	        
+			List<ArticleDTO> qnalist = adminService.selectSearchArticleQnas(cate1value, cate2value, pageStartNum, pg);
+			
+	        model.addAttribute("qnalist", qnalist);
+	        model.addAttribute("pageStartNum", pageStartNum);
+		    model.addAttribute("pageEndNum", pageEndNum);
+		    model.addAttribute("cate1List", cate1List);
+		    
+		    return "/admin/layout/cs/qnalist";
+			
+		}
+			
+			// 페이지당 항목 수
+		    int itemsPerPage = pageSize;
+		    
+		    // 총 항목 수
+		    int totalItems = adminService.selectCountQnas();
+		    
+		    // totalPages 계산
+		    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+ 
+		    int pageStartNum = (pg - 1) * itemsPerPage + 1;
+		    int pageEndNum = Math.min(pg * itemsPerPage, totalItems);
+		   
 			List<ArticleCate1DTO> cate1List = adminService.selectQnaCate1();
 			model.addAttribute("cate1List", cate1List);
 			
-			List<ArticleDTO> qnalist = adminService.selectArticleQnas();
-	        model.addAttribute("qnalist", qnalist);
-	        
-	        // 페이지당 항목 수
-		    int itemsPerPage = pageSize;
-	
-		    // 총 항목 수 (공지사항 목록의 크기)
-		    int totalItems = qnalist.size();
-	
-		    // totalPages 계산
-		    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
-	
-		    model.addAttribute("totalPages", totalPages);
-		    
-		    int pageStartNum = (pg - 1) * itemsPerPage + 1;
-		    int pageEndNum = Math.min(pg * itemsPerPage, totalItems);
-		    
-		    model.addAttribute("pageStartNum", pageStartNum);
-		    model.addAttribute("pageEndNum", pageEndNum);
-		}
+			List<ArticleDTO> qnalist = adminService.selectArticleQnas(pageStartNum, pg);
 			
-		return "/admin/layout/cs/qnalist";
+	        model.addAttribute("qnalist", qnalist);
+	        model.addAttribute("pageStartNum", pageStartNum);
+		    model.addAttribute("pageEndNum", pageEndNum);
+		    model.addAttribute("totalPages", totalPages);
+	        log.info("qnalist : " + qnalist);
+	        
+		    return "/admin/layout/cs/qnalist";	
+		
 	}
 	
 	@GetMapping("/admin/layout/cs/faqlist")
@@ -313,7 +322,7 @@ public class Admin_CsController {
 	@PostMapping("/admin/layout/cs/qnaWrite")
 	public String qnaWriter(ArticleDTO dto) {
 		
-		dto.setComment(dto.getComment() +1);
+		dto.setComment(dto.getComment() + 1);
 		
 		adminService.Answer(dto);
 		

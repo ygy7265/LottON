@@ -21,17 +21,19 @@ public interface CategoryMapper {
 	public List<ArticleCate2DTO> selectArticleQnaCate2(int group, int cate1);
 	public void noticemodify(ArticleDTO dto);
 	public void faqmodify(ArticleDTO dto);
-	public List<ArticleDTO> selectArticleNotices();
+	public List<ArticleDTO> selectArticleNotices(int pg, int pageStartNum);
 	public List<ArticleDTO> selectArticleFaqs();
-	public List<ArticleDTO> selectArticleQnas();
+	public List<ArticleDTO> selectArticleQnas(int pg, int pageStartNum);
 	public ArticleDTO selectArticleNotice(int no);
 	public ArticleDTO selectArticleFaq(int no);
 	public ArticleDTO selectArticleQna(int no);
-	public List<ArticleDTO> selectSearchArticleNotice(int cate1);
+	public List<ArticleDTO> selectSearchArticleNotice(int cate1,int pg, int pageStartNum);
 	public List<ArticleDTO> selectSearchArticleFaq(int cate1, int cate2);
-	public List<ArticleDTO> selectSearchArticleQna(int cate1, int cate2);
+	public List<ArticleDTO> selectSearchArticleQna(int cate1, int cate2, int pg, int pageStartNum);
 	public void AnswerQna(ArticleDTO dto);
 	public List<TermsDTO> selectPolicy();
 	public int selectCountNotices();
 	public int selectCountQnas();
+	public int selectCountNoticesByCate1(int cate1);
+	public int selectCountQnasByCate1ANDCate2(int cate1, int cate2);
 }
