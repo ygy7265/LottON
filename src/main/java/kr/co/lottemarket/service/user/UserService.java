@@ -6,15 +6,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.exceptionGroup_return;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import kr.co.lottemarket.dto.user.EmailMessageDTO;
 import kr.co.lottemarket.dto.user.UserDTO;
 import kr.co.lottemarket.entity.user.UserEntity;
 import kr.co.lottemarket.repository.user.UserRepository;
+import kr.co.lottemarket.security.MyUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -32,6 +37,10 @@ public class UserService {
 	
 	private final JavaMailSender javaMailSender; // 이메일 인증
 	
+	private final AuthenticationManager authenticationManager;
+	
+	
+	
 	private static String generatedCode; // 인증코드 생성 시 사용할 변수
 	
 	public UserDTO findByUesr(String uid) {
@@ -46,10 +55,28 @@ public class UserService {
 		return entity.toDTO();
 	}
 	
-	public UserDTO findByUidAndPass(String uid, String pass) {
-		pass = encoder.encode(pass);
-		UserEntity entity = userRepository.findByUidAndPass(uid, pass);
-		return entity.toDTO();
+	public int findByUidAndPass(String uid, String pass) {
+		
+		log.info("findByUidAndPass...1-1");
+		
+		try {
+			// 시큐리티 인증 처리
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(uid, pass);
+			log.info("findByUidAndPass...1-2");
+			
+			Authentication authentication = authenticationManager.authenticate(authenticationToken);
+			log.info("findByUidAndPass...1-3");
+			
+			MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+			return 1;
+			
+		}catch (Exception e) {
+			log.info("findByUidAndPass...1-4 : " + e.getMessage());
+			return 0;
+		}
+		
+		
+		
 	}
 	
 	public void save(UserDTO dto) { // Service에서는 Entity가 아닌 DTO가 매개변수로!!
@@ -62,6 +89,13 @@ public class UserService {
 		
 		
 		
+		userRepository.save(entity); 
+	}
+	
+	public void modify(UserDTO dto) {
+		// uid로 DB에서 찾을 때 이미 암호화 되어 있으므로 암호화 다시 할 필요없음
+		
+		UserEntity entity = dto.toEntity();
 		userRepository.save(entity); 
 	}
 	

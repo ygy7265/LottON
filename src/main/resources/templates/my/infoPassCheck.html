@@ -5,7 +5,7 @@
 	
 	$(function(){
 		
-		const formMy = $('#formMy');
+		const myForm = $('#myForm');
 		
 		$('#btnSubmit').click(function(e){
 			e.preventDefault();
@@ -13,34 +13,27 @@
 			
 			const uid = $('#passCheckId').text();
 			const pass = $('#passCheck').val();
-			
-			
+						
 			const jsonData = {"pass" : pass, "uid" : uid};
 			
 			$.ajax({
-				url: '/my/infoPassCheck',
+				url: '/my/infoPassConfirm',
 				type: 'POST',
 				data: jsonData, // 변수니까 '' 안씀
 				dataType: 'json', // Type 대문자
 				success: function(data){
 					
-					alert('success!');
+					//alert('success : ' + data);
 					
-					if(성공했으면){
-						formMy.submit();
+					if(data == 1){
+						myForm.submit();
+						alert('수정 완료했습니다.');
 					}else{
 						alert('입력한 비밀번호가 일치하지 않습니다.');
 						return; // return 하면 무슨 효과??
 					}
 				}
-				
 			});
-			
-			
-			
-			
-			
-			
 		});
 		
 		/*
@@ -79,7 +72,7 @@
             <article>
                 <h3>비밀번호 확인</h3>
                 
-				<form th:action="@{/my/infoPassCheck}" method="POST" id="formMy">
+				<form th:action="@{/my/infoPassCheck}" method="POST" id="myForm">
 					<input type="hidden" name="uid" th:value="${userDTO.uid}" /> <!-- th빠트리지말라고!!!!!!! 수정완료시 폼전송으로 보낼 파라미터 -->
 					<input type="hidden" name="email" th:value="${userDTO.email}" /> <!-- 수정완료시 폼전송으로 보낼 파라미터 -->
 					<input type="hidden" name="hp" th:value="${userDTO.hp}" />
