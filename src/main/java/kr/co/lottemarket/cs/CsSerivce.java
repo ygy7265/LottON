@@ -138,5 +138,12 @@ public class CsSerivce {
 	}
 	
 	
+	public List<ArticleDTO> selectNoticeCate(){
+		return mapper.selectNoticeCate();
+	}
+	
+	public void deleteArticle(int no) {
+		mapper.deleteArticle(no);
+	}
 	
 }

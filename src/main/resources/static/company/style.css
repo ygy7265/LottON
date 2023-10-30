@@ -264,7 +264,25 @@ main > .content > p {
 	text-align: center;
     width: 80%;
     margin: 28px auto;
+    border-collapse: collapse;
 }
+
+
+/* 추가된 부분 */
+
+#notice #noticeTable tr:nth-child(1){
+	border-bottom : 1px solid black;
+	font-size: 22px;
+}
+
+#notice #noticeTable tr{
+	 height: 50px;
+}
+#notice #noticeTable td{
+	 height: 50px;
+}
+
+/*--------------------------------*/
 
 
 /* í™ë³´ì±„ë„ */

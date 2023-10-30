@@ -7,12 +7,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import groovyjarjarantlr4.v4.parse.GrammarTreeVisitor.mode_return;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import kr.co.lottemarket.dto.ArticleDTO;
 import kr.co.lottemarket.dto.cs.ArticleCate1DTO;
 import kr.co.lottemarket.dto.cs.PageRequestDTO;
@@ -53,14 +58,18 @@ public class CS_ArticleController {
 	        log.info("pageResponseDTO group : " + pageResponseDTO.getGroup());
 	        log.info("pageResponseDTO.getDtoList()...." + pageResponseDTO.getDtoList());
 	        
+	        //notice 카테값 출력하기
+	        List<ArticleDTO> articleCates = articleSerivce.selectNoticeCate();
+	        model.addAttribute("articleCates", articleCates);
+	        
 			model.addAttribute("pageResponseDTO", pageResponseDTO);
+			
 			  log.info("pageResponseDTO = " + pageResponseDTO );
 			
 			model.addAttribute("state", "list");
 			
 			 //nav
 			 ArticleDTO nav = articleSerivce.selectNav(group, cate1);
-			 
 			 log.info(nav);
 			 
 			 model.addAttribute("nav", nav);
@@ -217,5 +226,16 @@ public class CS_ArticleController {
 
 		return "redirect:/cs/list?group=" + dto.getGroup() + "&cate1=" + dto.getCate1();
 	}
-
+	
+	
+	@GetMapping("/cs/delete/{no}")
+	public String delete(@PathVariable("no") int no) {
+		
+		log.info("no = " + no);
+		
+		articleSerivce.deleteArticle(no);
+		
+		return "redirect:/cs/list?group=3&cate1=1";
+	}
+	
 }

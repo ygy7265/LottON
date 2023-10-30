@@ -2,7 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
       layout:decorate="/cs/board/moduleList.html">
-		
+
+<head>
+	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+ $(document).ready(function() {
+        $('.btnDelete').click(function (e) {
+            e.preventDefault();
+			
+			let no =  $(".articleNo").val();
+			
+			console.log("no=" + no);
+			
+            if (confirm('상품을 삭제하시겠습니까?')) {
+                window.location.href = "/LotteON/cs/delete/" + no;
+            }
+        });
+    });
+</script>
+</head>
+	
+	
+
              <article layout:fragment="content">
 			  <nav>
 				<th:block th:if="${article.group == 1}">
@@ -21,9 +43,7 @@
 
               <div class="content">
 				  
-				 [[${article.content}]]<br><br>  
-				 [[${article.no}]]<br><br>
-				 [[${answer.parent}]]<br><br>
+				 [[${article.content}]]
 				  
                 <p>
                   개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
@@ -37,7 +57,7 @@
                   감사합니다.<br />
                 </p>
               </div>
-           
+           <input type="hidden" class="articleNo" th:value="${article.no}"/>
            <th:block th:if="${article.group == 3}">
               <th:block th:if="${answer != null && article.no == answer.parent}">
 			    <div class="qna_answer">
@@ -58,7 +78,13 @@
 			</th:block>
           </th:block>  
               <a th:href="@{/cs/list(group=${article.group},cate1=${article.cate1})}" class="btnList">목록보기</a>
-            
+		
+		<th:block th:if="${article.group == 3}">
+			<th:block th:if="${#authentication.principal.user.uid == article.uid}">
+		    	<a th:href="@{/cs/delete(cate1=${article.cate1}, no=${article.no})}" class="btnDelete">삭제하기</a>
+		    </th:block>	
+		</th:block>
+          
             </article>
             
 </html>

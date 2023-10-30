@@ -89,7 +89,25 @@
     
     
     
+    <select id="selectNoticeArticles" resultType="kr.co.lottemarket.dto.ArticleDTO">
+		SELECT * FROM  `lotte_board` 
+		WHERE `group` = 3
+		LIMIT 0 ,10
+    </select>
     
+    
+     <select id="selectNoticeCate" resultType="kr.co.lottemarket.dto.ArticleDTO">
+		  SELECT  a.*, b.cate1_name, c.cate2_name
+		  FROM `lotte_board` AS a
+		  LEFT JOIN `lotte_board_cate1` AS b ON a.group = b.group AND a.cate1 = b.cate1
+		  LEFT JOIN `lotte_board_cate2` AS c ON a.cate1 = c.cate1 AND a.cate2 = c.cate2
+		  WHERE a.`group` = 3
+    </select>
+	
+	<select id="deleteArticle">
+		DELETE FROM `lotte_board`
+        WHERE no = #{no}
+    </select>
 	
 
  

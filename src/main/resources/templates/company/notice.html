@@ -12,15 +12,15 @@
                 </div>
             </div>
             <section class="content">
-               <table id="noticeTable" border="0">
+               <table id="noticeTable">
                     <tr class="noticeTable">
                         <th>제목</th>
                         <th>등록일</th>
                     </tr>
                     
-                    <tr>
-   						<td class="title">기준일 및 주주명부 폐쇄기간 설정 공고</td>                    
-                        <td class="date">2022-12-16</td>
+                    <tr th:each="article:${articles}">
+   						<td class="title">[[${article.title}]]</td>                    
+                        <td class="date" th:text="${#temporals.format(article.rdate, 'yyyy-MM-dd')}"></td>
 	                 </tr>
                 </table>
             </section>
