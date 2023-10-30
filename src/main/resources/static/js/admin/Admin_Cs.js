@@ -18,7 +18,7 @@ $(document).ready(function(){
         
 	    $.ajax({
 	        type: "DELETE",
-	        url: "/admin/layout/cs/selectCsDelete",
+	        url: "/LotteON/admin/layout/cs/selectCsDelete",
 	        traditional: true,
 	        data: JSON.stringify(checkBoxArr), // 배열을 JSON 형식으로 변환
 	        contentType: "application/json", // 데이터 형식을 JSON으로 지정
@@ -53,7 +53,7 @@ $(document).ready(function(){
 	    if (confirm('상품을 삭제하시겠습니까?')) {
 			
 	        $.ajax({
-	            url: '/admin/layout/cs/noticeDelete/' + no,
+	            url: '/LotteON/admin/layout/cs/noticeDelete/' + no,
 	            type: 'DELETE',
 	            dataType: 'json',
 	            success: function (data) {
@@ -74,7 +74,7 @@ $(document).ready(function(){
 	    if (confirm('상품을 삭제하시겠습니까?')) {
 			
 	        $.ajax({
-	            url: '/admin/layout/cs/faqDelete/' + no,
+	            url: '/LotteON/admin/layout/cs/faqDelete/' + no,
 	            type: 'DELETE',
 	            dataType: 'json',
 	            success: function (data) {
@@ -95,7 +95,7 @@ $(document).ready(function(){
 	    if (confirm('상품을 삭제하시겠습니까?')) {
 			
 	        $.ajax({
-	            url: '/admin/layout/cs/qnaDelete/' + no,
+	            url: '/LotteON/admin/layout/cs/qnaDelete/' + no,
 	            type: 'DELETE',
 	            dataType: 'json',
 	            success: function (data) {
@@ -109,22 +109,22 @@ $(document).ready(function(){
     });
 	
 	$('.noticeWrite').click(function(){
-	   window.location.href = "/admin/layout/cs/noticeWrite"; 
+	   window.location.href = "/LotteON/admin/layout/cs/noticeWrite"; 
 	});
 	
 	$('.faqWrite').click(function(){
-	   window.location.href = "/admin/layout/cs/faqWrite"; 
+	   window.location.href = "/LotteON/admin/layout/cs/faqWrite"; 
 	});
 	
 	$('.qnaWrite').click(function(){
-	   window.location.href = "/admin/layout/cs/qnaWrite"; 
+	   window.location.href = "/LotteON/admin/layout/cs/qnaWrite"; 
 	});
 	
 	document.querySelector('#faqboardCate1').addEventListener('change', function() {
 		
 	    var selectedCate1 = this.value;
 	    var category2Select = document.querySelector('#faqboardCate2');
-	    var url = `/admin/layout/cs/faqcate2/${selectedCate1}`;
+	    var url = `/LotteON/admin/layout/cs/faqcate2/${selectedCate1}`;
 	 
 		console.log("url : " + url);
 	
