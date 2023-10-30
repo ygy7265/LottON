@@ -57,7 +57,7 @@ public class Admin_CsController {
 			
 	        
 		    
-		    return "/admin/layout/cs/noticelist";
+		    return "LotteON/admin/layout/cs/noticelist";
 		    
 		}
 			
