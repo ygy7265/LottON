@@ -401,4 +401,31 @@ public class Admin_CsController {
 		return "/admin/layout/user/userlist";
 	}
 	
+	@GetMapping("/admin/layout/store/seller")
+	public String selectCommpany(Model model, @RequestParam(defaultValue = "1") int pg, @RequestParam(defaultValue = "10") int pageSize) {
+		
+		// 페이지당 항목 수
+		int itemsPerPage = pageSize;
+		
+		// 총 항목 수
+		int totalItems = adminService.selectCountCommpany();
+		
+		// totalPages 계산
+		int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+		
+		model.addAttribute("totalPages", totalPages);
+		
+		int pageStartNum = (pg - 1) * itemsPerPage + 1;
+		int pageEndNum = Math.min(pg * itemsPerPage, totalItems);
+		
+		model.addAttribute("pageStartNum", pageStartNum);
+		model.addAttribute("pageEndNum", pageEndNum);
+		
+		List<UserDTO> sellerlist = adminService.selectCommpany();
+		
+		model.addAttribute("sellerlist", sellerlist);
+		
+		return "/admin/layout/store/seller";
+	}
+	
 }

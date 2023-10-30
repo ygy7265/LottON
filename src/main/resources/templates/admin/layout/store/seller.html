@@ -24,15 +24,15 @@
                 <th>관리</th>
             </tr>
 			
-            <tr th:if="${userlist.type != 9}" class="row" th:each="userlist : ${userlist}">
-                <td style="text-align:center; width:5%" th:text="${userlist.uid}">[[${userlist.uid}]]</td>
-                <td style="text-align:center; width:5%" th:text="${userlist.name}"></td>
-                <td style="text-align:center; width:5%" th:if="${userlist.gender == 1}">남</td>
-                <td style="text-align:center; width:5%" th:text="${userlist.birth}"></td>
-                <td style="text-align:center; width:10%" th:text="${userlist.hp}"></td>
-                <td style="text-align:center; width:10%" th:text="${userlist.email}"></td>
-                <td style="text-align:center; width:20%" th:text="${userlist.addr1}"></td>
-                <td style="text-align:center; width:10%" th:text="${#temporals.format(userlist.rdate, 'yy-MM-dd')}"></td>
+            <tr class="row" th:each="sellerlist : ${sellerlist}">
+                <td style="text-align:center; width:5%">[[${sellerlist.company}]]</td>
+                <td style="text-align:center; width:5%" th:text="${sellerlist.ceo}"></td>
+                <td style="text-align:center; width:10%" th:if="${sellerlist.comRegNum}"></td>
+                <td style="text-align:center; width:10%" th:text="${sellerlist.bizRegNum}"></td>
+                <td style="text-align:center; width:10%" th:text="${sellerlist.manager}"></td>
+                <td style="text-align:center; width:10%" th:text="${sellerlist.managerHp}"></td>
+                <td style="text-align:center; width:20%" th:text="${sellerlist.tel}"></td>
+                <td style="text-align:center; width:10%" th:text="${#temporals.format(sellerlist.rdate, 'yy-MM-dd')}"></td>
                 <td style="text-align:center; width:10%">
                     <a href="#" class="userDelete">[정지]</a>
                 </td>
@@ -41,13 +41,13 @@
 
 		<div class="paging">
 	        <span th:if="${pageStartNum > 1}">
-	            <a th:href="@{/admin/layout/user/userlist(pg=${pageStartNum - 1})}" >이전</a>
+	            <a th:href="@{/admin/layout/store/seller(pg=${pageStartNum - 1})}" >이전</a>
 	        </span>
 	        <span th:each="page : ${#numbers.sequence(1, totalPages)}" class="num">
-	            <a th:href="@{/admin/layout/user/userlist(pg=${page})}" th:text="${page}"></a>
+	            <a th:href="@{/admin/layout/store/seller(pg=${page})}" th:text="${page}"></a>
 	        </span>
 	        <span th:if="${pageEndNum < totalPages}" class="next">
-	            <a th:href="@{/admin/layout/user/userlist(pg=${pageEndNum + 1})}" >다음</a>
+	            <a th:href="@{/admin/layout/store/seller(pg=${pageEndNum + 1})}" >다음</a>
 	        </span>
 		</div>
 

@@ -40,5 +40,7 @@ public interface CategoryMapper {
 	public void commentPlus(int no);
 	public List<UserDTO> selectUser();
 	public int selectCountUser();
+	public List<UserDTO> selectCommpany();
+	public int selectCountCommpany();
 	
 }
