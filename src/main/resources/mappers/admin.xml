@@ -243,6 +243,18 @@
 	        
 	    </select>
 	    
+		<select id="selectCommpany" resultType="kr.co.lottemarket.dto.user.UserDTO">
+	       
+	        SELECT * FROM lotte_member WHERE `type` = 2; 
+	        
+	    </select>
+	    
+	    <select id="selectCountCommpany" resultType="int">
+	       
+			SELECT COUNT(*) FROM `lotte_member` WHERE `type` = 2;
+	        
+	    </select>
+	    
 	    <insert id="AnswerQna">
 	    	
 	    	INSERT INTO  lotte_board (`group`, parent, uid, cate1, cate2, content, rdate)  

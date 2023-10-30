@@ -18,7 +18,7 @@
     <div id="admin-wrapper">
         <header>
             <div>
-                <a th:href="@{/admin/layout/index/layoutindex}" class="logo"><img src="/images/admin_logo.png" alt="admin_logo"/></a>
+                <a th:href="@{/admin/layout/index/layoutindex}" class="logo"><img src="/LotteON/images/admin_logo.png" alt="admin_logo"/></a>
                 <p>
                     <span>[[${#authentication.principal.user.uid}]]님 환영합니다</span>
                     <a th:href="@{/}">HOME |</a>
@@ -41,7 +41,7 @@
                     <li>
                         <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
                         <ol>
-                            <li><a href="#">판매자현황</a></li>
+                            <li><a th:href="@{/admin/layout/store/seller}">판매자현황</a></li>
                         </ol>
                     </li>
                     <li>

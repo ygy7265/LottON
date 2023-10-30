@@ -41,6 +41,8 @@ public class UserDTO {
 	private String tel;
 	// manager, managerHp 는 프론트에서 name과 hp로 설정 되어있기 때문에 프론트에서 객체의 속성을 담당하는 DTO에서는 manager, managerHp가 필요없다
 	private String fax;
+	private String manager;
+	private String managerHp;
 	
 	private String regip;
 	private LocalDateTime wdate;
