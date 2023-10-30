@@ -20,7 +20,8 @@
 			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
 			WHERE parent=0 AND a.`group` =1
-			LIMIT #{pageStartNum}, 10;
+			ORDER BY a.`rdate` DESC
+			LIMIT 10 OFFSET #{pageStartNum};
 	        
 	    </select>
 	    
@@ -48,6 +49,7 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 2
+	       	ORDER BY a.`rdate` DESC
 	        LIMIT 10 OFFSET 0;
 	        
 	    </select>
@@ -64,7 +66,8 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 3
-	        LIMIT  #{pageStartNum}, 10;
+	        ORDER BY a.`rdate` DESC
+	        LIMIT 10 OFFSET #{pageStartNum};
 
 	        
 	    </select>
@@ -134,7 +137,8 @@
 			LEFT JOIN `lotte_board_group` AS b ON a.`group` = b.`group` 
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group`
 			WHERE parent=0 AND a.`group` =1 AND a.cate1 = #{cate1}
-			LIMIT  #{pageStartNum}, 10;
+			ORDER BY a.`rdate` DESC
+			LIMIT 10 OFFSET #{pageStartNum};
 	        
 	    </select>
 	    
@@ -150,6 +154,7 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 2 AND a.cate1 = #{cate1} AND a.cate2 = #{cate2}
+	        ORDER BY a.`rdate` DESC
 	        LIMIT 10 OFFSET 0;
 	        
 	    </select>
@@ -166,7 +171,8 @@
 			LEFT JOIN `lotte_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` 
 			LEFT JOIN `lotte_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` 
 	        WHERE parent=0 AND a.`group`= 3 AND a.cate1 = #{cate1} AND a.cate2 = #{cate2}
-	        LIMIT #{pageStartNum}, 10;
+	        ORDER BY a.`rdate` DESC
+	        LIMIT 10 OFFSET #{pageStartNum};
 	        
 	    </select>
 	    
