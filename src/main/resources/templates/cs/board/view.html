@@ -34,7 +34,7 @@
                 	<h2 class="title">[ [[${article.cate2_name}]] ] [[${article.title}]]</h2>                
 				</th:block>	
                 <p>
-                  <span>[[${article.uid}]]</span>
+                  <span>[[${#strings.substring(article.uid, 0, 3) + '***'}]]</span>
                   <span th:text="${#temporals.format(article.rdate, 'yyyy-MM-dd')}"></span>
                 </p>
               </nav>	 
@@ -43,7 +43,7 @@
 
               <div class="content">
 				  
-				 [[${article.content}]]
+				 [[${article.content}]] <br><br>
 				  
                 <p>
                   개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
