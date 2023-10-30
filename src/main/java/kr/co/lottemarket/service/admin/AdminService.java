@@ -429,4 +429,19 @@ public class AdminService {
     	return User;
     }
     
+    public List<UserDTO> selectCommpany() {
+    	
+    	List<UserDTO> dtoList = category2Mapper.selectCommpany();
+    	
+    	return dtoList;
+    	
+    }
+    
+    public int selectCountCommpany() {
+    	
+    	int Commpany = category2Mapper.selectCountCommpany();
+    	
+    	return Commpany;
+    }
+    
 }
