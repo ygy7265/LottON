@@ -18,7 +18,7 @@ public class TermsService {
 	private TermsRepository termsRepository;
 	
 	public TermsDTO findById() {
-		return termsRepository.findById(0).get().toDTO(); // get을 통해 TermsEntity를 선언하는 효과, 그리고 TermsEntity의 메서드를 호출할 수 있다.
+		return termsRepository.findById(1).get().toDTO(); // get을 통해 TermsEntity를 선언하는 효과, 그리고 TermsEntity의 메서드를 호출할 수 있다.
 	}
 							
 }

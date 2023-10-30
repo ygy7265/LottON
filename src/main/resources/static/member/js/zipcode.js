@@ -1,9 +1,9 @@
 /**
  * 카카오 우편번호 함수 
  */
-function zipcode(e) {
+function zipcode() {
 	
-	e.preventDefault();
+	
 	
     new daum.Postcode({
         oncomplete: function(data) {
