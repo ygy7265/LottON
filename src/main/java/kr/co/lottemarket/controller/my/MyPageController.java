@@ -179,18 +179,37 @@ public class MyPageController {
 		return "/my/infoPassCheck";
 	}
 	
-	@ResponseBody
+	// 비밀번호 확인페이지에서 폼 전송으로 수정할 때
 	@PostMapping("/infoPassCheck") // 비밀번호 일치하는지 안하는지 여기로 AJAX POST 전송해서 확인후 일치하면(성공값) 그때 다시 폼을 통해 여기로 POST 전송 해서 save한다!
-	public UserDTO infoPassCheck(String uid, String pass) { // 매개변수 DTO로도 받을 수 있다! 근데 AJAX로 쏠때랑 폼전송할 때랑 한번에 받을 수 있는 매개변수는 DTO겠네??
+	public String infoPassCheck(UserDTO user) { // 폼에서 파라미터 보내는 거 DTO로 수신
+		
+		// 우선 uid로 DB에 입력되어 정보 가져오기
+		UserDTO userDTO = userService.findByUid(user.getUid());
+		
+		// 가져온 정보에 파라미터로 받은 데이터 설정하기
+		userDTO.setEmail(user.getEmail());
+		userDTO.setHp(user.getHp());
+		userDTO.setZip(user.getZip());
+		userDTO.setAddr1(user.getAddr1());
+		userDTO.setAddr2(user.getAddr2());
+		
+		// 수정된 데이터로 save하기
+		userService.modify(userDTO);
+		
+		return "redirect:/member/logout";
+	}
+	
+	// 비밀번호 확인할 때 AJAX로 쏜 거 이 메서드로 확인
+	@ResponseBody
+	@PostMapping("/infoPassConfirm") // 비밀번호 일치하는지 안하는지 여기로 AJAX POST 전송해서 확인후 일치하면(성공값) 그때 다시 폼을 통해 여기로 POST 전송 해서 save한다!
+	public int infoPassConfirm(String uid, String pass) { // 매개변수 DTO로도 받을 수 있다! 근데 AJAX로 쏠때랑 폼전송할 때랑 한번에 받을 수 있는 매개변수는 DTO겠네??
 		
 		log.info("uid : " + uid);
 		log.info("pass : " + pass);
 
-		UserDTO userDTO = userService.findByUidAndPass(uid, pass);
+		int result = userService.findByUidAndPass(uid, pass);
 		
-		return userDTO;
-		
-		
+		return result;
 		/*
 		
 		
