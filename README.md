@@ -38,21 +38,31 @@
 ## 협업 도구
 - Slack
 
-## 뷰 템플릿
-- Thymeleaf template
+## 사용기술
+
+- Frontend: HTML, CSS, JavaScript,Thyleaf
+- Backend: Java (Spring Boot), JPA (Java Persistence API), MyBatis
+- Database: MySQL
+- Version Control: Git
+  
+### 보안
+
+- Spring Security를 통한 사용자 인증 및 권한 부여 구현
+- 세션 기반의 인증 사용
+
 
 ### 데이터베이스 관리 시스템 (DBMS)
 - MySQL 8.0
-
-## 정보 구조 (IA : Information Architecture)
-![IA Diagram 1](https://github.com/ygy7265/LottON/assets/48234811/11dc8af2-aeab-4860-9755-f8318c246fbc)
-![IA Diagram 2](https://github.com/ygy7265/LottON/assets/48234811/6eb5e97d-9476-43ae-bf18-dc89240f2ce2)
-![IA Diagram 3](https://github.com/ygy7265/LottON/assets/48234811/ba2be98c-086b-40a1-94da-3b4ebce14f53)
 
 ## 주요 기능
 - 회원가입 / 로그인 / 약관
 - 상품 등록 / 상품 목록 / 상품 보기 / 장바구니 / 주문하기
 - 고객센터 / 공지사항 / Q&A / FAQ
+  
+## 정보 구조 (IA : Information Architecture)
+![IA Diagram 1](https://github.com/ygy7265/LottON/assets/48234811/11dc8af2-aeab-4860-9755-f8318c246fbc)
+![IA Diagram 2](https://github.com/ygy7265/LottON/assets/48234811/6eb5e97d-9476-43ae-bf18-dc89240f2ce2)
+![IA Diagram 3](https://github.com/ygy7265/LottON/assets/48234811/ba2be98c-086b-40a1-94da-3b4ebce14f53)
 
 ## ERD
 ![ER Diagram](https://github.com/ygy7265/LottON/assets/48234811/350fea20-05c0-40be-8363-0344c4a438c1)
@@ -97,7 +107,7 @@
 0.0.9-SNAPSHOT
 
 - product 검색기능구현 1차 완료 (검색)
-- 
+
 0.0.10-SNAPSHOT
 
 - product 마이페이지 기능구현 1차 완료 (조회)
