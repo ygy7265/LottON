@@ -1,5 +1,7 @@
 ## 프로젝트소개
 롯데 e-커머스 LOTTE ON 쇼핑몰 개발
+[Uploading screencapture-3-34-47-106-8000-LotteON-2023-11-18-21_31_04.pdf…]()
+
 
 ## 프로젝트 기간
 2023.09.26 ~ 2023.10.30 (21일 160시간)
@@ -8,12 +10,12 @@
 
 ### 서비스 배포 환경
 - **OS:** Window10
-- **Browser:** Chrome 119.0.6045.160(
-- **WAS:** Apache Tomcat 9.x.x
-- **Language:** Spring Boot 3.xx
+- **Browser:** Chrome 119.0.6045.160
+- **WAS:** Apache Tomcat 10.1.13
+- **Language:** Spring Boot 3.1.4
 
 ### 라이브러리
-- activation-1.x.x.jar
+- activation-1..x.jar
 - cos-05Nov2002.jar
 - gson-2.9.1.jar
 - javax.mail-1.6.2.jar
@@ -24,18 +26,26 @@
 - mysql-connector-java-8.0.29.jar
 - slf4j-api-2.0.3.jar
 
+## ViewTempleate
+Thymeleaf template
+
+
 ### 데이터베이스 관리 시스템 (DBMS)
 - MySQL 8.0
 
 ## 정보구조(IA : Information Architecture)
 ![Untitled](https://github.com/ygy7265/LottON/assets/48234811/11dc8af2-aeab-4860-9755-f8318c246fbc)
-
-
+![Untitled (1)](https://github.com/ygy7265/LottON/assets/48234811/6eb5e97d-9476-43ae-bf18-dc89240f2ce2)
+![Untitled (2)](https://github.com/ygy7265/LottON/assets/48234811/ba2be98c-086b-40a1-94da-3b4ebce14f53)
 
 ## 주요기능
 -  회원가입 / 로그인 / 약관
 -  상품등록 / 상품목록 / 상품보기 / 장바구니 / 주문하기
 -  고객센터 / 공지사항 / Q&A / FAQ
+
+## ERD
+![image](https://github.com/ygy7265/LottON/assets/48234811/350fea20-05c0-40be-8363-0344c4a438c1)
+
 # LotteON 프로젝트 업데이트 내역
 
 0.0.1-SNAPSHOT
