@@ -1,7 +1,7 @@
 ## 프로젝트소개
 롯데 e-커머스 LOTTE ON 쇼핑몰 개발
 
-![Uploading screencapture-3-34-47-106-8000-LotteON-2023-11-18-21_31_04.png…]()
+![screencapture-3-34-47-106-8000-LotteON-2023-11-18-21_31_04](https://github.com/ygy7265/LottON/assets/48234811/d29ecd2b-94e2-4cfe-8767-dd1be7b3f328)
 
 
 ## 프로젝트 기간
