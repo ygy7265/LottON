@@ -40,7 +40,7 @@
 
 ## 사용기술
 
-- Frontend: HTML, CSS, JavaScript,Thyleaf
+- Frontend: HTML, CSS, JavaScript,Thyleaf,Jquery
 - Backend: Java (Spring Boot), JPA (Java Persistence API), MyBatis
 - Database: MySQL
 - Version Control: Git
