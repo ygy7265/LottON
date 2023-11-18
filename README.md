@@ -7,10 +7,10 @@
 ## 서비스 환경
 
 ### 서비스 배포 환경
-- **OS:** 테스트2
-- **Browser:** 테스트3
-- **WAS:** 테스트3
-- **Language:** 테스트3
+- **OS:** Window10
+- **Browser:** Chrome 119.0.6045.160(
+- **WAS:** Apache Tomcat 9.x.x
+- **Language:** Spring Boot 3.xx
 
 ### 라이브러리
 - activation-1.x.x.jar
@@ -27,6 +27,8 @@
 ### 데이터베이스 관리 시스템 (DBMS)
 - MySQL 8.0
 
+## 정보구조(IA : Information Architecture)
+![Untitled](https://github.com/ygy7265/LottON/assets/48234811/11dc8af2-aeab-4860-9755-f8318c246fbc)
 
 
 
