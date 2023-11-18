@@ -5,23 +5,28 @@
 2023.09.26 ~ 2023.10.30 (21일 160시간)
 
 ## 서비스 환경
-|구분|서비스 배포 환경|
-|------|---|
-|OS|테스트2|
-|Browser|테스트3|
-|WAS|테스트3|
-|Language|테스트3|
-|Library|activation-1.x.x.jar
-cos-05Nov2002.jar
-gson-2.9.1.jar
-javax.mail-1.6.2.jar
-javax.mail-api-1.6.2.jar
-jstl-1.2.jar
-logback-classic-1.4.4.jar
-logback-core-1.4.4.jar
-mysql-connector-java-8.0.29.jar
-slf4j-api-2.0.3.jar|
-|DBMS|MySQL 8.0|
+
+### 서비스 배포 환경
+- **OS:** 테스트2
+- **Browser:** 테스트3
+- **WAS:** 테스트3
+- **Language:** 테스트3
+
+### 라이브러리
+- activation-1.x.x.jar
+- cos-05Nov2002.jar
+- gson-2.9.1.jar
+- javax.mail-1.6.2.jar
+- javax.mail-api-1.6.2.jar
+- jstl-1.2.jar
+- logback-classic-1.4.4.jar
+- logback-core-1.4.4.jar
+- mysql-connector-java-8.0.29.jar
+- slf4j-api-2.0.3.jar
+
+### 데이터베이스 관리 시스템 (DBMS)
+- MySQL 8.0
+
 
 
 
