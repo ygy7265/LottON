@@ -68,8 +68,6 @@
 ## ERD
 ![ER Diagram](https://github.com/ygy7265/LottON/assets/48234811/350fea20-05c0-40be-8363-0344c4a438c1)
 
-
-User
 # LotteON 프로젝트 업데이트 내역
 
 ## 0.0.1-SNAPSHOT
