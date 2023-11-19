@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.lottemarket.config.RootConfig;
 import kr.co.lottemarket.dto.product.ProductCartDTO;
 import kr.co.lottemarket.entity.product.ProductCartEntity;
+import kr.co.lottemarket.entity.user.UserEntity;
 import kr.co.lottemarket.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +31,10 @@ public class ProductCartController {
 	private final ModelMapper modelmapper;
 	
 	@GetMapping("/productCart")
-	public String productCart(Model model, String uid) {
-	    uid = "seller1";
+	public String productCart(Model model) {
+		RootConfig userSession = new RootConfig();
+		String uid = (String) userSession.Usersession();
+		log.info(uid);
 	    List<Object[]> dto = service.selectCartItems(uid);
 
 	    // DTO 리스트를 생성하고 엔티티를 DTO로 변환하여 추가
@@ -48,7 +52,8 @@ public class ProductCartController {
 
 	@PostMapping("/productCart")
 	public String productCartPost(ProductCartDTO dto)	{
-		
+
+
 		service.insertDTO(dto);
 		
 		return "redirect:/product/productCart";

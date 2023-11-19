@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ import kr.co.lottemarket.dto.product.ReviewPageResponseDTO;
 import kr.co.lottemarket.dto.user.UserDTO;
 import kr.co.lottemarket.entity.product.ProductReviewEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
+import kr.co.lottemarket.security.MyUserDetails;
 import kr.co.lottemarket.service.mypage.MyPageQnaService;
 import kr.co.lottemarket.service.mypage.MyPageOrderService;
 import kr.co.lottemarket.service.mypage.MyPageOrderService.dataDTO;
@@ -56,9 +58,10 @@ public class MyPageController {
 	
 	@GetMapping("/")
 	public String index(Model model) {
-		
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
 		UserDTO userDTO = new UserDTO();
-		userDTO.setUid("seller1");
+		userDTO.setUid(uid);
 		List<ProductOrderDTO> dto = service.lastOrder(userDTO);
 		List<ProductReviewDTO> dtoReview = reviewService.reviewFindTop5();
 		List<ProductPointDTO> dtoPoint = pointService.pointFindTop5();
@@ -99,8 +102,9 @@ public class MyPageController {
 	
 		dto =service.OrderList(pageRequestDTO, begin, end);
 		
-		String user = (String)rootConfig.Usersession();
-		total = articleSerivce.selectMyCountTotal(user);
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
+		total = articleSerivce.selectMyCountTotal(uid);
     
 		model.addAttribute("dtoList",dto);
 		model.addAttribute("point",datadto.getPoint());
@@ -113,11 +117,11 @@ public class MyPageController {
 	// info
 	@GetMapping("/info")
 	public String info(Model model,HttpServletRequest request) {
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
 		dataDTO datadto = service.countProduct();
 
-		Object obj = rootConfig.Usersession();
-		String uid = "seller1";
-		
+		Object obj = rootConfig.Usersession();		
 		// Object 형변환 가능 여부 확인
 		if(obj instanceof String) {
 			uid = (String) obj;
@@ -345,8 +349,9 @@ public class MyPageController {
 		dto.setRegip(request.getRemoteAddr());
 		reviewService.reviewSave(dto,ordCompleteNo);
 		
-		String user = (String)rootConfig.Usersession();
-		total = articleSerivce.selectMyCountTotal(user);
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
+		total = articleSerivce.selectMyCountTotal(uid);
     
 		model.addAttribute("point",datadto.getPoint());
 		model.addAttribute("count",datadto.getCount());

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import kr.co.lottemarket.config.RootConfig;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageRequestDTO;
 import kr.co.lottemarket.dto.admin.Admin_ProductPageResponseDTO;
 import kr.co.lottemarket.dto.product.PageRequestDTO;
@@ -44,8 +45,9 @@ public class ProductService {
 	private final UserRepository userepo;
 	private final ModelMapper modelmapper;
 	int total = 0;
-	List<ProductDTO> dtoPage = null;
 	
+	List<ProductDTO> dtoPage = null;
+
 	//ProductList
 	public List<ProductDTO> selectsProductHit(){
 		List<ProductEntity> elist = repo.findTop8ByOrderByHitDesc();
@@ -147,12 +149,17 @@ public class ProductService {
 	}
 	@Transactional
 	public void insertDTO(ProductCartDTO dto) {
-		UserEntity user = dto.getUser();
+		
 		dto.setTotal(dto.getCount() * dto.getPrice());
 		ProductCartEntity result = cartrepo.findCartNoByProduct_ProdNo(dto.getProduct().getProdNo());
+		UserEntity user = userepo.findByUid(dto.getUser().getUid());
+		
 		userepo.save(user);
 		ProductCartEntity entity = modelmapper.map(dto, ProductCartEntity.class);
-		entity.setUser(user);
+		entity.setUser(dto.getUser());
+		
+		log.info(dto.getProduct().getProdNo());
+		
 		if(result != null) {
 			cartrepo.modifyCount(result.getCartNo(),entity.getCount());
 		}else {
@@ -177,7 +184,7 @@ public class ProductService {
 	}
 	
 	public List<Object[]> selectCartItems(String uid) {
-		uid="seller1";
+	
 		List<Object[]> entitys = cartrepo.findProductsBySeller(uid);
 		
 		return entitys;
@@ -185,7 +192,7 @@ public class ProductService {
 	
 	public List<ProductOrderItemDTO> findProductsByOrderItem(String uid) {
 		
-		uid="seller1";
+	
 		UserEntity entity = new UserEntity();
 		entity.setUid(uid);
 		List<ProductOrderItemEntity> entitys = orderrepo.findByUser(entity);

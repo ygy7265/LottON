@@ -63,7 +63,7 @@
 						<input type="hidden" name="ordProdName" th:value="${list.product.prodName}">
 						<input type="hidden" name="ordProdNo" th:value="${list.product.prodNo}">
 	                    <a href="#" class="receive" th:if="${list.ordComplete} == 0">수취확인</a>
-	                    <a href="#" class="review">상품평</a>
+	                    <a href="#" class="review" th:if="${list.rvComplete} == 0">상품평</a>
 	                    <a href="#" class="refund">반품신청</a>
 	                    <a href="#" class="exchange">교환신청</a>
 	                </td>

@@ -24,7 +24,6 @@
                         <img th:src="@{'/thumb1/'+${dto.thumb3}}" alt="상품이미지"/>
                     </div>
                     <div class="summary">
-						
                         <nav>
                             <h1>(주)[[${dto.company}]]</h1>
                             <h2>상품번호&nbsp;:&nbsp;<span>[[${dto.prodNo}]]</span></h2>
@@ -79,8 +78,8 @@
                         <input type="hidden" name="discount" th:value="${dto.discount}"/>
                         <input type="hidden" name="point" th:value="${dto.point}"/>
                         <input type="hidden" name="price" th:value="${dto.price}"/>
+                        <input type="hidden" name="user" th:if="${#authorization.expression('isAuthenticated()')}" th:value="${#authentication.principal != null ? #authentication.principal.username : 'ss'}" />
                         <input type="hidden" name="product" th:value="${dto.prodNo}"/>
-                        <input type="hidden" name="user" value="seller1"/>
                         <input type="hidden" name="tot" th:value="${dto.price}"/>
                       
                         </form>

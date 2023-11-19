@@ -31,6 +31,7 @@ import com.nimbusds.jose.shaded.gson.GsonBuilder;
 
 import jakarta.persistence.Entity;
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.lottemarket.config.RootConfig;
 import kr.co.lottemarket.dto.product.ProductDTO;
 import kr.co.lottemarket.dto.product.ProductOrderDTO;
 import kr.co.lottemarket.dto.product.ProductOrderItemDTO;
@@ -54,9 +55,9 @@ public class ProductOrderController {
 	private final ProductOrderItemService itemService;
 	
 	@GetMapping("/productOrder")
-	public String productOrder(HttpServletRequest request,Model model,String uid) {
+	public String productOrder(HttpServletRequest request,Model model) {
 		
-		List<ProductOrderItemDTO> dto= itemService.selectOrderItem(uid);
+		List<ProductOrderItemDTO> dto= itemService.selectOrderItem();
 		UserEntity user = dto.get(0).getUser();
 		Map<String, Integer> map = new HashMap<>();
 		
@@ -98,16 +99,14 @@ public class ProductOrderController {
 	}
 	
 	@PostMapping("/productOrder")
-	public String productOrderPost(@RequestParam("productOrderItemEntity") String productOrderItemEntity,String uid) {
+	public String productOrderPost(@RequestParam("productOrderItemEntity") String productOrderItemEntity) {
 		
-		itemService.insertOrder(productOrderItemEntity,uid);
+		itemService.insertOrder(productOrderItemEntity);
 		
 		return "redirect:/product/productOrder";
 	}
 	@PostMapping("/productOrderBuy")
 	public String productBuy(ProductOrderItemDTO dto) {
-		
-		log.info("Test"+dto.toString());
 		itemService.saveOrderItem(dto);
 		return "redirect:/product/productOrder";
 	}
@@ -134,7 +133,7 @@ public class ProductOrderController {
 	@PostMapping("/productComplete")
 	public String productOrderCompletePost(HttpServletRequest request,@ModelAttribute ProductOrderDTO itemdto) {
 		
-		List<ProductOrderItemDTO> dto= itemService.selectOrderItem("seller1");
+		List<ProductOrderItemDTO> dto= itemService.selectOrderItem();
 		
 		request.getSession().setAttribute("dto", dto);
 		request.getSession().setAttribute("itemdto", itemdto);

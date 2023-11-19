@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -26,6 +27,7 @@ import kr.co.lottemarket.entity.product.ProductPointEntity;
 import kr.co.lottemarket.entity.user.UserEntity;
 import kr.co.lottemarket.repository.mypage.PointRepository;
 import kr.co.lottemarket.repository.product.ProductOrderCompleteRepository;
+import kr.co.lottemarket.security.MyUserDetails;
 import kr.co.lottemarket.service.user.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,9 +47,10 @@ public class MyPageOrderService {
 	
 	public OrderPageResponseDTO OrderList(OrderPageRequestDTO pageRequestDTO,String begin,String end) {
 		 Pageable pageable = pageRequestDTO.getPageable();
-		 
-		 UserEntity entity = new UserEntity();
-		 entity.setUid("seller1");
+		 MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 String uid = userDetails.getUsername();
+		 UserEntity entity = UserEntity.builder().uid(uid).build();
+		
 		 Page<ProductOrderEntity> list = null;
 		 if(begin !=null && end != null) {
 			 
@@ -73,10 +76,12 @@ public class MyPageOrderService {
 		 OrderPageResponseDTO orderDTO = OrderPageResponseDTO.builder().dtoList(dto).total(total).OrderPageRequestDTO(pageRequestDTO).build();
 		 return orderDTO;
 		
-	}	public List<ProductOrderDTO> lastOrder(UserDTO userDTO){
-		
+	}	
+	public List<ProductOrderDTO> lastOrder(UserDTO userDTO){
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
 		UserEntity user = new UserEntity();
-		user.setUid(userDTO.getUid());
+		user.setUid(uid);
 		List<ProductOrderEntity> entity = comRepo.findTop5ByUserOrderByOrdDateDesc(user);
 		List<ProductOrderDTO> dto = entity.stream().map(e -> modelMapper.map(e, ProductOrderDTO.class)).toList();
 		
@@ -107,11 +112,13 @@ public class MyPageOrderService {
 	}
 	
 	public dataDTO countProduct() {
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
 		UserEntity entity = new UserEntity();
 		entity.setUid("seller1");
 		int count = comRepo.countByUserAndOrdComplete(entity, 0);
 		dataDTO dto = new dataDTO();
-		UserDTO userdto = userService.findByUid("seller1");
+		UserDTO userdto = userService.findByUid(uid);
 		dto.setCount(count);
 		dto.setPoint(userdto.getPoint());
 		return dto;

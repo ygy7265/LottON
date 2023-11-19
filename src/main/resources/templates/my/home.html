@@ -40,7 +40,7 @@
                           	<td class="status" style="color: blue;" th:if="${dto.ordComplete} == 1")>배송완료</td>
 	                		<td class="status" style="color: red;" th:if="${dto.ordComplete} == 0")>배송중</td>
                             <td class="confirm">
-								<input type="hidden" name="ordComNo" th:value="${dto.ordCompleteNo}" data-status="${dto.ordComplete}">
+								<input type="hidden" name="ordCompleteNo" th:value="${dto.ordCompleteNo}" data-status="${dto.ordComplete}">
 								<input type="hidden" name="ordProdName" th:value="${dto.product.prodName}">
 								<input type="hidden" name="ordProdNo" th:value="${dto.product.prodNo}">
                                 <a href="#" class="receive" th:if="${dto.ordComplete} == 0">수취확인</a>

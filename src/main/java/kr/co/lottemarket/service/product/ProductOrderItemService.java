@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonArray;
@@ -25,6 +27,7 @@ import kr.co.lottemarket.repository.product.ProductOrderCompleteRepository;
 import kr.co.lottemarket.repository.product.ProductOrderItemRepository;
 import kr.co.lottemarket.repository.product.ProductRepository;
 import kr.co.lottemarket.repository.user.UserRepository;
+import kr.co.lottemarket.security.MyUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -84,8 +87,9 @@ public class ProductOrderItemService {
 	}
 	
 	//카트리스트 출력
-	public List<ProductOrderItemDTO> selectOrderItem(String uid){
-		uid = "seller1";
+	public List<ProductOrderItemDTO> selectOrderItem(){
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
 		UserEntity user = UserEntity.builder().uid(uid).build();
 		
 		List<ProductOrderItemEntity> entity= repo.findByUser(user);
@@ -96,9 +100,11 @@ public class ProductOrderItemService {
 	
 	//카트 > 상품 주문하기 페이지
 	@Transactional
-	public void insertOrder(String productOrderItemEntity,String uid) {
+	public void insertOrder(String productOrderItemEntity) {
 		JsonElement jsonElement = JsonParser.parseString(productOrderItemEntity);
-		uid = "seller1";
+		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uid = userDetails.getUsername();
+
 		JsonArray jsonarray = jsonElement.getAsJsonArray();
 		UserEntity user = userrepo.findByUid(uid);
 		repo.deleteByUser(user);
@@ -110,7 +116,7 @@ public class ProductOrderItemService {
             int listdelivery = itemObject.get("delivery").getAsInt();
             int listdiscountValue = itemObject.get("discount").getAsInt();
             int listpoint = itemObject.get("point").getAsInt();
-            String listUid = itemObject.get("uid").getAsString();
+            String listUid = uid;
             int totalprice = listpriceValue * listCount;
             
             ProductEntity productdto = productrepo.findByProdNo(listProdNo);

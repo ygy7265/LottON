@@ -26,12 +26,14 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http
+		// 사이트 위변조 방지 해제
+		.csrf(CsrfConfigurer::disable)
 		.authorizeHttpRequests(
 			authorizeHttpRequests -> 
 			authorizeHttpRequests
-			.requestMatchers("/**").permitAll()
-			.requestMatchers("/product/**", "/js/**", "/images/**", "/css/**").permitAll()
-
+			.requestMatchers("/","/member/**","/thumb1/**","/product/**").permitAll()
+			.requestMatchers("/admin/**").hasAnyAuthority("3")
+			.requestMatchers("/js/**", "/images/**", "/css/**").permitAll()
 			.anyRequest().authenticated()
 		)
 
@@ -44,8 +46,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .passwordParameter("pass")
         )
 
-		// 사이트 위변조 방지 해제
-		.csrf(CsrfConfigurer::disable)
         .logout(config -> config
                         .logoutUrl("/member/logout") // GET 전송
                         .invalidateHttpSession(true)

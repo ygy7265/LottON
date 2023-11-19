@@ -18,7 +18,7 @@
                 </p>
               </nav>
                             
-              <form th:action="@{/product/productOrder}" method="post" >
+              <form th:action="@{/product/productOrder}" method="post" id="buyform">
                 <!-- 장바구니 목록 -->
                 <table>
                   <thead>
@@ -62,7 +62,6 @@
 		              <td><input type="hidden" class="descript" th:value="${dto.product.descript}"/></td>
 		              <td><input type="hidden" class="prodNo" th:value="${dto.product.prodNo}"/></td>
 		              <td><input type="hidden" class="prodName" th:value="${dto.product.prodName}"/></td>
-		              <td><input type="hidden" class="uid" value="seller1"/></td>
 		              <td><input type="hidden" class="total" th:value="${dto.price * dto.count}"/></td>
 		              <td><input type="hidden" class="cartNo" th:value="${dto.cartNo}"/></td>
                     </tr>
@@ -104,7 +103,7 @@
                    <input type="hidden" class="jsondata" name="productOrderItemEntity"/>
          		   <input type="hidden" class="orderdiscount" name="orderdiscount"/>
          		   <input type="hidden" class="ordertotal2"/>
-                  <input type="submit" name="" value="주문하기">    
+                  <input type="submit" name="orderBuyComplete" value="주문하기">    
                 </div>
               </form>
             </section>

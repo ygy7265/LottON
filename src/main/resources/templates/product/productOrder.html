@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 	  layout:decorate="/side.html">
 <head>
 <script src="../js/product/order.js"></script>
@@ -167,7 +168,7 @@
                         </p>
                     </div>
                 </article>
-                <input type="hidden" name="user" value="seller1"/>
+                <input type="hidden" name="user" th:value="${#authentication.principal.username}"/>
                 <input type="hidden" class="userpoint" th:value="${user.point}"/>
 				 <input type="hidden" class="totalprice" name="totalprice" th:value="${map['totalprice']}">
                 <!-- 경고 -->

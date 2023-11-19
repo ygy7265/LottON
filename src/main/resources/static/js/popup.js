@@ -41,6 +41,7 @@ $(function(){
 			success : function(result){
 				if(result == 1){
 					alert("수취확인 완료하였습니다.")
+					location.reload("/LotteON/my/");
 					
 				}else{
 					alert("수취확인 실패하였습니다.")

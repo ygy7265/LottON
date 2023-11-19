@@ -1,6 +1,19 @@
 
 		$(function(){
 			
+			$("input[name=orderBuyComplete]").click(function(e) {
+			    e.preventDefault();
+			    var selectedItems = $('.Item:checked'); // 선택된 체크박스 아이템들
+			    
+			    if (selectedItems.length === 0) {
+			        alert("주문하실 아이템을 선택해주세요");
+			        return;
+			    } else {
+			       $('#buyform').submit();
+			    }
+			});
+
+
 			let cartNo = null;
 		    let count = 0; // 상품 수 초기화
 		    let point = 0; // 포인트 초기화
