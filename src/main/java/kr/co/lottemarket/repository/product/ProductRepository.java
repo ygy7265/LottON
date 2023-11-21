@@ -29,7 +29,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 	public Page<ProductEntity> findByProdNameLike(String ProdName,Pageable pageable);
 	
 	@Query("SELECT p FROM ProductEntity p WHERE p.prodName LIKE %:search% OR p.descript LIKE %:search%")
-    public Page<ProductEntity> findByProdNameAndDescriptContaining(@Param("search") String search, Pageable pageable);
+    	public Page<ProductEntity> findByProdNameAndDescriptContaining(@Param("search") String search, Pageable pageable);
 	@Query("SELECT p FROM ProductEntity p WHERE p.prodName LIKE %:search% OR p.descript LIKE %:search%")
 	public Page<ProductEntity> findByProdNameAndPriceContaining(@Param("search") String search, Pageable pageable);
 	@Query("SELECT p FROM ProductEntity p WHERE p.price BETWEEN :min AND :max")
