@@ -104,38 +104,37 @@ public class ProductOrderItemService {
 		JsonElement jsonElement = JsonParser.parseString(productOrderItemEntity);
 		MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String uid = userDetails.getUsername();
-
+	
 		JsonArray jsonarray = jsonElement.getAsJsonArray();
 		UserEntity user = userrepo.findByUid(uid);
 		repo.deleteByUser(user);
 		for(JsonElement item : jsonarray) {
 			JsonObject itemObject = item.getAsJsonObject();
 			int listCount = itemObject.get("count").getAsInt();
-            int listProdNo = itemObject.get("prodNo").getAsInt();
-            int listpriceValue = itemObject.get("price").getAsInt();
-            int listdelivery = itemObject.get("delivery").getAsInt();
-            int listdiscountValue = itemObject.get("discount").getAsInt();
-            int listpoint = itemObject.get("point").getAsInt();
-            String listUid = uid;
-            int totalprice = listpriceValue * listCount;
+	            	int listProdNo = itemObject.get("prodNo").getAsInt();
+	            	int listpriceValue = itemObject.get("price").getAsInt();
+	            	int listdelivery = itemObject.get("delivery").getAsInt();
+	            	int listdiscountValue = itemObject.get("discount").getAsInt();
+	            	int listpoint = itemObject.get("point").getAsInt();
+	            	String listUid = uid;
+	            	int totalprice = listpriceValue * listCount;
             
-            ProductEntity productdto = productrepo.findByProdNo(listProdNo);
-            user = userrepo.findByUid(listUid);
-            ProductOrderItemDTO dto = ProductOrderItemDTO.builder()
-            .count(listCount)
-            .delivery(listdelivery)
-            .discount(listdiscountValue)
-            .point(listpoint)
-            .price(listpriceValue)
-            .total(totalprice)
-            .product(productdto)
-            
-            .user(user)
-            .build();
-            
-           
-            ProductOrderItemEntity entity = modelmapper.map(dto, ProductOrderItemEntity.class);
-            repo.save(entity);
+		        ProductEntity productdto = productrepo.findByProdNo(listProdNo);
+		        user = userrepo.findByUid(listUid);
+		        ProductOrderItemDTO dto = ProductOrderItemDTO.builder()
+		            .count(listCount)
+		            .delivery(listdelivery)
+		            .discount(listdiscountValue)
+		            .point(listpoint)
+		            .price(listpriceValue)
+		            .total(totalprice)
+		            .product(productdto)
+		            .user(user)
+		            .build();
+		            
+		           
+		      ProductOrderItemEntity entity = modelmapper.map(dto, ProductOrderItemEntity.class);
+		      repo.save(entity);
 
 		}
 	}
